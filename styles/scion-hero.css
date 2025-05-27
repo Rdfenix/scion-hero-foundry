@@ -124,6 +124,7 @@
   width: 100%;
   border-bottom: rgba(0, 0, 0, 1) 1px solid;
   padding: 0.5rem 0;
+  gap: 0.1rem;
 }
 
 .attributes
@@ -132,8 +133,50 @@
   > .attribute-row
   > .attribute-column {
   display: flex;
+  height: 100%;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
   flex: 1;
-  gap: 0.5rem;
+  gap: 0.3rem;
+}
+
+.circle-checkbox,
+.square-checkbox {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #222;
+  margin: 0 2px;
+  background: #fff;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.square-checkbox {
+  border-radius: 4px;
+}
+
+.circle-checkbox {
+  border-radius: 50%;
+}
+
+.circle-checkbox:checked,
+.square-checkbox:checked {
+  background: #222;
+}
+
+.circles,
+.squares {
+  display: flex;
+  flex-direction: row;
+}
+
+.circles > input[type="checkbox"],
+.squares > input[type="checkbox"] {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  margin: 1px;
 }
