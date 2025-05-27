@@ -1,0 +1,20 @@
+{
+  "SCION": "Scion: Hero",
+  "SCION.Abilities": "Habilidades",
+  "SCION.Armor": "Armadura",
+  "SCION.Boons": "Bênçãos",
+  "SCION.Boons.Description": "Descrição",
+  "SCION.Boons.Name": "Nome",
+  "SCION.Boons.Pack": "Pacote",
+  "SCION.Boons.Type": "Tipo",
+  "SCION.Boons.Usage": "Uso",
+  "SCION.Boons.Uses": "Usos",
+  "SCION.Characteristics": "Características",
+  "SCION.Combat": "Combate",
+  "SCION.Conditions": "Condições",
+  "SCION.Damage": "Dano",
+  "SCION.DicePool": "Pool de Dados",
+  "SCION.DiceRolls": "Rolagens de Dados",
+  "SCION.DiceRolls.Description": "Descrição",
+  "SCION.DiceRolls.Name": "Nome"
+}

@@ -1,0 +1,87 @@
+<div class="{{cssClass}} {{actor.type}} scion-wrapper">
+  {{!-- Actor Header --}}
+  <div class="scion-header">
+    <h1>HERO</h1>
+  </div>
+  {{!-- Character Sheet Template for Foundry VTT --}}
+  <form class="scion-form" autocomplete="off">
+    <header class="sheet-header">
+      <div class="column">
+        <div class="row">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value="{{actor.name}}"
+            placeholder=""
+          />
+        </div>
+        <div class="row">
+          <label for="player">Player</label>
+          <input
+            type="text"
+            id="player"
+            name="system.player"
+            value="{{#if system.player}}{{system.player}}{{else}}{{currentUserName}}{{/if}}"
+            placeholder=""
+          />
+        </div>
+      </div>
+      <div class="column">
+        <div class="row">
+          <label for="calling">Calling</label>
+          <input
+            type="text"
+            id="calling"
+            name="system.calling"
+            value="{{system.calling}}"
+            placeholder=""
+          />
+        </div>
+        <div class="row">
+          <label for="nature">Nature</label>
+          <input
+            type="text"
+            id="nature"
+            name="system.nature"
+            value="{{system.nature}}"
+            placeholder=""
+          />
+        </div>
+      </div>
+      <div class="column">
+        <div class="row">
+          <label for="pantheon">Pantheon</label>
+          <input
+            type="text"
+            id="pantheon"
+            name="system.pantheon"
+            value="{{system.pantheon}}"
+            placeholder=""
+          />
+        </div>
+        <div class="row">
+          <label for="god">God</label>
+          <input
+            type="text"
+            id="god"
+            name="system.god"
+            value="{{system.god}}"
+            placeholder=""
+          />
+        </div>
+      </div>
+    </header>
+    <section class="sheet-content">
+      <div class="attributes">
+        <div class="scion-label-title">
+          <h2>Attributes</h2>
+        </div>
+        <div class="attributes-types-grid" style="padding: 10px">
+          <pre>{{json system.attributes.physical}}</pre>
+        </div>
+      </div>
+    </section>
+  </form>
+</div>

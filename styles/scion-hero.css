@@ -1,0 +1,85 @@
+.scion-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(254, 254, 254, 255);
+  padding: 0 10px;
+  border-radius: 5px;
+}
+
+.scion-header {
+  background-image: url("../assets/svg/scion-logo.svg");
+  background-position: center 10px;
+  background-size: auto 85px;
+  background-repeat: no-repeat;
+  height: 120px;
+  padding: 90px 0 0px 0;
+  text-align: center;
+}
+
+.scion-header > h1 {
+  border-bottom: 0;
+  margin: 0;
+}
+
+.scion-form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+  gap: 0.5rem;
+}
+
+.scion-form > .sheet-header {
+  gap: 0.5rem;
+  display: flex;
+}
+
+.scion-form > .sheet-header > .column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.scion-form > .sheet-header > .column > .row {
+  line-height: 25px;
+}
+
+.scion-form > .sheet-header > .column > .row > input[type="text"] {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.scion-form > .sheet-header > .column > .row > input[type="text"]:focus {
+  box-shadow: none;
+}
+
+.scion-label-title {
+  width: 100%;
+  height: 85px;
+  max-width: 130rem;
+  margin: 0 auto;
+  background-image: url("../assets/png/band.png");
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scion-label-title > h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  border-bottom: 0;
+  margin: 0;
+}

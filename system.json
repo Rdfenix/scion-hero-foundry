@@ -1,0 +1,37 @@
+{
+  "id": "scion-hero-foundry",
+  "title": "Scion - Hero",
+  "description": "A system for playing Scion, a tabletop role-playing game.",
+  "version": "12.1.43",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "12.331",
+    "maximum": "12"
+  },
+  "authors": [
+    {
+      "name": "Rudnei Oliviera"
+    }
+  ],
+  "esmodules": ["module/scion-hero.js"],
+  "styles": ["styles/scion-hero.css"],
+  "scripts": [],
+  "packs": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "grid": {
+    "distance": 1,
+    "units": "m"
+  },
+  "media": [],
+  "url": "https://github.com/Rdfenix/scion-hero-foundry",
+  "manifest": "https://github.com/Rdfenix/scion-hero-foundry/releases/latest/download/system.json",
+  "download": "https://github.com/Rdfenix/scion-hero-foundry/releases/latest/download/scion-hero-foundry.zip",
+  "license": "LICENSE.txt",
+  "changelog": "https://github.com/Rdfenix/scion-hero-foundry/releases"
+}

@@ -1,0 +1,91 @@
+{
+  "Actor": {
+    "types": ["character"],
+    "templates": {
+      "base": {
+        "attributes": {
+          "physical": {
+            "strength": { "value": 1 },
+            "dexterity": { "value": 1 },
+            "stamina": { "value": 1 }
+          },
+          "social": {
+            "charisma": { "value": 1 },
+            "manipulation": { "value": 1 },
+            "appearance": { "value": 1 }
+          },
+          "mental": {
+            "intelligence": { "value": 1 },
+            "perception": { "value": 1 },
+            "wits": { "value": 1 }
+          }
+        },
+        "epicAttributes": {
+          "physical": {
+            "epicStrength": { "value": 0 },
+            "epicDexterity": { "value": 0 },
+            "epicStamina": { "value": 0 }
+          },
+          "social": {
+            "epicCharisma": { "value": 0 },
+            "epicManipulation": { "value": 0 },
+            "epicAppearance": { "value": 0 }
+          },
+          "mental": {
+            "epicPerception": { "value": 0 },
+            "epicIntelligence": { "value": 0 },
+            "epicWits": { "value": 0 }
+          }
+        },
+        "abilities": {
+          "academics": 0,
+          "animalKen": 0,
+          "athletics": 0,
+          "awareness": 0,
+          "brawl": 0,
+          "command": 0,
+          "control": 0,
+          "craft": 0,
+          "empathy": 0,
+          "fortitude": 0,
+          "integrity": 0,
+          "investigation": 0,
+          "larceny": 0,
+          "medicine": 0,
+          "marksmanship": 0,
+          "melee": 0,
+          "occult": 0,
+          "politics": 0,
+          "presence": 0,
+          "science": 0,
+          "stealth": 0,
+          "survival": 0,
+          "thrown": 0
+        },
+        "virtues": {},
+        "legend": { "value": 2, "max": 10 },
+        "willpower": { "value": 0, "max": 10 },
+        "birthrights": [],
+        "boons": [],
+        "knacks": [],
+        "purviews": [],
+        "health": {
+          "value": 0,
+          "conditions": {
+            "Bruised": { "value": 0 },
+            "Hurt": { "value": -1 },
+            "Injured": { "value": -1 },
+            "Wounded": { "value": -2 },
+            "Maimed": { "value": -2 },
+            "Crippled": { "value": -4 },
+            "Incapacitated": { "value": 0 }
+          }
+        }
+      }
+    }
+  },
+  "Item": {
+    "types": ["boon", "knack", "purview", "birthright"],
+    "templates": {}
+  }
+}
