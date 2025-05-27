@@ -78,8 +78,20 @@
         <div class="scion-label-title">
           <h2>Attributes</h2>
         </div>
-        <div class="attributes-types-grid" style="padding: 10px">
-          <pre>{{json system.attributes.physical}}</pre>
+        <div class="attributes-types-grid">
+          {{#each system.attributes as |attr key|}}
+          <div class="attribute-grid-item">
+            <h3>{{key}}</h3>
+            {{#each attr as |attribute label|}}
+            <div class="attribute-row">
+              <div class="attribute-column">
+                <span>{{label}}</span>
+              </div>
+              <div class="attribute-column"></div>
+            </div>
+            {{/each}}
+          </div>
+          {{/each}}
         </div>
       </div>
     </section>
