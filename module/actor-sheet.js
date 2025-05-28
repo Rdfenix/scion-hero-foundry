@@ -8,7 +8,7 @@ export class ScionHeroActorSheet extends ActorSheet {
       classes: ["scion-hero", "sheet", "character"],
       template:
         "systems/scion-hero-foundry/templates/actors/character-sheet.html",
-      width: 885,
+      width: 890,
       height: 800,
       tabs: [
         {
