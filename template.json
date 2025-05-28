@@ -22,19 +22,19 @@
         },
         "epicAttributes": {
           "physical": {
-            "epicStrength": { "value": 0, "max": 10, "min": 0 },
-            "epicDexterity": { "value": 0, "max": 10, "min": 0 },
-            "epicStamina": { "value": 0, "max": 10, "min": 0 }
+            "strength": { "value": 0, "max": 10, "min": 0 },
+            "dexterity": { "value": 0, "max": 10, "min": 0 },
+            "stamina": { "value": 0, "max": 10, "min": 0 }
           },
           "social": {
-            "epicCharisma": { "value": 0, "max": 10, "min": 0 },
-            "epicManipulation": { "value": 0, "max": 10, "min": 0 },
-            "epicAppearance": { "value": 0, "max": 10, "min": 0 }
+            "charisma": { "value": 0, "max": 10, "min": 0 },
+            "manipulation": { "value": 0, "max": 10, "min": 0 },
+            "appearance": { "value": 0, "max": 10, "min": 0 }
           },
           "mental": {
-            "epicPerception": { "value": 0, "max": 10, "min": 0 },
-            "epicIntelligence": { "value": 0, "max": 10, "min": 0 },
-            "epicWits": { "value": 0, "max": 10, "min": 0 }
+            "intelligence": { "value": 0, "max": 10, "min": 0 },
+            "perception": { "value": 0, "max": 10, "min": 0 },
+            "wits": { "value": 0, "max": 10, "min": 0 }
           }
         },
         "abilities": {

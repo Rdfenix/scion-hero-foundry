@@ -24,6 +24,10 @@ Hooks.once("init", async function () {
     }
     return result;
   });
+
+  Handlebars.registerHelper("sub", function (a, b) {
+    return a - b;
+  });
 });
 
 Hooks.on("createActor", async (actor, options, userId) => {

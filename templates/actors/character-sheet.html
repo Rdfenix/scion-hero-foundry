@@ -99,9 +99,16 @@
                   {{/each}}
                 </div>
                 <div class="squares">
-                  {{#each (range 1 10) as |i|}}
-                  <input type="checkbox" class="square-checkbox" />
-                  {{/each}}
+                  {{#with (lookup (lookup @root.system.epicAttributes key)
+                  label) as |epicAttr|}} {{#if epicAttr}} {{#each (range
+                  epicAttr.min (sub epicAttr.max 1)) as |i|}}
+                  <input
+                    type="checkbox"
+                    class="square-checkbox"
+                    data-target="epicAttributes.{{../key}}.{{label}}.value"
+                    value="{{i}}"
+                  />
+                  {{/each}} {{/if}} {{/with}}
                 </div>
               </div>
             </div>

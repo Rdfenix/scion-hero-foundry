@@ -44,15 +44,18 @@ export const attributesUpdate = (app, html, data) => {
     gridItem.find(".attribute-row").each(function () {
       const row = $(this);
       const label = row.find("span").text().trim().toLowerCase();
-      const checkboxes = row.find(".circle-checkbox");
-      const target = `attributes.${groupKey}.${label}.value`;
-      const currentValue = foundry.utils.getProperty(app.actor.system, target);
+      const circleCheckboxes = row.find(".circle-checkbox");
+      const targetAttributes = `attributes.${groupKey}.${label}.value`;
+      const currentAttrValue = foundry.utils.getProperty(
+        app.actor.system,
+        targetAttributes
+      );
 
       // Usa a função para atualizar o checked dos círculos
-      updateAttributeCheckboxes(checkboxes, currentValue);
+      updateAttributeCheckboxes(circleCheckboxes, currentAttrValue);
 
       // Usa a função para bindar os eventos
-      bindAttributeCheckboxes(checkboxes, groupKey, label, app);
+      bindAttributeCheckboxes(circleCheckboxes, groupKey, label, app);
     });
   });
 };
