@@ -1,13 +1,23 @@
 const bindAttributeCheckboxes = (checkboxes, groupKey, label, app) => {
-  checkboxes.off("change.scion").on("change.scion", async function (ev) {
+  checkboxes.off("click.scion").on("click.scion", async function (ev) {
+    ev.preventDefault();
+
     const newValue = parseInt(this.value);
-    if (!isNaN(newValue)) {
-      await app.actor.update(
-        {
-          [`system.attributes.${groupKey}.${label}.value`]: newValue,
-        },
-      );
-    }
+    const currentValue = foundry.utils.getProperty(
+      app.actor.system,
+      `attributes.${groupKey}.${label}.value`
+    );
+
+    let valueToSet = newValue > currentValue ? newValue : newValue - 1;
+
+    await app.actor.update(
+      {
+        [`system.attributes.${groupKey}.${label}.value`]: valueToSet,
+      },
+      { render: false }
+    );
+
+    updateAttributeCheckboxes(checkboxes, valueToSet);
   });
 };
 
