@@ -1,20 +1,18 @@
-export const splitInColumns = (object, columns, options) => {
+export const splitInColumns = (object, columns, columnClass, options) => {
+  if (!object || typeof object !== "object") return "";
   const keys = Object.keys(object);
   const columnSize = Math.ceil(keys.length / columns);
   let output = "";
 
-  output = Array(columns).reduce((acc, _, index) => {
-    const slice = keys.slice(index * columnSize, (index + 1) * columnSize);
-    acc += "<div class='skills-grid-item'>";
-
+  for (let i = 0; i < columns; i++) {
+    const slice = keys.slice(i * columnSize, (i + 1) * columnSize);
+    output += `<div class='${columnClass}'>`;
     slice.forEach((key) => {
-      acc += options.fn({ key, value: object[key] });
+      console.log(`Key: ${key}, Value: `, object[key], options);
+      output += options.fn({ key, data: object[key] });
     });
-
-    acc += "</div>";
-
-    return acc;
-  }, "");
+    output += "</div>";
+  }
 
   return output;
 };

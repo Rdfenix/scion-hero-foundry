@@ -36,6 +36,7 @@ export const ScionHeroActorBaseDefault = {
   abilities: {
     academics: { value: 0, max: 5, min: 1, favored: false },
     animalKen: { value: 0, max: 5, min: 1, favored: false },
+    art: { value: 0, max: 5, min: 1, favored: false },
     athletics: { value: 0, max: 5, min: 1, favored: false },
     awareness: { value: 0, max: 5, min: 1, favored: false },
     brawl: { value: 0, max: 5, min: 1, favored: false },

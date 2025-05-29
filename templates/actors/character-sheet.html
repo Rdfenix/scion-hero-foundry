@@ -123,11 +123,14 @@
           <h2>Abilities</h2>
         </div>
         <div class="skills-types-grid">
-          {{#splitInColumns system.abilities 3}}
-            <div class="skills-row">
-              <span class="ability-label">{{key}}</span>
-              <span class="ability-value">{{value.value}}</span>
-            </div>
+          {{#splitInColumns system.abilities 3 'skills-grid-item'}}
+          <div class="skills-row">
+            <span class="ability-label">{{key}}</span>
+            <span class="ability-value"
+              >{{#if (isObject
+              data)}}{{data.value}}{{else}}{{data}}{{/if}}</span
+            >
+          </div>
           {{/splitInColumns}}
         </div>
       </div>

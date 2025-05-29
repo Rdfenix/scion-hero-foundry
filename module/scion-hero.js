@@ -33,12 +33,15 @@ Hooks.once("init", async function () {
 
   Handlebars.registerHelper(
     "splitInColumns",
-    function (object, columns, options) {
-      console.log("splitInColumns called with:", object, columns, options);
-      const output = splitInColumns(object, columns, options);
+    function (object, columns, columnClass, options) {
+      const output = splitInColumns(object, columns, columnClass, options);
       return new Handlebars.SafeString(output);
     }
   );
+
+  Handlebars.registerHelper("isObject", function (value) {
+    return value && typeof value === "object" && !Array.isArray(value);
+  });
 });
 
 Hooks.on("createActor", async (actor, options, userId) => {
