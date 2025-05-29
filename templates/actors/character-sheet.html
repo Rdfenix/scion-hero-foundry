@@ -117,6 +117,20 @@
           {{/each}}
         </div>
       </div>
+
+      <div class="skills">
+        <div class="scion-label-title">
+          <h2>Abilities</h2>
+        </div>
+        <div class="skills-types-grid">
+          {{#splitInColumns system.abilities 3}}
+            <div class="skills-row">
+              <span class="ability-label">{{key}}</span>
+              <span class="ability-value">{{value.value}}</span>
+            </div>
+          {{/splitInColumns}}
+        </div>
+      </div>
     </section>
   </form>
 </div>

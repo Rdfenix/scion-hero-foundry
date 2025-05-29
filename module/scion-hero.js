@@ -2,6 +2,7 @@ import { ScionHeroActorSheet } from "./actor-sheet.js";
 import { ScionHeroActorBaseDefault } from "./actor-base-default.js";
 import { attributesUpdate } from "../helpers/attributesUpdate.js";
 import { mountingBasedata } from "../helpers/mountBasedata.js";
+import { splitInColumns } from "../helpers/splitInColumns.js";
 
 Hooks.once("init", async function () {
   // Remove a sheet padrão do core
@@ -29,6 +30,15 @@ Hooks.once("init", async function () {
   Handlebars.registerHelper("sub", function (a, b) {
     return a - b;
   });
+
+  Handlebars.registerHelper(
+    "splitInColumns",
+    function (object, columns, options) {
+      console.log("splitInColumns called with:", object, columns, options);
+      const output = splitInColumns(object, columns, options);
+      return new Handlebars.SafeString(output);
+    }
+  );
 });
 
 Hooks.on("createActor", async (actor, options, userId) => {
