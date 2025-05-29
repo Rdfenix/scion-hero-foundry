@@ -1,6 +1,7 @@
 import { ScionHeroActorSheet } from "./actor-sheet.js";
 import { ScionHeroActorBaseDefault } from "./actor-base-default.js";
 import { attributesUpdate } from "../helpers/attributesUpdate.js";
+import { mountingBasedata } from "../helpers/mountBasedata.js";
 
 Hooks.once("init", async function () {
   // Remove a sheet padrão do core
@@ -33,10 +34,8 @@ Hooks.once("init", async function () {
 Hooks.on("createActor", async (actor, options, userId) => {
   if (actor.type !== "character") return;
 
-  const baseData = foundry.utils.mergeObject(
-    ScionHeroActorBaseDefault,
-    actor.system || {}
-  );
+  const baseData = mountingBasedata(ScionHeroActorBaseDefault, actor);
+
   await actor.update({
     system: baseData,
   });
@@ -45,10 +44,8 @@ Hooks.on("createActor", async (actor, options, userId) => {
 Hooks.on("ready", async () => {
   for (const actor of game.actors.contents) {
     if (actor.type === "character") {
-      const baseData = foundry.utils.mergeObject(
-        ScionHeroActorBaseDefault,
-        actor.system || {}
-      );
+      const baseData = mountingBasedata(ScionHeroActorBaseDefault, actor);
+
       await actor.update({
         system: baseData,
       });
