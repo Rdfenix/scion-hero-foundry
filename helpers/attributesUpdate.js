@@ -90,12 +90,12 @@ export const attributesUpdate = (app, html, data) => {
   // Para cada grupo de atributos (physical, social, mental)
   html.find(".attribute-grid-item").each(function () {
     const gridItem = $(this);
-    const groupKey = gridItem.find("h3").text().trim().toLowerCase();
+    const groupKey = gridItem.data("key");
 
     // Para cada linha de atributo (ex: strength, dexterity)
     gridItem.find(".attribute-row").each(function () {
       const row = $(this);
-      const label = row.find("span").text().trim().toLowerCase();
+      const label = row.data("label");
 
       mountingAttributes(row, groupKey, label, app);
 

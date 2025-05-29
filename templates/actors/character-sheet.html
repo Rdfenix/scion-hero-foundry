@@ -80,10 +80,10 @@
         </div>
         <div class="attributes-types-grid">
           {{#each system.attributes as |attr key|}}
-          <div class="attribute-grid-item">
+          <div class="attribute-grid-item" data-key="{{key}}">
             <h3>{{key}}</h3>
             {{#each attr as |attribute label|}}
-            <div class="attribute-row">
+            <div class="attribute-row" data-label="{{label}}">
               <div class="attribute-column">
                 <span>{{label}}</span>
               </div>
@@ -124,12 +124,22 @@
         </div>
         <div class="skills-types-grid">
           {{#splitInColumns system.abilities 3 'skills-grid-item'}}
-          <div class="skills-row">
-            <span class="ability-label">{{key}}</span>
-            <span class="ability-value"
-              >{{#if (isObject
-              data)}}{{data.value}}{{else}}{{data}}{{/if}}</span
-            >
+          <div class="skills-row" data-key="{{key}}">
+            <div class="skills-column">
+              <span>{{key}}</span>
+            </div>
+            <div class="skills-column">
+              <div class="circles">
+                {{#each (range data.min data.max) as |i|}}
+                <input
+                  type="checkbox"
+                  class="circle-checkbox"
+                  data-target="abilities.{{../key}}.value"
+                  value="{{i}}"
+                />
+                {{/each}}
+              </div>
+            </div>
           </div>
           {{/splitInColumns}}
         </div>

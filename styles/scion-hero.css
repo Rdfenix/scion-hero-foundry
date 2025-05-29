@@ -140,7 +140,12 @@
   > .attributes-types-grid
   > .attribute-grid-item
   > .attribute-row
-  > .attribute-column {
+  > .attribute-column,
+.skills
+  > .skills-types-grid
+  > .skills-grid-item
+  > .skills-row
+  > .skills-column {
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -148,6 +153,10 @@
   justify-content: center;
   flex: 1;
   gap: 0.3rem;
+}
+
+.skills-column:nth-child(2) {
+  align-items: flex-end !important;
 }
 
 .circle-checkbox,

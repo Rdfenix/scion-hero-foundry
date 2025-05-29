@@ -1,6 +1,7 @@
 import { ScionHeroActorSheet } from "./actor-sheet.js";
 import { ScionHeroActorBaseDefault } from "./actor-base-default.js";
 import { attributesUpdate } from "../helpers/attributesUpdate.js";
+import { abilitiesUpdate } from "../helpers/abilitiesUpdate.js";
 import { mountingBasedata } from "../helpers/mountBasedata.js";
 import { splitInColumns } from "../helpers/splitInColumns.js";
 
@@ -68,4 +69,5 @@ Hooks.on("ready", async () => {
 
 Hooks.on("renderActorSheet", (app, html, data) => {
   attributesUpdate(app, html, data);
+  abilitiesUpdate(app, html, data);
 });
