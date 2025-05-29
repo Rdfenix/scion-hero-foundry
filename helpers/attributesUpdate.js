@@ -1,18 +1,25 @@
-const bindAttributeCheckboxes = (checkboxes, groupKey, label, app) => {
+const bindAttributeCheckboxes = (
+  checkboxes,
+  groupKey,
+  label,
+  app,
+  attributes,
+  type
+) => {
   checkboxes.off("click.scion").on("click.scion", async function (ev) {
     ev.preventDefault();
 
     const newValue = parseInt(this.value);
     const currentValue = foundry.utils.getProperty(
       app.actor.system,
-      `attributes.${groupKey}.${label}.value`
+      `${type}.${groupKey}.${label}.value`
     );
 
     let valueToSet = newValue > currentValue ? newValue : newValue - 1;
 
     await app.actor.update(
       {
-        [`system.attributes.${groupKey}.${label}.value`]: valueToSet,
+        [attributes]: valueToSet,
       },
       { render: false }
     );
@@ -34,6 +41,51 @@ const updateAttributeCheckboxes = (checkboxes, currentValue) => {
   });
 };
 
+const mountingAttributes = (row, groupKey, label, app) => {
+  const circleCheckboxes = row.find(".circle-checkbox");
+  const targetAttributes = `attributes.${groupKey}.${label}.value`;
+  const currentAttrValue = foundry.utils.getProperty(
+    app.actor.system,
+    targetAttributes
+  );
+  const systemAttributes = `system.attributes.${groupKey}.${label}.value`;
+
+  // Usa a função para atualizar o checked dos círculos
+  updateAttributeCheckboxes(circleCheckboxes, currentAttrValue);
+
+  // Usa a função para bindar os eventos
+  bindAttributeCheckboxes(
+    circleCheckboxes,
+    groupKey,
+    label,
+    app,
+    systemAttributes,
+    "attributes"
+  );
+};
+
+const mountingEpicAttributes = (row, groupKey, label, app) => {
+  const squareCheckboxes = row.find(".square-checkbox");
+  const targetEpicAttributes = `epicAttributes.${groupKey}.${label}.value`;
+  const currentAttrValue = foundry.utils.getProperty(
+    app.actor.system,
+    targetEpicAttributes
+  );
+  const systemEpicAttributes = `system.epicAttributes.${groupKey}.${label}.value`;
+
+  // Usa a função para atualizar o checked dos círculos
+  updateAttributeCheckboxes(squareCheckboxes, currentAttrValue);
+  // Usa a função para bindar os eventos
+  bindAttributeCheckboxes(
+    squareCheckboxes,
+    groupKey,
+    label,
+    app,
+    systemEpicAttributes,
+    "epicAttributes"
+  );
+};
+
 export const attributesUpdate = (app, html, data) => {
   // Para cada grupo de atributos (physical, social, mental)
   html.find(".attribute-grid-item").each(function () {
@@ -44,18 +96,10 @@ export const attributesUpdate = (app, html, data) => {
     gridItem.find(".attribute-row").each(function () {
       const row = $(this);
       const label = row.find("span").text().trim().toLowerCase();
-      const circleCheckboxes = row.find(".circle-checkbox");
-      const targetAttributes = `attributes.${groupKey}.${label}.value`;
-      const currentAttrValue = foundry.utils.getProperty(
-        app.actor.system,
-        targetAttributes
-      );
 
-      // Usa a função para atualizar o checked dos círculos
-      updateAttributeCheckboxes(circleCheckboxes, currentAttrValue);
+      mountingAttributes(row, groupKey, label, app);
 
-      // Usa a função para bindar os eventos
-      bindAttributeCheckboxes(circleCheckboxes, groupKey, label, app);
+      mountingEpicAttributes(row, groupKey, label, app);
     });
   });
 };

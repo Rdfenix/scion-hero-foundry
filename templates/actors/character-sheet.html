@@ -101,7 +101,7 @@
                 <div class="squares">
                   {{#with (lookup (lookup @root.system.epicAttributes key)
                   label) as |epicAttr|}} {{#if epicAttr}} {{#each (range
-                  epicAttr.min (sub epicAttr.max 1)) as |i|}}
+                  epicAttr.min epicAttr.max) as |i|}}
                   <input
                     type="checkbox"
                     class="square-checkbox"

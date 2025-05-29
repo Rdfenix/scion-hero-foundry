@@ -18,19 +18,19 @@ export const ScionHeroActorBaseDefault = {
   },
   epicAttributes: {
     physical: {
-      strength: { value: 0, max: 10, min: 0 },
-      dexterity: { value: 0, max: 10, min: 0 },
-      stamina: { value: 0, max: 10, min: 0 },
+      strength: { value: 0, max: 10, min: 1 },
+      dexterity: { value: 0, max: 10, min: 1 },
+      stamina: { value: 0, max: 10, min: 1 },
     },
     social: {
-      charisma: { value: 0, max: 10, min: 0 },
-      manipulation: { value: 0, max: 10, min: 0 },
-      appearance: { value: 0, max: 10, min: 0 },
+      charisma: { value: 0, max: 10, min: 1 },
+      manipulation: { value: 0, max: 10, min: 1 },
+      appearance: { value: 0, max: 10, min: 1 },
     },
     mental: {
-      intelligence: { value: 0, max: 10, min: 0 },
-      perception: { value: 0, max: 10, min: 0 },
-      wits: { value: 0, max: 10, min: 0 },
+      intelligence: { value: 0, max: 10, min: 1 },
+      perception: { value: 0, max: 10, min: 1 },
+      wits: { value: 0, max: 10, min: 1 },
     },
   },
   abilities: {
