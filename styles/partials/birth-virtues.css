@@ -1,0 +1,11 @@
+.birth,
+.virtues {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+}

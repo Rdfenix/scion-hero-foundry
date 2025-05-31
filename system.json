@@ -14,7 +14,13 @@
     }
   ],
   "esmodules": ["module/scion-hero.js"],
-  "styles": ["styles/scion-hero.css", "styles/partials/stats.css"],
+  "styles": [
+    "styles/scion-hero.css",
+    "styles/partials/stats.css",
+    "styles/partials/birth-virtues.css",
+    "styles/partials/knacks-boons.css",
+    "styles/partials/combat.css"
+  ],
   "scripts": [],
   "packs": [],
   "languages": [

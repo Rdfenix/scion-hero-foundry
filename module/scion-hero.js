@@ -47,6 +47,8 @@ Hooks.once("init", async function () {
   const partials = [
     "systems/scion-hero-foundry/templates/actors/partials/stats.html",
     "systems/scion-hero-foundry/templates/actors/partials/birth-virtues.html",
+    "systems/scion-hero-foundry/templates/actors/partials/knacks-boons.html",
+    "systems/scion-hero-foundry/templates/actors/partials/combat.html",
   ];
 
   await loadTemplates(partials);
