@@ -16,23 +16,21 @@ export class ScionHeroActorSheet extends ActorSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
-    tabSwitch(html, this);
-
     // Corrige: adiciona o parâmetro group: "primary" para bater com o data-group do HTML
-    this._tabs = new Tabs({
+    this._customTabs = new Tabs({
       navSelector: ".sheet-tabs",
       contentSelector: ".sheet-content",
       initial: "stats",
       group: "primary",
     });
 
-    this._tabs.bind(html[0]);
+    this._customTabs.bind(html[0]);
 
     html.find(".sheet-tabs a").on("click", (event) => {
       event.preventDefault();
-      this._tabs.activate(event.currentTarget);
-      let tab = event.currentTarget.dataset.tab;
+      this._customTabs.activate(event.currentTarget);
 
+      let tab = event.currentTarget.dataset.tab;
       html.find(".tab").removeClass("active");
       html.find(`.tab[data-tab="${tab}"]`).addClass("active");
     });
