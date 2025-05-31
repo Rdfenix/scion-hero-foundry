@@ -14,7 +14,7 @@
     }
   ],
   "esmodules": ["module/scion-hero.js"],
-  "styles": ["styles/scion-hero.css"],
+  "styles": ["styles/scion-hero.css", "styles/partials/stats.css"],
   "scripts": [],
   "packs": [],
   "languages": [

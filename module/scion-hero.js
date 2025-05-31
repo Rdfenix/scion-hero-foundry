@@ -43,6 +43,21 @@ Hooks.once("init", async function () {
   Handlebars.registerHelper("isObject", function (value) {
     return value && typeof value === "object" && !Array.isArray(value);
   });
+
+  const partials = [
+    "systems/scion-hero-foundry/templates/actors/partials/stats.html",
+    "systems/scion-hero-foundry/templates/actors/partials/birth-virtues.html",
+  ];
+
+  await loadTemplates(partials);
+
+  // Registra o partial explicitamente para garantir que o Handlebars reconheça
+  for (const partial of partials) {
+    const partialContent = await fetch(partial).then((response) =>
+      response.text()
+    );
+    Handlebars.registerPartial(partial, partialContent);
+  }
 });
 
 Hooks.on("createActor", async (actor, options, userId) => {

@@ -73,76 +73,21 @@
         </div>
       </div>
     </header>
+    <nav class="sheet-tabs tabs">
+      <a class="item active" data-group="primary" data-tab="stats"
+        >Attributes & Abilities</a
+      >
+      <a class="item" data-group="primary" data-tab="birth"
+        >Birthrights & Virtues</a
+      >
+    </nav>
     <section class="sheet-content">
-      <div class="attributes">
-        <div class="scion-label-title">
-          <h2>Attributes</h2>
-        </div>
-        <div class="attributes-types-grid">
-          {{#each system.attributes as |attr key|}}
-          <div class="attribute-grid-item" data-key="{{key}}">
-            <h3>{{key}}</h3>
-            {{#each attr as |attribute label|}}
-            <div class="attribute-row" data-label="{{label}}">
-              <div class="attribute-column">
-                <span>{{label}}</span>
-              </div>
-              <div class="attribute-column">
-                <div class="circles">
-                  {{#each (range attribute.min attribute.max) as |i|}}
-                  <input
-                    type="checkbox"
-                    class="circle-checkbox"
-                    data-target="attributes.{{../key}}.{{label}}.value"
-                    value="{{i}}"
-                  />
-                  {{/each}}
-                </div>
-                <div class="squares">
-                  {{#with (lookup (lookup @root.system.epicAttributes key)
-                  label) as |epicAttr|}} {{#if epicAttr}} {{#each (range
-                  epicAttr.min epicAttr.max) as |i|}}
-                  <input
-                    type="checkbox"
-                    class="square-checkbox"
-                    data-target="epicAttributes.{{../key}}.{{label}}.value"
-                    value="{{i}}"
-                  />
-                  {{/each}} {{/if}} {{/with}}
-                </div>
-              </div>
-            </div>
-            {{/each}}
-          </div>
-          {{/each}}
-        </div>
+      <div class="tab active" data-group="primary" data-tab="stats">
+        {{> "systems/scion-hero-foundry/templates/actors/partials/stats.html"}}
       </div>
-
-      <div class="skills">
-        <div class="scion-label-title">
-          <h2>Abilities</h2>
-        </div>
-        <div class="skills-types-grid">
-          {{#splitInColumns system.abilities 3 'skills-grid-item'}}
-          <div class="skills-row" data-key="{{key}}">
-            <div class="skills-column">
-              <span>{{key}}</span>
-            </div>
-            <div class="skills-column">
-              <div class="circles">
-                {{#each (range data.min data.max) as |i|}}
-                <input
-                  type="checkbox"
-                  class="circle-checkbox"
-                  data-target="abilities.{{../key}}.value"
-                  value="{{i}}"
-                />
-                {{/each}}
-              </div>
-            </div>
-          </div>
-          {{/splitInColumns}}
-        </div>
+      <div class="tab" data-group="primary" data-tab="birth">
+        {{>
+        "systems/scion-hero-foundry/templates/actors/partials/birth-virtues.html"}}
       </div>
     </section>
   </form>

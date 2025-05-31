@@ -9,14 +9,32 @@ export class ScionHeroActorSheet extends ActorSheet {
       template:
         "systems/scion-hero-foundry/templates/actors/character-sheet.html",
       width: 890,
-      height: 800,
-      tabs: [
-        {
-          navSelector: ".sheet-tabs",
-          contentSelector: ".sheet-body",
-          initial: "character",
-        },
-      ],
+      height: 800, // tabs removido para evitar conflito com inicialização manual
+    });
+  }
+
+  activateListeners(html) {
+    super.activateListeners(html);
+
+    tabSwitch(html, this);
+
+    // Corrige: adiciona o parâmetro group: "primary" para bater com o data-group do HTML
+    this._tabs = new Tabs({
+      navSelector: ".sheet-tabs",
+      contentSelector: ".sheet-content",
+      initial: "stats",
+      group: "primary",
+    });
+
+    this._tabs.bind(html[0]);
+
+    html.find(".sheet-tabs a").on("click", (event) => {
+      event.preventDefault();
+      this._tabs.activate(event.currentTarget);
+      let tab = event.currentTarget.dataset.tab;
+
+      html.find(".tab").removeClass("active");
+      html.find(`.tab[data-tab="${tab}"]`).addClass("active");
     });
   }
 
