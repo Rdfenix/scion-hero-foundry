@@ -1,6 +1,7 @@
 const bindAbilitieCheckboxes = (checkboxes, label, app, abilities, type) => {
   checkboxes.off("click.scion").on("click.scion", async function (ev) {
     ev.preventDefault();
+    ev.stopPropagation();
 
     const newValue = parseInt(this.value);
     const currentValue = foundry.utils.getProperty(

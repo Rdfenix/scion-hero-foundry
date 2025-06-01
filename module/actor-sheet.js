@@ -28,9 +28,15 @@ export class ScionHeroActorSheet extends ActorSheet {
 
     html.find(".sheet-tabs a").on("click", (event) => {
       event.preventDefault();
-      this._customTabs.activate(event.currentTarget);
+      event.stopPropagation();
 
       let tab = event.currentTarget.dataset.tab;
+
+      html.find(".sheet-tabs a").removeClass("active");
+      $(event.currentTarget).addClass("active");
+
+      this._customTabs.activate(tab);
+
       html.find(".tab").removeClass("active");
       html.find(`.tab[data-tab="${tab}"]`).addClass("active");
     });

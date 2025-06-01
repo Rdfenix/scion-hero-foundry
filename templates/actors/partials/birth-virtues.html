@@ -7,4 +7,20 @@
   <div class="scion-label-title">
     <h2>Virtues</h2>
   </div>
+  <section class="virtues-wrapper">
+    {{#each (range 1 3) as |i|}}
+    <div class="virtues-row">
+      <div class="virtues-column">
+        <span>Virtue</span>
+      </div>
+      <div class="virtues-column">
+        <div class="circles">
+          {{#each (range 1 5) as |i|}}
+          <input type="checkbox" class="circle-checkbox" />
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </section>
 </div>
