@@ -1,0 +1,393 @@
+{
+  "patheon": [
+    {
+      "name": "PESEDJET",
+      "description": "The Pesedjet, originating in Egypt, is theoldest (though not necessarily wisest) of thepantheons. This family of Gods claims thatits origins go back over 7,000 years to thebanks of the Nile River in northeastAfrica, and it has endured throughcultural, mythic and physical changesin the World’s very structure.As a pantheon, the Pesedjetconcerns itself with ma’at—justiceexpressed through social order.For the Pesedjet, everyonemust know his or herplace, and each post mustbe fi lled with the right person. In the times before time, theTitans destroyed appropriate relationships between people,and the Pesedjet created a social order in which peoplecould live knowing their place in an established hierarchy.Today, the Pesedjet’s Scions tend to concernthemselves with disruptions in social stability caused bythe Titans’ actions. Movements of refugees, discontentcaused by spiritual poverty and unemployment,revolutionary movements—these come to the Pesedjet’snotice as disturbances in the mythic realms. Other divinetribes view the Pesedjet as hidebound and conservative,but they grant that the Egyptian Gods really know howto impose long-lasting order in a chaotic world.The Pesedjet’s greatest weakness is its commitment tostability at any cost. The Egyptian Gods and their Scionsprefer minimally disruptive solutions to problems, trustingin old patterns to maintain the status quo. Other Gods findthis attitude frustrating. Old patterns allowed the Titans tobreak free in the first place; why perpetuate easily disruptedsystems? Still, the Egyptian deities promote tradition andconservative attitudes as bulwarks against chaos, leavingclose-knit but reactionary societies in their wake.",
+      "logo": "systems/scion-hero-foundry/assets/svg/PESEDJET.svg",
+      "virtues": [
+        {
+          "name": "Conviction",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Harmony",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Order",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Piety",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        }
+      ],
+      "deities": [
+        {
+          "name": "ANUBIS",
+          "favoredSkills": [
+            "animalKen",
+            "empathy",
+            "integrity",
+            "medicine",
+            "melee",
+            "occult"
+          ]
+        },
+        {
+          "name": "ATUM-RE",
+          "favoredSkills": [
+            "academics",
+            "art",
+            "fortitude",
+            "investigation",
+            "politics",
+            "presence"
+          ]
+        },
+        {
+          "name": "BASTET",
+          "favoredSkills": [
+            "athletics",
+            "awareness",
+            "brawl",
+            "larceny",
+            "stealth",
+            "survival"
+          ]
+        },
+        {
+          "name": "GEB",
+          "favoredSkills": [
+            "art",
+            "command",
+            "empathy",
+            "fortitude",
+            "politics",
+            "science"
+          ]
+        },
+        {
+          "name": "HORUS",
+          "favoredSkills": [
+            "athletics",
+            "awareness",
+            "brawl",
+            "command",
+            "melee",
+            "politics"
+          ]
+        },
+        {
+          "name": "ISIS",
+          "favoredSkills": [
+            "academics",
+            "integrity",
+            "investigation",
+            "occult",
+            "politics",
+            "presence"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DODEKATHEON",
+      "description": "Second oldest of the divine tribes,the Dodekatheon comprises theOlympian Gods of Greco-Romanlegend. Their origins are murky,since the ancient Greeks already knewtheir Gods when they migrated tothe Mediterranean Sea around4,000 years ago, but theywere still changing andgrowing 2,500 years ago,and their forms only becameset around 1,500 years ago.Where the Pesedjet emphasizessocial and cultural stability overand against individual rights,the Dodekatheon has sought toimpose patterns of individuality within thecommunity on humanity. Arete—personal excellence inservice to humanity—is the motivating urge of this tribeof Gods and its Scions. It is important for most people toknow their place, but it is equally important for some to riseabove their stations and create new patterns for human life.In modern times, the Dodekatheon’s Scions seek tomanifest and awaken great spirits in society—as artists,warriors, spiritual seekers, judges, leaders and poets.Extraordinary individuals can strengthen the fabric ofreality so that Titans can gain no purchase on it or ripthrough illusion’s curtains. Sometimes, the Scions ofthe Olympians challenge mortals, and sometimes, theyare the mortals challenged by the Gods. Both routeslead to greatness—an exaltation of human endeavor thatblocks the Titans from destroying the World.The Greek pantheon’s greatest weakness is hubris—belief that the individual is capable of winning outagainst Fate. Every God in the Dodekatheon believes thathis most recent favored Scion is capable of surviving thetitanspawn onslaught and changing the World. Investingtime and training in Scion after Scion, the whole pantheonputs tremendous trust in its heroes, while acknowledgingthat all too many have only fallen into ruin and darkness.The next Scion, of course, will prove a worthy vessel forthe trust and favor of the Gods…",
+      "logo": "systems/scion-hero-foundry/assets/svg/DODEKATHEON.svg",
+      "virtues": [
+        {
+          "name": "Expression",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Intellect",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Valor",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Vengeance",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        }
+      ],
+      "deities": [
+        {
+          "name": "Zeus",
+          "domain": "Sky and Thunder",
+          "symbol": "Eagle",
+          "worshippers": [
+            "Greeks",
+            "Romans"
+          ]
+        },
+        {
+          "name": "Odin",
+          "domain": "Wisdom and War",
+          "symbol": "Raven",
+          "worshippers": [
+            "Norse"
+          ]
+        },
+        {
+          "name": "Ra",
+          "domain": "Sun and Creation",
+          "symbol": "Sun Disk",
+          "worshippers": [
+            "Egyptians"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AESIR",
+      "description": "Born in the wastes andruin of Northern Europe,among Germanic warriorsand Nordic pirates, theAesir compose the fourtholdest of the divinefamilies. Their pantheonis the product of ashotgun wedding around1,000 years ago, whenthe Aesir and the Vanir(an earlier pantheon) wereboth devastated by theTitans during a war in theNorth. Relying on the safetyof numbers, the Aesir absorbedtheir rivals into their ranks and thuspreserved themselves in difficult times.The Aesir represent a third option apart fromthose espoused by the Dodekatheon and thePesedjet. Aesir Scions promote community stabilityas a hedge against modern life’s harshness. Yet, theyalso emphasize personal rights and individual honor.Therefore, while family and nation are important,injustice against a single person is cause for actionand even vengeance.Of all the divine tribes, the Aesir are the mostdirectly affected by Fate. Nearly every Norse Godand Goddess is fated to end badly at Ragnarök,the prophesied ending of the nine worlds. Bothindividually and as a group, the Aesir motivatetheir Scions to find ways around that ugly doom.They challenge both specific people and wholecommunities, striving for greater justice and firmercommitments to order. On the other hand, theirentanglements with Fate cause many complicationsfor the Aesir and their Scions alike.The Aesir’s great weaknesses are a preponderanceof enemies, an obsession with Fate and a fondnessfor aggressive solutions (which is how they acquiredso many foes in the fi rst place). Titanspawn are tobe killed fi rst; questions can be asked later usingmagic, if necessary. At the same time, the bindingsof Fate urge these Gods to ask for propheciesfrom nearly everyone, as they seek to avoid theirdoom at Ragnarök. Invariably,their enemies grant themforeknowledge of their ruin,with oracles that furtherconstrain their possiblecourses of action.",
+      "logo": "systems/scion-hero-foundry/assets/svg/AESIR.svg",
+      "virtues": [
+        {
+          "name": "Courage",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Endurance",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Expression",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Loyalty",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        }
+      ],
+      "deities": [
+        {
+          "name": "Zeus",
+          "domain": "Sky and Thunder",
+          "symbol": "Eagle",
+          "worshippers": [
+            "Greeks",
+            "Romans"
+          ]
+        },
+        {
+          "name": "Odin",
+          "domain": "Wisdom and War",
+          "symbol": "Raven",
+          "worshippers": [
+            "Norse"
+          ]
+        },
+        {
+          "name": "Ra",
+          "domain": "Sun and Creation",
+          "symbol": "Sun Disk",
+          "worshippers": [
+            "Egyptians"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ATZLÁNTI",
+      "description": "Coming into being sometimebetween 3,000 and 4,000years ago, the Aztec Godshave no name for theirpantheon. Other divinetribes usually call them theAtzlánti. Capricious andcruel in a way that theother pantheons are not, theAztec Gods are bloodthirsty,aggressive and violent. Theymost often sire Scions withmortals descended fromthe tribes that spokeNáhuatl, wherever such nativepeoples exist.For the Atzlánti, continuity ismore important than communityor individuality. A specifi c human is unimportant.Likewise, a specific village, family, clan or nation isequally unimportant. The most important issue for thistribe is that the sun continues on its daily course, thatthe moon follows the sun in its appointed rounds andthat the stars continue to shine on their proper schedule.Yet astronomical normality and regularity require bloodysacrifice, and even if the other Gods deplore the AztecGods’ methods, they cannot deny that at least thecalendar proceeds in its usual and expected way.Of all the divine tribes, the Aztlánti are the leastconcerned with the dictates of Fate or the potential doomof the Gods. They are the most mutable of form, the mostmutable of apparent purpose and the least suspiciousof the ambitions of their Scions. Of course, part of thereason for their carefree attitude toward their children istheir attitude toward pain and death. What better bloodto spill to ensure the continuation of the sun’s coursethan the blood of a glorious child of the Gods?The Atzlánti have weaknesses, naturally, and theirgreatest stumbling block is their desperate need forblood. Blood fuels and expedites all Aztec magic anddivine powers, and while Quetzalcoátl might need onlya drop for most of his workings, Huitzilopochtli seemsto need bucketsful. The other Gods wonder how muchof this kind of sacrifice is personal preference, and howmuch is genuine necessity. Nonetheless, the Atzlántineed blood, recently spilled animal or human blood,to do their part in preserving reality. Their Scions aresimilarly affected.",
+      "logo": "systems/scion-hero-foundry/assets/svg/ATZLANTI.svg",
+      "virtues": [
+        {
+          "name": "Conviction",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Courage",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Duty",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Loyalty",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        }
+      ],
+      "deities": [
+        {
+          "name": "Zeus",
+          "domain": "Sky and Thunder",
+          "symbol": "Eagle",
+          "worshippers": [
+            "Greeks",
+            "Romans"
+          ]
+        },
+        {
+          "name": "Odin",
+          "domain": "Wisdom and War",
+          "symbol": "Raven",
+          "worshippers": [
+            "Norse"
+          ]
+        },
+        {
+          "name": "Ra",
+          "domain": "Sun and Creation",
+          "symbol": "Sun Disk",
+          "worshippers": [
+            "Egyptians"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AMATSUKAMI",
+      "description": "The Amatsukami arethe heavenly divinities ofancient Japan. When askedhow long they have beenaround, they are certain toreply “forever.” Other tribesusually estimate their ageas falling between that ofthe Dodekatheon and theAesir, though it is possiblethat the Amatsukami arenot lying about their age.Regardless, the Amatsukamicertainly have a different wayof working in the World.The Atzlánti work toensure the continuity of theOverworld in synchronicitywith the World. The Dodekatheon, theAesir and the Pesedjet work to ensure the continuityof human communities. The Amatsukami, however,emphasize the continuity of Nature—thereality of the World and allof its natural wonders, theinteractions between theliving and the non-living tocreate beauty and the mutablebeauty formed by states ofpermanent change.For the Amatsukami,to light a candle is tocast a shadow, and to killa butterfl y is to cause adrought. No action is trulyseparate from any other; allchoices occur within a seamlessframework of Now. Therefore,this pantheon works for theright and proper balanceof all being: human individuality incooperation with community in cooperation withnature in cooperation with divinity. Its Scions workto establish “ecological” solutions to complex problems,believing that only many-leveled, beautiful answers willkeep the Titans at bay.The downside of such elegant and serene naturalresolutions is that they take time to implement, andthere’s a fair amount of dithering about what exactly todo. The Amatsukami tend not to take the most directroute to whatever their solution is, so as to gain moretime to perfect that effort. In situations where time isan issue, the Scions of the Japanese Gods all too oftenrun out of it",
+      "logo": "systems/scion-hero-foundry/assets/svg/AMATSUKAMI.svg",
+      "virtues": [
+        {
+          "name": "Duty",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Endurance",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Intellect",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Valor",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        }
+      ],
+      "deities": [
+        {
+          "name": "Zeus",
+          "domain": "Sky and Thunder",
+          "symbol": "Eagle",
+          "worshippers": [
+            "Greeks",
+            "Romans"
+          ]
+        },
+        {
+          "name": "Odin",
+          "domain": "Wisdom and War",
+          "symbol": "Raven",
+          "worshippers": [
+            "Norse"
+          ]
+        },
+        {
+          "name": "Ra",
+          "domain": "Sun and Creation",
+          "symbol": "Sun Disk",
+          "worshippers": [
+            "Egyptians"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LOA",
+      "description": "The Loa are divinities ofancient West Africa, transplantedthrough slavery to the Caribbeanand North and South America.They make up the most mixedof the pantheons in terms ofage. Gods only a few hundredyears old dwell by Gods whowalked the earth millenniaago. Other Gods might mockthe Loa as mere spirits elevatedabove their rank and station,but their actual power andauthority certainly matchesthat of their detractors. Muchof the mockery against them,therefore, is social rather thanmetaphysical. Of all the pantheons,the Loa remember their origins asScions. They tend to treat their progeny withrespect and honor. Indeed, the divinities of Voodooseem to believe that their pantheonhas not yet fi nished growing, andeach God has an array of spirits,minor divinities and borrowedCatholic saints to call uponas messengers, allies andcompanions for their Scions.The Loa form aninteresting complement tothe Amatsukami. Where theJapanese pantheon works forthe benefit of the totality ofnature in all of its diversity, theLoa concentrate their energyon retaining the energy andholiness of local places. Thewhole of nature is not nearly soimportant as the wholeness ofthe here-and-now to the Loa. TheVoodoo divinities are ardent believersin the idea that small is beautiful. A house where the inhabitants live in peace, prosperity and happiness is agood and beautiful goal for the Loa. One prosperousvillage or town ranks as a greater achievement thansaving an island or even the World. In this attention todetail, the Loa mock the greater pantheons. Why bothersaving the World if the people die and their towns are inruins? What’s the point if your temples are aestheticallypleasing but spiritually dead?Because the pantheon is still growing, the Gods relyon an active community for worshippers who fill themspiritual energy. As a result, the Voodoo deities sufferfrom a degree of myopia. In the pursuit of unity, prosperityand peace at the local level, they sometimes lose sight ofbigger issues, such as vanquishing the Titans.",
+      "logo": "systems/scion-hero-foundry/assets/svg/LOA.svg",
+      "virtues": [
+        {
+          "name": "Harmony",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Order",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Piety",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        },
+        {
+          "name": "Vengeance",
+          "value": 1,
+          "max": 5,
+          "min": 1
+        }
+      ],
+      "deities": [
+        {
+          "name": "Zeus",
+          "domain": "Sky and Thunder",
+          "symbol": "Eagle",
+          "worshippers": [
+            "Greeks",
+            "Romans"
+          ]
+        },
+        {
+          "name": "Odin",
+          "domain": "Wisdom and War",
+          "symbol": "Raven",
+          "worshippers": [
+            "Norse"
+          ]
+        },
+        {
+          "name": "Ra",
+          "domain": "Sun and Creation",
+          "symbol": "Sun Disk",
+          "worshippers": [
+            "Egyptians"
+          ]
+        }
+      ]
+    }
+  ]
+}

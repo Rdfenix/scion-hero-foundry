@@ -22,7 +22,36 @@
     "styles/partials/combat.css"
   ],
   "scripts": [],
-  "packs": [],
+  "packs": [
+    {
+      "name": "deities",
+      "label": "Deities",
+      "path": "packs/deities.db",
+      "type": "deity",
+      "system": "scion-hero-foundry"
+    },
+    {
+      "name": "boons",
+      "label": "Boon List",
+      "path": "packs/boons.db",
+      "type": "boon",
+      "system": "scion-hero-foundry"
+    },
+    {
+      "name": "knacks",
+      "label": "Knack List",
+      "path": "packs/knacks.db",
+      "type": "knack",
+      "system": "scion-hero-foundry"
+    },
+    {
+      "name": "purviews",
+      "label": "Purview List",
+      "path": "packs/purviews.db",
+      "type": "purview",
+      "system": "scion-hero-foundry"
+    }
+  ],
   "languages": [
     {
       "lang": "en",
