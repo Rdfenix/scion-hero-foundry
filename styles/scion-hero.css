@@ -84,6 +84,36 @@
   margin: 0;
 }
 
+.scion-pantheon-button {
+  width: calc(100% - 2px);
+  min-width: 20px;
+  height: var(--form-field-height);
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid var(--color-border-light-tertiary);
+  background: rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1px 3px;
+}
+
+.scion-pantheon-button > img {
+  width: 30px;
+  height: 30px !important;
+  flex: 0 !important;
+  border: 0;
+  margin-right: 0 !important;
+  margin-bottom: 5px;
+}
+
+.scion-pantheon-button:hover,
+.scion-pantheon-button:focus {
+  box-shadow: none;
+}
+
 .circle-checkbox,
 .square-checkbox {
   appearance: none;
