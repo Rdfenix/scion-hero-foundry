@@ -1,3 +1,5 @@
+import { _onAction } from "../helpers/actions.js";
+
 export class ScionHeroActorSheet extends ActorSheet {
   prepareData() {
     super.prepareData();
@@ -40,6 +42,9 @@ export class ScionHeroActorSheet extends ActorSheet {
       html.find(".tab").removeClass("active");
       html.find(`.tab[data-tab="${tab}"]`).addClass("active");
     });
+
+    // Usa delegação para garantir que funcione em partials e elementos dinâmicos
+    html.on("click", "[data-action]", _onAction.bind(this));
   }
 
   async getData() {

@@ -64,13 +64,13 @@
         </div>
         <div class="row">
           <label for="god">God</label>
-          <input
-            type="text"
-            id="god"
-            name="system.god"
-            value="{{system.pantheon.god}}"
-            placeholder=""
-          />
+          <button
+            type="button"
+            class="scion-pantheon-button"
+            data-action="select-god"
+          >
+            <span>{{system.pantheon.god}}</span>
+          </button>
         </div>
       </div>
     </header>

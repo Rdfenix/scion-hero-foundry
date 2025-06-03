@@ -87,7 +87,7 @@
     }
   },
   "Item": {
-    "types": ["boon", "knack", "purview", "birthright"],
+    "types": ["boon", "knack", "purview", "birthright", "deity"],
     "templates": {}
   }
 }

@@ -25,30 +25,30 @@
   "packs": [
     {
       "name": "deities",
-      "label": "Deities",
+      "label": "Deities List",
       "path": "packs/deities.db",
-      "type": "deity",
+      "type": "Item",
       "system": "scion-hero-foundry"
     },
     {
       "name": "boons",
       "label": "Boon List",
       "path": "packs/boons.db",
-      "type": "boon",
+      "type": "Item",
       "system": "scion-hero-foundry"
     },
     {
       "name": "knacks",
       "label": "Knack List",
       "path": "packs/knacks.db",
-      "type": "knack",
+      "type": "Item",
       "system": "scion-hero-foundry"
     },
     {
       "name": "purviews",
       "label": "Purview List",
       "path": "packs/purviews.db",
-      "type": "purview",
+      "type": "Item",
       "system": "scion-hero-foundry"
     }
   ],
