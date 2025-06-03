@@ -516,135 +516,80 @@
       ],
       "deities": [
         {
-          "name": "APHRODITE",
+          "name": "HUITZILOPOCHTLI",
           "favoredSkills": [
-            "animalKen",
-            "art",
-            "empathy",
-            "integrity",
-            "larceny",
-            "presence"
+            "athletics",
+            "awareness",
+            "brawl",
+            "marksmanship",
+            "melee",
+            "thrown"
           ]
         },
         {
-          "name": "APOLLO",
+          "name": "MICLÁNTECUHTLI",
           "favoredSkills": [
-            "art",
-            "athletics",
-            "medicine",
-            "marksmanship",
+            "command",
+            "investigation",
+            "larceny",
+            "politics",
             "presence",
+            "thrown"
+          ]
+        },
+        {
+          "name": "QUETZALCOÁTL",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "investigation",
+            "medicine",
+            "melee",
             "science"
           ]
         },
         {
-          "name": "ARES",
+          "name": "TEZCATLIPOCA",
           "favoredSkills": [
+            "athletics",
+            "brawl",
+            "fortitude",
+            "occult",
+            "presence",
+            "stealth"
+          ]
+        },
+        {
+          "name": "TLALOC",
+          "favoredSkills": [
+            "academics",
             "brawl",
             "command",
-            "marksmanship",
-            "melee",
-            "presence",
-            "thrown"
-          ]
-        },
-        {
-          "name": "ARTEMIS",
-          "favoredSkills": [
-            "animalKen",
-            "awareness",
-            "empathy",
-            "fortitude",
-            "marksmanship",
+            "medicine",
+            "stealth",
             "survival"
           ]
         },
         {
-          "name": "ATHENA",
-          "favoredSkills": [
-            "academics",
-            "command",
-            "craft",
-            "melee",
-            "investigation",
-            "science"
-          ]
-        },
-        {
-          "name": "DIONYSUS",
+          "name": "TLAZOLTÉOTL",
           "favoredSkills": [
             "art",
+            "craft",
             "empathy",
-            "integrity",
-            "fortitude",
-            "occult",
-            "presence"
+            "investigation",
+            "medicine",
+            "politics"
           ]
         },
         {
-          "name": "HADES",
+          "name": "XIPE TOTEC",
           "favoredSkills": [
-            "academics",
-            "command",
-            "occult",
-            "presence",
-            "stealth",
-            "thrown"
-          ]
-        },
-        {
-          "name": "HEPHAESTUS",
-          "favoredSkills": [
-            "art",
-            "control",
             "craft",
-            "investigation",
-            "melee",
-            "science"
-          ]
-        },
-        {
-          "name": "HERA",
-          "favoredSkills": [
-            "academics",
-            "command",
             "fortitude",
-            "investigation",
-            "politics",
-            "presence"
-          ]
-        },
-        {
-          "name": "HERMES",
-          "favoredSkills": [
-            "athletics",
-            "awareness",
+            "integrity",
             "larceny",
-            "occult",
-            "stealth",
+            "medicine",
             "survival"
-          ]
-        },
-        {
-          "name": "POSEIDON",
-          "favoredSkills": [
-            "animalKen",
-            "control",
-            "fortitude",
-            "integrity",
-            "melee",
-            "thrown"
-          ]
-        },
-        {
-          "name": "ZEUS",
-          "favoredSkills": [
-            "awareness",
-            "command",
-            "integrity",
-            "presence",
-            "politics",
-            "thrown"
           ]
         }
       ]
@@ -681,135 +626,80 @@
       ],
       "deities": [
         {
-          "name": "APHRODITE",
+          "name": "AMATERASU",
           "favoredSkills": [
-            "animalKen",
             "art",
+            "awareness",
+            "craft",
             "empathy",
             "integrity",
-            "larceny",
             "presence"
           ]
         },
         {
-          "name": "APOLLO",
+          "name": "HACHIMAN",
           "favoredSkills": [
-            "art",
             "athletics",
-            "medicine",
+            "command",
+            "investigation",
             "marksmanship",
-            "presence",
+            "melee",
             "science"
           ]
         },
         {
-          "name": "ARES",
+          "name": "IZANAGI",
+          "favoredSkills": [
+            "academics",
+            "awareness",
+            "fortitude",
+            "melee",
+            "presence",
+            "thrown"
+          ]
+        },
+        {
+          "name": "IZANAMI",
           "favoredSkills": [
             "brawl",
             "command",
-            "marksmanship",
-            "melee",
-            "presence",
-            "thrown"
-          ]
-        },
-        {
-          "name": "ARTEMIS",
-          "favoredSkills": [
-            "animalKen",
-            "awareness",
-            "empathy",
             "fortitude",
-            "marksmanship",
-            "survival"
-          ]
-        },
-        {
-          "name": "ATHENA",
-          "favoredSkills": [
-            "academics",
-            "command",
-            "craft",
-            "melee",
-            "investigation",
-            "science"
-          ]
-        },
-        {
-          "name": "DIONYSUS",
-          "favoredSkills": [
-            "art",
-            "empathy",
             "integrity",
-            "fortitude",
             "occult",
-            "presence"
+            "stealth"
           ]
         },
         {
-          "name": "HADES",
-          "favoredSkills": [
-            "academics",
-            "command",
-            "occult",
-            "presence",
-            "stealth",
-            "thrown"
-          ]
-        },
-        {
-          "name": "HEPHAESTUS",
-          "favoredSkills": [
-            "art",
-            "control",
-            "craft",
-            "investigation",
-            "melee",
-            "science"
-          ]
-        },
-        {
-          "name": "HERA",
-          "favoredSkills": [
-            "academics",
-            "command",
-            "fortitude",
-            "investigation",
-            "politics",
-            "presence"
-          ]
-        },
-        {
-          "name": "HERMES",
+          "name": "RAIDEN",
           "favoredSkills": [
             "athletics",
-            "awareness",
-            "larceny",
-            "occult",
-            "stealth",
-            "survival"
-          ]
-        },
-        {
-          "name": "POSEIDON",
-          "favoredSkills": [
-            "animalKen",
-            "control",
+            "brawl",
             "fortitude",
-            "integrity",
-            "melee",
-            "thrown"
+            "marksmanship",
+            "presence",
+            "science"
           ]
         },
         {
-          "name": "ZEUS",
+          "name": "SUSANO-O",
           "favoredSkills": [
             "awareness",
-            "command",
-            "integrity",
-            "presence",
-            "politics",
-            "thrown"
+            "brawl",
+            "craft",
+            "fortitude",
+            "melee",
+            "presence"
+          ]
+        },
+        {
+          "name": "TSUKI-YOMI",
+          "favoredSkills": [
+            "academics",
+            "awareness",
+            "empathy",
+            "investigation",
+            "marksmanship",
+            "politics"
           ]
         }
       ]
@@ -846,135 +736,80 @@
       ],
       "deities": [
         {
-          "name": "APHRODITE",
+          "name": "BARON SAMEDI",
           "favoredSkills": [
-            "animalKen",
-            "art",
-            "empathy",
+            "command",
+            "fortitude",
             "integrity",
-            "larceny",
+            "occult",
+            "politics",
             "presence"
           ]
         },
         {
-          "name": "APOLLO",
+          "name": "DAMBALLA",
           "favoredSkills": [
-            "art",
-            "athletics",
-            "medicine",
-            "marksmanship",
-            "presence",
-            "science"
-          ]
-        },
-        {
-          "name": "ARES",
-          "favoredSkills": [
+            "animalKen",
+            "awareness",
             "brawl",
-            "command",
-            "marksmanship",
-            "melee",
-            "presence",
-            "thrown"
+            "empathy",
+            "medicine",
+            "science"
           ]
         },
         {
-          "name": "ARTEMIS",
+          "name": "ERZULIE",
           "favoredSkills": [
-            "animalKen",
-            "awareness",
+            "art",
+            "athletics",
             "empathy",
-            "fortitude",
-            "marksmanship",
+            "integrity",
+            "presence",
             "survival"
           ]
         },
         {
-          "name": "ATHENA",
+          "name": "KALFU",
           "favoredSkills": [
-            "academics",
-            "command",
-            "craft",
-            "melee",
-            "investigation",
-            "science"
-          ]
-        },
-        {
-          "name": "DIONYSUS",
-          "favoredSkills": [
-            "art",
-            "empathy",
-            "integrity",
-            "fortitude",
-            "occult",
-            "presence"
-          ]
-        },
-        {
-          "name": "HADES",
-          "favoredSkills": [
-            "academics",
-            "command",
+            "animalKen",
+            "athletics",
             "occult",
             "presence",
             "stealth",
-            "thrown"
+            "survival"
           ]
         },
         {
-          "name": "HEPHAESTUS",
+          "name": "LEGBA",
           "favoredSkills": [
-            "art",
-            "control",
-            "craft",
-            "investigation",
-            "melee",
-            "science"
-          ]
-        },
-        {
-          "name": "HERA",
-          "favoredSkills": [
-            "academics",
             "command",
-            "fortitude",
-            "investigation",
-            "politics",
-            "presence"
-          ]
-        },
-        {
-          "name": "HERMES",
-          "favoredSkills": [
-            "athletics",
-            "awareness",
+            "empathy",
+            "integrity",
             "larceny",
             "occult",
-            "stealth",
-            "survival"
+            "politics"
           ]
         },
         {
-          "name": "POSEIDON",
+          "name": "OGOUN",
           "favoredSkills": [
-            "animalKen",
-            "control",
+            "art",
+            "craft",
+            "fortitude",
+            "melee",
+            "politics",
+            "presence"
+          ]
+        },
+        {
+          "name": "SHANGO",
+          "favoredSkills": [
+            "art",
+            "command",
             "fortitude",
             "integrity",
             "melee",
-            "thrown"
-          ]
-        },
-        {
-          "name": "ZEUS",
-          "favoredSkills": [
-            "awareness",
-            "command",
-            "integrity",
-            "presence",
-            "politics",
-            "thrown"
+            "presence"
           ]
         }
       ]
