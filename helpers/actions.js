@@ -31,10 +31,18 @@ const selectPantheon = async () => {
         name: deity.name,
         logo: deity.img,
         description: deity.system.description,
-        virtues: deity.system.virtues,
+        virtues: deity.system.virtues.reduce((acc, virtue) => {
+          acc[virtue.name] = {
+            value: 1,
+            min: virtue.min,
+            max: virtue.max,
+          };
+          return acc;
+        }, {}),
       }))
-      .filter((pantheon, index, self) =>
-        index === self.findIndex((p) => p.name === pantheon.name)
+      .filter(
+        (pantheon, index, self) =>
+          index === self.findIndex((p) => p.name === pantheon.name)
       );
 
     console.log("Panteões disponíveis:", pantheons);
@@ -70,8 +78,18 @@ const selectPantheon = async () => {
             },
           },
           default: "select",
-          render: (html) =>
-            console.log("Diálogo de seleção de panteão renderizado"),
+          render: (html) => {
+            console.log("Diálogo de seleção de panteão renderizado");
+            setTimeout(() => {
+              const contentEl = html
+                .closest(".window-app")
+                .find(".window-content")[0];
+              if (contentEl) {
+                contentEl.scrollTop = 0;
+                console.log("Scroll forçado para o topo");
+              }
+            }, 50);
+          },
           close: () => resolve(null),
         },
         {

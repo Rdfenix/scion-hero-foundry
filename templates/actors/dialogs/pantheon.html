@@ -7,8 +7,28 @@
       <ul class="pantheon-list">
         {{#each pantheons as |pantheon|}}
         <li class="pantheon-item">
-          {{pantheon.name}}
-          <img class="pantheon-logo" src="{{pantheon.logo}}" alt="{{pantheon.name}}" />
+          <label for="{{pantheon.name}}">
+            <div class="pantheon-name">
+              {{pantheon.name}}
+              <img
+                class="pantheon-logo"
+                src="{{pantheon.logo}}"
+                alt="{{pantheon.name}}"
+              />
+            </div>
+            <div class="pantheon-virtues">
+              {{#splitInColumns pantheon.virtues 2 'pantheon-virtue-item'}}
+              <div class="pantheon-virtue-item-row">{{key}}</div>
+              {{/splitInColumns}}
+            </div>
+            <div class="pantheon-description">
+              {{#if pantheon.description}}
+              <p>{{pantheon.description}}</p>
+              {{else}}
+              <p>No description available.</p>
+              {{/if}}
+            </div>
+          </label>
         </li>
         {{/each}}
       </ul>

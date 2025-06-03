@@ -56,6 +56,39 @@
   border: none;
 }
 
+.pantheon-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pantheon-virtues {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-auto-rows: minmax(60px, auto);
+  gap: 0.9rem;
+  text-align: center;
+  width: 100%;
+}
+
+.pantheon-item {
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border-light-tertiary);
+  transition: background-color 0.3s ease;
+}
+
+.pantheon-item:last-child {
+  border-bottom: none;
+}
+
+.pantheon-item:hover {
+  background-color: rgba(211, 211, 211, 0.5) !important;
+}
+
+.pantheon-item > label {
+  cursor: pointer;
+}
+
 /* Ajusta o tamanho dos botões do Dialog do Pantheon */
 /* .dialog .dialog-buttons .dialog-button {
   min-width: 80px;
