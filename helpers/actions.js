@@ -86,7 +86,6 @@ const selectPantheon = async () => {
                 .find(".window-content")[0];
               if (contentEl) {
                 contentEl.scrollTop = 0;
-                console.log("Scroll forçado para o topo");
               }
             }, 50);
           },
