@@ -96,6 +96,61 @@
             "politics",
             "presence"
           ]
+        },
+        {
+          "name": "OSIRIS",
+          "favoredSkills": [
+            "awareness",
+            "command",
+            "fortitude",
+            "investigation",
+            "politics",
+            "presence"
+          ]
+        },
+        {
+          "name": "PTAH",
+          "favoredSkills": [
+            "art",
+            "craft",
+            "investigation",
+            "larceny",
+            "science",
+            "thrown"
+          ]
+        },
+        {
+          "name": "SET",
+          "favoredSkills": [
+            "brawl",
+            "command",
+            "control",
+            "melee",
+            "presence",
+            "survival"
+          ]
+        },
+        {
+          "name": "SOBEK",
+          "favoredSkills": [
+            "athletics",
+            "awareness",
+            "brawl",
+            "larceny",
+            "presence",
+            "stealth"
+          ]
+        },
+        {
+          "name": "THOTH",
+          "favoredSkills": [
+            "academics",
+            "investigation",
+            "integrity",
+            "occult",
+            "politics",
+            "science"
+          ]
         }
       ]
     },
@@ -131,28 +186,135 @@
       ],
       "deities": [
         {
-          "name": "Zeus",
-          "domain": "Sky and Thunder",
-          "symbol": "Eagle",
-          "worshippers": [
-            "Greeks",
-            "Romans"
+          "name": "APHRODITE",
+          "favoredSkills": [
+            "animalKen",
+            "art",
+            "empathy",
+            "integrity",
+            "larceny",
+            "presence"
           ]
         },
         {
-          "name": "Odin",
-          "domain": "Wisdom and War",
-          "symbol": "Raven",
-          "worshippers": [
-            "Norse"
+          "name": "APOLLO",
+          "favoredSkills": [
+            "art",
+            "athletics",
+            "medicine",
+            "marksmanship",
+            "presence",
+            "science"
           ]
         },
         {
-          "name": "Ra",
-          "domain": "Sun and Creation",
-          "symbol": "Sun Disk",
-          "worshippers": [
-            "Egyptians"
+          "name": "ARES",
+          "favoredSkills": [
+            "brawl",
+            "command",
+            "marksmanship",
+            "melee",
+            "presence",
+            "thrown"
+          ]
+        },
+        {
+          "name": "ARTEMIS",
+          "favoredSkills": [
+            "animalKen",
+            "awareness",
+            "empathy",
+            "fortitude",
+            "marksmanship",
+            "survival"
+          ]
+        },
+        {
+          "name": "ATHENA",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "craft",
+            "melee",
+            "investigation",
+            "science"
+          ]
+        },
+        {
+          "name": "DIONYSUS",
+          "favoredSkills": [
+            "art",
+            "empathy",
+            "integrity",
+            "fortitude",
+            "occult",
+            "presence"
+          ]
+        },
+        {
+          "name": "HADES",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "occult",
+            "presence",
+            "stealth",
+            "thrown"
+          ]
+        },
+        {
+          "name": "HEPHAESTUS",
+          "favoredSkills": [
+            "art",
+            "control",
+            "craft",
+            "investigation",
+            "melee",
+            "science"
+          ]
+        },
+        {
+          "name": "HERA",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "fortitude",
+            "investigation",
+            "politics",
+            "presence"
+          ]
+        },
+        {
+          "name": "HERMES",
+          "favoredSkills": [
+            "athletics",
+            "awareness",
+            "larceny",
+            "occult",
+            "stealth",
+            "survival"
+          ]
+        },
+        {
+          "name": "POSEIDON",
+          "favoredSkills": [
+            "animalKen",
+            "control",
+            "fortitude",
+            "integrity",
+            "melee",
+            "thrown"
+          ]
+        },
+        {
+          "name": "ZEUS",
+          "favoredSkills": [
+            "awareness",
+            "command",
+            "integrity",
+            "presence",
+            "politics",
+            "thrown"
           ]
         }
       ]
@@ -189,28 +351,135 @@
       ],
       "deities": [
         {
-          "name": "Zeus",
-          "domain": "Sky and Thunder",
-          "symbol": "Eagle",
-          "worshippers": [
-            "Greeks",
-            "Romans"
+          "name": "APHRODITE",
+          "favoredSkills": [
+            "animalKen",
+            "art",
+            "empathy",
+            "integrity",
+            "larceny",
+            "presence"
           ]
         },
         {
-          "name": "Odin",
-          "domain": "Wisdom and War",
-          "symbol": "Raven",
-          "worshippers": [
-            "Norse"
+          "name": "APOLLO",
+          "favoredSkills": [
+            "art",
+            "athletics",
+            "medicine",
+            "marksmanship",
+            "presence",
+            "science"
           ]
         },
         {
-          "name": "Ra",
-          "domain": "Sun and Creation",
-          "symbol": "Sun Disk",
-          "worshippers": [
-            "Egyptians"
+          "name": "ARES",
+          "favoredSkills": [
+            "brawl",
+            "command",
+            "marksmanship",
+            "melee",
+            "presence",
+            "thrown"
+          ]
+        },
+        {
+          "name": "ARTEMIS",
+          "favoredSkills": [
+            "animalKen",
+            "awareness",
+            "empathy",
+            "fortitude",
+            "marksmanship",
+            "survival"
+          ]
+        },
+        {
+          "name": "ATHENA",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "craft",
+            "melee",
+            "investigation",
+            "science"
+          ]
+        },
+        {
+          "name": "DIONYSUS",
+          "favoredSkills": [
+            "art",
+            "empathy",
+            "integrity",
+            "fortitude",
+            "occult",
+            "presence"
+          ]
+        },
+        {
+          "name": "HADES",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "occult",
+            "presence",
+            "stealth",
+            "thrown"
+          ]
+        },
+        {
+          "name": "HEPHAESTUS",
+          "favoredSkills": [
+            "art",
+            "control",
+            "craft",
+            "investigation",
+            "melee",
+            "science"
+          ]
+        },
+        {
+          "name": "HERA",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "fortitude",
+            "investigation",
+            "politics",
+            "presence"
+          ]
+        },
+        {
+          "name": "HERMES",
+          "favoredSkills": [
+            "athletics",
+            "awareness",
+            "larceny",
+            "occult",
+            "stealth",
+            "survival"
+          ]
+        },
+        {
+          "name": "POSEIDON",
+          "favoredSkills": [
+            "animalKen",
+            "control",
+            "fortitude",
+            "integrity",
+            "melee",
+            "thrown"
+          ]
+        },
+        {
+          "name": "ZEUS",
+          "favoredSkills": [
+            "awareness",
+            "command",
+            "integrity",
+            "presence",
+            "politics",
+            "thrown"
           ]
         }
       ]
@@ -247,28 +516,135 @@
       ],
       "deities": [
         {
-          "name": "Zeus",
-          "domain": "Sky and Thunder",
-          "symbol": "Eagle",
-          "worshippers": [
-            "Greeks",
-            "Romans"
+          "name": "APHRODITE",
+          "favoredSkills": [
+            "animalKen",
+            "art",
+            "empathy",
+            "integrity",
+            "larceny",
+            "presence"
           ]
         },
         {
-          "name": "Odin",
-          "domain": "Wisdom and War",
-          "symbol": "Raven",
-          "worshippers": [
-            "Norse"
+          "name": "APOLLO",
+          "favoredSkills": [
+            "art",
+            "athletics",
+            "medicine",
+            "marksmanship",
+            "presence",
+            "science"
           ]
         },
         {
-          "name": "Ra",
-          "domain": "Sun and Creation",
-          "symbol": "Sun Disk",
-          "worshippers": [
-            "Egyptians"
+          "name": "ARES",
+          "favoredSkills": [
+            "brawl",
+            "command",
+            "marksmanship",
+            "melee",
+            "presence",
+            "thrown"
+          ]
+        },
+        {
+          "name": "ARTEMIS",
+          "favoredSkills": [
+            "animalKen",
+            "awareness",
+            "empathy",
+            "fortitude",
+            "marksmanship",
+            "survival"
+          ]
+        },
+        {
+          "name": "ATHENA",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "craft",
+            "melee",
+            "investigation",
+            "science"
+          ]
+        },
+        {
+          "name": "DIONYSUS",
+          "favoredSkills": [
+            "art",
+            "empathy",
+            "integrity",
+            "fortitude",
+            "occult",
+            "presence"
+          ]
+        },
+        {
+          "name": "HADES",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "occult",
+            "presence",
+            "stealth",
+            "thrown"
+          ]
+        },
+        {
+          "name": "HEPHAESTUS",
+          "favoredSkills": [
+            "art",
+            "control",
+            "craft",
+            "investigation",
+            "melee",
+            "science"
+          ]
+        },
+        {
+          "name": "HERA",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "fortitude",
+            "investigation",
+            "politics",
+            "presence"
+          ]
+        },
+        {
+          "name": "HERMES",
+          "favoredSkills": [
+            "athletics",
+            "awareness",
+            "larceny",
+            "occult",
+            "stealth",
+            "survival"
+          ]
+        },
+        {
+          "name": "POSEIDON",
+          "favoredSkills": [
+            "animalKen",
+            "control",
+            "fortitude",
+            "integrity",
+            "melee",
+            "thrown"
+          ]
+        },
+        {
+          "name": "ZEUS",
+          "favoredSkills": [
+            "awareness",
+            "command",
+            "integrity",
+            "presence",
+            "politics",
+            "thrown"
           ]
         }
       ]
@@ -305,28 +681,135 @@
       ],
       "deities": [
         {
-          "name": "Zeus",
-          "domain": "Sky and Thunder",
-          "symbol": "Eagle",
-          "worshippers": [
-            "Greeks",
-            "Romans"
+          "name": "APHRODITE",
+          "favoredSkills": [
+            "animalKen",
+            "art",
+            "empathy",
+            "integrity",
+            "larceny",
+            "presence"
           ]
         },
         {
-          "name": "Odin",
-          "domain": "Wisdom and War",
-          "symbol": "Raven",
-          "worshippers": [
-            "Norse"
+          "name": "APOLLO",
+          "favoredSkills": [
+            "art",
+            "athletics",
+            "medicine",
+            "marksmanship",
+            "presence",
+            "science"
           ]
         },
         {
-          "name": "Ra",
-          "domain": "Sun and Creation",
-          "symbol": "Sun Disk",
-          "worshippers": [
-            "Egyptians"
+          "name": "ARES",
+          "favoredSkills": [
+            "brawl",
+            "command",
+            "marksmanship",
+            "melee",
+            "presence",
+            "thrown"
+          ]
+        },
+        {
+          "name": "ARTEMIS",
+          "favoredSkills": [
+            "animalKen",
+            "awareness",
+            "empathy",
+            "fortitude",
+            "marksmanship",
+            "survival"
+          ]
+        },
+        {
+          "name": "ATHENA",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "craft",
+            "melee",
+            "investigation",
+            "science"
+          ]
+        },
+        {
+          "name": "DIONYSUS",
+          "favoredSkills": [
+            "art",
+            "empathy",
+            "integrity",
+            "fortitude",
+            "occult",
+            "presence"
+          ]
+        },
+        {
+          "name": "HADES",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "occult",
+            "presence",
+            "stealth",
+            "thrown"
+          ]
+        },
+        {
+          "name": "HEPHAESTUS",
+          "favoredSkills": [
+            "art",
+            "control",
+            "craft",
+            "investigation",
+            "melee",
+            "science"
+          ]
+        },
+        {
+          "name": "HERA",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "fortitude",
+            "investigation",
+            "politics",
+            "presence"
+          ]
+        },
+        {
+          "name": "HERMES",
+          "favoredSkills": [
+            "athletics",
+            "awareness",
+            "larceny",
+            "occult",
+            "stealth",
+            "survival"
+          ]
+        },
+        {
+          "name": "POSEIDON",
+          "favoredSkills": [
+            "animalKen",
+            "control",
+            "fortitude",
+            "integrity",
+            "melee",
+            "thrown"
+          ]
+        },
+        {
+          "name": "ZEUS",
+          "favoredSkills": [
+            "awareness",
+            "command",
+            "integrity",
+            "presence",
+            "politics",
+            "thrown"
           ]
         }
       ]
@@ -363,28 +846,135 @@
       ],
       "deities": [
         {
-          "name": "Zeus",
-          "domain": "Sky and Thunder",
-          "symbol": "Eagle",
-          "worshippers": [
-            "Greeks",
-            "Romans"
+          "name": "APHRODITE",
+          "favoredSkills": [
+            "animalKen",
+            "art",
+            "empathy",
+            "integrity",
+            "larceny",
+            "presence"
           ]
         },
         {
-          "name": "Odin",
-          "domain": "Wisdom and War",
-          "symbol": "Raven",
-          "worshippers": [
-            "Norse"
+          "name": "APOLLO",
+          "favoredSkills": [
+            "art",
+            "athletics",
+            "medicine",
+            "marksmanship",
+            "presence",
+            "science"
           ]
         },
         {
-          "name": "Ra",
-          "domain": "Sun and Creation",
-          "symbol": "Sun Disk",
-          "worshippers": [
-            "Egyptians"
+          "name": "ARES",
+          "favoredSkills": [
+            "brawl",
+            "command",
+            "marksmanship",
+            "melee",
+            "presence",
+            "thrown"
+          ]
+        },
+        {
+          "name": "ARTEMIS",
+          "favoredSkills": [
+            "animalKen",
+            "awareness",
+            "empathy",
+            "fortitude",
+            "marksmanship",
+            "survival"
+          ]
+        },
+        {
+          "name": "ATHENA",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "craft",
+            "melee",
+            "investigation",
+            "science"
+          ]
+        },
+        {
+          "name": "DIONYSUS",
+          "favoredSkills": [
+            "art",
+            "empathy",
+            "integrity",
+            "fortitude",
+            "occult",
+            "presence"
+          ]
+        },
+        {
+          "name": "HADES",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "occult",
+            "presence",
+            "stealth",
+            "thrown"
+          ]
+        },
+        {
+          "name": "HEPHAESTUS",
+          "favoredSkills": [
+            "art",
+            "control",
+            "craft",
+            "investigation",
+            "melee",
+            "science"
+          ]
+        },
+        {
+          "name": "HERA",
+          "favoredSkills": [
+            "academics",
+            "command",
+            "fortitude",
+            "investigation",
+            "politics",
+            "presence"
+          ]
+        },
+        {
+          "name": "HERMES",
+          "favoredSkills": [
+            "athletics",
+            "awareness",
+            "larceny",
+            "occult",
+            "stealth",
+            "survival"
+          ]
+        },
+        {
+          "name": "POSEIDON",
+          "favoredSkills": [
+            "animalKen",
+            "control",
+            "fortitude",
+            "integrity",
+            "melee",
+            "thrown"
+          ]
+        },
+        {
+          "name": "ZEUS",
+          "favoredSkills": [
+            "awareness",
+            "command",
+            "integrity",
+            "presence",
+            "politics",
+            "thrown"
           ]
         }
       ]
