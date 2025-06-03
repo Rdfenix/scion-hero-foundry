@@ -26,12 +26,16 @@ const selectPantheon = async () => {
     const deities = await pack.getDocuments();
     console.log("Divindades encontradas no pacote:", deities);
 
-    const pantheons = deities.map((deity) => ({
-      name: deity.name,
-      logo: deity.img,
-      description: deity.system.description,
-      virtues: deity.system.virtues,
-    }));
+    const pantheons = deities
+      .map((deity) => ({
+        name: deity.name,
+        logo: deity.img,
+        description: deity.system.description,
+        virtues: deity.system.virtues,
+      }))
+      .filter((pantheon, index, self) =>
+        index === self.findIndex((p) => p.name === pantheon.name)
+      );
 
     console.log("Panteões disponíveis:", pantheons);
 
