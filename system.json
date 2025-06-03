@@ -19,7 +19,8 @@
     "styles/partials/stats.css",
     "styles/partials/birth-virtues.css",
     "styles/partials/knacks-boons.css",
-    "styles/partials/combat.css"
+    "styles/partials/combat.css",
+    "styles/dialogs/pantheon.css"
   ],
   "scripts": [],
   "packs": [

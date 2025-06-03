@@ -24,56 +24,58 @@ const selectPantheon = async () => {
     }
 
     const deities = await pack.getDocuments();
+    console.log("Divindades encontradas no pacote:", deities);
 
-    const pantheon = deities.map((deity) => ({
+    const pantheons = deities.map((deity) => ({
       name: deity.name,
       logo: deity.img,
       description: deity.system.description,
       virtues: deity.system.virtues,
     }));
 
-    console.log("Panteões disponíveis:", pantheon);
+    console.log("Panteões disponíveis:", pantheons);
 
-    if (pantheon.length === 0) {
+    if (pantheons.length === 0) {
       throw new Error("Nenhuma divindade encontrada no pacote.");
     }
 
-    // return new Promise((resolve) => {
-    //   new Dialog({
-    //     title: "Selecione um Panteão",
-    //     content: `
-    //       <form>
-    //         <div class="form-group">
-    //           <select name="deity" id="deity-select">
-    //             ${deities.map(d => `<option value="${d.id}">${d.name}</option>`).join('')}
-    //           </select>
-    //         </div>
-    //       </form>
-    //     `,
-    //     buttons: {
-    //       select: {
-    //         icon: '<i class="fas fa-check"></i>',
-    //         label: "Selecionar",
-    //         callback: (html) => {
-    //           const selectedId = html.find('#deity-select').val();
-    //           const selectedDeity = deities.find(d => d.id === selectedId);
-    //           if (selectedDeity) {
-    //             console.log("Divindade selecionada:", selectedDeity);
-    //             resolve(selectedDeity);
-    //           }
-    //         }
-    //       },
-    //       cancel: {
-    //         icon: '<i class="fas fa-times"></i>',
-    //         label: "Cancelar",
-    //         callback: () => resolve(null)
-    //       }
-    //     },
-    //     default: "select",
-    //     render: (html) => console.log("Diálogo de seleção de panteão renderizado"),
-    //     close: () => resolve(null)
-    //   }).render(true);
-    // });
+    const content = await renderTemplate(
+      "systems/scion-hero-foundry/templates/actors/dialogs/pantheon.html",
+      { pantheons }
+    );
+
+    return new Promise((resolve) => {
+      new Dialog(
+        {
+          title: "Selecione um Panteão",
+          content,
+          buttons: {
+            select: {
+              icon: '<i class="fas fa-check"></i>',
+              label: "Selecionar",
+              class: "pantheon-select",
+              callback: (html) => {
+                console.log("Botão de seleção clicado");
+              },
+            },
+            cancel: {
+              icon: '<i class="fas fa-times"></i>',
+              label: "Cancelar",
+              class: "pantheon-cancel",
+              callback: () => resolve(null),
+            },
+          },
+          default: "select",
+          render: (html) =>
+            console.log("Diálogo de seleção de panteão renderizado"),
+          close: () => resolve(null),
+        },
+        {
+          width: 700,
+          height: 500,
+        }
+      ).render(true);
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error(error.message);

@@ -1,0 +1,17 @@
+<form autocomplete="off" class="pantheon-form">
+  <div class="pantheon-group form-group">
+    <header class="pantheon-group-header">
+      <h1>Choose the Pantheon</h1>
+    </header>
+    <section class="pantheon-group-content">
+      <ul class="pantheon-list">
+        {{#each pantheons as |pantheon|}}
+        <li class="pantheon-item">
+          {{pantheon.name}}
+          <img class="pantheon-logo" src="{{pantheon.logo}}" alt="{{pantheon.name}}" />
+        </li>
+        {{/each}}
+      </ul>
+    </section>
+  </div>
+</form>

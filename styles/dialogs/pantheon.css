@@ -1,0 +1,69 @@
+.pantheon-form,
+.pantheon-group {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column !important;
+  gap: 0.5rem;
+  margin: 0 !important;
+}
+
+.pantheon-form {
+  background: rgba(254, 254, 254, 255);
+  padding: 15px 15px;
+  border-radius: 5px;
+  min-height: 25.875rem;
+}
+
+.pantheon-group-header,
+.pantheon-group-content {
+  display: flex;
+  width: 100%;
+}
+
+.pantheon-group-header {
+  flex: none !important;
+  display: flex;
+  justify-content: center;
+}
+
+.pantheon-group-header > h1 {
+  margin: 0 0 0.1rem !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+.pantheon-group-content {
+  width: 100% !important;
+  display: flex !important;
+  flex-flow: column;
+  height: 100% !important;
+}
+
+.pantheon-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  padding: 0;
+}
+
+.pantheon-logo {
+  width: 100px;
+  height: 90px;
+  border: none;
+}
+
+/* Ajusta o tamanho dos botões do Dialog do Pantheon */
+/* .dialog .dialog-buttons .dialog-button {
+  min-width: 80px;
+  min-height: 32px;
+  padding: 4px 12px;
+  font-size: 1rem;
+  border-radius: 4px;
+  margin: 0 6px;
+  box-sizing: border-box;
+  background-color: red;
+} */
