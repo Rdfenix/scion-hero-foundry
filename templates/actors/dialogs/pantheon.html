@@ -7,7 +7,7 @@
       <ul class="pantheon-list">
         {{#each pantheons as |pantheon|}}
         <li class="pantheon-item">
-          <input type="radio" name="pantheon-option" id="{{pantheon.name}}" hidden>
+          <input type="radio" name="pantheon-option" id="{{pantheon.name}}" value="{{pantheon.name}}" data-target="{{pantheon.name}}" hidden>
           <label for="{{pantheon.name}}">
             <div class="pantheon-name">
               {{pantheon.name}}
