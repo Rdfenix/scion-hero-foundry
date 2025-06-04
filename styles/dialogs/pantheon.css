@@ -102,6 +102,13 @@
   text-align: justify;
 }
 
+.virtues-label,
+.description-label {
+  width: 100%;
+  text-align: center;
+  font-size: 1.45rem;
+}
+
 /* Fixar os botões do Dialog no fundo */
 .dialog .dialog-buttons {
   position: sticky;
