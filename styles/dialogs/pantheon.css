@@ -29,7 +29,7 @@
   justify-content: center;
 }
 
-.pantheon-group-header > h1 {
+.pantheon-group-header>h1 {
   margin: 0 0 0.1rem !important;
   padding: 0 !important;
   border: none !important;
@@ -82,11 +82,12 @@
   border-bottom: none;
 }
 
-.pantheon-item:hover {
+.pantheon-item:hover,
+.pantheon-item:has(input[type="radio"]:checked) {
   background-color: rgba(211, 211, 211, 0.5) !important;
 }
 
-.pantheon-item > label {
+.pantheon-item>label {
   cursor: pointer;
 }
 

@@ -7,14 +7,11 @@
       <ul class="pantheon-list">
         {{#each pantheons as |pantheon|}}
         <li class="pantheon-item">
+          <input type="radio" name="pantheon-option" id="{{pantheon.name}}" hidden>
           <label for="{{pantheon.name}}">
             <div class="pantheon-name">
               {{pantheon.name}}
-              <img
-                class="pantheon-logo"
-                src="{{pantheon.logo}}"
-                alt="{{pantheon.name}}"
-              />
+              <img class="pantheon-logo" src="{{pantheon.logo}}" alt="{{pantheon.name}}" />
             </div>
             <div class="pantheon-virtues">
               {{#splitInColumns pantheon.virtues 2 'pantheon-virtue-item'}}

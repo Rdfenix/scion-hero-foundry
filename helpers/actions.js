@@ -67,6 +67,15 @@ const selectPantheon = async () => {
               label: "Selecionar",
               class: "pantheon-select",
               callback: (html) => {
+
+                const pantheonSelected = html.find('input[name="pantheon-option"]:checked').val();
+
+                console.log("Pantheon Selected", pantheonSelected);
+
+                if (!pantheonSelected) {
+                  return ui.notifications.warn("Choose a pantheon first");
+                }
+
                 console.log("Botão de seleção clicado");
               },
             },
