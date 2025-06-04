@@ -139,6 +139,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1px 3px;
+  font-family: skranji-regular, sans-serif !important;
 }
 
 .scion-pantheon-button > img {

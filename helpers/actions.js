@@ -5,7 +5,10 @@ export async function _onAction(event) {
 
   switch (event.currentTarget.dataset.action) {
     case "select-pantheon":
-      await selectPantheon(this.actor); // Corrigido: passa o actor da sheet
+      await selectPantheon(this.actor);
+      break;
+    case "select-god":
+      await selectGod(this.actor);
       break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
@@ -15,9 +18,6 @@ export async function _onAction(event) {
 
 const selectPantheon = async (actor) => {
   try {
-    for (const [key, value] of game.packs.entries()) {
-      console.log(key, value.documentName, value.metadata);
-    }
     const pack = game.packs.get("scion-hero-foundry.deities");
     if (!pack) {
       throw new Error("Pacote de panteões não encontrado.");
@@ -128,3 +128,5 @@ const selectPantheon = async (actor) => {
     return null;
   }
 };
+
+const selectGod = async (actor) => {};

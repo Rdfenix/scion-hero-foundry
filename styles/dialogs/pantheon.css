@@ -29,7 +29,7 @@
   justify-content: center;
 }
 
-.pantheon-group-header>h1 {
+.pantheon-group-header > h1 {
   margin: 0 0 0.1rem !important;
   padding: 0 !important;
   border: none !important;
@@ -61,6 +61,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 1.45rem;
 }
 
 .pantheon-virtues {
@@ -70,6 +71,10 @@
   gap: 0.9rem;
   text-align: center;
   width: 100%;
+  padding: 1rem 2rem;
+  font-size: 0.95rem;
+  justify-items: center;
+  align-items: center;
 }
 
 .pantheon-item {
@@ -87,10 +92,15 @@
   background-color: rgba(211, 211, 211, 0.5) !important;
 }
 
-.pantheon-item>label {
+.pantheon-item > label {
   cursor: pointer;
 }
 
+.pantheon-description {
+  padding: 0 0.5rem;
+  font-size: 0.9rem;
+  text-align: justify;
+}
 
 /* Fixar os botões do Dialog no fundo */
 .dialog .dialog-buttons {
