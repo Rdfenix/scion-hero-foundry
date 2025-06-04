@@ -5,7 +5,7 @@ export async function _onAction(event) {
 
   switch (event.currentTarget.dataset.action) {
     case "select-pantheon":
-      await selectPantheon();
+      await selectPantheon(this.actor); // Corrigido: passa o actor da sheet
       break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
@@ -13,7 +13,7 @@ export async function _onAction(event) {
   }
 }
 
-const selectPantheon = async () => {
+const selectPantheon = async (actor) => {
   try {
     for (const [key, value] of game.packs.entries()) {
       console.log(key, value.documentName, value.metadata);
@@ -66,17 +66,33 @@ const selectPantheon = async () => {
               icon: '<i class="fas fa-check"></i>',
               label: "Selecionar",
               class: "pantheon-select",
-              callback: (html) => {
-
-                const pantheonSelected = html.find('input[name="pantheon-option"]:checked').val();
-
-                console.log("Pantheon Selected", pantheonSelected);
+              callback: async (html) => {
+                const pantheonSelected = html
+                  .find('input[name="pantheon-option"]:checked')
+                  .val();
 
                 if (!pantheonSelected) {
                   return ui.notifications.warn("Choose a pantheon first");
                 }
+                const selectedPantheon = pantheons.find(
+                  (p) => p.name === pantheonSelected
+                );
 
-                console.log("Botão de seleção clicado");
+                if (!selectedPantheon) {
+                  return ui.notifications.warn("Pantheon not found");
+                }
+
+                await actor.update({
+                  "system.pantheon": {
+                    name: selectedPantheon.name,
+                    logo: selectedPantheon.logo,
+                  },
+                  "system.virtues": null,
+                });
+
+                await actor.update({
+                  "system.virtues": selectedPantheon.virtues,
+                });
               },
             },
             cancel: {
