@@ -44,7 +44,11 @@ export class ScionHeroActorSheet extends ActorSheet {
     });
 
     // Usa delegação para garantir que funcione em partials e elementos dinâmicos
-    html.on("click", "[data-action]", _onAction.bind(this));
+    html.on("click", "[data-action]", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      _onAction(event, this.actor);
+    });
   }
 
   async getData() {

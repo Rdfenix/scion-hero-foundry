@@ -1,19 +1,28 @@
-export async function _onAction(event) {
+export async function _onAction(event, actor) {
   event.preventDefault();
   event.stopPropagation();
   console.log("Ação acionada:", event.currentTarget.dataset.action);
 
   switch (event.currentTarget.dataset.action) {
     case "select-pantheon":
-      await selectPantheon(this.actor);
+      await selectPantheon(actor);
       break;
     case "select-god":
-      await selectGod(this.actor);
+      await selectGod(actor);
       break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
   }
+}
+
+function reopenWithActiveTab(actor, tabName) {
+  Hooks.once("renderActorSheet", (app, html, data) => {
+    const nav = html[0].querySelector(".sheet-tabs");
+    const tabEl = nav?.querySelector(`[data-tab="${tabName}"]`);
+    if (tabEl) tabEl.click();
+  });
+  return actor.sheet.render(true);
 }
 
 const selectPantheon = async (actor) => {
@@ -82,6 +91,10 @@ const selectPantheon = async (actor) => {
                   return ui.notifications.warn("Pantheon not found");
                 }
 
+                const activeTab =
+                  document.querySelector(".sheet-tabs .item.active")?.dataset
+                    .tab ?? "stats";
+
                 await actor.update({
                   "system.pantheon": {
                     name: selectedPantheon.name,
@@ -93,6 +106,8 @@ const selectPantheon = async (actor) => {
                 await actor.update({
                   "system.virtues": selectedPantheon.virtues,
                 });
+
+                await reopenWithActiveTab(actor, activeTab);
               },
             },
             cancel: {
