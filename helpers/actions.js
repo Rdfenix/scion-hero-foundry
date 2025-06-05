@@ -1,7 +1,6 @@
 export async function _onAction(event, actor) {
   event.preventDefault();
   event.stopPropagation();
-  console.log("Ação acionada:", event.currentTarget.dataset.action);
 
   switch (event.currentTarget.dataset.action) {
     case "select-pantheon":
@@ -116,7 +115,6 @@ const selectPantheon = async (actor) => {
           },
           default: "select",
           render: (html) => {
-            console.log("Diálogo de seleção de panteão renderizado");
             setTimeout(() => {
               const contentEl = html
                 .closest(".window-app")
@@ -182,7 +180,6 @@ const selectGod = async (actor) => {
                   .find('input[name="pantheon-option"]:checked')
                   .val();
 
-                console.log("Deus selecionado:", godSelected);
                 if (!godSelected) {
                   return ui.notifications.warn("Choose a god first");
                 }
@@ -228,7 +225,6 @@ const selectGod = async (actor) => {
           },
           default: "select",
           render: (html) => {
-            console.log("Diálogo de seleção de panteão renderizado");
             setTimeout(() => {
               const contentEl = html
                 .closest(".window-app")
