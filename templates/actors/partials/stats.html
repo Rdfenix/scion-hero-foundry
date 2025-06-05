@@ -49,7 +49,14 @@
     {{#splitInColumns system.abilities 3 'skills-grid-item'}}
     <div class="skills-row" data-key="{{key}}">
       <div class="skills-column">
-        <span>{{key}}</span>
+        <div class="skills-row">
+          <input
+            type="checkbox"
+            class="square-checkbox"
+            {{#if data.favored}}checked{{/if}}
+          />
+          <span>{{key}}</span>
+        </div>
       </div>
       <div class="skills-column">
         <div class="circles">
