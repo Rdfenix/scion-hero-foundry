@@ -1,0 +1,34 @@
+<form autocomplete="off" class="pantheon-form">
+  <div class="pantheon-group form-group">
+    <header class="pantheon-group-header">
+      <h1>Choose the Gods</h1>
+    </header>
+    <section class="pantheon-group-content">
+      <ul class="pantheon-list">
+        {{#each gods as |god|}}
+        <li class="pantheon-item">
+          <input
+            type="radio"
+            name="pantheon-option"
+            id="{{god.name}}"
+            value="{{god.name}}"
+            data-target="{{god.name}}"
+            hidden
+          />
+          <label for="{{god.name}}">
+            <div class="pantheon-name">{{god.name}}</div>
+            <div class="skills-label">
+              <span>Favored Skills</span>
+            </div>
+            <div class="god-skills">
+              {{#splitInColumns god.favoredSkills 3 'god-skill-item'}}
+              <div class="god-skill-item-row">{{data}}</div>
+              {{/splitInColumns}}
+            </div>
+          </label>
+        </li>
+        {{/each}}
+      </ul>
+    </section>
+  </div>
+</form>
