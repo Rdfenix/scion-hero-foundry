@@ -1,0 +1,66 @@
+[
+  {
+    "_id": "purviews_1",
+    "name": "PURVIEWS",
+    "type": "Item",
+    "system": {
+      "description": "These Purviews are the most common ones. Although they’re associated with specific Gods, they’re available to Scions of any heritage. Each Boon may be purchased separately and out of sequence. Using allpurpose Boons requires a Birthright.",
+      "purviews": [
+        {
+          "name": "ANIMAL",
+          "description": "This Purview expresses the totemic power to which a Scion’s ichor grants him access. Its Boons work on only one type of animal, chosen by the player when he purchases the character’s first Boon. That animal needn’t be the same one associated with his divine parent.<br /> <strong>Associated With:</strong> Anubis (Jackal), Athena (Owl), Atum-Re (Falcon), Bastet (Cat), Damballa (Snake), Geb (Goose), Hachiman (Dove), Hera (Peacock), Horus (Falcon), Huitzilopochtli (Hummingbird, Eagle), Miclántecuhtli (Dog), Osiris (Centipede, Ram), Poseidon (Horse), Quetzalcoátl (Resplendent Quetzal), Set (Salawa), Sobek (Crocodile), Tezcatlipoca (Jaguar), Thoth (Baboon, Ibis)",
+          "boons": [
+            {
+              "name": "ANIMAL COMMUNICATION",
+              "level": 1,
+              "dice_pool": "Intelligence + Animal Ken",
+              "cost": "none",
+              "description": "The Scion can understand and make himself understood by an animal as he speaks his native language and the animal responds with its own postures, scents and/or vocalizations. This Boon doesn’t make animals smart, calm or loyal, but most are curious enough about having a person address them that they’ll hear a Scion out before defaulting to aggression, panic or indifference."
+            },
+            {
+              "name": "ANIMAL COMMAND",
+              "level": 2,
+              "dice_pool": "Charisma + Animal Ken",
+              "cost": "1 Willpower",
+              "description": "The Scion spends one Willpower and names one task that the animal must perform. The task cannot seem suicidal or impossible to the animal, but the animal cannot balk at an order that doesn’t immediately seem so. “Hey rabbit, go rip that lion’s throat open,” would seem impossible to the rabbit so commanded. “Run to that grass across this street,” would be a fine order for that same rabbit, though, even if cars were zipping by. The order can describe a single immediate action (“Bite that guy!”) or one with a single condition (“Come find me when a blue car stops here.”). If he lacks the previous Boon, the Scion can deliver his command only through simplistic nonverbal signals."
+            },
+            {
+              "name": "ANIMAL ASPECT",
+              "level": 3,
+              "dice_pool": "Stamina + Animal Ken",
+              "cost": "1 Legend per action",
+              "description": "By meditating for one action (Speed 3) on a token representing his animal, the Scion takes on a metaphorical characteristic associated with it, creating a dice bonus for rolls involving the Attribute most closely associated with that characteristic. A Scion might take on a snake’s sinuous grace (Dexterity), a peacock’s beauty (Appearance), an elephant’s proverbial memory (via Intelligence) or any other justifiable characteristic. The bonus dice are equal to the number of successes on the activation roll, and the benefit lasts for one action per Legend point spent up front to fuel the Boon."
+            }
+          ]
+        },
+        {
+          "name": "CHAOS",
+          "description": "Chaos is the Purview of confusion, anarchy and formlessness.<br /> <strong>Associated With:</strong> Dionysus, Kalfu, Loki, Set, Susano-o",
+          "boons": [
+            {
+              "name": "EYE OF THE STORM",
+              "level": 1,
+              "dice_pool": "none",
+              "cost": "1 Legend per scene",
+              "description": "When the Scion finds herself caught up in a chaotic situation unrelated to her—whether she’s dodging a tornado’s debris or emerging from a bar to find a berserk mob rushing toward her to clash with a line of riot cops down the street—she can activate this Boon and become an island of calm in the tumult. She is miraculously untouched in the confusion, and she remains so for as long as she doesn’t actively involve herself. She still suffers normal environmental movement penalties, but environmental dangers such as falling rocks, stampeding beasts or thrashing rioters all fail to touch her."
+            },
+            {
+              "name": "HORNET’S NEST",
+              "level": 2,
+              "dice_pool": "Intelligence + Awareness",
+              "cost": "none",
+              "description": "If the Boon’s activation roll succeeds, the Storyteller should determine and reveal in general terms what action the Scion can take to either cause the most chaos in the scene or defuse the potential chaos inherent in the situation. The revelation should be something simple like “opening the parrot cage,” “staying in the hallway,” “winking at the Scion of Sif” or “calling the Scion of Ptah’s cell phone.” The Storyteller should explain only which action will lead to which outcome, not how."
+            },
+            {
+              "name": "PARALYZING CONFUSION",
+              "level": 3,
+              "dice_pool": "Wits + Empathy",
+              "cost": "1 Willpower",
+              "description": "This Boon turns a person’s rational thoughts into seething, chaotic noise. On a successful activation roll, the victim freezes in place, suddenly unable to think, speak or act. He’s unaware of what goes on around him, and he has no memory of the moments before or after the use of this Boon. <br /> The effect lasts for a number of actions equal to the successes on the activation roll, and it erases the victim’s memory for an equal amount of time before the roll. If the victim has more dots of Legend than the user, the power doesn’t work. If the victim has an equal Legend rating, the activation roll is contested against the victim’s (Willpower + Integrity + Legend)."
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
