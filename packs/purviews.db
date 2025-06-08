@@ -221,6 +221,33 @@
               "description": "By touching the entrance to a location, the Scion lays a ward on the area that bars entrance to a certain type of threat. Such a ward could bar ghosts, walking dead, a breed of titanspawn, human beings, lesser animals or Scions. The ward acts as a sphere with a circumference area equal to 500 square feet per dot of Legend the Scion has. It lasts for one day per success garnered by the (Stamina + Fortitude) roll. <br/> The Scion can ward an area against as many different types of threats as she wants, but each threat requires its own activation roll and expenditure. (In effect, she must stack multiple wards on the same area.) Characters with more Legend than the Scion who laid down the ward can attempt to batter their way through the perimeter, thus destroying the ward. The ward can take a number of health levels of damage equal to ([the Scion’s Legend x 5] + [activation roll successes]), and it has a Hardness rating equal to the Scion’s Legend."
             }
           ]
+        },
+        {
+          "name": "HEALTH",
+          "description": "This Purview pertains to the physical well-being of beasts, mortals or other Scions. Titanspawn and supernatural creatures are also legitimate subjects of these Boons, but a Scion cannot use these Boons on himself. <br /> <strong>Associated With:</strong> Apollo, Artemis, Athena, Baron Samedi, Damballa, Freya, Freyr, Hera, Isis, Quetzalcoátl, Tlaloc, Xipe Totec",
+          "boons": [
+            {
+              "name": "ASSESS HEALTH",
+              "level": 1,
+              "dice_pool": "none",
+              "cost": "none",
+              "description": "The Scion can instantly, automatically assess the current medical condition of a single living patient in his presence. He can tell how many levels of damage the patient is suffering, as well as any physical addictions he suffers, any illnesses or diseases with which he is infected and any genetic defects that afflict him."
+            },
+            {
+              "name": "BLESSING OF HEALTH | CURSE OF FRAILTY",
+              "level": 2,
+              "dice_pool": "Stamina + Medicine",
+              "cost": "1 Legend",
+              "description": "The Boon can take away a patient’s reproductive capabilities or restore them, provided the patient already has all the necessary organs. This effect lasts for one year per success on the activation roll. <br /> Used on a pregnant patient, the Boon can make her unborn child come into the World strong and healthy or sickly and deformed. The Boon can cure or create any of the following conditions: a physical deformity, a life-threatening birth defect, a chemical dependency, an illness contracted from the mother, physical damage suffered in utero or a non-specified immune system effect (representing a ±2 dice modifier in rolls to resist illness). Each separate condition increases the difficulty of the roll by one. A Scion can also use this Boon on an infant within the first 24 hours after its birth."
+            },
+            {
+              "name": "HEAL | INFECT",
+              "level": 3,
+              "dice_pool": "Stamina + Medicine",
+              "cost": "1 Legend or 1 Willpower",
+              "description": "The Scion can repair a patient’s injuries or inflict harm directly. On one hand, he can heal as many health levels of bashing damage as his player gets successes on a (Stamina + Medicine) roll. Doing so costs one Legend. Alternatively, he can downgrade a number of health levels equal to successes on the roll from lethal to bashing damage. Doing so costs one Willpower. <br /> On the other hand, he can inflict as many health levels of bashing damage as his player gets successes on the (Stamina + Medicine) roll. Doing so also costs one Legend. Alternatively, he can upgrade a number of health levels equal to successes on the roll from bashing to lethal damage. Doing so costs one Willpower. The Scion can use this Boon on the same person only once per day. He can use it on as many different people in the same day as he can afford to spend the points."
+            }
+          ]
         }
       ]
     }
