@@ -302,6 +302,60 @@
               "description": "The Scion turns himself away from his enemies much as the moon turns its face away from the earth. The player decides which “phase” of the character’s body he wishes to leave visible then rolls the Scion’s (Dexterity + Stealth) against a difficulty determined on the table that follows. If the roll succeeds, the intended portion of his body fades from sight. If the roll fails, the Legend point is still spent, but nothing happens. If the roll botches, the character assumes the full-moon phase, garnering a -3 penalty on any mundane attempt to hide. <br /> A character can attempt to use this Boon only once per scene, and the effects last for the entire scene. <br /> <table class='purview-table'><thead><tr><th>Phase</th><th>Difficulty</th><th>Effect</th></tr></thead><tbody><tr><td>Gibbous</td><td>1</td><td>Stealth rolls receive two bonus successes</td></tr><tr><td>Half</td><td>2</td><td>Stealth rolls receive four bonus successes</td></tr><tr><td>Crescent</td><td>3</td><td>Stealth rolls receive six bonus successes</td></tr><tr><td>New</td><td>4</td><td>Mundane detection attempts fail automatically. Stealth rolls against supernatural detection receive eight bonus successes</td></tr><tr><td>Full</td><td>Botch</td><td>Stealth dice pools suffer a -3 penalty</td></tr></tbody></table>"
             }
           ]
+        },
+        {
+          "name": "PSYCHOPOMP",
+          "description": "The Psychopomp Purview comprises every aspect of conducting subjects from one place to another, whether the destination is across town or in the deepest pits of the Underworld, and whether those subjects are dead souls or snot-nosed preschoolers. <br /> <strong>Associated With:</strong> Baron Samedi, Hermes, Izanagi, Legba, Odin, Ptah, Quetzalcoátl, Susano-o, Tsuki-yomi",
+          "boons": [
+            {
+              "name": "UNERRING ORIENTATION",
+              "level": 1,
+              "dice_pool": "none",
+              "cost": "1 Legend",
+              "description": "In a locale she knows well, such as her hometown or a national park she visits every autumn, the Scion knows how to get from any point within to any other point. In an unfamiliar locale, her sense of direction defaults to a standard compass rose. Should someone give her correct directions in an unfamiliar locale, she retains them thereafter. If she studies a map of an unfamiliar city for five minutes, that information remains imprinted on her mind until she leaves that city for longer than a week. <br /> For the cost of one Legend, the Boon can also reveal to a Scion how far away and in what direction the location she considers home lies. Alternatively, if the Scion finds herself in a strange place—if she’s been drugged and kidnapped, for instance—this Boon can tell her how far she is and in what direction she traveled from the last place she wasn’t lost."
+            },
+            {
+              "name": "WHERE ARE YOU?",
+              "level": 2,
+              "dice_pool": "Intelligence + Awareness",
+              "cost": "none",
+              "description": "If someone makes remote contact with a Scion (by telephone, instant messenger, telepathy…), the Scion gets a sense of how far away he is and in what direction. She might not be able to direct the person to her location, but she can follow her nose right to the location whence the contact originated. The sensation remains even after the period of contact ends, but it doesn’t follow the person around if that person moves. It can only lead a Scion to where the communication ended."
+            },
+            {
+              "name": "UNBARRED ENTRY",
+              "level": 3,
+              "dice_pool": "none",
+              "cost": "1 Legend",
+              "description": "The Scion can pass through a solid surface as if either she or it were intangible. She can pass through only as much space as she could cross in a single step—through a wall or a locked door, for instance—and doing so is a simple action. All the Scion’s clothing and items make the transition with her, but she can’t pull anyone else along behind. If the solid surface is too thick for her to be able to pass through, it remains as solid to her as it does to everyone else. This Boon doesn’t literally make the Scion intangible, however, so she can’t use it in combat to avoid damage or to step through a ring of fire without being burned."
+            }
+          ]
+        },
+        {
+          "name": "SKY",
+          "description": "The Sky Purview is one of wind and storms and lightning and flight. Its Boons offer a Scion unparalleled freedom and majesty. <br /> <strong>Associated With:</strong> Frigg, Horus, Izanagi, Quetzalcoátl, Raiden, Set, Shango, Susano-o, Thor, Tlaloc, Zeus",
+          "boons": [
+            {
+              "name": "SKY’S GRACE",
+              "level": 1,
+              "dice_pool": "none",
+              "cost": "1 Legend",
+              "description": "By spending a point of Legend, the Scion takes no damage from falls of any height. Alternatively, the Scion can use that point to double the distance he can jump either straight up or horizontally. If the Scion has the Holy Bound Knack—see p. 126—as well as this Boon, the base distance he can leap doubles, then doubles again if the player spends a point of Legend. <br /> Also, Sky’s Grace can mitigate knockback the character suffers from successful attacks. If an attack knocks the character back, he may spend a point of Legend to stop himself in a sudden gust of wind. The attack still knocks the character back at least one yard, but the character may stop himself at any distance he chooses beyond that."
+            },
+            {
+              "name": "WIND’S FREEDOM",
+              "level": 2,
+              "dice_pool": "none",
+              "cost": "1 Legend + 1 Willpower per scene",
+              "description": "The Scion laughs in the face of gravity. For the rest of the scene, the distances the Scion can move or dash per action remain normal, but they now apply to the Zaxis as well as the X- and Y-axes. All the normal rules for movement remain in place, except that the character can now move freely through all three dimensions (i.e., he can fly). He can even hold still in midair if he wants to. The only thing a character can’t do in midair that he could do on the ground is jump, as there’s nothing to jump off of. If the character drops the Birthright that makes this Boon possible or allows it to be destroyed, the effect ends immediately."
+            },
+            {
+              "name": "STORM AUGMENTATION",
+              "level": 3,
+              "dice_pool": "Appearance + Presence",
+              "cost": "1 Legend per attack",
+              "description": "For a number of actions equal to the successes the player rolled to activate the Boon, jagged threads of lightning coil around the Scion’s fists or weapon, or skirling winds sweep around him as he moves. On any successful attack he makes in the subsequent duration, he may spend a point of Legend to make thunder crash or winds gust violently. Doing so automatically doubles any knockback the attack applies. Furthermore, if the attack inflicts even one level of damage, have the victim’s player roll (Stamina + Fortitude) against a difficulty equal to (raw damage – victim’s Legend). The minimum difficulty for this roll is 1. If the victim’s player fails this roll, the victim is stunned, losing two dice from all nonreflexive rolls until the attacker’s next action. This Boon’s effects apply to any attack the character makes—be it in close or ranged combat—for which he spends the requisite point of Legend."
+            }
+          ]
         }
       ]
     }
