@@ -248,6 +248,60 @@
               "description": "The Scion can repair a patient’s injuries or inflict harm directly. On one hand, he can heal as many health levels of bashing damage as his player gets successes on a (Stamina + Medicine) roll. Doing so costs one Legend. Alternatively, he can downgrade a number of health levels equal to successes on the roll from lethal to bashing damage. Doing so costs one Willpower. <br /> On the other hand, he can inflict as many health levels of bashing damage as his player gets successes on the (Stamina + Medicine) roll. Doing so also costs one Legend. Alternatively, he can upgrade a number of health levels equal to successes on the roll from bashing to lethal damage. Doing so costs one Willpower. The Scion can use this Boon on the same person only once per day. He can use it on as many different people in the same day as he can afford to spend the points."
             }
           ]
+        },
+        {
+          "name": "JUSTICE",
+          "description": "The Purview of Justice covers all forms of redress of slights, from the meanest of petty vengeance to the most grandiloquent of karmic poetry. <br /> <strong>Associated With:</strong> Anubis, Athena, Geb, Horus, Osiris, Quetzalcoátl, Shango, Thoth, Tyr, Vidar, Zeus",
+          "boons": [
+            {
+              "name": "JUDGMENT",
+              "level": 1,
+              "dice_pool": "Perception + Empathy",
+              "cost": "none",
+              "description": "This Boon aids a Scion immensely in determining guilt, one of the foundations of meting out justice. When she confronts someone she suspects committed an injustice and accuses that person of having done so, her player rolls (Perception + Empathy). (This roll isn’t modified by supernatural powers or contested by the suspect’s player.) On a success, the Scion can intuitively tell whether the suspect is guilty as charged. A failure yields an indeterminate reading and means that the Scion can’t try to determine the same subject’s guilt for 24 hours. A botch yields a false reading."
+            },
+            {
+              "name": "GUILT APPARITIONS",
+              "level": 2,
+              "dice_pool": "Manipulation + Integrity",
+              "cost": "1 Legend",
+              "description": "When a Scion knows that someone is guilty of an injustice but she lacks either the evidence to prove it or the leverage to make him admit it, she can rely on this Boon instead. To use it, she accuses the guilty party of the injustice (be it in person, in a letter, over the phone, via skywriting…), and her player spends a point of Legend and rolls (Manipulation + Integrity). If the roll succeeds, the accusation causes the victim to periodically hallucinate like Macbeth or his wife. These hallucinations occur randomly, torturing the guilty party with the knowledge that justice hasn’t been served. They also render him unable to regain Willpower. <br /> The effect lasts for a number of days equal to the activation roll’s successes, or until the offender makes fair amends, or until the offender confesses his crime to someone who can force him to make fair amends—whichever occurs first."
+            },
+            {
+              "name": "SHIELD OF RIGHTEOUSNESS",
+              "level": 3,
+              "dice_pool": "none",
+              "cost": "1 Legend + 1 Willpower",
+              "description": "This Boon can protect an innocent victim from suffering someone else’s due punishment. The Scion cries out against the injustice—a simple “He didn’t do it!” will suffice—and spends the Legend and Willpower point. Doing so, she renders the next action that would inflict harm on the innocent victim completely impotent, obviating any damage that action should inflict. Whether the victim is being stabbed by a jealous wife, shot by a firing squad, lynched by a mob, hurled off a cliff by a duped Scion vigilante or whatever, he suffers no damage from that action. For the Boon to work, the Scion must be present at the site of the unjust punishment, and the victim must actually be innocent."
+            }
+          ]
+        },
+        {
+          "name": "MOON",
+          "description": "This Purview represents the moon’s tidal effects, its ever-changing nature and its celestial serenity. <br /> <strong>Associated With:</strong> Artemis, Bastet, Horus, Kalfu, Tezcatlipoca, Thoth, Tsuki-yomi",
+          "boons": [
+            {
+              "name": "SMOKING MIRROR",
+              "level": 1,
+              "dice_pool": "none",
+              "cost": "1 Legend",
+              "description": "By looking up at the moon and spending the requisite Legend point, the character sees reflected in it a bird’s-eye view of the surrounding terrain. This perspective allows a clear view of a radius in miles equal to the Scion’s Legend. The Scion may focus on any point in the reflection and see it clearly, but he can’t see through physical objects or change the angle from the top-down perspective. This Boon doesn’t function on new moon nights, but it can see down through thick clouds on any other night. If the moon is visible during the day, the Scion can use this Boon then as well."
+            },
+            {
+              "name": "TIDAL INTERFERENCE",
+              "level": 2,
+              "dice_pool": "Strength + Presence",
+              "cost": "1 Legend per point of DV penalty",
+              "description": "The Scion exerts a pull on all enemies with whom he’s in close combat. A success on a (Strength + Presence) roll activates this Boon, and the Scion spends a set number of points of Legend (the maximum that may be spent is the value of the Scion’s permanent Legend). The Boon then inflicts a DV penalty on his close-combat opponents equal to the number of Legend points he spent. This effect lasts for the rest of the combat scene."
+            },
+            {
+              "name": "PHASE CLOAK",
+              "level": 3,
+              "dice_pool": "Dexterity + Stealth",
+              "cost": "1 Legend",
+              "description": "The Scion turns himself away from his enemies much as the moon turns its face away from the earth. The player decides which “phase” of the character’s body he wishes to leave visible then rolls the Scion’s (Dexterity + Stealth) against a difficulty determined on the table that follows. If the roll succeeds, the intended portion of his body fades from sight. If the roll fails, the Legend point is still spent, but nothing happens. If the roll botches, the character assumes the full-moon phase, garnering a -3 penalty on any mundane attempt to hide. <br /> A character can attempt to use this Boon only once per scene, and the effects last for the entire scene. <br /> <table class='purview-table'><thead><tr><th>Phase</th><th>Difficulty</th><th>Effect</th></tr></thead><tbody><tr><td>Gibbous</td><td>1</td><td>Stealth rolls receive two bonus successes</td></tr><tr><td>Half</td><td>2</td><td>Stealth rolls receive four bonus successes</td></tr><tr><td>Crescent</td><td>3</td><td>Stealth rolls receive six bonus successes</td></tr><tr><td>New</td><td>4</td><td>Mundane detection attempts fail automatically. Stealth rolls against supernatural detection receive eight bonus successes</td></tr><tr><td>Full</td><td>Botch</td><td>Stealth dice pools suffer a -3 penalty</td></tr></tbody></table>"
+            }
+          ]
         }
       ]
     }
