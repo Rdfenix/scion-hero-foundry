@@ -167,6 +167,60 @@
               "description": "With a blessing, the Scion protects a patch of land from all natural blights and vermin infestations for one year. Alternatively, she can curse the land with a blight that either kills the plants within it outright or makes them so attractive to vermin that the resulting infestation has the same effect. The Scion’s player spends three Legend and rolls (Stamina + Survival). The number of successes she rolls determines how many acres she can affect with this power. <br /> If one Scion wants to use an aspect of this Boon on a patch of land on which another Scion has used the opposite aspect, a contested roll is called for. Whoever achieves more successes spreads her effect over the larger area, canceling out the lesser effect."
             }
           ]
+        },
+        {
+          "name": "FIRE",
+          "description": "For sharing fire with humanity, Zeus punished the Titan Prometheus. Yet, it’s never been clear whether Prometheus meant to uplift humankind with his generosity or destroy it with an insidious, forward-thinking act of sabotage. <br /> <strong>Associated With:</strong> Hephaestus, Loki, Ogoun, Ptah",
+          "boons": [
+            {
+              "name": "FIRE IMMUNITY",
+              "level": 1,
+              "dice_pool": "none",
+              "cost": "none",
+              "description": "The Scion takes no damage from fire, he need never worry about suffering from smoke inhalation, and even the most intense heat is nothing more than a comforting warmth to him. This immunity remains in effect regardless of what substance is burning. It doesn’t, however, extend to his clothes or to any item except the Birthright through which he channels the Boon."
+            },
+            {
+              "name": "BOLSTER FIRE",
+              "level": 2,
+              "dice_pool": "none",
+              "cost": "1 Legend per scene",
+              "description": "Normally, fire needs oxygen to breathe and fuel to consume. With this Boon, a Scion removes both necessities from a single flame for one scene. He could keep a single torch (or even a match) lit for hours as he explores a dark labyrinth. He could cause the tiny spark at the end of a fuse to burn in place without moving. This Boon is also good for keeping a source of flame from consuming the breathable air in an enclosed space. <br /> The Scion must be able to see the flame he intends to bolster, but once he uses the Boon, he can leave its presence without canceling the effect. The fire he bolsters with this Boon can be no larger than that of an average campfire (roughly a yard in diameter). <br /> If no source of flame is available, the Scion can create a fire the size of a candle flame from thin air. It burns at the end of his finger or from some point on the Birthright he uses to activate the Boon. The flame isn’t strong enough to cause damage in combat, but it can ignite a flammable substance easily enough."
+            },
+            {
+              "name": "FIRE’S EYE",
+              "level": 3,
+              "dice_pool": "Perception + Awareness",
+              "cost": "1 Legend",
+              "description": "The Scion can see out of any fire that A.) is already within his line of sight or B.) he affected with Bolster Fire. The Scion cannot hear what is happening around a distant fire, and his field of vision remains the same through the fire as it is through his eyes. He may physically move his head or turn his body in place to change his remote perspective, though. <br /> While he looks through the fire, the Scion can’t see from his own perspective. He may maintain his remote perspective for as long as he wishes."
+            }
+          ]
+        },
+        {
+          "name": "GUARDIAN",
+          "description": "It is every God’s and Scion’s responsibility to protect the World, but some take this duty more seriously than their fellows. It’s from them that this Purview arises. <br /> <strong>Associated With:</strong> Anubis, Baldur, Erzulie, Hachiman, Heimdall, Huitzilopochtli, Isis, Miclántecuhtli, Quetzalcoátl, Raiden, Set, Thor, Xipe Totec",
+          "boons": [
+            {
+              "name": "VIGIL BRAND",
+              "level": 1,
+              "dice_pool": "Perception + Empathy (to check up)",
+              "cost": "1 Legend (to brand)",
+              "description": "The Scion touches a person, an object or the entrance to a location and lays a mystical brand there that marks that subject as being under her protection. (Doing so costs one Legend.) Thereafter, whenever that subject is in physical danger (as determined by the Storyteller), the Scion receives a reflexive intuition to that effect. Should her player then succeed on a (Perception + Empathy) roll, she gains a clearer understanding of the subject’s condition, location and current situation. The Scion can also use this Boon to check up on a subject at any time, but only one subject at a time. A Scion cannot brand herself with this Boon, but she can brand as many other subjects as she pleases. A subject can be branded by more than one Scion at the same time. Each brand is unique to the Scion who made it."
+            },
+            {
+              "name": "AEGIS",
+              "level": 2,
+              "dice_pool": "Stamina + Fortitude",
+              "cost": "1 Legend + 1 Willpower",
+              "description": "By touching a mortal or an object, the Scion grants it a measure of divine physical protection. Her player spends one Legend and Willpower then rolls (Stamina + Fortitude), adding her usual bonuses. Successes on this roll then apply to the subject of the Scion’s protection as a temporary Hardness rating for the next 24 hours."
+            },
+            {
+              "name": "WARD",
+              "level": 3,
+              "dice_pool": "Stamina + Fortitude",
+              "cost": "1 Legend + 1 Willpower",
+              "description": "By touching the entrance to a location, the Scion lays a ward on the area that bars entrance to a certain type of threat. Such a ward could bar ghosts, walking dead, a breed of titanspawn, human beings, lesser animals or Scions. The ward acts as a sphere with a circumference area equal to 500 square feet per dot of Legend the Scion has. It lasts for one day per success garnered by the (Stamina + Fortitude) roll. <br/> The Scion can ward an area against as many different types of threats as she wants, but each threat requires its own activation roll and expenditure. (In effect, she must stack multiple wards on the same area.) Characters with more Legend than the Scion who laid down the ward can attempt to batter their way through the perimeter, thus destroying the ward. The ward can take a number of health levels of damage equal to ([the Scion’s Legend x 5] + [activation roll successes]), and it has a Hardness rating equal to the Scion’s Legend."
+            }
+          ]
         }
       ]
     }
