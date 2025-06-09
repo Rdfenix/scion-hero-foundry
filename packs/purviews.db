@@ -356,6 +356,60 @@
               "description": "For a number of actions equal to the successes the player rolled to activate the Boon, jagged threads of lightning coil around the Scion’s fists or weapon, or skirling winds sweep around him as he moves. On any successful attack he makes in the subsequent duration, he may spend a point of Legend to make thunder crash or winds gust violently. Doing so automatically doubles any knockback the attack applies. Furthermore, if the attack inflicts even one level of damage, have the victim’s player roll (Stamina + Fortitude) against a difficulty equal to (raw damage – victim’s Legend). The minimum difficulty for this roll is 1. If the victim’s player fails this roll, the victim is stunned, losing two dice from all nonreflexive rolls until the attacker’s next action. This Boon’s effects apply to any attack the character makes—be it in close or ranged combat—for which he spends the requisite point of Legend."
             }
           ]
+        },
+        {
+          "name": "SUN",
+          "description": "This Purview represents the sun’s radiance, its constancy and its celestial glory. <br /> <strong>Associated With:</strong> Amaterasu, Apollo, Atum-Re, Baldur, Bastet, Freyr, Heimdall, Horus, Huitzilopochtli, Legba, Tezcatlipoca",
+          "boons": [
+            {
+              "name": "PENETRATING GLARE",
+              "level": 1,
+              "dice_pool": "none",
+              "cost": "none",
+              "description": "As sunlight only dims when it passes through thick clouds, so too can a Scion’s vision cut through physical occlusions. When the Scion receives this Boon, she sees clearly through such physical impediments as smoke, fog, murky water (if the Scion is in said water) or even translucent barriers through which other people can see only silhouettes. The character can even see perfectly clearly in dim light (i.e., light no less intense than a single birthday candle). In total darkness, however, she’s just as blind as the next person."
+            },
+            {
+              "name": "DIVINE RADIANCE",
+              "level": 2,
+              "dice_pool": "none",
+              "cost": "1 Legend",
+              "description": "This Boon allows a Scion to emit sunlight. She can either radiate a glow from her entire body, shining with the intensity of a 100-watt incandescent light bulb, or focus that light to a narrower beam. For instance, she could narrow the focus of the light to come from her palm or her eyes to act as a high-powered flashlight. The Scion can emit soft light thus for one scene. <br /> Alternatively, the character can concentrate her light into a single intense burst that gleams from some reflective surface on her person, be it from the steel edge of her weapon, the metal buttons on her jacket or the surgical-steel head of her tongue stud. (Such a burst imposes a -2 distraction penalty on the victim’s non-reflexive actions until the Scion’s next action, and it ends the Scion’s use of this Boon.) The Scion could even focus the light down to a pinpoint intense enough to scorch an object or ignite a flammable accelerant.(The pinpoint is not intense enough to damage a victim in combat, though.)"
+            },
+            {
+              "name": "HEAVENLY FLARE",
+              "level": 3,
+              "dice_pool": "Appearance + Presence",
+              "cost": "1 Legend",
+              "description": "Concentrating for one action (Speed 4), the Scion builds up and releases a flash of sunlight that’s impossible for anyone within line of sight to miss. When she does so, the player of anyone who was looking at her, even through expensive sunglasses, must roll (Stamina + Fortitude). If the victim’s roll nets more successes than the Scion’s activation roll, he sees only a sudden flash that has no effect on him. If the victim gains an equal number of successes, he still suffers a -2 distraction penalty on all non-reflexive actions until the Scion’s next action. If the Scion gets more successes to activate this Boon than a victim does to resist it, the victim is both blinded and rendered Inactive until the Scion’s next action. After that, the victim suffers a -3 distraction penalty on all non-reflexive actions for a number of actions equal to the Scion’s Legend rating. Extras are automatically assumed to fail the resistance roll."
+            }
+          ]
+        },
+        {
+          "name": "WAR",
+          "description": "This Purview covers all ideologically inspired battles from the smallest house-to-house raids to the most impressive land, sea and air campaigns to the largest cosmic clash between God and Titan. The ideology in question must be religious, political, geographical or cosmic for the conflict to qualify. <br /> <strong>Associated With:</strong> Ares, Athena, Erzulie, Freya, Freyr, Hachiman, Huitzilopochtli, Odin, Ogoun, Set, Tezcatlipoca, Tyr",
+          "boons": [
+            {
+              "name": "BLESSING OF BRAVERY",
+              "level": 1,
+              "dice_pool": "Charisma + Command",
+              "cost": "none",
+              "description": "Intoning a benediction over a person or group prepared to engage in battle, the Scion bolsters their courage and determination. Every character on the Scion’s side of the conflict who hears the benediction gains a point of Willpower as well as two temporary bonus dots of Valor that last until the battle ends. The Scion may amplify his voice electronically, but he must be present at the battle and give the blessing live."
+            },
+            {
+              "name": "BATTLE CRY",
+              "level": 2,
+              "dice_pool": "Charisma + Presence",
+              "cost": "1 Legend",
+              "description": "This Boon allows a Scion to emit sunlight. She can either radiate a glow from her entire body, shining with the intensity of a 100-watt incandescent light bulb, or focus that light to a narrower beam. For instance, she could narrow the focus of the light to come from her palm or her eyes to act as a high-powered flashlight. The Scion can emit soft light thus for one scene. <br /> Alternatively, the character can concentrate her light into a single intense burst that gleams from some reflective surface on her person, be it from the steel edge of her weapon, the metal buttons on her jacket or the surgical-steel head of her tongue stud. (Such a burst imposes a -2 distraction penalty on the victim’s non-reflexive actions until the Scion’s next action, and it ends the Scion’s use of this Boon.) The Scion could even focus the light down to a pinpoint intense enough to scorch an object or ignite a flammable accelerant.(The pinpoint is not intense enough to damage a victim in combat, though.)"
+            },
+            {
+              "name": "HEAVENLY FLARE",
+              "level": 3,
+              "dice_pool": "Appearance + Presence",
+              "cost": "1 Legend",
+              "description": "During a battle, be it a pitched field engagement or an alley fight between a Band of Scions and a gang of frost giants, the Scion can loose a horrible battle cry that unnerves his foes. Every fighter on the Scion’s enemies’ side who hears the unearthly shriek loses one die from all attack rolls for a number of attacks equal to the Scion’s Legend rating. <br /> The Scion may use electronic equipment to amplify this battle cry so every enemy present can hear it, but he must be present on the battlefield himself for it to work. He can let out this battle cry only once per combat scene, and it doesn’t affect enemies whose Legend rating is higher than his."
+            }
+          ]
         }
       ]
     }
