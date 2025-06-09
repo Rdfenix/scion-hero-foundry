@@ -403,11 +403,11 @@
               "description": "This Boon allows a Scion to emit sunlight. She can either radiate a glow from her entire body, shining with the intensity of a 100-watt incandescent light bulb, or focus that light to a narrower beam. For instance, she could narrow the focus of the light to come from her palm or her eyes to act as a high-powered flashlight. The Scion can emit soft light thus for one scene. <br /> Alternatively, the character can concentrate her light into a single intense burst that gleams from some reflective surface on her person, be it from the steel edge of her weapon, the metal buttons on her jacket or the surgical-steel head of her tongue stud. (Such a burst imposes a -2 distraction penalty on the victim’s non-reflexive actions until the Scion’s next action, and it ends the Scion’s use of this Boon.) The Scion could even focus the light down to a pinpoint intense enough to scorch an object or ignite a flammable accelerant.(The pinpoint is not intense enough to damage a victim in combat, though.)"
             },
             {
-              "name": "HEAVENLY FLARE",
+              "name": "WARRIOR IDEAL",
               "level": 3,
-              "dice_pool": "Appearance + Presence",
+              "dice_pool": "Charisma + Presence",
               "cost": "1 Legend",
-              "description": "During a battle, be it a pitched field engagement or an alley fight between a Band of Scions and a gang of frost giants, the Scion can loose a horrible battle cry that unnerves his foes. Every fighter on the Scion’s enemies’ side who hears the unearthly shriek loses one die from all attack rolls for a number of attacks equal to the Scion’s Legend rating. <br /> The Scion may use electronic equipment to amplify this battle cry so every enemy present can hear it, but he must be present on the battlefield himself for it to work. He can let out this battle cry only once per combat scene, and it doesn’t affect enemies whose Legend rating is higher than his."
+              "description": "The Scion adopts some idealized warrior aspect, from howling berserker to unquestioning enlisted man to fearless officer to pitiless samurai. This attitude unnerves and intimidates any opponent who faces him in combat, inflicting a penalty equal to the Scion’s Legend on any attack roll the opponent makes. This penalty applies to any character with a lesser or equal Legend rating who attempts to attack the Scion. This idealized aspect lasts for a number of consecutive actions during the battle equal to the successes the Scion’s player rolled to activate it, and he can invoke it only once during any given battle."
             }
           ]
         }
