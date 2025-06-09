@@ -1,0 +1,32 @@
+.journal-header {
+  font-family: oldenburg-regular, sans-serif !important;
+}
+
+.journal-page-header {
+  font-family: skranji-regular, sans-serif !important;
+  font-size: smaller;
+  padding: 0 0 20px 0;
+  border-bottom: 2px solid var(--color-underline-header);
+  margin: 0 0 23px 0;
+}
+
+.journal-page-header > h1 {
+  font-family: skranji-bold, sans-serif;
+  font-size: medium;
+  margin: 0;
+  padding: 0;
+  border-bottom: none;
+}
+
+.pruviews-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  position: relative;
+  background: rgba(254, 254, 254, 255);
+  padding: 15px 15px;
+  border-radius: 5px;
+  font-family: skranji-regular, sans-serif !important;
+  font-size: medium;
+}

@@ -91,3 +91,19 @@ Hooks.on("renderActorSheet", (app, html, data) => {
   attributesUpdate(app, html, data);
   abilitiesUpdate(app, html, data);
 });
+
+// Desabilita edição do campo 'name' das páginas de Journal do tipo Purview
+Hooks.on("renderJournalPageSheet", (app, html, data) => {
+  // Verifica se o nome da página está na lista de purviews
+  const purviewNames = game.journal.contents.map((j) => j.name);
+  const pageNameInput = html.find('input[name="name"]');
+  if (purviewNames.includes(app.document.name)) {
+    pageNameInput.prop("disabled", true);
+    pageNameInput.css({
+      background: "#eee",
+      color: "#888",
+      cursor: "not-allowed",
+    });
+    pageNameInput.attr("title", "Nome bloqueado pelo sistema");
+  }
+});
