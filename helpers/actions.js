@@ -252,20 +252,24 @@ const selectGod = async (actor) => {
 /** Puviews */
 export async function getPurviews() {
   try {
-    console.log(
-      "Available packs:",
-      game.packs.map((p) => p.metadata)
-    );
-
     const pack = game.packs.get("scion-hero-foundry.purviews");
+
     if (!pack) {
       throw new Error("Purviews pack not found.");
     }
 
     const purviews = await pack.getDocuments();
 
-    console.log("Purviews fetched:", purviews);
-    return purviews;
+    return purviews
+      .map((purview) => ({
+        name: purview.name,
+        description: purview.system.description,
+        purviews: purview.system.purviews,
+      }))
+      .filter(
+        (purview, index, self) =>
+          index === self.findIndex((p) => p.name === purview.name)
+      );
   } catch (error) {
     console.error("Error fetching purviews:", error);
     ui.notifications.error("Failed to fetch purviews.");
