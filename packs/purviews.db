@@ -530,6 +530,178 @@
           ]
         },
         {
+          "name": "ITZTLI",
+          "description": "The Aztecs practiced many sacrificial rituals, from personal observances performed in private to public spectacles performed on stone altars high atop massive step pyramids. They did so to both empower and placate the Gods so that the Gods would have the means and the motivation to continue to do their jobs. Being both mortal and divine, an Aztec God’s Scion can straddle the line between performing and accepting a blood sacrifice.",
+          "boons": [
+            {
+              "name": "MAGUEY STING",
+              "level": 1,
+              "dice_pool": "none",
+              "cost": "1 lethal health level",
+              "description": "By piercing her flesh with a maguey thorn, an obsidian blade, a surgical scalpel or even just a rusty straight pin, the Scion sheds a portion of her blood. This blood serves as a token offering to her divine parent, who rewards her with a single point of Legend. The Scion may perform this sacrifice only once per day."
+            },
+            {
+              "name": "COMBAT SACRIFICE",
+              "level": 2,
+              "dice_pool": "none",
+              "cost": "1 Willpower",
+              "description": "The Scion stands unflinching before her raging enemies, sacrificing her safety in the name of her Legend. In combat, the character spends a point of Willpower to psych herself up for an action that might seem damn foolish. The player then sacrifices points of DV against an incoming attack, effectively making the character easier to hit. She can sacrifice no more points of DV than she has dots of Legend. If the attack hits her as a result of this reduced DV and inflicts even a single point of damage, the Scion receives a number of points of Legend equal to the DV penalty she forced upon herself. (Only those points of DV the player intentionally sacrificed count.) <br /> The character can use this Boon as many times as she wants in combat—if she’s a masochist—but the granted Legend points cannot exceed the character’s standard maximum."
+            },
+            {
+              "name": "OBSIDIAN MUTILATION",
+              "level": 3,
+              "dice_pool": "Conviction",
+              "cost": "1 lethal health level per Legend",
+              "description": "As with Maguey Sting, the Scion ritually sheds her blood and receives a concomitant reward in Legend. Unlike Maguey Sting, though, this sacrifice doesn’t top out at one health level and one point of Legend per day. If her player succeeds on a Conviction roll, the character may inflict as many health levels of lethal damage upon herself as she wishes, earning a point of Legend for every health level she suffers. (These points may exceed the normal maximum, but any extra points disappear after one week.) The character may perform this ritual only once per week."
+            }
+          ]
+        },
+        {
+          "name": "JOTUNBLUT",
+          "description": "“Jotunblut,” which means literally “giant’s blood,” describes a quality peculiar to the Gods and Scions of the Norse pantheon. In ancient days, the Norse Gods intermingled with the giants from whom they took the World, blending their ichor with their enemies’blood. Today, that legacy breeds true in the ichor of those Gods’ Scions. By shedding a measure of her blood (i.e., suffering a single health level of lethal damage) and spending Legend, a Scion can use that blood to bestow a hint of the giants’ legendary strength and toughness. Mortals and animals who receive this endowment from a Scion remain loyal to that Scion thereafter, though they become surly and short-tempered with everyone else. This loyalty lasts for a limited time and must be renewed periodically by a fresh infusion of the Scion’s blood. If the limited time lapses and the Scion doesn’t renew the recipient’s loyalty, the recipient turns feral but keeps the physical bonuses. Once that happens, any Scion with appropriate Jotunblut Boons can re-endow the feral being and claim its loyalty for his own. <br /> The endowments granted by these Boons cannot be stacked on the same character, even if a Scion is reendowing a feral being. They can, however, be replaced by higher-dot Boons under this Purview. That is, a Scion cannot endow the same person twice with this Purview’s two-dot Boon in order to give the person four free Attribute dots. (That would cost more Legend points anyway.) If he wants the person to have more free Attribute dots, he’ll have to re-endow that person with a Jotunblut Boon rated at three dots or higher. If the Scion re-endows a person with a Jotunblut Boon rated less than or equal to the last one that affected the character after that person’s previous loyalty lapses, the Scion claims that person’s loyalty but has no effect on the recipient’s Attributes. <br /> Finally, Scions cannot use these Boons to bestow freeAttribute dots on (or to claim the loyalty of) titanspawn, their fellow Scions or other supernatural beings.",
+          "boons": [
+            {
+              "name": "BESTIAL ENDOWMENT",
+              "level": 1,
+              "dice_pool": "none",
+              "cost": "1 lethal health level + 1 Legend",
+              "description": "The Scion grants a beast a single extra dot in either Strength or Stamina. The beast becomes loyal to only the Scion, who can also train him as normal, but that loyalty must be renewed once every month."
+            },
+            {
+              "name": "HUMAN ENDOWMENT",
+              "level": 2,
+              "dice_pool": "none",
+              "cost": "1 lethal health level + 2 Legend",
+              "description": "The Scion may imbue a human with two free Attribute dots that can be spent into the human’s Strength and/or Stamina. The human remains loyal to the Scion for a single month but grows irritable around other people. A Scion cannot use this Boon on a beast."
+            },
+            {
+              "name": "HEROIC ENDOWMENT",
+              "level": 3,
+              "dice_pool": "none",
+              "cost": "1 lethal health level + 3 Legend",
+              "description": "The Scion can now imbue a human with three free Attribute dots to be spent into the human’s Strength and/or Stamina. The person remains loyal to the Scion for three months (roughly one season) and remains equally irritable with other people. A Scion cannot use this Boon on a beast."
+            }
+          ]
+        },
+        {
+          "name": "TSUKUMO-GAMI",
+          "description": "It’s a fundamental Shinto understanding that every physical object has a spirit. Those spirits, known as kami, vary as widely in grace and power as the objects they represent vary in size and importance. A Scion who’s inherited this Purview is not only aware of these spirits, but she’s able to coax them out of hiding and bargain with them for information and favors.",
+          "boons": [
+            {
+              "name": "THE WAKEFUL SPIRIT",
+              "level": 1,
+              "dice_pool": "Charisma + Presence",
+              "cost": "none",
+              "description": "With a little persistence, a Scion can capture the attention of the spirit of an inanimate object and speak to it for a few minutes. When she does so, the object takes on anthropomorphic features—the grains in a wooden door, for instance, might flow into the shape of a face—and speaks in a way befitting the size and importance of the object. Unremarkable, unimportant objects have dim-witted, semi-conscious spirits, whereas unique objects to which people form emotional attachments are eloquent, knowledgeable and charming. <br /> In speaking to a spirit, a character can find out information the spirit has directly experienced. A car’s spirit can talk about where it’s been or who’s been in it. A lamp’s spirit can talk about the last time the master of the house used its light. A wishing well’s spirit can talk about how many people have wasted their pittances on false hopes. The older and more interesting the object is, the farther back and more clearly its spirit can remember key information. Spirits don’t differentiate easily between non-spirit beings, though, and they consider it rude to talk about the goings-on of other spirits if the spirits in question are doing their jobs properly. Also, most don’t pay too much attention to their surroundings unless something truly unusual happens."
+            },
+            {
+              "name": "THE WATCHFUL SPIRIT",
+              "level": 2,
+              "dice_pool": "Charisma + Presence",
+              "cost": "1 Legend",
+              "description": "The Scion can not only coax information from a kami, but also set it to some passive task on her behalf. She can, for example, have the kami watch out for a specific person, observe any titanspawn who approach, or remember and repeat anything another Scion says to it. This period of duty lasts for a number of days equal to the number of successes the character amassed on the activation roll."
+            },
+            {
+              "name": "THE HELPFUL SPIRIT",
+              "level": 3,
+              "dice_pool": "Charisma + Occult",
+              "cost": "1 Legend per die of improvement",
+              "description": "With the proper shows of respect and decorum, a Scion can convince the kami within an object to enhance the mundane function of that object. In so doing, she gains a dice bonus equal to the number of Legend points she spends on the effect, which lasts for a number of days equal to number of successes on the activation roll. Be it anything from a weapon to a baby grand piano, the item must be one that requires a dice roll to use with skill. If the character uses this Boon on one of her Birthright items, she can enhance only its mundane function."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "_id": "purviews_3",
+    "name": "SPECIAL PURVIEWS",
+    "type": "Item",
+    "system": {
+      "description": "These Purviews are associated with specific Gods, but they are available to Scions of any heritage. Their dots are bought in sequence, representing a growing mastery of the Purview. A Scion must have a Birthright relic to use these Purviews.",
+      "purviews": [
+        {
+          "name": "ANIMAL",
+          "description": "This Purview expresses the totemic power to which a Scion’s ichor grants him access. Its Boons work on only one type of animal, chosen by the player when he purchases the character’s first Boon. That animal needn’t be the same one associated with his divine parent.<br /> <strong>Associated With:</strong> Anubis (Jackal), Athena (Owl), Atum-Re (Falcon), Bastet (Cat), Damballa (Snake), Geb (Goose), Hachiman (Dove), Hera (Peacock), Horus (Falcon), Huitzilopochtli (Hummingbird, Eagle), Miclántecuhtli (Dog), Osiris (Centipede, Ram), Poseidon (Horse), Quetzalcoátl (Resplendent Quetzal), Set (Salawa), Sobek (Crocodile), Tezcatlipoca (Jaguar), Thoth (Baboon, Ibis)",
+          "boons": [
+            {
+              "name": "ANIMAL COMMUNICATION",
+              "level": 1,
+              "dice_pool": "Intelligence + Animal Ken",
+              "cost": "none",
+              "description": "The Scion can understand and make himself understood by an animal as he speaks his native language and the animal responds with its own postures, scents and/or vocalizations. This Boon doesn’t make animals smart, calm or loyal, but most are curious enough about having a person address them that they’ll hear a Scion out before defaulting to aggression, panic or indifference."
+            },
+            {
+              "name": "ANIMAL COMMAND",
+              "level": 2,
+              "dice_pool": "Charisma + Animal Ken",
+              "cost": "1 Willpower",
+              "description": "The Scion spends one Willpower and names one task that the animal must perform. The task cannot seem suicidal or impossible to the animal, but the animal cannot balk at an order that doesn’t immediately seem so. “Hey rabbit, go rip that lion’s throat open,” would seem impossible to the rabbit so commanded. “Run to that grass across this street,” would be a fine order for that same rabbit, though, even if cars were zipping by. The order can describe a single immediate action (“Bite that guy!”) or one with a single condition (“Come find me when a blue car stops here.”). If he lacks the previous Boon, the Scion can deliver his command only through simplistic nonverbal signals."
+            },
+            {
+              "name": "ANIMAL ASPECT",
+              "level": 3,
+              "dice_pool": "Stamina + Animal Ken",
+              "cost": "1 Legend per action",
+              "description": "By meditating for one action (Speed 3) on a token representing his animal, the Scion takes on a metaphorical characteristic associated with it, creating a dice bonus for rolls involving the Attribute most closely associated with that characteristic. A Scion might take on a snake’s sinuous grace (Dexterity), a peacock’s beauty (Appearance), an elephant’s proverbial memory (via Intelligence) or any other justifiable characteristic. The bonus dice are equal to the number of successes on the activation roll, and the benefit lasts for one action per Legend point spent up front to fuel the Boon."
+            }
+          ]
+        },
+        {
+          "name": "CHAOS",
+          "description": "Chaos is the Purview of confusion, anarchy and formlessness.<br /> <strong>Associated With:</strong> Dionysus, Kalfu, Loki, Set, Susano-o",
+          "boons": [
+            {
+              "name": "EYE OF THE STORM",
+              "level": 1,
+              "dice_pool": "none",
+              "cost": "1 Legend per scene",
+              "description": "When the Scion finds herself caught up in a chaotic situation unrelated to her—whether she’s dodging a tornado’s debris or emerging from a bar to find a berserk mob rushing toward her to clash with a line of riot cops down the street—she can activate this Boon and become an island of calm in the tumult. She is miraculously untouched in the confusion, and she remains so for as long as she doesn’t actively involve herself. She still suffers normal environmental movement penalties, but environmental dangers such as falling rocks, stampeding beasts or thrashing rioters all fail to touch her."
+            },
+            {
+              "name": "HORNET’S NEST",
+              "level": 2,
+              "dice_pool": "Intelligence + Awareness",
+              "cost": "none",
+              "description": "If the Boon’s activation roll succeeds, the Storyteller should determine and reveal in general terms what action the Scion can take to either cause the most chaos in the scene or defuse the potential chaos inherent in the situation. The revelation should be something simple like “opening the parrot cage,” “staying in the hallway,” “winking at the Scion of Sif” or “calling the Scion of Ptah’s cell phone.” The Storyteller should explain only which action will lead to which outcome, not how."
+            },
+            {
+              "name": "PARALYZING CONFUSION",
+              "level": 3,
+              "dice_pool": "Wits + Empathy",
+              "cost": "1 Willpower",
+              "description": "This Boon turns a person’s rational thoughts into seething, chaotic noise. On a successful activation roll, the victim freezes in place, suddenly unable to think, speak or act. He’s unaware of what goes on around him, and he has no memory of the moments before or after the use of this Boon. <br /> The effect lasts for a number of actions equal to the successes on the activation roll, and it erases the victim’s memory for an equal amount of time before the roll. If the victim has more dots of Legend than the user, the power doesn’t work. If the victim has an equal Legend rating, the activation roll is contested against the victim’s (Willpower + Integrity + Legend)."
+            }
+          ]
+        },
+        {
+          "name": "DARKNESS",
+          "description": "Characters who inherit this Purview are as at home in the dark as in the light (if not more so), either protecting humanity from unseen terrors or harrying hapless mortals from the shadows.<br /> <strong>Associated With:</strong> Baron Samedi, Hades, Izanami, Kalfu, Tezcatlipoca, Tsuki-yomi",
+          "boons": [
+            {
+              "name": "NIGHT EYES",
+              "level": 1,
+              "dice_pool": "none",
+              "cost": "none",
+              "description": "Darkness no longer inflicts visibility penalties on the character. He can see in pitch-blackness almost as well as he can see in bright sunlight, losing only the ability to perceive colors. (Objects he sees in darkness are blackon-black yet perfectly distinguishable in a way that’s conveniently impossible to describe to someone who doesn’t have this Boon.) The Scion cannot see through physical impediments, however."
+            },
+            {
+              "name": "SHADOW MASK",
+              "level": 2,
+              "dice_pool": "Dexterity + Larceny",
+              "cost": "1 Legend",
+              "description": "The Scion pulls a shadow down from the brim of his hat or up from beneath his collar and wraps it around his head, rendering him completely unrecognizable to human eyes or electronic surveillance equipment (even equipment designed specifically to see in darkness). His voice becomes an unidentifiable whisper. The Scion can see through this mask, and other Scions using Night Eyes can recognize him through it.<br /> The shadow mask lasts for a maximum of 24 hours. The Scion can will it to disperse before that period elapses, but otherwise, it remains in place the whole time even if the Scion is unconscious. It doesn’t disperse even if someone shines a bright light in the Scion’s face."
+            },
+            {
+              "name": "SHADOW REFUGE",
+              "level": 3,
+              "dice_pool": "Dexterity + Stealth",
+              "cost": "1 Legend",
+              "description": "The Scion can hide within any shadow into which his body fits. He need only position himself within the three-dimensional area of the shadow as his player succeeds on the activation roll and spends the point of Legend. If he does so, mundane attempts to find him—even those aided by electronic equipment—fail automatically. Supernatural attempts aided by Epic Perception or an Arete in Awareness (or both) proceed as normal, contesting the searcher’s (Perception + Awareness) against the Scion’s activation roll. <br /> The Scion can hide within the shadow as long as it remains large enough. He can move with it as it moves, but doing so might require a new (Dexterity + Stealth) roll depending on the circumstances."
+            }
+          ]
+        },
+        {
           "name": "DEATH",
           "description": "The Gods don’t share mortals’ instinctive dread of death, but they know its power well. Likewise, as a Scion’s mastery of this Purview grows, his fear of death diminishes. <br /> <strong>Associated With:</strong> Anubis, Baron Samedi, Hades, Hel, Huitzilopochtli, Izanami, Miclántecuhtli, Odin, Osiris, Xipe Totec",
           "boons": [
