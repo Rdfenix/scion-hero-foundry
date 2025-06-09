@@ -47,7 +47,7 @@
     },
     {
       "name": "purviews",
-      "label": "Purview List",
+      "label": "Purviews List",
       "path": "packs/purviews.db",
       "type": "Item",
       "system": "scion-hero-foundry"

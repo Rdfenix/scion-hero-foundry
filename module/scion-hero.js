@@ -4,6 +4,7 @@ import { attributesUpdate } from "../helpers/attributesUpdate.js";
 import { abilitiesUpdate } from "../helpers/abilitiesUpdate.js";
 import { mountingBasedata } from "../helpers/mountBasedata.js";
 import { splitInColumns } from "../helpers/splitInColumns.js";
+import { createPuviewsJournal } from "../helpers/journals.js";
 
 Hooks.once("init", async function () {
   // Remove a sheet padrão do core
@@ -82,6 +83,8 @@ Hooks.on("ready", async () => {
       });
     }
   }
+
+  await createPuviewsJournal();
 });
 
 Hooks.on("renderActorSheet", (app, html, data) => {
