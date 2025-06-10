@@ -44,6 +44,14 @@
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
+.purviews-description,
+.purview-item-desciption,
+.boon-description {
+  font-style: italic;
+  font-weight: lighter;
+  text-align: justify;
+}
+
 .purviews-section {
   display: flex;
   flex-direction: column;
@@ -59,11 +67,49 @@
   font-size: 1.75em;
 }
 
-.purviews-wrapper {
+.purviews-wrapper,
+.pruview-list,
+.purview-item,
+.boons {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: auto;
   position: relative;
   gap: 0.8rem;
+}
+
+.pruview-list {
+  gap: 0.85rem;
+}
+
+.purview-item {
+  gap: 0.5rem;
+}
+
+.boon-list {
+  list-style: none;
+  padding: 0 1.5rem 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.boon-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.boon-header-row {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+  gap: 0.5rem;
+}
+
+.boon-header-column {
+  text-transform: capitalize;
+  justify-content: flex-start;
 }

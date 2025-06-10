@@ -6,7 +6,32 @@
     </div>
     <div class="pruview-list">
       {{#each purview.purviews as |item|}}
-      <div class="purview-item"><h3>{{item.name}}</h3></div>
+      <div class="purview-item">
+        <h3>{{item.name}}</h3>
+        <span class="purview-item-desciption">{{{item.description}}}</span>
+        <div class="boons">
+          <ul class="boon-list">
+            {{#each item.boons as |boon|}}
+            <li>
+              <div class="boon-header">
+                <div class="boon-title">{{{boon.name}}}</div>
+                <div class="boon-header-row">
+                  <div class="boon-header-column">
+                    <span class="boon-header-label">Dice Pool:</span>
+                    <span class="boon-header-value">{{{boon.dice_pool}}}</span>
+                  </div>
+                  <div class="boon-header-column">
+                    <span class="boon-header-label">Cost:</span>
+                    <span class="boon-header-value">{{{boon.cost}}}</span>
+                  </div>
+                </div>
+                <div class="boon-description">{{{boon.description}}}</div>
+              </div>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
       {{/each}}
     </div>
   </div>
