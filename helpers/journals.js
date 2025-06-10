@@ -4,16 +4,26 @@ export async function createPuviewsJournal() {
   const purviewList = await getPurviews();
   const templatePath =
     "systems/scion-hero-foundry/templates/journals/purviews.html";
+  const folderName = "Purviews";
 
-  console.log("Purviews fetched:", purviewList);
+  let folder = game.folders.find(
+    (f) => f.name === folderName && f.type === "JournalEntry"
+  );
+
+  if (folder) {
+    await folder.delete();
+  }
+
+  folder = await Folder.create({
+    name: folderName,
+    type: "JournalEntry",
+    color: "#782e22",
+  });
 
   const pages = [];
 
   for (const purview of purviewList) {
-    console.log("Processing purview:", purview);
-
     const existingJournal = game.journal.find((j) => j.name === purview.name);
-
     const content = await renderTemplate(templatePath, { purview });
 
     if (existingJournal) {
@@ -33,15 +43,14 @@ export async function createPuviewsJournal() {
       {
         name: `${purview.name}`,
         pages: pages,
-        folder: null,
+        folder: folder.id,
         permission: { default: 2 },
         flags: {
           "scion-hero-foundry": {
             customCss: true,
           },
         },
-      },
-      { renderSheet: true }
+      }
     );
 
     // Garante que o flag customCss está presente na página criada

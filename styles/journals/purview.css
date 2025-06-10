@@ -113,3 +113,45 @@
   text-transform: capitalize;
   justify-content: flex-start;
 }
+
+.boon-title {
+  text-decoration: underline;
+  font-weight: bolder;
+}
+
+.boon-list > li {
+  padding: 20px;
+  background: rgb(220, 220, 220);
+  cursor: pointer;
+}
+
+.boon-list > li:last-child {
+  border-bottom: none;
+}
+
+.boon-header-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.boon-header-row > span:first-child {
+  font-weight: bolder;
+}
+
+.boon-header-row > span:last-child {
+  font-style: italic;
+  font-weight: lighter;
+}
+
+.purview-table {
+  background: rgb(248, 248, 255);
+}
+
+.purview-table > thead > tr > th,
+.purview-table > tbody > tr > td {
+  border: 1px solid #aaa;
+  padding: 10px;
+  text-align: left;
+  font-family: skranji-regular, sans-serif !important;
+}

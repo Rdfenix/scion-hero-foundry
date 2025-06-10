@@ -12,15 +12,17 @@
         <div class="boons">
           <ul class="boon-list">
             {{#each item.boons as |boon|}}
-            <li>
+            <li draggable="true">
               <div class="boon-header">
                 <div class="boon-title">{{{boon.name}}}</div>
-                <div class="boon-header-row">
-                  <div class="boon-header-column">
+                <div class="boon-header-column">
+                  <div class="boon-header-row">
                     <span class="boon-header-label">Dice Pool:</span>
                     <span class="boon-header-value">{{{boon.dice_pool}}}</span>
                   </div>
-                  <div class="boon-header-column">
+                </div>
+                <div class="boon-header-column">
+                  <div class="boon-header-row">
                     <span class="boon-header-label">Cost:</span>
                     <span class="boon-header-value">{{{boon.cost}}}</span>
                   </div>
