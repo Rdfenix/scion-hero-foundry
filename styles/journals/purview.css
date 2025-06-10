@@ -46,3 +46,12 @@
   font-family: skranji-bold, sans-serif;
   font-size: 1.75em;
 }
+
+.purviews-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  position: relative;
+  gap: 0.8rem;
+}

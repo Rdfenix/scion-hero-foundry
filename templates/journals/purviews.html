@@ -1,4 +1,13 @@
 <section class="purviews-section">
   <h2>Description</h2>
-  <div><span>{{{purview.description}}}</span></div>
+  <div class="purviews-wrapper">
+    <div class="purviews-description">
+      <span>{{{purview.description}}}</span>
+    </div>
+    <div class="pruview-list">
+      {{#each purview.purviews as |item|}}
+      <div class="purview-item"><h3>{{item.name}}</h3></div>
+      {{/each}}
+    </div>
+  </div>
 </section>
