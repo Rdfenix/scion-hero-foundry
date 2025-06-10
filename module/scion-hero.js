@@ -98,4 +98,12 @@ Hooks.on("renderJournalPageSheet", (sheet, html, data) => {
 
   // Altera o título da janela modal do Foundry
   html.closest(".app.window-app").find(".window-title").text(newTitle);
+
+  const flag = sheet.document.getFlag("scion-hero-foundry", "customCss");
+
+  if (flag) {
+    html
+      .closest(".journal-entry-content")
+      ?.addClass("purview-journal-entry-content");
+  }
 });

@@ -29,14 +29,24 @@ export async function createPuviewsJournal() {
       },
     });
 
-    await JournalEntry.create(
+    const entry = await JournalEntry.create(
       {
         name: `${purview.name}`,
         pages: pages,
         folder: null,
         permission: { default: 2 },
+        flags: {
+          "scion-hero-foundry": {
+            customCss: true,
+          },
+        },
       },
       { renderSheet: true }
     );
+
+    // Garante que o flag customCss está presente na página criada
+    for (const page of entry.pages.contents) {
+      await page.setFlag("scion-hero-foundry", "customCss", true);
+    }
   }
 }
