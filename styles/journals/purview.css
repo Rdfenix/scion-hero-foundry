@@ -115,8 +115,25 @@
 }
 
 .boon-title {
-  text-decoration: underline;
   font-weight: bolder;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.boon-title > span {
+  text-decoration: underline;
+}
+
+.boon-title > .level > span {
+  font-size: 1.25rem;
+}
+
+.level {
+  display: flex;
+  gap: 10px;
+  font-family: skranji-regular, sans-serif !important;
+  text-transform: capitalize;
 }
 
 .boon-list > li {

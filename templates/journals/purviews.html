@@ -14,7 +14,13 @@
             {{#each item.boons as |boon|}}
             <li draggable="true">
               <div class="boon-header">
-                <div class="boon-title">{{{boon.name}}}</div>
+                <div class="boon-title">
+                  <span>{{{boon.name}}}</span>
+                  <div class="level">
+                    <span>Level:</span>
+                    <span>{{boon.level}}</span>
+                  </div>
+                </div>
                 <div class="boon-header-column">
                   <div class="boon-header-row">
                     <span class="boon-header-label">Dice Pool:</span>
