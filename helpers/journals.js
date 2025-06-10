@@ -14,14 +14,14 @@ export async function createPuviewsJournal() {
 
     const existingJournal = game.journal.find((j) => j.name === purview.name);
 
-    const content = await renderTemplate(templatePath, purview);
+    const content = await renderTemplate(templatePath, { purview });
 
     if (existingJournal) {
       await existingJournal.delete();
     }
 
     pages.push({
-      name: purview.description, // Adiciona o nome da página
+      name: purview.name,
       type: "text",
       text: {
         content: content,
