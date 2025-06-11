@@ -4,7 +4,12 @@ import { attributesUpdate } from "../helpers/attributesUpdate.js";
 import { abilitiesUpdate } from "../helpers/abilitiesUpdate.js";
 import { mountingBasedata } from "../helpers/mountBasedata.js";
 import { splitInColumns } from "../helpers/splitInColumns.js";
-import { createPuviewsJournal } from "../helpers/journals.js";
+import {
+  createPuviewsJournal,
+  checkPurviewFlag,
+  checkKnacksFlag,
+  createKnacksJournal,
+} from "../helpers/journals.js";
 
 Hooks.once("init", async function () {
   // Remove a sheet padrão do core
@@ -85,6 +90,7 @@ Hooks.on("ready", async () => {
   }
 
   await createPuviewsJournal();
+  await createKnacksJournal();
 });
 
 Hooks.on("renderActorSheet", (app, html, data) => {
@@ -99,11 +105,6 @@ Hooks.on("renderJournalPageSheet", (sheet, html, data) => {
   // Altera o título da janela modal do Foundry
   html.closest(".app.window-app").find(".window-title").text(newTitle);
 
-  const flag = sheet.document.getFlag("scion-hero-foundry", "customCss");
-
-  if (flag) {
-    html
-      .closest(".journal-entry-content")
-      ?.addClass("purview-journal-entry-content");
-  }
+  checkPurviewFlag(sheet, html);
+  checkKnacksFlag(sheet, html);
 });
