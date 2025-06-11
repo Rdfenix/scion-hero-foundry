@@ -1,1 +1,7 @@
-<section class="knacks-section"></section>
+<section class="knacks-section">
+  <div class="knack-wrapper-list">
+    {{#each knackItem.knacks as |knack|}}
+    <h2>{{knack.name}}</h2>
+    {{/each}}
+  </div>
+</section>
