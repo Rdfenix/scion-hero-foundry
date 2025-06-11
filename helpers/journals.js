@@ -56,6 +56,8 @@ export async function createPuviewsJournal() {
 export async function createKnacksJournal() {
   const knackList = await getKnacks();
   const folderName = "Knacks";
+  const templatePath =
+    "systems/scion-hero-foundry/templates/journals/knacks.html";
   console.log("knackList", knackList);
 
   let folder = game.folders.find(
@@ -71,6 +73,38 @@ export async function createKnacksJournal() {
     type: "JournalEntry",
     color: "#556B2F",
   });
+
+  const pages = [];
+
+  for (const knackItem of knackList) {
+    const existingJournal = game.journal.find((j) => j.name === knackItem.name);
+    const content = await renderTemplate(templatePath, { knackItem });
+
+    if (existingJournal) {
+      await existingJournal.delete();
+    }
+
+    pages.push({
+      name: knackItem.name,
+      type: "text",
+      text: {
+        content: content,
+        format: CONST.JOURNAL_ENTRY_PAGE_FORMATS.HTML,
+      },
+    });
+
+    const entry = await JournalEntry.create({
+      name: `${knackItem.name}`,
+      pages: pages,
+      folder: folder.id,
+      permission: { default: 2 },
+    });
+
+    // Garante que o flag customCss está presente na página criada
+    for (const page of entry.pages.contents) {
+      await page.setFlag("scion-hero-foundry", "customKnackCss", true);
+    }
+  }
 }
 
 export const checkPurviewFlag = (sheet, html) => {

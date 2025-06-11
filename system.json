@@ -21,7 +21,8 @@
     "styles/partials/knacks-boons.css",
     "styles/partials/combat.css",
     "styles/dialogs/pantheon.css",
-    "styles/journals/purview.css"
+    "styles/journals/purview.css",
+    "styles/journals/knacks.css"
   ],
   "scripts": [],
   "packs": [
