@@ -2,6 +2,16 @@
   <div class="knack-wrapper-list">
     {{#each knackItem.knacks as |knack|}}
     <h2>{{knack.name}}</h2>
+    <div class="knack-list">
+      <ul>
+        {{#each knack.powers as |power|}}
+        <li draggable="true">
+          <h3>{{power.name}}</h3>
+          <span>{{{power.description}}}</span>
+        </li>
+        {{/each}}
+      </ul>
+    </div>
     {{/each}}
   </div>
 </section>

@@ -140,6 +140,7 @@
   padding: 20px;
   background: rgb(220, 220, 220);
   cursor: pointer;
+  border-radius: 4px;
 }
 
 .boon-list > li:last-child {
