@@ -9,7 +9,7 @@
   </div>
   <section class="virtues-wrapper">
     {{#each system.virtues as |attr key|}}
-    <div class="virtues-row">
+    <div class="virtues-row" data-key="{{key}}">
       <div class="virtues-column">
         <span>{{key}}</span>
       </div>

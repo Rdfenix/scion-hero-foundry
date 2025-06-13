@@ -50,7 +50,7 @@ const mountingVirtues = (row, label, app) => {
 export const virtuesUpdate = (app, html, data) => {
   html.find(".virtues-row").each(function () {
     const row = $(this);
-    const label = row.find("span").text().toLowerCase();
+    const label = row.data("key");
     mountingVirtues(row, label, app);
   });
 };
