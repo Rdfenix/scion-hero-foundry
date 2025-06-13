@@ -37,3 +37,38 @@
 .virtues-row > .virtues-column:nth-child(2) {
   align-items: flex-end !important;
 }
+
+.birth-wrapper,
+.births {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: skranji-regular, sans-serif !important;
+  gap: 0.5rem;
+}
+
+.births {
+  padding: 0 0 10px 0;
+}
+
+.birth-wrapper {
+  justify-content: center;
+  padding: 0 2.25rem;
+}
+
+.birth-wrapper > .button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.birth-wrapper > .button > button:hover,
+.birth-wrapper > .button > button:focus {
+  box-shadow: none;
+}
+
+.birth-wrapper > .button > button {
+  font-family: skranji-regular, sans-serif !important;
+  text-transform: uppercase;
+  width: 15rem;
+}
