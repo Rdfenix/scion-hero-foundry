@@ -95,6 +95,7 @@
   border-top: none;
   border-left: none;
   border-right: none;
+  padding: 10px;
 }
 
 .scion-form > .sheet-header > .column > .row > input[type="text"]:focus {
@@ -138,7 +139,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 1px 3px;
+  padding: 10px;
   font-family: skranji-regular, sans-serif !important;
 }
 

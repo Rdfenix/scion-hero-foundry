@@ -72,3 +72,47 @@
   text-transform: uppercase;
   width: 15rem;
 }
+
+.births > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.birthright-input-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.birthright-input-area > .row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.birthright-name > input[type="text"] {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 100%;
+  padding: 10px;
+}
+
+.birthright-name > input[type="text"]::placeholder {
+  font-style: italic;
+}
+
+.birthright-name > input[type="text"]:focus {
+  box-shadow: none;
+}
+
+.birthright-name,
+.birthright-level {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
