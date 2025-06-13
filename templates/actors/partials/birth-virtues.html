@@ -11,7 +11,17 @@
               <div class="birthright-name">
                 <input type="text" placeholder="Brithright Name" />
               </div>
-              <div class="birthright-level"></div>
+              <div class="birthright-level">
+                <div class="circles">
+                  {{#each (range 1 5) as |i|}}
+                  <input
+                    type="checkbox"
+                    class="circle-checkbox"
+                    value="{{i}}"
+                  />
+                  {{/each}}
+                </div>
+              </div>
             </div>
             <div class="row">
               <div class="birthright-description"></div>
