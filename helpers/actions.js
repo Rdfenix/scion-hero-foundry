@@ -15,6 +15,12 @@ export async function _onAction(event, actor) {
   }
 }
 
+export async function _onChange(event, actor) {
+  if (event.currentTarget.dataset.action === "select-birthright-type") {
+    console.log("Getting the event", event.target.value);
+  }
+}
+
 function reopenWithActiveTab(actor, tabName) {
   Hooks.once("renderActorSheet", (app, html, data) => {
     const nav = html[0].querySelector(".sheet-tabs");

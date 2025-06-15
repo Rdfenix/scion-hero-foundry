@@ -1,4 +1,4 @@
-import { _onAction } from "../helpers/actions.js";
+import { _onAction, _onChange } from "../helpers/actions.js";
 
 export class ScionHeroActorSheet extends ActorSheet {
   prepareData() {
@@ -45,9 +45,17 @@ export class ScionHeroActorSheet extends ActorSheet {
 
     // Usa delegação para garantir que funcione em partials e elementos dinâmicos
     html.on("click", "[data-action]", (event) => {
+      if (event.currentTarget.tagName.toLowerCase() === "select") return;
       event.preventDefault();
       event.stopPropagation();
       _onAction(event, this.actor);
+    });
+
+    html.on("change", "[data-action]", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      _onChange(event, this.actor);
     });
   }
 

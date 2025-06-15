@@ -33,7 +33,11 @@
     <div class="button">
       <div class="birthright-types">
         <label for="birthright-type">Choose the type</label>
-        <select name="" id="birthright-type">
+        <select
+          name=""
+          id="birthright-type"
+          data-action="select-birthright-type"
+        >
           {{#each system.birthrights as |birthright|}}
           <option value="{{birthright.type}}">{{birthright.type}}</option>
           {{/each}}
