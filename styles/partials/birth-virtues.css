@@ -59,11 +59,27 @@
 .birth-wrapper > .button {
   display: flex;
   width: 100%;
-  align-items: center;
+  align-items: flex-end;
+  gap: 0.8rem;
+}
+
+.birthright-types {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  font-family: skranji-regular, sans-serif !important;
+  text-transform: capitalize;
+}
+
+.birthright-types > select {
+  height: 33px;
+  border: 2px groove var(--color-border-light-highlight);
 }
 
 .birth-wrapper > .button > button:hover,
-.birth-wrapper > .button > button:focus {
+.birth-wrapper > .button > button:focus,
+.birthright-types > select:focus,
+.birthright-types > select:hover {
   box-shadow: none;
 }
 

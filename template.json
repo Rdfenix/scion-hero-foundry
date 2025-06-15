@@ -67,7 +67,20 @@
         "legend": { "value": 2, "max": 12, "min": 1 },
         "legendPoints": { "value": 0, "max": 48, "min": 0 },
         "willpower": { "value": 0, "max": 10, "min": 1 },
-        "birthrights": [],
+        "birthrights": {
+          "0": {
+            "type": "Creature"
+          },
+          "1": {
+            "type": "Followers"
+          },
+          "2": {
+            "type": "Guide"
+          },
+          "3": {
+            "type": "Relic"
+          }
+        },
         "boons": [],
         "knacks": [],
         "purviews": [],
