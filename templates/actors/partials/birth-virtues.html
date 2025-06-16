@@ -7,7 +7,7 @@
       <ul>
         {{#each system.birthrights as |birthright index|}}
         <li>
-          <div class="birthright-input-area">
+          <div class="birthright-input-area" data-index="{{index}}">
             <div class="row">
               <div class="birthright-name">
                 <input
@@ -26,6 +26,7 @@
                   <input
                     type="checkbox"
                     class="circle-checkbox"
+                    data-target="birthrights.{{index}}.level.value"
                     value="{{i}}"
                   />
                   {{/each}}

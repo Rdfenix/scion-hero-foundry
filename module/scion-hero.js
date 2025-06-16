@@ -3,6 +3,7 @@ import { ScionHeroActorBaseDefault } from "./actor-base-default.js";
 import { attributesUpdate } from "../helpers/attributesUpdate.js";
 import { abilitiesUpdate } from "../helpers/abilitiesUpdate.js";
 import { virtuesUpdate } from "../helpers/virtuesUpdate.js";
+import { birthrightUpdate } from "../helpers/birthrightsUpdate.js";
 import { mountingBasedata } from "../helpers/mountBasedata.js";
 import { splitInColumns } from "../helpers/splitInColumns.js";
 import {
@@ -98,6 +99,7 @@ Hooks.on("renderActorSheet", (app, html, data) => {
   attributesUpdate(app, html, data);
   abilitiesUpdate(app, html, data);
   virtuesUpdate(app, html, data);
+  birthrightUpdate(app, html, data);
 });
 
 Hooks.on("renderJournalPageSheet", (sheet, html, data) => {
