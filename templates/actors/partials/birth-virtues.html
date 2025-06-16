@@ -19,6 +19,10 @@
                   data-index="{{index}}"
                 />
               </div>
+              <div class="types">
+                <span>Type:</span>
+                <span class="birth-type">{{birthright.type}}</span>
+              </div>
               <div class="birthright-level">
                 <div class="circles">
                   {{#each (range birthright.level.min birthright.level.max) as
@@ -34,7 +38,14 @@
               </div>
             </div>
             <div class="row">
-              <div class="birthright-description"></div>
+              <div class="birthright-description">
+                <textarea
+                  name=""
+                  id=""
+                  value="{{birthright.description}}"
+                ></textarea>
+                <div class="boons-area"></div>
+              </div>
             </div>
           </div>
         </li>

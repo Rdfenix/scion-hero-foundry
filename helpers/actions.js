@@ -83,7 +83,7 @@ const setBirthrightOptionEstructure = async (actor) => {
       ui.notifications.error("Choose the type of birthrights.");
     }
 
-    schema = { ...schema, _id: foundry.utils.randomID() };
+    schema = { ...schema, _id: foundry.utils.randomID(), type: selectedType };
 
     const activeTab =
       document.querySelector(".sheet-tabs .item.active")?.dataset.tab ??

@@ -79,7 +79,9 @@
 .birth-wrapper > .button > button:hover,
 .birth-wrapper > .button > button:focus,
 .birthright-types > select:focus,
-.birthright-types > select:hover {
+.birthright-types > select:hover,
+.birthright-description > textarea:focus,
+.birthright-description > textarea:hover {
   box-shadow: none;
 }
 
@@ -134,4 +136,30 @@
   width: 100%;
   display: flex;
   align-items: center;
+}
+
+.birthright-description {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
+}
+
+.birthright-description > textarea {
+  width: 45rem;
+  height: 100px;
+  min-height: 50px;
+  max-height: 200px;
+  resize: none;
+  font-family: skranji-regular, sans-serif !important;
+  text-transform: capitalize;
+  padding: 10px;
+}
+
+.types {
+  display: flex;
+  gap: 0.5rem;
 }
