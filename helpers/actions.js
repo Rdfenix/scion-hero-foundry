@@ -1,4 +1,4 @@
-let optionChoosed = "";
+import { birthrightSchema } from "../module/actor-base-default.js";
 
 export async function _onAction(event, actor) {
   event.preventDefault();
@@ -21,24 +21,93 @@ export async function _onAction(event, actor) {
 }
 
 export async function _onChange(event, actor) {
-  if (event.currentTarget.dataset.action === "select-birthright-type") {
-    const value = event.target.value;
+  event.preventDefault();
+  event.stopPropagation();
+  event.stopImmediatePropagation();
 
-    await getOptionFromBirthright(value);
+  switch (event.currentTarget.dataset.action) {
+    case "select-birthright-type":
+      event.currentTarget.dataset.selectedType = event.target.value;
+      break;
+    case "update-birthright-name":
+      await onBirthrightChange(event, actor);
+      break;
+    default:
+      console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
+      break;
   }
 }
 
-const getOptionFromBirthright = async (value) => {
+const onBirthrightChange = async (event, actor) => {
   try {
-    optionChoosed = value;
+    const field = event.currentTarget.dataset.field;
+    const index = parseInt(event.currentTarget.dataset.index);
+
+    if (!field || !index) {
+      return ui.notifications.error(
+        "Failed to found field or index from brithrights."
+      );
+    }
+
+    const birthrights = foundry.utils.deepClone(actor.system.birthrights);
+
+    birthrights[index][field] = event.currentTarget.value;
+
+    const activeTab =
+      document.querySelector(".sheet-tabs .item.active")?.dataset.tab ??
+      "stats";
+
+    await this.actor.update(
+      {
+        "system.birthrights": birthrights,
+      },
+      { render: false }
+    );
+
+    await reopenWithActiveTab(actor, activeTab);
   } catch (error) {
     console.error(error.message);
-    ui.notifications.error(error.message);
+    ui.notifications.error("Failed to fetch Birthrights.");
   }
 };
 
 const setBirthrightOptionEstructure = async (actor) => {
-  console.log("Options", optionChoosed);
+  try {
+    const selectedType = document.getElementById("birthright-type").value;
+
+    let schema = birthrightSchema[selectedType];
+
+    if (!schema) {
+      ui.notifications.error("Choose the type of birthrights.");
+    }
+
+    schema = { ...schema, _id: foundry.utils.randomID() };
+
+    const activeTab =
+      document.querySelector(".sheet-tabs .item.active")?.dataset.tab ??
+      "stats";
+
+    const birthrightList = foundry.utils.getProperty(
+      actor.system,
+      "birthrights"
+    );
+
+    birthrightList.push(schema);
+
+    await actor.update(
+      {
+        "system.birthrights": birthrightList,
+      },
+      { render: false }
+    );
+
+    await reopenWithActiveTab(actor, activeTab);
+
+    console.log(birthrightList);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch Birthrights.");
+  }
 };
 
 function reopenWithActiveTab(actor, tabName) {

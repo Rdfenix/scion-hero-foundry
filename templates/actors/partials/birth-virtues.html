@@ -5,15 +5,24 @@
   <section class="birth-wrapper">
     <div class="births">
       <ul>
+        {{#each system.birthrights as |birthright index|}}
         <li>
           <div class="birthright-input-area">
             <div class="row">
               <div class="birthright-name">
-                <input type="text" placeholder="Brithright Name" />
+                <input
+                  type="text"
+                  placeholder="Birthright Name"
+                  value="{{birthright.name}}"
+                  data-action="update-birthright-name"
+                  data-field="name"
+                  data-index="{{index}}"
+                />
               </div>
               <div class="birthright-level">
                 <div class="circles">
-                  {{#each (range 1 5) as |i|}}
+                  {{#each (range birthright.level.min birthright.level.max) as
+                  |i|}}
                   <input
                     type="checkbox"
                     class="circle-checkbox"
@@ -28,6 +37,7 @@
             </div>
           </div>
         </li>
+        {{/each}}
       </ul>
     </div>
     <div class="button">
@@ -37,9 +47,16 @@
           name=""
           id="birthright-type"
           data-action="select-birthright-type"
+          onmousedown="event.stopPropagation();"
+          onclick="event.stopPropagation();"
+          onchange="event.stopPropagation(); event.stopImmediatePropagation();"
+          onkeydown="event.stopPropagation();"
         >
-          {{#each system.birthrights as |birthright|}}
-          <option value="{{birthright.type}}">{{birthright.type}}</option>
+          <option value="" disabled selected>Select Type of Birthright</option>
+          {{#each system.birthrightTypes as |birthrightType|}}
+          <option value="{{birthrightType.type}}">
+            {{birthrightType.type}}
+          </option>
           {{/each}}
         </select>
       </div>

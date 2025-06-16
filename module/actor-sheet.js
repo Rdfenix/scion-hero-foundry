@@ -14,7 +14,6 @@ export class ScionHeroActorSheet extends ActorSheet {
       height: 800, // tabs removido para evitar conflito com inicialização manual
     });
   }
-
   activateListeners(html) {
     super.activateListeners(html);
 
@@ -24,11 +23,17 @@ export class ScionHeroActorSheet extends ActorSheet {
       contentSelector: ".sheet-content",
       initial: "stats",
       group: "primary",
+      callback: (event, tabs, tab) => {
+        // Só permite mudar a aba se o evento vier diretamente do link da aba
+        return !(event && event.target !== event.currentTarget);
+      },
     });
 
     this._customTabs.bind(html[0]);
 
     html.find(".sheet-tabs a").on("click", (event) => {
+      if (event.target !== event.currentTarget) return;
+
       event.preventDefault();
       event.stopPropagation();
 
@@ -45,9 +50,9 @@ export class ScionHeroActorSheet extends ActorSheet {
 
     // Usa delegação para garantir que funcione em partials e elementos dinâmicos
     html.on("click", "[data-action]", (event) => {
-      if (event.currentTarget.tagName.toLowerCase() === "select") return;
       event.preventDefault();
       event.stopPropagation();
+      if (event.currentTarget.tagName.toLowerCase() === "select") return;
       _onAction(event, this.actor);
     });
 

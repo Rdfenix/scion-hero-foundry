@@ -63,7 +63,8 @@ export const ScionHeroActorBaseDefault = {
   legend: { value: 2, max: 12, min: 1 },
   legendPoints: { value: 0, max: 48, min: 0 },
   willpower: { value: 0, max: 10, min: 1 },
-  birthrights: {
+  birthrights: [],
+  birthrightTypes: {
     0: {
       type: "Creature",
     },
@@ -92,4 +93,17 @@ export const ScionHeroActorBaseDefault = {
       Incapacitated: { value: 0 },
     },
   },
+};
+
+const defaultBirthSchema = {
+  name: "",
+  description: "",
+  level: { value: 0, min: 1, max: 5 },
+};
+
+export const birthrightSchema = {
+  Creature: defaultBirthSchema,
+  Followers: defaultBirthSchema,
+  Guide: defaultBirthSchema,
+  Relic: { ...defaultBirthSchema, boons: [] },
 };
