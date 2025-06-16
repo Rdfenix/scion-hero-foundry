@@ -44,7 +44,16 @@
                   id=""
                   value="{{birthright.description}}"
                 ></textarea>
-                <div class="boons-area"></div>
+                {{#if (hasOwnProperty birthright "boons")}}
+                <div class="boons-area">
+                  <ul>
+                    <li>
+                      <input type="text" />
+                      <input type="text" />
+                    </li>
+                  </ul>
+                </div>
+                {{/if}}
               </div>
             </div>
           </div>

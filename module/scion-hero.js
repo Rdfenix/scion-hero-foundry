@@ -52,6 +52,10 @@ Hooks.once("init", async function () {
     return value && typeof value === "object" && !Array.isArray(value);
   });
 
+  Handlebars.registerHelper("hasOwnProperty", function (obj, key, options) {
+    return Object.hasOwn(obj, key);
+  });
+
   const partials = [
     "systems/scion-hero-foundry/templates/actors/partials/stats.html",
     "systems/scion-hero-foundry/templates/actors/partials/birth-virtues.html",
