@@ -43,13 +43,15 @@ const onBirthrightChange = async (event, actor) => {
     const field = event.currentTarget.dataset.field;
     const index = parseInt(event.currentTarget.dataset.index);
 
-    if (!field || !index) {
-      return ui.notifications.error(
-        "Failed to found field or index from brithrights."
-      );
+    if (field === undefined || isNaN(index)) {
+      throw new Error("Failed to found field or index from birthrights.");
     }
+    const birthrights = foundry.utils.getProperty(actor.system, "birthrights");
 
-    const birthrights = foundry.utils.deepClone(actor.system.birthrights);
+    // Verifica se o índice existe
+    if (!birthrights[index]) {
+      throw new Error(`Birthright at index ${index} not found`);
+    }
 
     birthrights[index][field] = event.currentTarget.value;
 
@@ -57,7 +59,7 @@ const onBirthrightChange = async (event, actor) => {
       document.querySelector(".sheet-tabs .item.active")?.dataset.tab ??
       "stats";
 
-    await this.actor.update(
+    await actor.update(
       {
         "system.birthrights": birthrights,
       },
