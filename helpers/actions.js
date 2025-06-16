@@ -1,3 +1,5 @@
+let optionChoosed = "";
+
 export async function _onAction(event, actor) {
   event.preventDefault();
   event.stopPropagation();
@@ -9,6 +11,9 @@ export async function _onAction(event, actor) {
     case "select-god":
       await selectGod(actor);
       break;
+    case "button-birthright-type":
+      await setBirthrightOptionEstructure(actor);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
@@ -17,9 +22,24 @@ export async function _onAction(event, actor) {
 
 export async function _onChange(event, actor) {
   if (event.currentTarget.dataset.action === "select-birthright-type") {
-    console.log("Getting the event", event.target.value);
+    const value = event.target.value;
+
+    await getOptionFromBirthright(value);
   }
 }
+
+const getOptionFromBirthright = async (value) => {
+  try {
+    optionChoosed = value;
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error(error.message);
+  }
+};
+
+const setBirthrightOptionEstructure = async (actor) => {
+  console.log("Options", optionChoosed);
+};
 
 function reopenWithActiveTab(actor, tabName) {
   Hooks.once("renderActorSheet", (app, html, data) => {
