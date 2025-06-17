@@ -1,0 +1,57 @@
+.knacks,
+.boons {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+}
+
+.knacks-wrapper > button:focus,
+.knacks-wrapper > button:hover,
+.knacks-wrapper > .knack-list > ul > li > input[type="text"]:focus,
+.knacks-wrapper > .knack-list > ul > li > input[type="text"]:hover,
+.knacks-wrapper > .knack-list > ul > li > textarea:focus,
+.knacks-wrapper > .knack-list > ul > li > textarea:hover {
+  box-shadow: none;
+}
+
+.knacks-wrapper,
+.boons-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-family: skranji-regular, sans-serif !important;
+  text-transform: capitalize;
+  padding: 0 20px;
+}
+
+.knacks-wrapper > .knack-list > ul {
+  padding: 0 0px;
+}
+
+.knacks-wrapper > .knack-list > ul > li > textarea {
+  height: 100px;
+  min-height: 50px;
+  max-height: 200px;
+  resize: none;
+  font-family: skranji-regular, sans-serif !important;
+  text-transform: capitalize;
+  padding: 10px;
+}
+
+.knacks-wrapper > .knack-list > ul > li > input[type="text"] {
+  padding: 10px;
+  font-family: skranji-regular, sans-serif !important;
+  text-transform: capitalize;
+}
+
+.knacks-wrapper > button {
+  font-family: skranji-regular, sans-serif !important;
+  text-transform: uppercase;
+}
