@@ -83,7 +83,9 @@
 .birthright-description > textarea:focus,
 .birthright-description > textarea:hover,
 .boons-area > ul > li > input[type="text"]:focus,
-.boons-area > ul > li > input[type="text"]:hover {
+.boons-area > ul > li > input[type="text"]:hover,
+.boons-area > button:focus,
+.boons-area > button:hover {
   box-shadow: none;
 }
 
@@ -140,6 +142,10 @@
   align-items: center;
 }
 
+.birthright-level {
+  gap: 0.5rem;
+}
+
 .birthright-description {
   display: flex;
   width: 100%;
@@ -172,6 +178,7 @@
   flex-direction: column;
   width: 100%;
   height: auto;
+  gap: 0.65rem;
 }
 
 .boons-area > ul {
@@ -191,4 +198,9 @@
 
 .boons-area > ul > li > input[type="text"] {
   padding: 10px;
+}
+
+.boons-area > button {
+  font-family: skranji-regular, sans-serif !important;
+  text-transform: uppercase;
 }

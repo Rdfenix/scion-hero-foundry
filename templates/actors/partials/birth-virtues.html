@@ -24,6 +24,7 @@
                 <span class="birth-type">{{birthright.type}}</span>
               </div>
               <div class="birthright-level">
+                <span>Level:</span>
                 <div class="circles">
                   {{#each (range birthright.level.min birthright.level.max) as
                   |i|}}
@@ -39,6 +40,7 @@
             </div>
             <div class="row">
               <div class="birthright-description">
+                <span>Description:</span>
                 <textarea
                   name=""
                   id=""
@@ -48,11 +50,14 @@
                 <div class="boons-area">
                   <span>Boons:</span>
                   <ul>
+                    {{#each birthright.boons as |boon index|}}
                     <li>
                       <input type="text" placeholder="Boon name" />
                       <input type="text" placeholder="Level" />
                     </li>
+                    {{/each}}
                   </ul>
+                  <button data-action="button-birthright-boon">Add Boon</button>
                 </div>
                 {{/if}}
               </div>
