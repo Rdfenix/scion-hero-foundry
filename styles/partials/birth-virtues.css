@@ -81,7 +81,9 @@
 .birthright-types > select:focus,
 .birthright-types > select:hover,
 .birthright-description > textarea:focus,
-.birthright-description > textarea:hover {
+.birthright-description > textarea:hover,
+.boons-area > ul > li > input[type="text"]:focus,
+.boons-area > ul > li > input[type="text"]:hover {
   box-shadow: none;
 }
 
@@ -146,6 +148,7 @@
   margin-top: 20px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   margin-bottom: 20px;
+  gap: 0.65rem;
 }
 
 .birthright-description > textarea {
@@ -162,4 +165,30 @@
 .types {
   display: flex;
   gap: 0.5rem;
+}
+
+.boons-area {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+}
+
+.boons-area > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+}
+
+.boons-area > ul > li {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.boons-area > ul > li > input[type="text"] {
+  padding: 10px;
 }
