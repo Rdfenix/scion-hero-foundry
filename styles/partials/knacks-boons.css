@@ -31,7 +31,8 @@
   padding: 0 20px;
 }
 
-.knacks-wrapper > .knack-list > ul {
+.knacks-wrapper > .knack-list > ul,
+.boons-wrapper > .boons > ul {
   padding: 0 0px;
 }
 
