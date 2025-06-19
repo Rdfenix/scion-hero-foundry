@@ -1,7 +1,7 @@
 import { _onAction, _onChange } from "../helpers/actions.js";
 
 // Importa a nova classe base do Foundry VTT
-const { DocumentSheetV2 } = foundry.applications.api;
+const { DocumentSheetV2, TabsV2 } = foundry.applications.api;
 
 export class ScionHeroActorSheet extends DocumentSheetV2 {
   // O método prepareData() está correto como está.
@@ -84,34 +84,34 @@ export class ScionHeroActorSheet extends DocumentSheetV2 {
     super.activateListeners(html);
 
     // Corrige: adiciona o parâmetro group: "primary" para bater com o data-group do HTML
-    this._customTabs = new Tabs({
+    this._customTabs = new TabsV2({
       navSelector: ".sheet-tabs",
       contentSelector: ".sheet-content",
       initial: "stats",
       group: "primary",
-      callback: (event, tabs, tab) => {
-        return !(event && event.target !== event.currentTarget);
-      },
     });
 
-    this._customTabs.bind(html[0]);
+    console.log("cheguei", this.element[0]);
 
-    html.find(".sheet-tabs a").on("click", (event) => {
-      if (event.target !== event.currentTarget) return;
+    this._customTabs.bind(this.element[0]);
 
-      event.preventDefault();
-      event.stopPropagation();
+    this._customTabs.render(true);
+    // html.find(".sheet-tabs a").on("click", (event) => {
+    //   if (event.target !== event.currentTarget) return;
 
-      let tab = event.currentTarget.dataset.tab;
+    //   event.preventDefault();
+    //   event.stopPropagation();
 
-      html.find(".sheet-tabs a").removeClass("active");
-      $(event.currentTarget).addClass("active");
+    //   let tab = event.currentTarget.dataset.tab;
 
-      this._customTabs.activate(tab);
+    //   html.find(".sheet-tabs a").removeClass("active");
+    //   $(event.currentTarget).addClass("active");
 
-      html.find(".tab").removeClass("active");
-      html.find(`.tab[data-tab="${tab}"]`).addClass("active");
-    });
+    //   this._customTabs.activate(tab);
+
+    //   html.find(".tab").removeClass("active");
+    //   html.find(`.tab[data-tab="${tab}"]`).addClass("active");
+    // });
 
     html.on("click", "[data-action]", (event) => {
       event.preventDefault();

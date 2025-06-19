@@ -5,7 +5,7 @@
   </div>
   {{!-- Character Sheet Template for Foundry VTT --}}
   <form class="scion-form" autocomplete="off">
-    <header class="sheet-header">
+    <header class="scion-sheet-header">
       <div class="column">
         <div class="row">
           <label for="name">Name</label>
@@ -76,17 +76,14 @@
         </div>
       </div>
     </header>
-    <nav class="sheet-tabs tabs">
-      <a class="item active" data-group="primary" data-tab="stats"
-        >Attributes & Abilities</a
-      >
-      <a class="item" data-group="primary" data-tab="birth"
-        >Birthrights & Virtues</a
-      >
-      <a class="item" data-group="primary" data-tab="knacks">Knacks & Boons</a>
+    <nav class="sheet-tabs tabs" data-group="primary">
+      <a class="item" data-tab="stats">Attributes & Abilities</a>
+      <a class="item" data-tab="birth">Birthrights & Virtues</a>
+      <a class="item" data-tab="knacks">Knacks & Boons</a>
     </nav>
+
     <section class="sheet-content">
-      <div class="tab active" data-group="primary" data-tab="stats">
+      <div class="tab" data-group="primary" data-tab="stats">
         {{> "systems/scion-hero-foundry/templates/actors/partials/stats.html"}}
       </div>
       <div class="tab" data-group="primary" data-tab="birth">
