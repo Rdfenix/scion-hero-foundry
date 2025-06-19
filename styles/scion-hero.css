@@ -1,3 +1,7 @@
+@import url("partials/stats.css");
+@import url("partials/knacks-boons.css");
+@import url("partials/birth-virtues.css");
+
 @font-face {
   font-family: oldenburg-regular;
   src: url("../assets/fonts/Oldenburg-Regular.ttf") format("truetype");

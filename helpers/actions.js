@@ -163,7 +163,7 @@ const selectPantheon = async (actor) => {
       throw new Error("Nenhuma divindade encontrada no pacote.");
     }
 
-    const content = await renderTemplate(
+    const content = await foundry.applications.handlebars.renderTemplate(
       "systems/scion-hero-foundry/templates/actors/dialogs/pantheon.html",
       { pantheons }
     );
@@ -267,7 +267,7 @@ const selectGod = async (actor) => {
       }, {}),
     }));
 
-    const content = await renderTemplate(
+    const content = await foundry.applications.handlebars.renderTemplate(
       "systems/scion-hero-foundry/templates/actors/dialogs/gods.html",
       { gods }
     );

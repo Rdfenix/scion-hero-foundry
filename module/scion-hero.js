@@ -14,20 +14,25 @@ import {
 } from "../helpers/journals.js";
 
 Hooks.once("init", async function () {
-  // Remove a sheet padrão do core
-  Actors.unregisterSheet("core", "core");
-  // Registra a nova sheet como padrão para o tipo 'character'
-  Actors.registerSheet("scion-hero-foundry", ScionHeroActorSheet, {
-    types: ["character"],
-    makeDefault: true,
-    label: "Scion Hero Actor Sheet",
-  });
+  foundry.documents.collections.Actors.unregisterSheet(
+    "core",
+    foundry.appv1.sheets.ActorSheet
+  );
+
+  foundry.documents.collections.Actors.registerSheet(
+    "scion-hero-foundry",
+    ScionHeroActorSheet,
+    {
+      types: ["character"],
+      makeDefault: true,
+      label: "Scion Hero Actor Sheet",
+    }
+  );
 
   Handlebars.registerHelper("json", function (context) {
     return JSON.stringify(context, null, 2);
   });
 
-  // Helper para gerar um array de números de start até end (inclusive)
   Handlebars.registerHelper("range", function (start, end, options) {
     let result = [];
     for (let i = start; i <= end; i++) {
@@ -63,7 +68,7 @@ Hooks.once("init", async function () {
     "systems/scion-hero-foundry/templates/actors/partials/combat.html",
   ];
 
-  await loadTemplates(partials);
+  await foundry.applications.handlebars.loadTemplates(partials);
 
   // Registra o partial explicitamente para garantir que o Handlebars reconheça
   for (const partial of partials) {
