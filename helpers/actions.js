@@ -14,6 +14,12 @@ export async function _onAction(event, actor) {
     case "button-birthright-type":
       await setBirthrightOptionEstructure(actor);
       break;
+    case "button-knack-add":
+      await setKnackStructure(actor);
+      break;
+    case "button-boon-add":
+      await setBoonStructure(actor);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
@@ -111,6 +117,10 @@ const setBirthrightOptionEstructure = async (actor) => {
     ui.notifications.error("Failed to fetch Birthrights.");
   }
 };
+
+const setKnackStructure = async () => {};
+
+const setBoonStructure = async () => {};
 
 function reopenWithActiveTab(actor, tabName) {
   Hooks.once("renderActorSheet", (app, html, data) => {

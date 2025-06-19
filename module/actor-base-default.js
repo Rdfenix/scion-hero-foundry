@@ -108,3 +108,16 @@ export const birthrightSchema = {
   Guide: defaultBirthSchema,
   Relic: { ...defaultBirthSchema, boons: [] },
 };
+
+export const knackSchema = {
+  name: "",
+  description: "",
+};
+
+export const boonSchema = {
+  name: "",
+  level: "",
+  dice_pool: "",
+  cost: "",
+  description: "",
+};
