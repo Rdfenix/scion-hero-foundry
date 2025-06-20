@@ -59,7 +59,9 @@
             data-action="select-pantheon"
           >
             <span>{{system.pantheon.name}}</span>
+            {{#if system.pantheon.logo}}
             <img src="{{system.pantheon.logo}}" alt="pantheon logo" />
+            {{/if}}
           </button>
         </div>
         <div class="row">

@@ -1,4 +1,9 @@
 export const ScionHeroActorBaseDefault = {
+  pantheon: {
+    name: "",
+    logo: "",
+    god: "",
+  },
   attributes: {
     physical: {
       strength: { value: 1, max: 10, min: 1 },
