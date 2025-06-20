@@ -39,6 +39,13 @@
   font-weight: normal;
 }
 
+.tab[aria-hidden="true"] {
+  display: none;
+}
+.tab[aria-hidden="false"] {
+  display: block;
+}
+
 .scion-wrapper {
   width: 100%;
   height: auto;
@@ -51,6 +58,8 @@
   border-radius: 5px;
   font-family: skranji-regular, sans-serif !important;
   font-size: medium;
+  overflow: auto;
+  color: #222;
 }
 
 .scion-header {
@@ -67,6 +76,7 @@
   border-bottom: 0;
   margin: 0;
   font-family: skranji-bold, sans-serif;
+  color: #222;
 }
 
 .scion-form {
@@ -78,12 +88,12 @@
   gap: 0.5rem;
 }
 
-.scion-form > .sheet-header {
+.scion-sheet-header {
   gap: 0.5rem;
   display: flex;
 }
 
-.scion-form > .sheet-header > .column {
+.scion-sheet-header > .column {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -91,18 +101,18 @@
   align-items: stretch;
 }
 
-.scion-form > .sheet-header > .column > .row {
+.scion-sheet-header > .column > .row {
   line-height: 25px;
 }
 
-.scion-form > .sheet-header > .column > .row > input[type="text"] {
+.scion-sheet-header > .column > .row > input[type="text"] {
   border-top: none;
   border-left: none;
   border-right: none;
   padding: 10px;
 }
 
-.scion-form > .sheet-header > .column > .row > input[type="text"]:focus {
+.scion-sheet-header > .column > .row > input[type="text"]:focus {
   box-shadow: none;
 }
 
@@ -133,12 +143,12 @@
 .scion-pantheon-button {
   width: calc(100% - 2px);
   min-width: 20px;
-  height: var(--form-field-height);
+  height: 32px;
   border-left: none;
   border-right: none;
   border-top: none;
-  border-bottom: 1px solid var(--color-border-light-tertiary);
-  background: rgba(0, 0, 0, 0.05);
+  background: #302831;
+  border: 1px solid #302831;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -159,6 +169,7 @@
 .scion-pantheon-button:hover,
 .scion-pantheon-button:focus {
   box-shadow: none;
+  outline: none;
 }
 
 .circle-checkbox,
