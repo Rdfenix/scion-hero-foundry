@@ -24,7 +24,10 @@ export async function createPuviewsJournal() {
 
   for (const purview of purviewList) {
     const existingJournal = game.journal.find((j) => j.name === purview.name);
-    const content = await renderTemplate(templatePath, { purview });
+    const content = await foundry.applications.handlebars.renderTemplate(
+      templatePath,
+      { purview }
+    );
 
     if (existingJournal) {
       await existingJournal.delete();
@@ -78,7 +81,10 @@ export async function createKnacksJournal() {
 
   for (const knackItem of knackList) {
     const existingJournal = game.journal.find((j) => j.name === knackItem.name);
-    const content = await renderTemplate(templatePath, { knackItem });
+    const content = await foundry.applications.handlebars.renderTemplate(
+      templatePath,
+      { knackItem }
+    );
 
     if (existingJournal) {
       await existingJournal.delete();

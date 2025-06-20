@@ -1,6 +1,6 @@
 import { _onAction, _onChange } from "../helpers/actions.js";
 
-export class ScionHeroActorSheet extends ActorSheet {
+export class ScionHeroActorSheet extends foundry.appv1.sheets.ActorSheet {
   prepareData() {
     super.prepareData();
   }
@@ -18,7 +18,7 @@ export class ScionHeroActorSheet extends ActorSheet {
     super.activateListeners(html);
 
     // Corrige: adiciona o parâmetro group: "primary" para bater com o data-group do HTML
-    this._customTabs = new Tabs({
+    this._customTabs = new foundry.applications.ux.Tabs({
       navSelector: ".sheet-tabs",
       contentSelector: ".sheet-content",
       initial: "stats",
