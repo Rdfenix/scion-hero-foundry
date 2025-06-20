@@ -8,10 +8,9 @@ import { mountingBasedata } from "../helpers/mountBasedata.js";
 import { splitInColumns } from "../helpers/splitInColumns.js";
 import {
   createPuviewsJournal,
-  checkPurviewFlag,
-  checkKnacksFlag,
   createKnacksJournal,
 } from "../helpers/journals.js";
+import { registerJournalHooks } from "./hooks.js";
 
 Hooks.once("init", async function () {
   // Remove a sheet padrão do core
@@ -76,6 +75,8 @@ Hooks.once("init", async function () {
     );
     Handlebars.registerPartial(partial, partialContent);
   }
+
+  registerJournalHooks();
 });
 
 Hooks.on("createActor", async (actor, options, userId) => {
@@ -108,15 +109,4 @@ Hooks.on("renderActorSheet", (app, html, data) => {
   abilitiesUpdate(app, html, data);
   virtuesUpdate(app, html, data);
   birthrightUpdate(app, html, data);
-});
-
-Hooks.on("renderJournalPageSheet", (sheet, html, data) => {
-  const page = sheet.object;
-  const newTitle = `${page.name}`;
-
-  // Altera o título da janela modal do Foundry
-  html.closest(".app.window-app").find(".window-title").text(newTitle);
-
-  checkPurviewFlag(sheet, html);
-  checkKnacksFlag(sheet, html);
 });

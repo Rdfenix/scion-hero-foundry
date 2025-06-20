@@ -61,55 +61,56 @@ export async function createKnacksJournal() {
   const folderName = "Knacks";
   const templatePath =
     "systems/scion-hero-foundry/templates/journals/knacks.html";
-  console.log("knackList", knackList);
 
+  // Deleta pasta antiga se já existir
   let folder = game.folders.find(
     (f) => f.name === folderName && f.type === "JournalEntry"
   );
+  if (folder) await folder.delete();
 
-  if (folder) {
-    await folder.delete();
-  }
-
+  // Cria nova pasta
   folder = await Folder.create({
     name: folderName,
     type: "JournalEntry",
     color: "#556B2F",
   });
 
-  const pages = [];
-
+  // Cria journals individualmente com página e flag
   for (const knackItem of knackList) {
     const existingJournal = game.journal.find((j) => j.name === knackItem.name);
+    if (existingJournal) await existingJournal.delete();
+
     const content = await foundry.applications.handlebars.renderTemplate(
       templatePath,
-      { knackItem }
+      {
+        knackItem,
+      }
     );
 
-    if (existingJournal) {
-      await existingJournal.delete();
-    }
-
-    pages.push({
-      name: knackItem.name,
-      type: "text",
-      text: {
-        content: content,
-        format: CONST.JOURNAL_ENTRY_PAGE_FORMATS.HTML,
-      },
-    });
-
     const entry = await JournalEntry.create({
-      name: `${knackItem.name}`,
-      pages: pages,
+      name: knackItem.name,
       folder: folder.id,
       permission: { default: 2 },
     });
 
-    // Garante que o flag customCss está presente na página criada
-    for (const page of entry.pages.contents) {
-      await page.setFlag("scion-hero-foundry", "customKnackCss", true);
-    }
+    const page = await entry.createEmbeddedDocuments("JournalEntryPage", [
+      {
+        name: knackItem.name,
+        type: "text",
+        text: {
+          content,
+          format: CONST.JOURNAL_ENTRY_PAGE_FORMATS.HTML,
+        },
+        flags: {
+          "scion-hero-foundry": {
+            customKnackCss: true,
+          },
+        },
+      },
+    ]);
+
+    // Aplica flag na página criada (primeira e única neste caso)
+    // await page[0].setFlag("scion-hero-foundry", "customKnackCss", true);
   }
 }
 
@@ -127,6 +128,8 @@ export const checkPurviewFlag = (sheet, html) => {
 };
 
 export const checkKnacksFlag = (sheet, html) => {
+  console.log("sheet", sheet);
+  console.log("html", html);
   const knackFlag = sheet.document.getFlag(
     "scion-hero-foundry",
     "customKnackCss"
