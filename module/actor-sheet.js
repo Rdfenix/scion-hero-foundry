@@ -1,6 +1,6 @@
 import { _onAction, _onChange } from "../helpers/actions.js";
 
-export class ScionHeroActorSheet extends ActorSheet {
+export class ScionHeroActorSheet extends foundry.appv1.sheets.ActorSheet {
   prepareData() {
     super.prepareData();
   }
@@ -11,20 +11,18 @@ export class ScionHeroActorSheet extends ActorSheet {
       template:
         "systems/scion-hero-foundry/templates/actors/character-sheet.html",
       width: 890,
-      height: 800, // tabs removido para evitar conflito com inicialização manual
+      height: 800,
     });
   }
   activateListeners(html) {
     super.activateListeners(html);
 
-    // Corrige: adiciona o parâmetro group: "primary" para bater com o data-group do HTML
-    this._customTabs = new Tabs({
+    this._customTabs = new foundry.applications.ux.Tabs({
       navSelector: ".sheet-tabs",
       contentSelector: ".sheet-content",
       initial: "stats",
       group: "primary",
       callback: (event, tabs, tab) => {
-        // Só permite mudar a aba se o evento vier diretamente do link da aba
         return !(event && event.target !== event.currentTarget);
       },
     });
