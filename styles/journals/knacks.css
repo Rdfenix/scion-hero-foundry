@@ -2,10 +2,7 @@
   display: none;
 }
 
-.knack-journal-entry-content
-  > .journal-entry-pages
-  > .scrollable
-  > .journal-entry-page {
+.knack-journal-entry-content > .journal-entry-pages > .journal-entry-page {
   margin-top: 20px;
   background: rgba(254, 254, 254, 255);
   border-radius: 5px;
@@ -14,9 +11,8 @@
 
 .knack-journal-entry-content
   > .journal-entry-pages
-  > .scrollable
-  > .journal-entry-page
-  > .journal-page-header {
+  > .journal-entry-page:has(header.journal-page-header)
+  header.journal-page-header {
   margin: 0 0 23px 0;
   background-image: url(../../assets/png/band-small.png);
   background-position: center center;
@@ -31,10 +27,9 @@
 
 .knack-journal-entry-content
   > .journal-entry-pages
-  > .scrollable
-  > .journal-entry-page
-  > .journal-page-header
-  > h1 {
+  > .journal-entry-page:has(header.journal-page-header)
+  header.journal-page-header
+  h1 {
   font-family: skranji-bold, sans-serif;
   font-size: 1.5rem;
   margin: 0;
@@ -50,10 +45,17 @@
   flex-direction: column;
   justify-content: flex-start;
   font-family: skranji-bold, sans-serif;
+  color: #222;
 }
 
 .knack-wrapper-list {
   gap: 1rem;
+}
+
+.knack-wrapper-list h2,
+.knack-list > ul > li h3 {
+  font-family: skranji-bold, sans-serif;
+  color: #222;
 }
 
 .knack-list > ul {

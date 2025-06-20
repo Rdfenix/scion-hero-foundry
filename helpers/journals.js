@@ -20,39 +20,38 @@ export async function createPuviewsJournal() {
     color: "#782e22",
   });
 
-  const pages = [];
-
   for (const purview of purviewList) {
     const existingJournal = game.journal.find((j) => j.name === purview.name);
+    if (existingJournal) await existingJournal.delete();
+
     const content = await foundry.applications.handlebars.renderTemplate(
       templatePath,
-      { purview }
+      {
+        purview,
+      }
     );
 
-    if (existingJournal) {
-      await existingJournal.delete();
-    }
-
-    pages.push({
-      name: purview.name,
-      type: "text",
-      text: {
-        content: content,
-        format: CONST.JOURNAL_ENTRY_PAGE_FORMATS.HTML,
-      },
-    });
-
     const entry = await JournalEntry.create({
-      name: `${purview.name}`,
-      pages: pages,
+      name: purview.name,
       folder: folder.id,
       permission: { default: 2 },
     });
 
-    // Garante que o flag customCss está presente na página criada
-    for (const page of entry.pages.contents) {
-      await page.setFlag("scion-hero-foundry", "customPurviewCss", true);
-    }
+    await entry.createEmbeddedDocuments("JournalEntryPage", [
+      {
+        name: purview.name,
+        type: "text",
+        text: {
+          content,
+          format: CONST.JOURNAL_ENTRY_PAGE_FORMATS.HTML,
+        },
+        flags: {
+          "scion-hero-foundry": {
+            customPurviewCss: true,
+          },
+        },
+      },
+    ]);
   }
 }
 
@@ -93,7 +92,7 @@ export async function createKnacksJournal() {
       permission: { default: 2 },
     });
 
-    const page = await entry.createEmbeddedDocuments("JournalEntryPage", [
+    await entry.createEmbeddedDocuments("JournalEntryPage", [
       {
         name: knackItem.name,
         type: "text",
@@ -108,36 +107,21 @@ export async function createKnacksJournal() {
         },
       },
     ]);
-
-    // Aplica flag na página criada (primeira e única neste caso)
-    // await page[0].setFlag("scion-hero-foundry", "customKnackCss", true);
   }
 }
 
-export const checkPurviewFlag = (sheet, html) => {
-  const purviewFlag = sheet.document.getFlag(
-    "scion-hero-foundry",
-    "customPurviewCss"
-  );
+export const checkPurviewFlag = (doc) => {
+  if (doc.flags["scion-hero-foundry"]?.customPurviewCss) {
+    const element = document.getElementsByClassName("journal-entry-content")[0];
 
-  if (purviewFlag) {
-    html
-      .closest(".journal-entry-content")
-      ?.addClass("purview-journal-entry-content");
+    element.classList.add("purview-journal-entry-content");
   }
 };
 
-export const checkKnacksFlag = (sheet, html) => {
-  console.log("sheet", sheet);
-  console.log("html", html);
-  const knackFlag = sheet.document.getFlag(
-    "scion-hero-foundry",
-    "customKnackCss"
-  );
+export const checkKnacksFlag = (doc) => {
+  if (doc.flags["scion-hero-foundry"]?.customKnackCss) {
+    const element = document.getElementsByClassName("journal-entry-content")[0];
 
-  if (knackFlag) {
-    html
-      .closest(".journal-entry-content")
-      ?.addClass("knack-journal-entry-content");
+    element.classList.add("knack-journal-entry-content");
   }
 };
