@@ -46,11 +46,35 @@ export async function _onChange(event, actor) {
     case "update-birthright-description":
       await onBirthrightChange(event, actor);
       break;
+    case "update-birthright-boon":
+      await onBirthrightBoonChange(event, actor);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
   }
 }
+
+const onBirthrightBoonChange = async (event, actor) => {
+  try {
+    const field = event.currentTarget.dataset.field;
+    const birthIndex = parseInt(event.currentTarget.dataset.birthIndex);
+    const boonIndex = parseInt(event.currentTarget.dataset.boonIndex);
+
+    if (field === undefined || isNaN(birthIndex)) {
+      throw new Error("Failed to found field or index from birthrights.");
+    }
+
+    const birthrights = foundry.utils.getProperty(actor.system, "birthrights");
+
+    birthrights[birthIndex].boons[boonIndex][field] = event.currentTarget.value;
+
+    console.log(birthrights);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch boons on Birthrights.");
+  }
+};
 
 const onBirthrightChange = async (event, actor) => {
   try {
@@ -441,7 +465,3 @@ const selectGod = async (actor) => {
     return null;
   }
 };
-
-
-
-
