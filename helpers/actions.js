@@ -1,4 +1,4 @@
-import { birthrightSchema } from "../module/actor-base-default.js";
+import { birthrightSchema, knackSchema, boonSchema } from "../module/actor-base-default.js";
 
 export async function _onAction(event, actor) {
   event.preventDefault();
@@ -118,9 +118,65 @@ const setBirthrightOptionEstructure = async (actor) => {
   }
 };
 
-const setKnackStructure = async () => {};
+const setKnackStructure = async (actor) => {
+  try {
+    let schema = knackSchema;
 
-const setBoonStructure = async () => {};
+    schema = { ...schema, _id: foundry.utils.randomID() };
+
+    const activeTab =
+      document.querySelector(".sheet-tabs .item.active")?.dataset.tab ??
+      "stats";
+
+    const knackList = foundry.utils.getProperty(actor.system, "knacks");
+
+    knackList.push(schema);
+
+    await actor.update(
+      {
+        "system.knacks": knackList,
+      },
+      { render: false }
+    );
+
+    await reopenWithActiveTab(actor, activeTab);
+
+    console.log(knackList);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch knacks.");
+  }
+};
+
+const setBoonStructure = async (actor) => {
+  try {
+    let schema = boonSchema;
+
+    schema = { ...schema, _id: foundry.utils.randomID() };
+
+    const activeTab =
+      document.querySelector(".sheet-tabs .item.active")?.dataset.tab ??
+      "stats";
+
+    const boonList = foundry.utils.getProperty(actor.system, "boons");
+
+    boonList.push(schema);
+
+    await actor.update(
+      {
+        "system.boons": boonList,
+      },
+      { render: false }
+    );
+
+    await reopenWithActiveTab(actor, activeTab);
+
+    console.log(boonList);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch knacks.");
+  }
+};
 
 function reopenWithActiveTab(actor, tabName) {
   Hooks.once("renderActorSheet", (app, html, data) => {

@@ -4,7 +4,6 @@ export function registerJournalHooks() {
   Hooks.on("renderJournalEntrySheet", (sheet, html, data) => {});
 
   Hooks.on("renderJournalEntryPageSheet", (sheet, html, data) => {
-    console.log("renderJournalSheet olha abaixo");
     const doc = sheet.document;
     checkKnacksFlag(doc);
     checkPurviewFlag(doc);

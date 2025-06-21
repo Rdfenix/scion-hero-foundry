@@ -5,10 +5,23 @@
   <div class="knacks-wrapper">
     <div class="knack-list">
       <ul>
+        {{#each system.knacks as |knack index|}}
         <li>
-          <input type="text" name="" id="" placeholder="Knack" />
-          <textarea name="" id="" placeholder="Description"></textarea>
+          <input
+            type="text"
+            name=""
+            id=""
+            value="{{{knack.name}}}"
+            placeholder="Knack"
+          />
+          <textarea
+            name=""
+            id=""
+            value="{{{knack.description}}}"
+            placeholder="Description"
+          ></textarea>
         </li>
+        {{/each}}
       </ul>
     </div>
     <button data-action="button-knack-add">Add Knack</button>
@@ -21,28 +34,59 @@
   <div class="boons-wrapper">
     <div class="boons">
       <ul class="boon-list">
+        {{#each system.boons as |boon index|}}
         <li>
           <div class="boom-name-level">
             <div class="boon-name">
-              <input type="text" name="" id="" placeholder="Boon name" />
+              <input
+                type="text"
+                name=""
+                id=""
+                value="{{{boon.name}}}"
+                placeholder="Boon name"
+              />
             </div>
             <div class="boon-level">
               <span>level:</span
-              ><input type="text" name="" id="" placeholder="Boon level" />
+              ><input
+                type="text"
+                name=""
+                id=""
+                value="{{{boon.level}}}"
+                placeholder="Boon level"
+              />
             </div>
           </div>
           <div class="boon-dice-pool">
             <span>Dice pool:</span>
-            <input type="text" name="" id="" placeholder="Dice pool" />
+            <input
+              type="text"
+              name=""
+              id=""
+              value="{{{boon.dice_pool}}}"
+              placeholder="Dice pool"
+            />
           </div>
           <div class="boon-cost">
             <span>cost:</span>
-            <input type="text" name="" id="" placeholder="Boon cost" />
+            <input
+              type="text"
+              name=""
+              id=""
+              value="{{{boon.cost}}}"
+              placeholder="Boon cost"
+            />
           </div>
           <div class="boon-description">
-            <textarea name="" id="" placeholder="Description"></textarea>
+            <textarea
+              name=""
+              id=""
+              value="{{{boon.description}}}"
+              placeholder="Description"
+            ></textarea>
           </div>
         </li>
+        {{/each}}
       </ul>
     </div>
     <button data-action="button-boon-add">Add Boon</button>
