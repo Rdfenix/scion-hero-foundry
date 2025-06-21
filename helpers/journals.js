@@ -1,4 +1,5 @@
-import { getPurviews, getKnacks } from "./actions.js";
+import { getKnacks } from "../api/knackApi.js";
+import { getPurviews } from "../api/purviewsApi.js";
 
 export async function createPuviewsJournal() {
   const purviewList = await getPurviews();
