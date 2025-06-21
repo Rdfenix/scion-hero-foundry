@@ -1,4 +1,8 @@
-import { birthrightSchema, knackSchema, boonSchema } from "../module/actor-base-default.js";
+import {
+  birthrightSchema,
+  knackSchema,
+  boonSchema,
+} from "../module/actor-base-default.js";
 
 export async function _onAction(event, actor) {
   event.preventDefault();
@@ -16,6 +20,9 @@ export async function _onAction(event, actor) {
       break;
     case "button-knack-add":
       await setKnackStructure(actor);
+      break;
+    case "button-birthright-boon":
+      await setBoonToBirthright(event, actor);
       break;
     case "button-boon-add":
       await setBoonStructure(actor);
@@ -36,6 +43,7 @@ export async function _onChange(event, actor) {
       event.currentTarget.dataset.selectedType = event.target.value;
       break;
     case "update-birthright-name":
+    case "update-birthright-description":
       await onBirthrightChange(event, actor);
       break;
     default:
@@ -61,18 +69,12 @@ const onBirthrightChange = async (event, actor) => {
 
     birthrights[index][field] = event.currentTarget.value;
 
-    const activeTab =
-      document.querySelector(".sheet-tabs .item.active")?.dataset.tab ??
-      "stats";
-
     await actor.update(
       {
         "system.birthrights": birthrights,
       },
       { render: false }
     );
-
-    await reopenWithActiveTab(actor, activeTab);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error("Failed to fetch Birthrights.");
@@ -176,6 +178,34 @@ const setBoonStructure = async (actor) => {
     console.error(error.message);
     ui.notifications.error("Failed to fetch knacks.");
   }
+};
+
+const setBoonToBirthright = async (event, actor) => {
+  const index = parseInt(event.currentTarget.dataset.index);
+
+  const birthrights = foundry.utils.getProperty(actor.system, "birthrights");
+
+  let schema = boonSchema;
+
+  schema = { ...schema, _id: foundry.utils.randomID() };
+
+  delete schema.description;
+  delete schema.cost;
+  delete schema.dice_pool;
+
+  birthrights[index]?.boons.push(schema);
+
+  await actor.update(
+    {
+      "system.birthrights": birthrights,
+    },
+    { render: false }
+  );
+
+  const activeTab =
+    document.querySelector(".sheet-tabs .item.active")?.dataset.tab ?? "stats";
+
+  await reopenWithActiveTab(actor, activeTab);
 };
 
 function reopenWithActiveTab(actor, tabName) {

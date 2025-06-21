@@ -189,6 +189,7 @@
   flex-direction: column;
   width: auto;
   height: auto;
+  gap: 0.73rem;
 }
 
 .boons-area > ul > li {

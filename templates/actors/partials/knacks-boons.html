@@ -9,15 +9,13 @@
         <li>
           <input
             type="text"
-            name=""
-            id=""
             value="{{{knack.name}}}"
+            data-index="{{index}}"
             placeholder="Knack"
           />
           <textarea
-            name=""
-            id=""
             value="{{{knack.description}}}"
+            data-index="{{index}}"
             placeholder="Description"
           ></textarea>
         </li>
@@ -43,6 +41,7 @@
                 name=""
                 id=""
                 value="{{{boon.name}}}"
+                data-index="{{index}}"
                 placeholder="Boon name"
               />
             </div>
@@ -50,9 +49,8 @@
               <span>level:</span
               ><input
                 type="text"
-                name=""
-                id=""
                 value="{{{boon.level}}}"
+                data-index="{{index}}"
                 placeholder="Boon level"
               />
             </div>
@@ -61,9 +59,8 @@
             <span>Dice pool:</span>
             <input
               type="text"
-              name=""
-              id=""
               value="{{{boon.dice_pool}}}"
+              data-index="{{index}}"
               placeholder="Dice pool"
             />
           </div>
@@ -71,16 +68,13 @@
             <span>cost:</span>
             <input
               type="text"
-              name=""
-              id=""
               value="{{{boon.cost}}}"
               placeholder="Boon cost"
             />
           </div>
           <div class="boon-description">
             <textarea
-              name=""
-              id=""
+              data-index="{{index}}"
               value="{{{boon.description}}}"
               placeholder="Description"
             ></textarea>

@@ -42,22 +42,44 @@
               <div class="birthright-description">
                 <span>Description:</span>
                 <textarea
-                  name=""
-                  id=""
-                  value="{{birthright.description}}"
-                ></textarea>
+                  data-action="update-birthright-description"
+                  data-field="description"
+                  data-index="{{index}}"
+                >{{{birthright.description}}}</textarea
+                >
                 {{#if (hasOwnProperty birthright "boons")}}
                 <div class="boons-area">
                   <span>Boons:</span>
                   <ul>
-                    {{#each birthright.boons as |boon index|}}
+                    {{#each birthright.boons as |boon bonnIndex|}}
                     <li>
-                      <input type="text" placeholder="Boon name" />
-                      <input type="text" placeholder="Level" />
+                      <input
+                        type="text"
+                        value="{{boon.name}}"
+                        data-field="name"
+                        data-birth-index="{{index}}"
+                        data-boon-index="{{bonnIndex}}"
+                        data-action="update-birthright-boon"
+                        placeholder="Boon name"
+                      />
+                      <input
+                        type="text"
+                        value="{{boon.level}}"
+                        data-field="level"
+                        data-birth-index="{{index}}"
+                        data-boon-index="{{bonnIndex}}"
+                        data-action="update-birthright-boon"
+                        placeholder="Level"
+                      />
                     </li>
                     {{/each}}
                   </ul>
-                  <button data-action="button-birthright-boon">Add Boon</button>
+                  <button
+                    data-action="button-birthright-boon"
+                    data-index="{{index}}"
+                  >
+                    Add Boon
+                  </button>
                 </div>
                 {{/if}}
               </div>
