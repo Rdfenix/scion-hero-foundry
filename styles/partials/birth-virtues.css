@@ -110,6 +110,7 @@
   justify-content: center;
   align-items: flex-start;
   width: 100%;
+  position: relative;
 }
 
 .birthright-input-area > .row {
@@ -155,6 +156,22 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   margin-bottom: 20px;
   gap: 0.65rem;
+  position: relative;
+}
+
+.delete-button {
+  position: absolute;
+  width: 36px;
+  height: auto;
+  right: 5px;
+  top: 0;
+  border: none;
+  background: none;
+  text-align: center;
+}
+
+.delete-button i {
+  margin-right: 0;
 }
 
 .birthright-description > textarea {
@@ -179,6 +196,7 @@
   width: 100%;
   height: auto;
   gap: 0.65rem;
+  position: relative;
 }
 
 .boons-area > ul {
@@ -195,6 +213,8 @@
 .boons-area > ul > li {
   display: flex;
   gap: 0.5rem;
+  align-items: center;
+  position: relative;
 }
 
 .boons-area > ul > li > input[type="text"] {
@@ -204,4 +224,12 @@
 .boons-area > button {
   font-family: skranji-regular, sans-serif !important;
   text-transform: uppercase;
+}
+
+.boons-area .delete-button {
+  position: static;
+  margin-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
