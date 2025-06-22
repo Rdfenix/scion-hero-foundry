@@ -33,6 +33,12 @@ export async function _onAction(event, actor) {
     case "delete-birth-boon":
       await deleteBoonFromBirthright(actor, event);
       break;
+    case "delete-knack":
+      await deleteKnack(actor, event);
+      break;
+    case "delete-boon":
+      await deleteBoon(actor, event);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
@@ -454,7 +460,6 @@ const selectGod = async (actor) => {
 };
 
 const deleteBirthright = async (actor, event) => {
-  console.log("passei aqui");
   try {
     const birthId = event.currentTarget.dataset.birthId;
 
@@ -512,5 +517,55 @@ const deleteBoonFromBirthright = async (actor, event) => {
   } catch (error) {
     console.error(error.message);
     ui.notifications.error("Failed to delete boons from Birthrights.");
+  }
+};
+
+const deleteBoon = async (actor, event) => {
+  try {
+    const boonId = event.currentTarget.dataset.boonId;
+
+    if (!boonId) {
+      throw new Error("Failed to found id from Boons.");
+    }
+    let boons = foundry.utils.getProperty(actor.system, "boons");
+
+    boons = boons.filter((boon) => boon._id !== boonId);
+
+    await actor.update(
+      {
+        "system.boons": boons,
+      },
+      { render: false }
+    );
+
+    await reopenWithActiveTab(actor);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to delete boons.");
+  }
+};
+
+const deleteKnack = async (actor, event) => {
+  try {
+    const knackId = event.currentTarget.dataset.knackId;
+
+    if (!knackId) {
+      throw new Error("Failed to found id from Knacks.");
+    }
+    let knacks = foundry.utils.getProperty(actor.system, "knacks");
+
+    knacks = knacks.filter((knack) => knack._id !== knackId);
+
+    await actor.update(
+      {
+        "system.knacks": knacks,
+      },
+      { render: false }
+    );
+
+    await reopenWithActiveTab(actor);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to delete Knack.");
   }
 };

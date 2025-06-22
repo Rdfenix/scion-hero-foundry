@@ -13,12 +13,9 @@
             data-index="{{index}}"
             placeholder="Knack"
           />
-          <textarea
-            value="{{{knack.description}}}"
-            data-index="{{index}}"
-            placeholder="Description"
-          ></textarea>
-          <button class="delete-button">
+          <textarea data-index="{{index}}" placeholder="Description">{{{knack.description}}}</textarea
+          >
+          <button class="delete-button" data-action="delete-knack" data-knack-id="{{knack._id}}">
             <i class="fa-solid fa-trash"></i>
           </button>
         </li>
@@ -78,11 +75,10 @@
           <div class="boon-description">
             <textarea
               data-index="{{index}}"
-              value="{{{boon.description}}}"
               placeholder="Description"
-            ></textarea>
+            >{{{boon.description}}}</textarea>
           </div>
-          <button class="delete-button">
+          <button class="delete-button" data-action="delete-boon" data-boon-id="{{boon._id}}">
             <i class="fa-solid fa-trash"></i>
           </button>
         </li>
