@@ -69,6 +69,13 @@ const onBirthrightBoonChange = async (event, actor) => {
 
     birthrights[birthIndex].boons[boonIndex][field] = event.currentTarget.value;
 
+    await actor.update(
+      {
+        "system.birthrights": birthrights,
+      },
+      { render: false }
+    );
+
     console.log(birthrights);
   } catch (error) {
     console.error(error.message);
@@ -402,7 +409,6 @@ const selectGod = async (actor) => {
                     favored: favoredSkillsArr.includes(key),
                   };
                 }
-
 
                 await actor.update({
                   "system.abilities": updatedAbilities,
