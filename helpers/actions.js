@@ -27,6 +27,12 @@ export async function _onAction(event, actor) {
     case "button-boon-add":
       await setBoonStructure(actor);
       break;
+    case "delete-birthright":
+      await deleteBirthright(actor, event);
+      break;
+    case "delete-birth-boon":
+      await deleteBoonFromBirthright(actor, event);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
@@ -139,8 +145,6 @@ const setBirthrightOptionEstructure = async (actor) => {
     );
 
     await reopenWithActiveTab(actor);
-
-    console.log(birthrightList);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error("Failed to fetch Birthrights.");
@@ -207,10 +211,6 @@ const setBoonToBirthright = async (event, actor) => {
   let schema = boonSchema;
 
   schema = { ...schema, _id: foundry.utils.randomID() };
-
-  delete schema.description;
-  delete schema.cost;
-  delete schema.dice_pool;
 
   birthrights[index]?.boons.push(schema);
 
@@ -450,5 +450,67 @@ const selectGod = async (actor) => {
     console.error(error.message);
     ui.notifications.error(error.message);
     return null;
+  }
+};
+
+const deleteBirthright = async (actor, event) => {
+  console.log("passei aqui");
+  try {
+    const birthId = event.currentTarget.dataset.birthId;
+
+    if (!birthId) {
+      throw new Error("Failed to found id from birthrights.");
+    }
+
+    let birthrights = foundry.utils.getProperty(actor.system, "birthrights");
+
+    birthrights = birthrights.filter((birth) => birth._id !== birthId);
+
+    await actor.update(
+      {
+        "system.birthrights": birthrights,
+      },
+      { render: false }
+    );
+
+    await reopenWithActiveTab(actor);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to delete Birthrights.");
+  }
+};
+
+const deleteBoonFromBirthright = async (actor, event) => {
+  try {
+    const birthId = event.currentTarget.dataset.birthId;
+    const boonId = event.currentTarget.dataset.boonId;
+
+    if (!boonId || !birthId) {
+      throw new Error("Failed to find boon or birthright id.");
+    }
+
+    let birthrights = foundry.utils.getProperty(actor.system, "birthrights");
+
+    birthrights = birthrights.map((birth) => {
+      if (birth._id === birthId) {
+        return {
+          ...birth,
+          boons: (birth.boons || []).filter((boon) => boon._id !== boonId),
+        };
+      }
+      return birth;
+    });
+
+    await actor.update(
+      {
+        "system.birthrights": birthrights,
+      },
+      { render: false }
+    );
+
+    await reopenWithActiveTab(actor);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to delete boons from Birthrights.");
   }
 };
