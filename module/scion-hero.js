@@ -87,6 +87,10 @@ Hooks.on("createActor", async (actor, options, userId) => {
   await actor.update({
     system: baseData,
   });
+
+  if (actor.sheet.rendered) {
+    actor.sheet.render(true);
+  }
 });
 
 Hooks.on("ready", async () => {

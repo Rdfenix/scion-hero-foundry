@@ -117,10 +117,6 @@ const setBirthrightOptionEstructure = async (actor) => {
 
     schema = { ...schema, _id: foundry.utils.randomID(), type: selectedType };
 
-    const activeTab =
-      document.querySelector(".sheet-tabs .item.active")?.dataset.tab ??
-      "stats";
-
     const birthrightList = foundry.utils.getProperty(
       actor.system,
       "birthrights"
@@ -135,7 +131,7 @@ const setBirthrightOptionEstructure = async (actor) => {
       { render: false }
     );
 
-    await reopenWithActiveTab(actor, activeTab);
+    await reopenWithActiveTab(actor);
 
     console.log(birthrightList);
   } catch (error) {
@@ -150,10 +146,6 @@ const setKnackStructure = async (actor) => {
 
     schema = { ...schema, _id: foundry.utils.randomID() };
 
-    const activeTab =
-      document.querySelector(".sheet-tabs .item.active")?.dataset.tab ??
-      "stats";
-
     const knackList = foundry.utils.getProperty(actor.system, "knacks");
 
     knackList.push(schema);
@@ -165,7 +157,7 @@ const setKnackStructure = async (actor) => {
       { render: false }
     );
 
-    await reopenWithActiveTab(actor, activeTab);
+    await reopenWithActiveTab(actor);
 
     console.log(knackList);
   } catch (error) {
@@ -180,10 +172,6 @@ const setBoonStructure = async (actor) => {
 
     schema = { ...schema, _id: foundry.utils.randomID() };
 
-    const activeTab =
-      document.querySelector(".sheet-tabs .item.active")?.dataset.tab ??
-      "stats";
-
     const boonList = foundry.utils.getProperty(actor.system, "boons");
 
     boonList.push(schema);
@@ -195,7 +183,7 @@ const setBoonStructure = async (actor) => {
       { render: false }
     );
 
-    await reopenWithActiveTab(actor, activeTab);
+    await reopenWithActiveTab(actor);
 
     console.log(boonList);
   } catch (error) {
@@ -226,16 +214,16 @@ const setBoonToBirthright = async (event, actor) => {
     { render: false }
   );
 
+  await reopenWithActiveTab(actor);
+};
+
+function reopenWithActiveTab(actor) {
   const activeTab =
     document.querySelector(".sheet-tabs .item.active")?.dataset.tab ?? "stats";
 
-  await reopenWithActiveTab(actor, activeTab);
-};
-
-function reopenWithActiveTab(actor, tabName) {
   Hooks.once("renderActorSheet", (app, html, data) => {
     const nav = html[0].querySelector(".sheet-tabs");
-    const tabEl = nav?.querySelector(`[data-tab="${tabName}"]`);
+    const tabEl = nav?.querySelector(`[data-tab="${activeTab}"]`);
     if (tabEl) tabEl.click();
   });
   return actor.sheet.render(true);
@@ -304,10 +292,6 @@ const selectPantheon = async (actor) => {
                   return ui.notifications.warn("Pantheon not found");
                 }
 
-                const activeTab =
-                  document.querySelector(".sheet-tabs .item.active")?.dataset
-                    .tab ?? "stats";
-
                 await actor.update({
                   "system.pantheon": {
                     name: selectedPantheon.name,
@@ -320,7 +304,7 @@ const selectPantheon = async (actor) => {
                   "system.virtues": selectedPantheon.virtues,
                 });
 
-                await reopenWithActiveTab(actor, activeTab);
+                await reopenWithActiveTab(actor);
               },
             },
             cancel: {
@@ -419,9 +403,6 @@ const selectGod = async (actor) => {
                   };
                 }
 
-                const activeTab =
-                  document.querySelector(".sheet-tabs .item.active")?.dataset
-                    .tab ?? "stats";
 
                 await actor.update({
                   "system.abilities": updatedAbilities,
@@ -430,7 +411,7 @@ const selectGod = async (actor) => {
                   },
                 });
 
-                await reopenWithActiveTab(actor, activeTab);
+                await reopenWithActiveTab(actor);
               },
             },
             cancel: {
