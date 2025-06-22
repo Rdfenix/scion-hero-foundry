@@ -48,6 +48,16 @@
   padding: 0 20px;
 }
 
+.knacks-wrapper .knack-list ul li input[type="text"],
+.knacks-wrapper .knack-list ul li textarea {
+  width: 45rem;
+}
+
+.knacks-wrapper > .knack-list > ul > li,
+.boons-wrapper > .boons > ul > li {
+  position: relative;
+}
+
 .knacks-wrapper > .knack-list > ul,
 .boons-wrapper > .boons > ul {
   padding: 0 0px;
@@ -62,6 +72,7 @@
   font-family: skranji-regular, sans-serif !important;
   text-transform: capitalize;
   padding: 10px;
+  width: 45rem;
 }
 
 .knacks-wrapper > .knack-list > ul > li > input[type="text"],
@@ -118,11 +129,19 @@
   text-transform: capitalize;
 }
 
+.boon-level input[type="text"] {
+  width: 18rem;
+}
+
+.boon-cost input[type="text"] {
+  width: 42.3rem;
+}
+
 .boons-wrapper
   > .boons
   > .boon-list
   > li
   > .boon-dice-pool
   > input[type="text"] {
-  width: 30rem;
+  width: 39.8rem;
 }
