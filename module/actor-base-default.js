@@ -63,6 +63,7 @@ export const ScionHeroActorBaseDefault = {
   legend: { value: 2, max: 12, min: 1 },
   legendPoints: { value: 0, max: 48, min: 0 },
   willpower: { value: 0, max: 10, min: 1 },
+  willpowerPoints: { value: 0, max: 10, min: 1 },
   birthrights: [],
   birthrightTypes: {
     0: {
@@ -80,7 +81,21 @@ export const ScionHeroActorBaseDefault = {
   },
   boons: [],
   knacks: [],
-  purviews: [],
+  weapons: [],
+  combat: {
+    dodgeDV: 0,
+    parryDV: 0,
+    soak: {
+      Bashing: { value: 0 },
+      Lethal: { value: 0 },
+      Aggravated: { value: 0 },
+    },
+    armor: {
+      Bashing: { value: 0 },
+      Lethal: { value: 0 },
+      Aggravated: { value: 0 },
+    },
+  },
   health: {
     value: 0,
     conditions: {
