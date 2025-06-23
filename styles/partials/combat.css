@@ -14,6 +14,13 @@
   position: relative;
 }
 
+.weapon-wrapper .add-weapon {
+  font-family: skranji-regular, sans-serif !important;
+  text-transform: uppercase;
+  width: 50rem;
+  margin-left: 16px;
+}
+
 .weapon-wrapper ul {
   list-style: none;
   padding: 0 30px;
@@ -24,13 +31,25 @@
   align-items: center;
   flex-direction: column;
   gap: 0.6rem;
+  padding: 10px;
+  box-shadow: 4px 1px 13px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.weapon-wrapper ul li .delete-button {
+  top: 98px;
+  bottom: 0;
+  font-size: 20px;
+  height: 30px;
 }
 
 .weapon-name,
-.weapon-specs {
+.weapon-specs,
+.attr-skill,
+.damage-info {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.5rem;
   width: 100%;
 }
 
@@ -42,4 +61,30 @@
 
 .weapon-wrapper input[type="text"] {
   padding: 10px;
+  height: 33px;
+}
+
+.attr-skill select,
+.damage-attr select {
+  width: 13rem;
+  padding: 0 10px;
+  height: 33px;
+}
+
+.attr-skill select {
+  width: 10.2rem;
+}
+
+.weapon-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.weapon-stats input[type="text"] {
+  width: 6rem;
+}
+
+.damage input[type="text"] {
+  width: 10rem;
 }
