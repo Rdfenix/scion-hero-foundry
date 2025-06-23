@@ -101,7 +101,15 @@
     }
   },
   "Item": {
-    "types": ["boon", "knack", "purview", "birthright", "deity"],
+    "types": [
+      "boon",
+      "knack",
+      "purview",
+      "birthright",
+      "deity",
+      "consumibles",
+      "other"
+    ],
     "templates": {}
   }
 }
