@@ -1,0 +1,45 @@
+.weapons,
+.willpower-legend,
+.combat-armor,
+.weapon-wrapper,
+.weapon-wrapper ul {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  position: relative;
+}
+
+.weapon-wrapper ul {
+  list-style: none;
+  padding: 0 30px;
+}
+
+.weapon-wrapper ul li {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.weapon-name,
+.weapon-specs {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.weapon-name button {
+  width: 23rem;
+  font-family: skranji-regular, sans-serif !important;
+  text-transform: capitalize;
+}
+
+.weapon-wrapper input[type="text"] {
+  padding: 10px;
+}

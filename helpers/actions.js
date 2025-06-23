@@ -7,6 +7,7 @@ import {
 export async function _onAction(event, actor) {
   event.preventDefault();
   event.stopPropagation();
+  event.stopImmediatePropagation();
 
   switch (event.currentTarget.dataset.action) {
     case "select-pantheon":
