@@ -79,19 +79,28 @@ Hooks.once("init", async function () {
   registerJournalHooks();
 });
 
-Hooks.on("createActor", async (actor, options, userId) => {
-  if (actor.type !== "character") return;
+Hooks.on("preCreateActor", (document, data, options, userId) => {
+  if (document.type !== "character") return;
 
-  const baseData = mountingBasedata(ScionHeroActorBaseDefault, actor);
+  const baseData = mountingBasedata(ScionHeroActorBaseDefault, document);
 
-  await actor.update({
-    system: baseData,
-  });
-
-  if (actor.sheet.rendered) {
-    actor.sheet.render(true);
-  }
+  // Injeta os dados diretamente no momento da criação
+  document.updateSource({ system: baseData });
 });
+
+// Hooks.on("createActor", async (actor, options, userId) => {
+//   if (actor.type !== "character") return;
+
+//   const baseData = mountingBasedata(ScionHeroActorBaseDefault, actor);
+
+//   await actor.update({
+//     system: baseData,
+//   });
+
+//   if (actor.sheet.rendered) {
+//     actor.sheet.render(true);
+//   }
+// });
 
 Hooks.on("ready", async () => {
   for (const actor of game.actors.contents) {
