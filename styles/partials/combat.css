@@ -59,6 +59,13 @@
   text-transform: capitalize;
 }
 
+.weapon-name button:nth-of-type(2) {
+  background-color: #ff5b5b;
+  border: 1px solid #ff5b5b;
+  color: #fff;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
 .weapon-wrapper input[type="text"] {
   padding: 10px;
   height: 33px;

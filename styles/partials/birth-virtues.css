@@ -113,6 +113,10 @@
   position: relative;
 }
 
+.birthright-input-area .delete-button {
+  top: 0;
+}
+
 .birthright-input-area > .row {
   display: flex;
   align-items: center;
@@ -164,10 +168,11 @@
   width: 36px;
   height: auto;
   right: 5px;
-  top: 0;
+  top: 5px;
   border: none;
   background: none;
   text-align: center;
+  font-size: 17px;
 }
 
 .delete-button i {
