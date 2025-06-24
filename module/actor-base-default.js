@@ -136,3 +136,16 @@ export const boonSchema = {
   cost: "",
   description: "",
 };
+
+export const weapon = {
+  name: "",
+  attr: "",
+  skill: "",
+  speed: "",
+  acc: "",
+  defense: "",
+  range: "",
+  damage: "",
+  damageAttr: "",
+  type: "",
+};

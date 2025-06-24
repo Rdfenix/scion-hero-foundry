@@ -62,6 +62,12 @@ export async function _onChange(event, actor) {
     case "update-birthright-boon":
       await onBirthrightBoonChange(event, actor);
       break;
+    case "knack-change":
+      await onKnackChange(event, actor);
+      break;
+    case "boon-change":
+      await onBoonChange(event, actor);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
@@ -122,6 +128,64 @@ const onBirthrightChange = async (event, actor) => {
   } catch (error) {
     console.error(error.message);
     ui.notifications.error("Failed to fetch Birthrights.");
+  }
+};
+
+const onKnackChange = async (event, actor) => {
+  try {
+    const field = event.currentTarget.dataset.field;
+    const id = event.currentTarget.dataset.knackId; // <-- agora é string
+
+    if (field === undefined || !id) {
+      throw new Error("Failed to found field or id from knacks.");
+    }
+    let knacks = foundry.utils.getProperty(actor.system, "knacks");
+
+    knacks = knacks.map((knack) => {
+      if (knack._id === id) {
+        knack[field] = event.currentTarget.value;
+      }
+      return knack;
+    });
+
+    await actor.update(
+      {
+        "system.knacks": knacks,
+      },
+      { render: false }
+    );
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch Knacks.");
+  }
+};
+
+const onBoonChange = async (event, actor) => {
+  try {
+    const field = event.currentTarget.dataset.field;
+    const id = event.currentTarget.dataset.boonId; // <-- agora é string
+
+    if (field === undefined || !id) {
+      throw new Error("Failed to found field or id from boons.");
+    }
+    let boons = foundry.utils.getProperty(actor.system, "boons");
+
+    boons = boons.map((boon) => {
+      if (boon._id === id) {
+        boon[field] = event.currentTarget.value;
+      }
+      return boon;
+    });
+
+    await actor.update(
+      {
+        "system.boons": boons,
+      },
+      { render: false }
+    );
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch boons.");
   }
 };
 

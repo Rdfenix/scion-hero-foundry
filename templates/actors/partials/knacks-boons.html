@@ -11,11 +11,24 @@
             type="text"
             value="{{{knack.name}}}"
             data-index="{{index}}"
+            data-knack-id="{{knack._id}}"
+            data-action="knack-change"
             placeholder="Knack"
+            data-field="name"
           />
-          <textarea data-index="{{index}}" placeholder="Description">{{{knack.description}}}</textarea
+          <textarea
+            data-index="{{index}}"
+            data-knack-id="{{knack._id}}"
+            data-field="description"
+            placeholder="Description"
+            data-action="knack-change"
+          >{{{knack.description}}}</textarea
           >
-          <button class="delete-button" data-action="delete-knack" data-knack-id="{{knack._id}}">
+          <button
+            class="delete-button"
+            data-action="delete-knack"
+            data-knack-id="{{knack._id}}"
+          >
             <i class="fa-solid fa-trash"></i>
           </button>
         </li>
@@ -38,11 +51,12 @@
             <div class="boon-name">
               <input
                 type="text"
-                name=""
-                id=""
                 value="{{{boon.name}}}"
                 data-index="{{index}}"
                 placeholder="Boon name"
+                data-boon-id="{{boon._id}}"
+                data-field="name"
+                data-action="boon-change"
               />
             </div>
             <div class="boon-level">
@@ -52,6 +66,9 @@
                 value="{{{boon.level}}}"
                 data-index="{{index}}"
                 placeholder="Boon level"
+                data-boon-id="{{boon._id}}"
+                data-field="level"
+                data-action="boon-change"
               />
             </div>
           </div>
@@ -62,6 +79,9 @@
               value="{{{boon.dice_pool}}}"
               data-index="{{index}}"
               placeholder="Dice pool"
+              data-boon-id="{{boon._id}}"
+              data-field="dice_pool"
+              data-action="boon-change"
             />
           </div>
           <div class="boon-cost">
@@ -70,15 +90,26 @@
               type="text"
               value="{{{boon.cost}}}"
               placeholder="Boon cost"
+              data-boon-id="{{boon._id}}"
+              data-field="cost"
+              data-action="boon-change"
             />
           </div>
           <div class="boon-description">
             <textarea
               data-index="{{index}}"
               placeholder="Description"
-            >{{{boon.description}}}</textarea>
+              data-boon-id="{{boon._id}}"
+              data-field="description"
+              data-action="boon-change"
+            >{{{boon.description}}}</textarea
+            >
           </div>
-          <button class="delete-button" data-action="delete-boon" data-boon-id="{{boon._id}}">
+          <button
+            class="delete-button"
+            data-action="delete-boon"
+            data-boon-id="{{boon._id}}"
+          >
             <i class="fa-solid fa-trash"></i>
           </button>
         </li>
