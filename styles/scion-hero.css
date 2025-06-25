@@ -40,7 +40,9 @@ input[type="text"]:hover,
 button:focus,
 button:hover,
 textarea:focus,
-textarea:hover {
+textarea:hover,
+select:focus,
+select:hover {
   box-shadow: none;
   outline: none;
 }
@@ -126,7 +128,21 @@ textarea:hover {
   justify-content: center;
 }
 
-.scion-label-title > h2 {
+.scion-label-subtitle {
+  margin: 0 0 15px 0;
+  background-image: url(../assets/png/band-small.png);
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  min-height: 60px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.scion-label-title > h2,
+.scion-label-subtitle > h2 {
   font-size: 1.5rem;
   font-weight: 600;
   color: #fff;
@@ -134,6 +150,10 @@ textarea:hover {
   border-bottom: 0;
   margin: 0;
   font-family: skranji-bold, sans-serif;
+}
+
+.scion-label-subtitle > h2 {
+  font-size: 1.2rem;
 }
 
 .scion-pantheon-button {

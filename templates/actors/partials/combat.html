@@ -51,6 +51,53 @@
   <div class="scion-label-title">
     <h2>Willpower & Legend</h2>
   </div>
+  <div class="willpower-legend-wrapper">
+    <div class="willpower">
+      <div class="scion-label-subtitle">
+        <h2>Willpower</h2>
+      </div>
+      <div class="points">
+        <div class="circles">
+          {{#each (range system.willpower.min system.willpower.max) as |i|}}
+          <input
+            type="checkbox"
+            class="circle-checkbox"
+            data-target="willpower.{{i}}.value"
+            value="{{i}}"
+          />
+          {{/each}}
+        </div>
+        <div class="squares">
+          {{#each (range system.willpowerPoints.min system.willpowerPoints.max)
+          as |i|}}
+          <input
+            type="checkbox"
+            class="square-checkbox"
+            data-target="willpowerPoints.{{i}}.value"
+            value="{{i}}"
+          />
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="legend">
+      <div class="scion-label-subtitle">
+        <h2>Legend</h2>
+      </div>
+      <div class="points">
+        <div class="circles">
+          {{#each (range system.legend.min system.legend.max) as |i|}}
+          <input
+            type="checkbox"
+            class="circle-checkbox"
+            data-target="willpower.{{i}}.value"
+            value="{{i}}"
+          />
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="combat-armor">
   <div class="scion-label-title">
