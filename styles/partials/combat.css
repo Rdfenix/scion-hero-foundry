@@ -119,3 +119,29 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+
+.point-to-spend {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.point-to-spend input[type="number"] {
+  width: 9rem;
+  padding: 10px;
+}
+
+.points {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  align-items: center;
+}
+
+.willpower .scion-label-subtitle,
+.legend .scion-label-subtitle {
+  margin: 0 0 5px 0;
+}

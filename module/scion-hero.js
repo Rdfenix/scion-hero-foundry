@@ -59,6 +59,10 @@ Hooks.once("init", async function () {
     return Object.hasOwn(obj, key);
   });
 
+  Handlebars.registerHelper("multiply", function (a, b) {
+    return a * b;
+  });
+
   const partials = [
     "systems/scion-hero-foundry/templates/actors/partials/stats.html",
     "systems/scion-hero-foundry/templates/actors/partials/birth-virtues.html",

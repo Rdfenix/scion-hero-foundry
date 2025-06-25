@@ -95,6 +95,15 @@
           />
           {{/each}}
         </div>
+        <div class="point-to-spend">
+          <span>Points:</span><span>{{multiply system.legend.value 4}}</span>
+          <input
+            type="number"
+            min="{{system.legendPoints.min}}"
+            max="{{system.legendPoints.max}}"
+            value="{{system.legendPoints.value}}"
+          />
+        </div>
       </div>
     </div>
   </div>
