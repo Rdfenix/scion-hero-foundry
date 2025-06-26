@@ -6,6 +6,8 @@ import { virtuesUpdate } from "../helpers/virtuesUpdate.js";
 import { birthrightUpdate } from "../helpers/birthrightsUpdate.js";
 import { mountingBasedata } from "../helpers/mountBasedata.js";
 import { splitInColumns } from "../helpers/splitInColumns.js";
+import { willpowerUpdate } from "../helpers/willpowerUpdate.js";
+import { legendUpdate } from "../helpers/legendUpdate.js";
 import {
   createPuviewsJournal,
   createKnacksJournal,
@@ -126,4 +128,6 @@ Hooks.on("renderActorSheet", (app, html, data) => {
   abilitiesUpdate(app, html, data);
   virtuesUpdate(app, html, data);
   birthrightUpdate(app, html, data);
+  willpowerUpdate(app, html, data);
+  legendUpdate(app, html, data);
 });
