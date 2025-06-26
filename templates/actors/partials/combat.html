@@ -4,31 +4,47 @@
   </div>
   <div class="weapon-wrapper">
     <ul>
+      {{#each system.weapons as |weapon|}}
       <li>
         <div class="weapon-name">
-          <input type="text" placeholder="Weapon name" />
+          <input
+            type="text"
+            placeholder="Weapon name"
+            value="{{weapon.name}}"
+          />
           <button>Attack</button>
           <button>Damage</button>
         </div>
         <div class="weapon-specs">
           <div class="attr-skill">
-            <select name="" id="">
+            <select name="weapon-attr" id="">
               <option value="">Attr</option>
+              {{#each ../system.attrKeys as |attr|}}
+              <option value="{{attr}}">{{attr}}</option>
+              {{/each}}
             </select>
             <select name="" id="">
               <option value="">Skills</option>
             </select>
           </div>
           <div class="weapon-stats">
-            <input type="text" placeholder="Speed" />
-            <input type="text" placeholder="Accuracy" />
-            <input type="text" placeholder="Defense" />
-            <input type="text" placeholder="Range" />
+            <input type="text" placeholder="Speed" value="{{weapon.speed}}" />
+            <input type="text" placeholder="Accuracy" value="{{weapon.acc}}" />
+            <input
+              type="text"
+              placeholder="Defense"
+              value="{{weapon.defense}}"
+            />
+            <input type="text" placeholder="Range" value="{{weapon.range}}" />
           </div>
         </div>
         <div class="damage-info">
           <div class="damage">
-            <input type="text" placeholder="Damage value" />
+            <input
+              type="text"
+              placeholder="Damage value"
+              value="{{weapon.damage}}"
+            />
           </div>
           <div class="damage-attr">
             <select name="" id="">
@@ -43,8 +59,11 @@
           <i class="fa-solid fa-trash"></i>
         </button>
       </li>
+      {{/each}}
     </ul>
-    <button class="add-weapon">Add weapon</button>
+    <button class="add-weapon" data-action="button-weapon-add">
+      Add weapon
+    </button>
   </div>
 </div>
 <div class="willpower-legend">

@@ -3,6 +3,7 @@ import {
   birthrightSchema,
   knackSchema,
   boonSchema,
+  weaponSchema,
 } from "../module/actor-base-default.js";
 
 export async function _onAction(event, actor) {
@@ -28,6 +29,9 @@ export async function _onAction(event, actor) {
       break;
     case "button-boon-add":
       await setBoonStructure(actor);
+      break;
+    case "button-weapon-add":
+      await setWeaponStructure(actor);
       break;
     case "delete-birthright":
       await deleteBirthright(actor, event);
@@ -271,10 +275,33 @@ const setKnackStructure = async (actor) => {
     );
 
     await reopenWithActiveTab(actor);
-
   } catch (error) {
     console.error(error.message);
     ui.notifications.error("Failed to fetch knacks.");
+  }
+};
+
+const setWeaponStructure = async (actor) => {
+  try {
+    let schema = weaponSchema;
+
+    schema = { ...schema, _id: foundry.utils.randomID() };
+
+    const weapons = foundry.utils.getProperty(actor.system, "weapons");
+
+    weapons.push(schema);
+
+    await actor.update(
+      {
+        "system.weapons": weapons,
+      },
+      { render: false }
+    );
+
+    await reopenWithActiveTab(actor);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch weapons.");
   }
 };
 
@@ -296,7 +323,6 @@ const setBoonStructure = async (actor) => {
     );
 
     await reopenWithActiveTab(actor);
-
   } catch (error) {
     console.error(error.message);
     ui.notifications.error("Failed to fetch knacks.");

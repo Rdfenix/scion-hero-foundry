@@ -137,7 +137,7 @@ export const boonSchema = {
   description: "",
 };
 
-export const weapon = {
+export const weaponSchema = {
   name: "",
   attr: "",
   skill: "",

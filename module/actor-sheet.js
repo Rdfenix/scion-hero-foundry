@@ -73,6 +73,13 @@ export class ScionHeroActorSheet extends foundry.appv1.sheets.ActorSheet {
       context.system = actorData.system || {};
       context.currentUserName = game.user?.name || "";
 
+      const attrKeys = [];
+      const attributes = context.system.attributes || {};
+      for (const group of Object.values(attributes)) {
+        attrKeys.push(...Object.keys(group));
+      }
+      context.system.attrKeys = attrKeys;
+
       console.log("Contexto preparado:", context);
 
       return context;
