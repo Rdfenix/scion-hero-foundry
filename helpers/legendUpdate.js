@@ -8,7 +8,7 @@ const mountingLegendcheckboxes = (row, app) => {
   const actor = app.actor.system.legend;
 
   updateCheckboxes(circleCheckboxes, currentValue);
-  bindCheckboxes(circleCheckboxes, targetProp, app, actor, system);
+  bindCheckboxes(circleCheckboxes, targetProp, app, actor, system, true);
 };
 
 export const legendUpdate = (app, html, data) => {

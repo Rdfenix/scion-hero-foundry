@@ -1,3 +1,5 @@
+import { reopenWithActiveTab } from "./reopenWithActiveTab.js";
+
 export const updateCheckboxes = (checkboxes, currentValue) => {
   checkboxes.each(function () {
     const input = this;
@@ -11,7 +13,14 @@ export const updateCheckboxes = (checkboxes, currentValue) => {
   });
 };
 
-export const bindCheckboxes = (checkboxes, targetProp, app, actor, system) => {
+export const bindCheckboxes = (
+  checkboxes,
+  targetProp,
+  app,
+  actor,
+  system,
+  render = false
+) => {
   checkboxes.off("click.scion").on("click.scion", async function (ev) {
     ev.preventDefault();
     ev.stopPropagation();
@@ -29,6 +38,10 @@ export const bindCheckboxes = (checkboxes, targetProp, app, actor, system) => {
     data.value = valueToSet;
 
     await app.actor.update({ [system]: data }, { render: false });
+
+    if (render) {
+      await reopenWithActiveTab(app.actor);
+    }
 
     updateCheckboxes(checkboxes, valueToSet);
   });
