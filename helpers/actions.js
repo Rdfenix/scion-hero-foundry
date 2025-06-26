@@ -69,11 +69,43 @@ export async function _onChange(event, actor) {
     case "boon-change":
       await onBoonChange(event, actor);
       break;
+    case "legend-point-change":
+      await onLegendPointChange(event, actor);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
   }
 }
+
+const onLegendPointChange = async (event, actor) => {
+  try {
+    const legendPoints = foundry.utils.getProperty(
+      actor.system,
+      "legendPoints"
+    );
+
+    const min = legendPoints.min ?? 0;
+    const max = legendPoints.max ?? 48;
+    let value = parseInt(event.currentTarget.value);
+
+    if (isNaN(value)) value = min;
+    value = Math.max(min, Math.min(max, value));
+    legendPoints.value = value;
+
+    await actor.update(
+      {
+        "system.legendPoints": legendPoints,
+      },
+      { render: false }
+    );
+
+    event.currentTarget.value = value;
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch legend points.");
+  }
+};
 
 const onBirthrightBoonChange = async (event, actor) => {
   try {
@@ -95,8 +127,6 @@ const onBirthrightBoonChange = async (event, actor) => {
       },
       { render: false }
     );
-
-    console.log(birthrights);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error("Failed to fetch boons on Birthrights.");
@@ -242,7 +272,6 @@ const setKnackStructure = async (actor) => {
 
     await reopenWithActiveTab(actor);
 
-    console.log(knackList);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error("Failed to fetch knacks.");
@@ -268,7 +297,6 @@ const setBoonStructure = async (actor) => {
 
     await reopenWithActiveTab(actor);
 
-    console.log(boonList);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error("Failed to fetch knacks.");
