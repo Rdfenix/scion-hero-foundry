@@ -69,6 +69,10 @@ Hooks.once("init", async function () {
     return a === b;
   });
 
+  Handlebars.registerHelper("ifEquals", function (a, b) {
+    return a === b ? "selected" : "";
+  });
+
   const partials = [
     "systems/scion-hero-foundry/templates/actors/partials/stats.html",
     "systems/scion-hero-foundry/templates/actors/partials/birth-virtues.html",

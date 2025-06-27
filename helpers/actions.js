@@ -79,11 +79,77 @@ export async function _onChange(event, actor) {
     case "legend-point-change":
       await onLegendPointChange(event, actor);
       break;
+    case "update-weapon-field":
+      await onChangeFieldInWeapon(event, actor);
+      break;
+    case "select-weapon-type":
+      await onSelectFieldInWeapon(event, actor);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
   }
 }
+
+const onSelectFieldInWeapon = async (event, actor) => {
+  try {
+    const field = event.currentTarget.dataset.field;
+    const weaponId = event.currentTarget.dataset.weaponId;
+
+    if (field === undefined || !weaponId) {
+      throw new Error("Failed to found field or id from weapons.");
+    }
+
+    let weapons = foundry.utils.getProperty(actor.system, "weapons");
+
+    weapons = weapons.map((weapon) => {
+      if (weapon._id === weaponId) {
+        weapon[field] = event.target.value;
+      }
+      return weapon;
+    });
+
+    await actor.update(
+      {
+        "system.weapons": weapons,
+      },
+      { render: false }
+    );
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch Weapons.");
+  }
+};
+
+const onChangeFieldInWeapon = async (event, actor) => {
+  try {
+    const field = event.currentTarget.dataset.field;
+    const weaponId = event.currentTarget.dataset.weaponId;
+
+    if (field === undefined || !weaponId) {
+      throw new Error("Failed to found field or id from weapons.");
+    }
+
+    let weapons = foundry.utils.getProperty(actor.system, "weapons");
+
+    weapons = weapons.map((weapon) => {
+      if (weapon._id === weaponId) {
+        weapon[field] = event.currentTarget.value;
+      }
+      return weapon;
+    });
+
+    await actor.update(
+      {
+        "system.weapons": weapons,
+      },
+      { render: false }
+    );
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch Weapons.");
+  }
+};
 
 const onLegendPointChange = async (event, actor) => {
   try {

@@ -10,6 +10,9 @@
           <input
             type="text"
             placeholder="Weapon name"
+            data-action="update-weapon-field"
+            data-weapon-id="{{weapon._id}}"
+            data-field="name"
             value="{{weapon.name}}"
           />
           <button>Attack</button>
@@ -17,28 +20,59 @@
         </div>
         <div class="weapon-specs">
           <div class="attr-skill">
-            <select name="weapon-attr" id="">
+            <select
+              name="weapon-attr"
+              data-action="select-weapon-type"
+              data-field="attr"
+              data-weapon-id="{{weapon._id}}"
+            >
               <option value="">Attr</option>
-              {{#each ../system.attrKeys as |attr|}}
-              <option value="{{attr}}">{{attr}}</option>
+              {{#each ../system.attrKeys as |attrKey|}}
+              <option value="{{attrKey}}" {{ifEquals weapon.attr attrKey}}>
+                {{attrKey}}
+              </option>
               {{/each}}
             </select>
-            <select name="weapon-skill" id="">
+            <select
+              name="weapon-skill"
+              data-action="select-weapon-type"
+              data-field="skill"
+              data-weapon-id="{{weapon._id}}"
+            >
               <option value="">Skills</option>
               {{#each ../system.skillsKeys as |skill|}}
-              <option value="{{skill}}">{{skill}}</option>
+              <option value="{{skill}}" {{ifEquals weapon.skill skill}}>
+                {{skill}}
+              </option>
               {{/each}}
             </select>
           </div>
           <div class="weapon-stats">
-            <input type="text" placeholder="Speed" value="{{weapon.speed}}" />
+            <input
+              type="text"
+              placeholder="Speed"
+              data-action="update-weapon-field"
+              data-weapon-id="{{weapon._id}}"
+              data-field="speed"
+              value="{{weapon.speed}}"
+            />
             <input type="text" placeholder="Accuracy" value="{{weapon.acc}}" />
             <input
               type="text"
               placeholder="Defense"
+              data-action="update-weapon-field"
+              data-weapon-id="{{weapon._id}}"
+              data-field="defense"
               value="{{weapon.defense}}"
             />
-            <input type="text" placeholder="Range" value="{{weapon.range}}" />
+            <input
+              type="text"
+              placeholder="Range"
+              data-action="update-weapon-field"
+              data-weapon-id="{{weapon._id}}"
+              data-field="range"
+              value="{{weapon.range}}"
+            />
           </div>
         </div>
         <div class="damage-info">
@@ -46,20 +80,37 @@
             <input
               type="text"
               placeholder="Damage value"
+              data-action="update-weapon-field"
+              data-weapon-id="{{weapon._id}}"
+              data-field="damage"
               value="{{weapon.damage}}"
             />
           </div>
           <div class="damage-attr">
-            <select name="" id="">
-              <option value="">Attr</option>
+            <select
+              data-action="select-weapon-type"
+              data-field="damageAttr"
+              data-weapon-id="{{weapon._id}}"
+            >
+              <option value="">Damage Attr</option>
               {{#each ../system.attrKeys as |attr|}}
-              <option value="{{attr}}">{{attr}}</option>
+              <option value="{{attr}}" {{ifEquals weapon.damageAttr attr}}>
+                {{attr}}
+              </option>
               {{/each}}
             </select>
-            <select name="" id="">
-              <option value="">Type</option>
+            <select
+              name=""
+              id=""
+              data-action="select-weapon-type"
+              data-field="type"
+              data-weapon-id="{{weapon._id}}"
+            >
+              <option value="">Damage Type</option>
               {{#each ../system.damageType as |type|}}
-              <option value="{{type}}">{{type}}</option>
+              <option value="{{type}}" {{ifEquals weapon.type type}}>
+                {{type}}
+              </option>
               {{/each}}
             </select>
           </div>
