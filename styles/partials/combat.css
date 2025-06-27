@@ -24,6 +24,7 @@
 .weapon-wrapper ul {
   list-style: none;
   padding: 0 30px;
+  gap: 1.62rem;
 }
 
 .weapon-wrapper ul li {

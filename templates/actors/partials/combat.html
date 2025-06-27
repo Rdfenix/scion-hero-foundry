@@ -23,8 +23,11 @@
               <option value="{{attr}}">{{attr}}</option>
               {{/each}}
             </select>
-            <select name="" id="">
+            <select name="weapon-skill" id="">
               <option value="">Skills</option>
+              {{#each ../system.skillsKeys as |skill|}}
+              <option value="{{skill}}">{{skill}}</option>
+              {{/each}}
             </select>
           </div>
           <div class="weapon-stats">
@@ -49,6 +52,9 @@
           <div class="damage-attr">
             <select name="" id="">
               <option value="">Attr</option>
+              {{#each ../system.attrKeys as |attr|}}
+              <option value="{{attr}}">{{attr}}</option>
+              {{/each}}
             </select>
             <select name="" id="">
               <option value="">Type</option>
