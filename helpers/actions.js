@@ -45,6 +45,9 @@ export async function _onAction(event, actor) {
     case "delete-boon":
       await deleteBoon(actor, event);
       break;
+    case "delete-weapon":
+      await deleteWeapon(actor, event);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
@@ -590,6 +593,32 @@ const deleteBirthright = async (actor, event) => {
   } catch (error) {
     console.error(error.message);
     ui.notifications.error("Failed to delete Birthrights.");
+  }
+};
+
+const deleteWeapon = async (actor, event) => {
+  try {
+    const weaponId = event.currentTarget.dataset.weaponId;
+
+    if (!weaponId) {
+      throw new Error("Failed to found id from Weapons.");
+    }
+
+    let weapons = foundry.utils.getProperty(actor.system, "weapons");
+
+    weapons = weapons.filter((weapon) => weapon._id !== weaponId);
+
+    await actor.update(
+      {
+        "system.weapons": weapons,
+      },
+      { render: false }
+    );
+
+    await reopenWithActiveTab(actor);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to delete Weapon.");
   }
 };
 

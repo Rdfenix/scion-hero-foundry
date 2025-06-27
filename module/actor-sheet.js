@@ -85,8 +85,11 @@ export class ScionHeroActorSheet extends foundry.appv1.sheets.ActorSheet {
         skillsKeys.push(skillKey);
       }
 
+      const damageType = ["Bashing", "Letal", "Aggraveted"];
+
       context.system.attrKeys = attrKeys;
       context.system.skillsKeys = skillsKeys;
+      context.system.damageType = damageType;
 
       console.log("Contexto preparado:", context);
 
