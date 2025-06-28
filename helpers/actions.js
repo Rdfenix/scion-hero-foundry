@@ -6,6 +6,30 @@ import {
   weaponSchema,
 } from "../module/actor-base-default.js";
 
+const mountGodsList = async (gods) =>
+  gods.map((god) => ({
+    name: god.name,
+    favoredSkills: (god.favoredSkills || []).reduce((obj, skill, idx) => {
+      obj[idx] = skill;
+      return obj;
+    }, {}),
+  }));
+
+const mountFavoritiesSkills = async (deityPantheon, actor) => {
+  const abilities = foundry.utils.getProperty(actor.system, "abilities");
+  const favoredSkillsArr = Object.values(deityPantheon.favoredSkills);
+  const updatedAbilities = {};
+
+  for (const [key, value] of Object.entries(abilities)) {
+    updatedAbilities[key] = {
+      ...value,
+      favored: favoredSkillsArr.includes(key),
+    };
+  }
+
+  return updatedAbilities;
+};
+
 export async function _onAction(event, actor) {
   event.preventDefault();
   event.stopPropagation();
@@ -482,12 +506,30 @@ const selectPantheon = async (actor) => {
                   return ui.notifications.warn("Pantheon not found");
                 }
 
+                let gods =
+                  deities.find((p) => p.name === selectedPantheon.name)?.system
+                    .deities || [];
+
+                gods = await mountGodsList(gods);
+
+                const updatedAbilities = await mountFavoritiesSkills(
+                  gods[0],
+                  actor
+                );
+
                 await actor.update({
                   "system.pantheon": {
                     name: selectedPantheon.name,
                     logo: selectedPantheon.logo,
                   },
                   "system.virtues": null,
+                });
+
+                await actor.update({
+                  "system.abilities": updatedAbilities,
+                  "system.pantheon": {
+                    god: gods[0].name,
+                  },
                 });
 
                 await actor.update({
@@ -543,13 +585,7 @@ const selectGod = async (actor) => {
 
     let gods = deities.find((p) => p.name === pantheon)?.system.deities || [];
 
-    gods = gods.map((god) => ({
-      name: god.name,
-      favoredSkills: (god.favoredSkills || []).reduce((obj, skill, idx) => {
-        obj[idx] = skill;
-        return obj;
-      }, {}),
-    }));
+    gods = await mountGodsList(gods);
 
     const content = await foundry.applications.handlebars.renderTemplate(
       "systems/scion-hero-foundry/templates/actors/dialogs/gods.html",
@@ -580,18 +616,10 @@ const selectGod = async (actor) => {
                   return ui.notifications.warn("God not found");
                 }
 
-                const abilities = actor.system.abilities;
-                const favoredSkillsArr = Object.values(
-                  deityPantheon.favoredSkills
+                const updatedAbilities = await mountFavoritiesSkills(
+                  deityPantheon,
+                  actor
                 );
-
-                const updatedAbilities = {};
-                for (const [key, value] of Object.entries(abilities)) {
-                  updatedAbilities[key] = {
-                    ...value,
-                    favored: favoredSkillsArr.includes(key),
-                  };
-                }
 
                 await actor.update({
                   "system.abilities": updatedAbilities,

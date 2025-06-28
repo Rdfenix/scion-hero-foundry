@@ -77,6 +77,7 @@
   width: 13rem;
   padding: 0 10px;
   height: 33px;
+  text-transform: capitalize;
 }
 
 .attr-skill select {
