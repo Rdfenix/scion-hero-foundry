@@ -147,3 +147,27 @@
 .legend .scion-label-subtitle {
   margin: 0 0 5px 0;
 }
+
+.combat-armor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-auto-rows: minmax(60px, auto);
+  gap: 0.9rem;
+  text-align: center;
+  width: 100%;
+}
+
+.combat-armor-grid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.defense-value-dodge,
+.defense-value-parry {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+}

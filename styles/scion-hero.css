@@ -128,7 +128,8 @@ select:hover {
   justify-content: center;
 }
 
-.scion-label-subtitle {
+.scion-label-subtitle,
+.scion-label-small-subtitle {
   margin: 0 0 15px 0;
   background-image: url(../assets/png/band-small.png);
   background-position: center center;
@@ -141,8 +142,13 @@ select:hover {
   align-items: center;
 }
 
+.scion-label-small-subtitle {
+  background-image: url(../assets/png/band-very-small.png);
+}
+
 .scion-label-title > h2,
-.scion-label-subtitle > h2 {
+.scion-label-subtitle > h2,
+.scion-label-small-subtitle h2 {
   font-size: 1.5rem;
   font-weight: 600;
   color: #fff;
