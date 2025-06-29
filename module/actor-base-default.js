@@ -83,14 +83,15 @@ export const ScionHeroActorBaseDefault = {
   knacks: [],
   weapons: [],
   combat: {
-    dodgeDV: 0,
-    parryDV: 0,
+    dodgeDV: { value: 0 },
+    parryDV: { value: 0 },
     soak: {
       Bashing: { value: 0 },
       Lethal: { value: 0 },
       Aggravated: { value: 0 },
     },
     armor: {
+      name: "",
       Bashing: { value: 0 },
       Lethal: { value: 0 },
       Aggravated: { value: 0 },

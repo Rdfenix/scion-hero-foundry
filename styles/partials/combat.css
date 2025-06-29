@@ -170,4 +170,16 @@
   width: 100%;
   align-items: center;
   gap: 0.5rem;
+  padding: 0px 15px;
+}
+
+.defense-value-dodge input[type="text"],
+.defense-value-parry input[type="text"] {
+  flex: 1;
+  min-width: 0;
+  padding: 10px;
+}
+.defense-value-dodge span,
+.defense-value-parry span {
+  min-width: 60px; /* ajuste conforme necessário */
 }
