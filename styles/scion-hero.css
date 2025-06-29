@@ -148,7 +148,7 @@ select:hover {
 
 .scion-label-title > h2,
 .scion-label-subtitle > h2,
-.scion-label-small-subtitle h2 {
+.scion-label-small-subtitle > h2 {
   font-size: 1.5rem;
   font-weight: 600;
   color: #fff;
@@ -158,7 +158,8 @@ select:hover {
   font-family: skranji-bold, sans-serif;
 }
 
-.scion-label-subtitle > h2 {
+.scion-label-subtitle > h2,
+.scion-label-small-subtitle > h2 {
   font-size: 1.2rem;
 }
 
