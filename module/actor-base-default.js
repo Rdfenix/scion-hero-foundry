@@ -150,3 +150,16 @@ export const weaponSchema = {
   damageAttr: "",
   type: "",
 };
+
+export const epicAttributeSuccesses = {
+  1: 1,
+  2: 2,
+  3: 4,
+  4: 7,
+  5: 11,
+  6: 16,
+  7: 22,
+  8: 29,
+  9: 37,
+  10: 46,
+};

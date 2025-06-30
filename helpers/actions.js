@@ -109,6 +109,9 @@ export async function _onChange(event, actor) {
     case "select-weapon-type":
       await onSelectFieldInWeapon(event, actor);
       break;
+    case "defense-value-update":
+      await onChangeDefenseValue(event, actor);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
@@ -142,6 +145,32 @@ const onSelectFieldInWeapon = async (event, actor) => {
   } catch (error) {
     console.error(error.message);
     ui.notifications.error("Failed to fetch Weapons.");
+  }
+};
+
+const onChangeDefenseValue = async (event, actor) => {
+  try {
+    const field = event.currentTarget.dataset.field;
+
+    if (field === undefined) {
+      throw new Error("Failed to found field from defense values.");
+    }
+
+    let combat = foundry.utils.getProperty(actor.system, "combat");
+
+    combat = { ...combat, [field]: { value: event.currentTarget.value } };
+
+    await actor.update(
+      {
+        "system.combat": combat,
+      },
+      { render: false }
+    );
+
+    reopenWithActiveTab(actor);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch combat.");
   }
 };
 

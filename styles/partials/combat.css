@@ -183,3 +183,42 @@
 .defense-value-parry span {
   min-width: 60px; /* ajuste conforme necessário */
 }
+
+.armor-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  gap: 0.5rem;
+}
+
+.armor-stats {
+  display: flex;
+  flex: 1 auto;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.aggraveted,
+.lethal,
+.bashing {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 0.5rem;
+}
+
+.aggraveted span,
+.lethal span,
+.bashing span {
+  min-width: 20px;
+  text-transform: uppercase;
+}
+
+.aggraveted input[type="text"],
+.lethal input[type="text"],
+.bashing input[type="text"] {
+  flex: 1;
+  min-width: 0;
+  padding: 10px;
+}

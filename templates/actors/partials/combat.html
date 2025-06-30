@@ -203,16 +203,54 @@
       </div>
       <div class="defense-value-dodge">
         <span>Dodge:</span>
-        <input type="text" placeholder="Value" />
+        <input
+          type="text"
+          data-field="dodgeDV"
+          data-action="defense-value-update"
+          placeholder="Value"
+          value="{{system.combat.dodgeDV.value}}"
+        />
       </div>
       <div class="defense-value-parry">
         <span>Parry:</span>
-        <input type="text" placeholder="value" />
+        <input
+          type="text"
+          data-field="parryDV"
+          data-action="defense-value-update"
+          placeholder="value"
+          value="{{system.combat.parryDV.value}}"
+        />
       </div>
     </div>
     <div class="combat-armor-grid-item">
       <div class="scion-label-small-subtitle">
         <h2>Armor</h2>
+      </div>
+      <div class="armor-wrapper">
+        <div class="armor-name">
+          <input
+            type="text"
+            placeholder="Armor name"
+            value="{{system.combat.armor.name}}"
+          />
+        </div>
+        <div class="armor-stats">
+          <div class="aggraveted">
+            <span>A</span>
+            <input
+              type="text"
+              value="{{system.combat.armor.Aggravated.value}}"
+            />
+          </div>
+          <div class="lethal">
+            <span>L</span>
+            <input type="text" value="{{system.combat.armor.Lethal.value}}" />
+          </div>
+          <div class="bashing">
+            <span>B</span>
+            <input type="text" value="{{system.combat.armor.Bashing.value}}" />
+          </div>
+        </div>
       </div>
     </div>
     <div class="combat-armor-grid-item">
