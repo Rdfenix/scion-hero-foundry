@@ -283,6 +283,20 @@
   <div class="scion-label-title">
     <h2>Health</h2>
   </div>
+
+  <div class="health-line">
+    {{#each system.health.conditions as |condition index|}}
+    <div class="health-box">
+      <span class="penalty">{{condition.value}}</span>
+      <select name="" data-index="" data-action="change-health-damage">
+        <option value=""></option>
+        <option value="/">&#8260;</option>
+        <option value="X">✕</option>
+        <option value="*">★</option>
+      </select>
+    </div>
+    {{/each}}
+  </div>
 </div>
 <div class="experience">
   <div class="scion-label-title">

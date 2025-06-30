@@ -99,6 +99,7 @@ export const ScionHeroActorBaseDefault = {
   },
   health: {
     value: 0,
+    status: "",
     conditions: {
       Bruised: { value: 0 },
       Hurt: { value: -1 },
