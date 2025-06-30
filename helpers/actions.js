@@ -112,6 +112,9 @@ export async function _onChange(event, actor) {
     case "defense-value-update":
       await onChangeDefenseValue(event, actor);
       break;
+    case "change-health-damage":
+      await onChangeHealthValue(event, actor);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
@@ -145,6 +148,69 @@ const onSelectFieldInWeapon = async (event, actor) => {
   } catch (error) {
     console.error(error.message);
     ui.notifications.error("Failed to fetch Weapons.");
+  }
+};
+
+const onChangeHealthValue = async (event, actor) => {
+  try {
+    const key = event.currentTarget.dataset.key;
+    const value =
+      event.currentTarget.value === "__none__" ? "" : event.currentTarget.value;
+    console.log("cheguei", event);
+
+    if (key === undefined) {
+      throw new Error("Failed to found key from health values.");
+    }
+
+    let health = foundry.utils.getProperty(actor.system, "health");
+
+    if (health === undefined) {
+      throw new Error("Failed to found health.");
+    }
+
+    health = {
+      ...health,
+      conditions: {
+        ...health.conditions,
+        [key]: {
+          ...health.conditions[key],
+          damageType: value,
+        },
+      },
+    };
+
+    const conditionKeys = Object.keys(health.conditions);
+    let lastKey = null;
+
+    for (const key of conditionKeys) {
+      if (health.conditions[key] && health.conditions[key].damageType !== "") {
+        lastKey = key;
+      }
+    }
+
+    if (lastKey) {
+      health = {
+        ...health,
+        value: health.conditions[lastKey].value,
+      };
+    } else {
+      health = {
+        ...health,
+        value: 0,
+      };
+    }
+
+    await actor.update(
+      {
+        "system.health": health,
+      },
+      { render: false }
+    );
+
+    reopenWithActiveTab(actor);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch health.");
   }
 };
 

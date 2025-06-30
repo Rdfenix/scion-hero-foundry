@@ -285,14 +285,14 @@
   </div>
 
   <div class="health-line">
-    {{#each system.health.conditions as |condition index|}}
+    {{#each system.health.conditions as |condition key|}}
     <div class="health-box">
-      <span class="penalty">{{condition.value}}</span>
-      <select name="" data-index="" data-action="change-health-damage">
-        <option value=""></option>
-        <option value="/">&#8260;</option>
-        <option value="X">✕</option>
-        <option value="*">★</option>
+      <span class="penalty">{{#if (eq key "Incapacitated")}}I{{else}}{{condition.value}}{{/if}}</span>
+      <select data-key="{{key}}" data-action="change-health-damage">
+        <option {{ifEquals condition.damageType "__none__"}} value="__none__">&nbsp;</option>
+        <option {{ifEquals condition.damageType "/"}} value="/" >&#8260;</option>
+        <option {{ifEquals condition.damageType "X"}} value="X">✕</option>
+        <option {{ifEquals condition.damageType "*"}} value="*">★</option>
       </select>
     </div>
     {{/each}}

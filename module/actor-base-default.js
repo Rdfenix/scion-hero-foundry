@@ -99,15 +99,14 @@ export const ScionHeroActorBaseDefault = {
   },
   health: {
     value: 0,
-    status: "",
     conditions: {
-      Bruised: { value: 0 },
-      Hurt: { value: -1 },
-      Injured: { value: -1 },
-      Wounded: { value: -2 },
-      Maimed: { value: -2 },
-      Crippled: { value: -4 },
-      Incapacitated: { value: 0 },
+      Bruised: { value: 0, damageType: "" },
+      Hurt: { value: -1, damageType: "" },
+      Injured: { value: -1, damageType: "" },
+      Wounded: { value: -2, damageType: "" },
+      Maimed: { value: -2, damageType: "" },
+      Crippled: { value: -4, damageType: "" },
+      Incapacitated: { value: -4, damageType: "" },
     },
   },
 };
