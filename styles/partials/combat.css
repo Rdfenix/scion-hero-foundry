@@ -1,4 +1,6 @@
 .weapons,
+.health,
+.experience,
 .willpower-legend,
 .combat-armor,
 .weapon-wrapper,
@@ -184,12 +186,15 @@
   min-width: 60px; /* ajuste conforme necessário */
 }
 
-.armor-wrapper {
+.armor-wrapper,
+.soak-wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
   position: relative;
   gap: 0.5rem;
+  flex: 1;
+  justify-content: center;
 }
 
 .armor-stats {

@@ -163,3 +163,9 @@ export const epicAttributeSuccesses = {
   9: 37,
   10: 46,
 };
+
+export const prioritySimbols = {
+  "*": 3,
+  X: 2,
+  "/": 1,
+};
