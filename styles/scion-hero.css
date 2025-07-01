@@ -233,3 +233,7 @@ select:hover {
   height: 16px;
   margin: 1px;
 }
+
+.dialog .window-content {
+  overflow: auto;
+}
