@@ -5,6 +5,7 @@ import {
   boonSchema,
   weaponSchema,
 } from "../module/actor-base-default.js";
+import { callRollAttrDice } from "./rollDice.js";
 
 const mountGodsList = async (gods) =>
   gods.map((god) => ({
@@ -71,6 +72,9 @@ export async function _onAction(event, actor) {
       break;
     case "delete-weapon":
       await deleteWeapon(actor, event);
+      break;
+    case "roll-attribute":
+      await callRollAttrDice(actor, event);
       break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);

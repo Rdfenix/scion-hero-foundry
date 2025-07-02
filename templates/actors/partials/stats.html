@@ -8,7 +8,12 @@
       <h3>{{key}}</h3>
       {{#each attr as |attribute label|}}
       <div class="attribute-row" data-label="{{label}}">
-        <div class="attribute-column">
+        <div
+          class="attribute-column"
+          data-action="roll-attribute"
+          data-key="{{key}}"
+          data-label="{{label}}"
+        >
           <span>{{label}}</span>
         </div>
         <div class="attribute-column">
@@ -50,12 +55,11 @@
     <div class="skills-row" data-key="{{key}}">
       <div class="skills-column">
         <div class="skills-row">
-          <input
-            type="checkbox"
-            class="square-checkbox"
-            {{#if data.favored}}checked{{/if}}
-          />
-          <span>{{key}}</span>
+          <input type="checkbox" class="square-checkbox" {{#if
+          data.favored}}checked{{/if}} />
+          <div data-action="roll-abilitie" data-key="{{key}}">
+            <span>{{key}}</span>
+          </div>
         </div>
       </div>
       <div class="skills-column">

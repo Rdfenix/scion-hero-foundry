@@ -74,6 +74,13 @@
   align-items: flex-end !important;
 }
 
+.skills-row {
+  position: relative;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .skills-row > .square-checkbox {
   margin: 3px 0px;
   pointer-events: none;
