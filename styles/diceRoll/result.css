@@ -1,0 +1,10 @@
+.dice-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  font-family: skranji-regular, sans-serif !important;
+  color: #222;
+  flex-wrap: nowrap;
+}

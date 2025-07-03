@@ -129,7 +129,7 @@
 }
 
 /* Fixar os botões do Dialog no fundo */
-.dialog-form .form-footer {
+.pantheon-dialog > .window-content > .dialog-form > .form-footer {
   position: sticky;
   bottom: 0;
   left: 0;
@@ -141,7 +141,7 @@
   border-radius: 4px;
 }
 
-.dialog-form .form-footer button {
+.pantheon-dialog > .window-content > .dialog-form > .form-footer button {
   color: #222;
   font-size: 19px;
   font-weight: bold;

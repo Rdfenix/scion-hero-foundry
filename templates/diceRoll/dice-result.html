@@ -1,0 +1,32 @@
+<div class="dice-result">
+  <h3>Dice Roll Result</h3>
+  <span>{{data.title}}</span>
+  <div class="dice-result-wrapper">
+    {{#if data.explodedDices.length}}
+    <div class="exploded-dices">
+      <span>Exploded Dices:</span>
+      <span>{{data.explodedDices}}</span>
+    </div>
+    {{/if}} {{#if data.criticalFail}}
+    <div class="critical-fail">
+      <span>Critical Fail:</span>
+      <span>{{data.criticalFailCount}}</span>
+    </div>
+    {{else if data.fail}}
+    <div class="fail">
+      <span>Fail:</span>
+      <span>{{data.totalSucess}}</span>
+    </div>
+    {{else}}
+    <div class="success">
+      <span>Normal Success:</span>
+      <span>{{data.totalSucess}}</span>
+    </div>
+    {{/if}} {{#if data.epicAttributeLabel}}
+    <div class="epic-attribute">
+      <span>Epic Attribute - {{data.epicAttributeLabel}}:</span>
+      <span>{{data.epicAttribute}}</span>
+    </div>
+    {{/if}}
+  </div>
+</div>
