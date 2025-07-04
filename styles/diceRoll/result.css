@@ -7,4 +7,42 @@
   font-family: skranji-regular, sans-serif !important;
   color: #222;
   flex-wrap: nowrap;
+  text-transform: capitalize;
+  gap: 5px;
+}
+
+.dice-result h3 {
+  font-size: 20px;
+  font-family: skranji-regular, sans-serif !important;
+  margin-bottom: 5px;
+}
+
+.dice-result span {
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+.dice-result-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  gap: 10px;
+  border-top: 1px solid #9f9f9f;
+  padding: 10px 0;
+}
+
+.exploded-dices,
+.critical-fail,
+.fail,
+.success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 16px;
+  text-transform: capitalize;
+  gap: 5px;
 }

@@ -7,7 +7,8 @@
       <span>Exploded Dices:</span>
       <span>{{data.explodedDices}}</span>
     </div>
-    {{/if}} {{#if data.criticalFail}}
+    {{/if}} 
+    {{#if (and (eq data.epicAttribute 0) data.criticalFail)}}
     <div class="critical-fail">
       <span>Critical Fail:</span>
       <span>{{data.criticalFailCount}}</span>
