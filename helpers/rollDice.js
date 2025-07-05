@@ -65,9 +65,6 @@ export const callRollAttrDice = async (actor, event) => {
       explodedDices,
     } = await calcSuccess(results);
 
-    console.log("Total os Success", totalSucess);
-    console.log("Fail", fail);
-    console.log("Critical Fail", criticalFail);
     await sendRollToChat(actor, {
       totalSucess,
       criticalFailCount,
