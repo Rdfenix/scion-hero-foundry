@@ -77,6 +77,10 @@ Hooks.once("init", async function () {
     return a === b;
   });
 
+  Handlebars.registerHelper("higherThan", function (a, b) {
+    return a > b;
+  });
+
   Handlebars.registerHelper("ifEquals", function (a, b) {
     return a === b ? "selected" : "";
   });
@@ -109,20 +113,6 @@ Hooks.on("preCreateActor", (document, data, options, userId) => {
   // Injeta os dados diretamente no momento da criação
   document.updateSource({ system: baseData });
 });
-
-// Hooks.on("createActor", async (actor, options, userId) => {
-//   if (actor.type !== "character") return;
-
-//   const baseData = mountingBasedata(ScionHeroActorBaseDefault, actor);
-
-//   await actor.update({
-//     system: baseData,
-//   });
-
-//   if (actor.sheet.rendered) {
-//     actor.sheet.render(true);
-//   }
-// });
 
 Hooks.on("ready", async () => {
   for (const actor of game.actors.contents) {

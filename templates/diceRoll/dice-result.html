@@ -22,7 +22,8 @@
       <span>Normal Success:</span>
       <span>{{data.totalSucess}}</span>
     </div>
-    {{/if}} {{#if data.epicAttributeLabel}}
+    {{/if}} {{#if (and (higherThan data.epicAttribute 0)
+    data.epicAttributeLabel)}}
     <div class="epic-attribute">
       <span>Epic Attribute - {{data.epicAttributeLabel}}:</span>
       <span>{{data.epicAttribute}}</span>
