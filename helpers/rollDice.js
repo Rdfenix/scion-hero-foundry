@@ -1,3 +1,5 @@
+import { epicAttributeSuccesses } from "../module/actor-base-default.js";
+
 export const rollDice = async (diceTotal = 0) => {
   try {
     const roll = await new Roll(`${diceTotal}d10`).evaluate();
@@ -203,6 +205,8 @@ const sendRollToChat = async (
   }
 ) => {
   try {
+    const totalEpicSuccess = epicAttributeSuccesses[epicAttribute] || 0;
+
     const data = {
       totalSucess,
       criticalFailCount,
@@ -212,6 +216,7 @@ const sendRollToChat = async (
       explodedDices,
       title,
       epicAttributeLabel,
+      totalEpicSuccess,
     };
 
     const context = await foundry.applications.handlebars.renderTemplate(
