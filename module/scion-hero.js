@@ -65,6 +65,14 @@ Hooks.once("init", async function () {
     return a * b;
   });
 
+  Handlebars.registerHelper("sum", function (a, b) {
+    return a + b;
+  });
+
+  Handlebars.registerHelper("divide", function (a, b) {
+    return a / b;
+  });
+
   Handlebars.registerHelper("eq", function (a, b) {
     return a === b;
   });

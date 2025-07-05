@@ -7,8 +7,7 @@
       <span>Exploded Dices:</span>
       <span>{{data.explodedDices}}</span>
     </div>
-    {{/if}} 
-    {{#if (and (eq data.epicAttribute 0) data.criticalFail)}}
+    {{/if}} {{#if (and (eq data.epicAttribute 0) data.criticalFail)}}
     <div class="critical-fail">
       <span>Critical Fail:</span>
       <span>{{data.criticalFailCount}}</span>
@@ -29,5 +28,9 @@
       <span>{{data.epicAttribute}}</span>
     </div>
     {{/if}}
+  </div>
+  <div class="total-result">
+    <span>Total Result:</span>
+    <span>{{sum data.totalSucess data.epicAttribute}}</span>
   </div>
 </div>

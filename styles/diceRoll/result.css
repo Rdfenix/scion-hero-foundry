@@ -31,7 +31,9 @@
   height: 100%;
   gap: 10px;
   border-top: 1px solid #9f9f9f;
+  border-bottom: 1px solid #9f9f9f;
   padding: 10px 0;
+  font-style: italic;
 }
 
 .exploded-dices,
@@ -45,4 +47,16 @@
   font-size: 16px;
   text-transform: capitalize;
   gap: 5px;
+}
+
+.total-result {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 25px;
+  text-transform: capitalize;
+  gap: 5px;
+  font-weight: bold;
+  padding: 10px 0;
 }

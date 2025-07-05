@@ -1,4 +1,5 @@
-import { _onAction, _onChange } from "../helpers/actions.js";
+import { _onAction } from "../helpers/actions.js";
+import { _onChange } from "../helpers/change.js";
 
 export class ScionHeroActorSheet extends foundry.appv1.sheets.ActorSheet {
   prepareData() {
