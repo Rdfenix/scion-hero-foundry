@@ -1,6 +1,6 @@
 import { reopenWithActiveTab } from "./reopenWithActiveTab.js";
 import { getDeities } from "../api/deitiesApi.js";
-import { callRollSkillDice } from "./rollDice.js";
+import { callRollSkillDice, callRollWeaponDice } from "./rollDice.js";
 
 const mountGodsList = async (gods) =>
   gods.map((god) => ({
@@ -362,7 +362,7 @@ export const callDialogRollWeaponDice = async (actor, event) => {
       { data }
     );
 
-    return new Promise((resolve) => {
+    return new Promise(async (resolve) => {
       new foundry.applications.api.DialogV2({
         classes: ["weapon-dialog"],
         window: {},
@@ -375,7 +375,60 @@ export const callDialogRollWeaponDice = async (actor, event) => {
             class: "roll-weapon",
             default: true,
             callback: async (event, button, dialog) => {
-              // Implement the roll logic here
+              let multipleSelected = $(dialog.element)
+                .find('select[name="multiple-attack"]')
+                .val();
+              const extraDices = parseInt(
+                $(dialog.element).find('input[name="extra-dices"]').val() ||
+                  "0",
+                10
+              );
+
+              multipleSelected = JSON.parse(multipleSelected);
+
+              console.log("multipleSelected", multipleSelected);
+              console.log("extraDices", extraDices);
+
+              let attrValue = 0;
+              let epicAttrValue = 0;
+
+              const attr = foundry.utils.getProperty(
+                actor.system,
+                "attributes"
+              );
+              const epicAttr = foundry.utils.getProperty(
+                actor.system,
+                "epicAttributes"
+              );
+              const abilities = foundry.utils.getProperty(
+                actor.system,
+                "abilities"
+              );
+              const skillValue = abilities[weapon.skill]?.value ?? 0;
+
+              for (const [groupName, group] of Object.entries(attr)) {
+                if (group[weapon.attr]) {
+                  attrValue = group[weapon.attr].value;
+                  break;
+                }
+              }
+
+              for (const [groupName, group] of Object.entries(epicAttr)) {
+                if (group[weapon.attr]) {
+                  epicAttrValue = group[weapon.attr].value;
+                  break;
+                }
+              }
+
+              await callRollWeaponDice(actor, {
+                multipleSelected,
+                epicAttrValue,
+                skillValue,
+                attrValue,
+                weapon,
+                extraDices,
+              });
+
               resolve();
             },
           },

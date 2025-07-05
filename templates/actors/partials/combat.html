@@ -56,7 +56,7 @@
               data-field="speed"
               value="{{weapon.speed}}"
             />
-            <input type="text" placeholder="Accuracy" value="{{weapon.acc}}" />
+            <input type="text" placeholder="Accuracy" data-action="update-weapon-field" data-weapon-id="{{weapon._id}}" data-field="acc" value="{{weapon.acc}}" />
             <input
               type="text"
               placeholder="Defense"

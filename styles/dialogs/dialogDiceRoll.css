@@ -100,10 +100,11 @@
   width: 100%;
   align-items: center;
 }
-
-.multiple-atk select,
-.target select {
-  width: 15rem;
+.multiple-atk {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  align-items: center;
 }
 
 .extra-info input[type="text"] {

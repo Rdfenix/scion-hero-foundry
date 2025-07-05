@@ -124,6 +124,71 @@ export const callRollSkillDice = async (
   }
 };
 
+export const callRollWeaponDice = async (
+  actor,
+  { multipleSelected, epicAttrValue, skillValue, attrValue, weapon, extraDices }
+) => {
+  try {
+    if (!weapon) {
+      throw new Error("Weapon not found.");
+    }
+
+    let acc = parseInt(weapon.acc) || 0;
+    const penality = foundry.utils.getProperty(actor.system, "health.value");
+    let totalDice = Math.max(
+      attrValue + skillValue + acc + penality + extraDices,
+      0
+    );
+
+    let actions = 1;
+
+    if (multipleSelected) {
+      totalDice = Math.max(totalDice - 2, 0);
+      actions = 2;
+    }
+
+    if (totalDice > 0) {
+      for (let i = 0; i < actions; i++) {
+        let results = [];
+        results = await rollDice(totalDice);
+
+        const {
+          totalSucess,
+          criticalFailCount,
+          fail,
+          criticalFail,
+          explodedDices,
+        } = await calcSuccess(results);
+
+        await sendRollToChat(actor, {
+          totalSucess,
+          criticalFailCount,
+          fail,
+          criticalFail,
+          epicAttribute: epicAttrValue || 0,
+          explodedDices,
+          title: `#${i + 1} - ${weapon.name}`,
+          epicAttributeLabel: weapon.attr || "",
+        });
+      }
+    } else {
+      await sendRollToChat(actor, {
+        totalSucess: 0,
+        criticalFailCount: 0,
+        fail: true,
+        criticalFail: false,
+        epicAttribute: epicAttrValue || 0,
+        explodedDices: [],
+        title: `#1 - ${weapon.name}`,
+        epicAttributeLabel: weapon.attr || "",
+      });
+    }
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error(error.message);
+  }
+};
+
 const sendRollToChat = async (
   actor,
   {
