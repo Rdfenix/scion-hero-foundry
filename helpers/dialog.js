@@ -336,3 +336,73 @@ export const callDialogRollSkillDice = async (actor, event) => {
     ui.notifications.error(error.message);
   }
 };
+
+export const callDialogRollWeaponDice = async (actor, event) => {
+  try {
+    const weaponId = event.currentTarget.dataset.weaponId;
+
+    if (!weaponId) {
+      return ui.notifications.error("WeaponId not found.");
+    }
+
+    const weapons = foundry.utils.getProperty(actor.system, "weapons");
+
+    const weapon = weapons.find((w) => w._id === weaponId);
+
+    if (!weapon) {
+      return ui.notifications.error("Weapon not found.");
+    }
+
+    const data = {
+      weapon,
+    };
+
+    const content = await foundry.applications.handlebars.renderTemplate(
+      "systems/scion-hero-foundry/templates/actors/dialogs/weapon-atk.html",
+      { data }
+    );
+
+    return new Promise((resolve) => {
+      new foundry.applications.api.DialogV2({
+        classes: ["weapon-dialog"],
+        window: {},
+        content,
+        buttons: [
+          {
+            action: "roll",
+            label: "Roll",
+            icon: '<i class="fas fa-dice"></i>',
+            class: "roll-weapon",
+            default: true,
+            callback: async (event, button, dialog) => {
+              // Implement the roll logic here
+              resolve();
+            },
+          },
+          {
+            action: "cancel",
+            icon: '<i class="fas fa-times"></i>',
+            label: "Cancel",
+            class: "roll-weapon-cancel",
+            callback: () => resolve(null),
+          },
+        ],
+        render: (html) => {
+          console.log(html);
+          setTimeout(() => {
+            const contentEl = html
+              .closest(".window-app")
+              .find(".window-content")[0];
+            if (contentEl) {
+              contentEl.scrollTop = 0;
+            }
+          }, 50);
+        },
+        close: () => resolve(null),
+      }).render({ force: true });
+    });
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error(error.message);
+  }
+};

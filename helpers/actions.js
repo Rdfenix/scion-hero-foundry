@@ -10,6 +10,7 @@ import {
   selectPantheon,
   selectGod,
   callDialogRollSkillDice,
+  callDialogRollWeaponDice
 } from "./dialog.js";
 
 export async function _onAction(event, actor) {
@@ -59,6 +60,11 @@ export async function _onAction(event, actor) {
       break;
     case "roll-abilitie":
       await callDialogRollSkillDice(actor, event);
+      break;
+    case "roll-attack":
+      await callDialogRollWeaponDice(actor, event);
+      break;
+    case "roll-damage":
       break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);

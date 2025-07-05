@@ -15,8 +15,8 @@
             data-field="name"
             value="{{weapon.name}}"
           />
-          <button>Attack</button>
-          <button>Damage</button>
+          <button data-action="roll-attack" data-weapon-id="{{weapon._id}}">Attack</button>
+          <button data-action="roll-damage" data-weapon-id="{{weapon._id}}">Damage</button>
         </div>
         <div class="weapon-specs">
           <div class="attr-skill">
