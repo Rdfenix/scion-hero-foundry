@@ -86,3 +86,8 @@
   pointer-events: none;
   opacity: 0.8;
 }
+
+.attribute-row > .attribute-column:nth-child(1),
+.skills-row > .skills-column:nth-child(1) > .skills-row > div {
+  cursor: pointer;
+}

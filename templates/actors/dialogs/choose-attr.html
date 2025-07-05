@@ -1,0 +1,15 @@
+<form autocomplete="off" class="attr-dialog-form">
+  <div class="attr-dialog-group">
+    <header class="attr-dialog-group-header">
+      <h1>Choose the Attribute</h1>
+    </header>
+    <section class="attr-dialog-content">
+      <select name="attr-dice-roll">
+        <option value="">Attr</option>
+        {{#each data.attrKeys as |attr|}}
+        <option value="{{attr}}">{{attr}}</option>
+        {{/each}}
+      </select>
+    </section>
+  </div>
+</form>

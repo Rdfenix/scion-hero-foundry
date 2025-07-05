@@ -6,7 +6,11 @@ import {
   weaponSchema,
 } from "../module/actor-base-default.js";
 import { callRollAttrDice } from "./rollDice.js";
-import { selectPantheon, selectGod } from "./dialog.js";
+import {
+  selectPantheon,
+  selectGod,
+  callDialogRollSkillDice,
+} from "./dialog.js";
 
 export async function _onAction(event, actor) {
   event.preventDefault();
@@ -52,6 +56,9 @@ export async function _onAction(event, actor) {
       break;
     case "roll-attribute":
       await callRollAttrDice(actor, event);
+      break;
+    case "roll-abilitie":
+      await callDialogRollSkillDice(actor, event);
       break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);

@@ -20,6 +20,7 @@
     "styles/partials/knacks-boons.css",
     "styles/partials/combat.css",
     "styles/dialogs/pantheon.css",
+    "styles/dialogs/dialogDiceRoll.css",
     "styles/journals/purview.css",
     "styles/journals/knacks.css",
     "styles/diceRoll/result.css"

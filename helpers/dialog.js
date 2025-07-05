@@ -1,5 +1,6 @@
 import { reopenWithActiveTab } from "./reopenWithActiveTab.js";
 import { getDeities } from "../api/deitiesApi.js";
+import { callRollSkillDice } from "./rollDice.js";
 
 const mountGodsList = async (gods) =>
   gods.map((god) => ({
@@ -229,5 +230,109 @@ export const selectGod = async (actor) => {
     console.error(error.message);
     ui.notifications.error(error.message);
     return null;
+  }
+};
+
+export const callDialogRollSkillDice = async (actor, event) => {
+  try {
+    const key = event.currentTarget.dataset.key;
+    const abilities = foundry.utils.getProperty(actor.system, "abilities");
+    const attrKeys = Object.values(
+      foundry.utils.getProperty(actor.system, "attributes") || {}
+    ).flatMap((group) => Object.keys(group));
+    const skillValue = abilities[key]?.value ?? 0;
+
+    const data = {
+      attrKeys,
+    };
+
+    const content = await foundry.applications.handlebars.renderTemplate(
+      "systems/scion-hero-foundry/templates/actors/dialogs/choose-attr.html",
+      { data }
+    );
+
+    return new Promise(async (resolve) => {
+      new foundry.applications.api.DialogV2({
+        classes: ["roll-skill-dialog"],
+        window: {},
+        content,
+        buttons: [
+          {
+            action: "roll",
+            label: "Roll",
+            icon: '<i class="fas fa-dice"></i>',
+            class: "roll-skill",
+            default: true,
+            callback: async (event, button, dialog) => {
+              const attrSelected = $(dialog.element)
+                .find('select[name="attr-dice-roll"]')
+                .val();
+
+              if (!attrSelected) {
+                return ui.notifications.warn("Choose an attribute first");
+              }
+
+              const attr = foundry.utils.getProperty(
+                actor.system,
+                "attributes"
+              );
+              const epicAttr = foundry.utils.getProperty(
+                actor.system,
+                "epicAttributes"
+              );
+
+              let attrValue = 0;
+              let epicAttrValue = 0;
+
+              for (const [groupName, group] of Object.entries(attr)) {
+                if (group[attrSelected]) {
+                  attrValue = group[attrSelected].value;
+                  break;
+                }
+              }
+
+              for (const [groupName, group] of Object.entries(epicAttr)) {
+                if (group[attrSelected]) {
+                  epicAttrValue = group[attrSelected].value;
+                  break;
+                }
+              }
+
+              await callRollSkillDice(actor, {
+                skillName: key,
+                skillValue,
+                attr: attrSelected,
+                attrValue,
+                epicAttrValue,
+              });
+
+              resolve();
+            },
+          },
+          {
+            action: "cancel",
+            icon: '<i class="fas fa-times"></i>',
+            label: "Cancel",
+            class: "roll-skill-cancel",
+            callback: () => resolve(null),
+          },
+        ],
+        render: (html) => {
+          console.log(html);
+          setTimeout(() => {
+            const contentEl = html
+              .closest(".window-app")
+              .find(".window-content")[0];
+            if (contentEl) {
+              contentEl.scrollTop = 0;
+            }
+          }, 50);
+        },
+        close: () => resolve(null),
+      }).render({ force: true });
+    });
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error(error.message);
   }
 };

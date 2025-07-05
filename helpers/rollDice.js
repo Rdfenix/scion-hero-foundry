@@ -84,6 +84,49 @@ export const callRollAttrDice = async (actor, event) => {
   }
 };
 
+export const callRollSkillDice = async (
+  actor,
+  { skillName, skillValue, attr, attrValue, epicAttrValue }
+) => {
+  try {
+    if (!skillName || !skillValue || !attr || !attrValue) {
+      throw new Error("Missing required parameters for skill roll.");
+    }
+
+    const penality = foundry.utils.getProperty(actor.system, "health.value");
+    const title = `${attr} + ${skillName}`;
+    const totalDice = Math.max(attrValue + skillValue + penality, 0);
+
+    let results = [];
+
+    if (totalDice > 0) {
+      results = await rollDice(totalDice);
+    }
+
+    const {
+      totalSucess,
+      criticalFailCount,
+      fail,
+      criticalFail,
+      explodedDices,
+    } = await calcSuccess(results);
+
+    await sendRollToChat(actor, {
+      totalSucess,
+      criticalFailCount,
+      fail,
+      criticalFail,
+      epicAttribute: epicAttrValue,
+      explodedDices,
+      title,
+      epicAttributeLabel: attr,
+    });
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error(error.message);
+  }
+};
+
 const sendRollToChat = async (
   actor,
   {
