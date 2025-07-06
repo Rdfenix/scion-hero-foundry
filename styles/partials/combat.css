@@ -37,10 +37,11 @@
   padding: 10px;
   box-shadow: 4px 1px 13px rgba(0, 0, 0, 0.3);
   position: relative;
+  width: 48rem;
 }
 
 .weapon-wrapper ul li .delete-button {
-  top: 98px;
+  top: 230px;
   bottom: 0;
   font-size: 20px;
   height: 30px;
@@ -54,6 +55,32 @@
   align-items: center;
   gap: 0.5rem;
   width: 100%;
+}
+
+.damage-info,
+.weapon-specs {
+  flex-wrap: wrap;
+}
+
+.damage-attr {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.attr-skill div,
+.weapon-stats div,
+.damage,
+.damage-attr div {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 0.5rem;
+}
+
+.weapon-stats div input[type="text"] {
+  width: 9rem;
 }
 
 .weapon-name button {
@@ -82,8 +109,12 @@
   text-transform: capitalize;
 }
 
+.damage-attr select {
+  width: 21rem;
+}
+
 .attr-skill select {
-  width: 10.2rem;
+  width: 23rem;
 }
 
 .weapon-stats {
