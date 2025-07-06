@@ -8,8 +8,14 @@
   height: 340px;
 }
 
+.damage-dialog {
+  width: 490px;
+  height: 320px;
+}
+
 .weapon-dialog-form,
-.weapon-dialog-group {
+.weapon-dialog-group,
+.damage-atk-group {
   width: 100%;
   min-height: 100px;
   position: relative;
@@ -25,7 +31,8 @@
 }
 
 .attr-dialog-form,
-.attr-dialog-group {
+.attr-dialog-group,
+.damage-atk-form {
   width: 100%;
   height: 140px;
   min-height: 100px;
@@ -43,7 +50,9 @@
 
 .attr-dialog-group-header > h1,
 .weapon-dialog-group-header > h1,
-.weapon-dialog-group-header > h2 {
+.weapon-dialog-group-header > h2,
+.damage-atk-group-header > h1,
+.damage-atk-group-header > h2 {
   margin: 0 0 1.5rem !important;
   padding: 0 !important;
   border: none !important;

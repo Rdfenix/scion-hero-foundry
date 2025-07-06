@@ -1,6 +1,10 @@
 import { reopenWithActiveTab } from "./reopenWithActiveTab.js";
 import { getDeities } from "../api/deitiesApi.js";
-import { callRollSkillDice, callRollWeaponDice } from "./rollDice.js";
+import {
+  callRollSkillDice,
+  callRollWeaponDice,
+  callDamageAtkRoll,
+} from "./rollDice.js";
 
 const mountGodsList = async (gods) =>
   gods.map((god) => ({
@@ -275,7 +279,7 @@ export const callDialogRollSkillDice = async (actor, event) => {
       { data }
     );
 
-    return new Promise(async (resolve) => {
+    return new Promise((resolve) => {
       new foundry.applications.api.DialogV2({
         classes: ["roll-skill-dialog"],
         window: {},
@@ -363,7 +367,7 @@ export const callDialogRollWeaponDice = async (actor, event) => {
       { data }
     );
 
-    return new Promise(async (resolve) => {
+    return new Promise((resolve) => {
       new foundry.applications.api.DialogV2({
         classes: ["weapon-dialog"],
         window: {},
@@ -413,6 +417,91 @@ export const callDialogRollWeaponDice = async (actor, event) => {
             icon: '<i class="fas fa-times"></i>',
             label: "Cancel",
             class: "roll-weapon-cancel",
+            callback: () => resolve(null),
+          },
+        ],
+        render: (html) => {
+          console.log(html);
+          setTimeout(() => {
+            const contentEl = html
+              .closest(".window-app")
+              .find(".window-content")[0];
+            if (contentEl) {
+              contentEl.scrollTop = 0;
+            }
+          }, 50);
+        },
+        close: () => resolve(null),
+      }).render({ force: true });
+    });
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error(error.message);
+  }
+};
+
+export const callDialogRollDamage = async (actor, event) => {
+  try {
+    const weaponId = event.currentTarget.dataset.weaponId;
+
+    if (!weaponId) {
+      return ui.notifications.error("WeaponId not found.");
+    }
+
+    const weapons = foundry.utils.getProperty(actor.system, "weapons");
+
+    const weapon = weapons.find((w) => w._id === weaponId);
+
+    if (!weapon) {
+      return ui.notifications.error("Weapon not found.");
+    }
+
+    const data = {
+      weapon,
+    };
+
+    const content = await foundry.applications.handlebars.renderTemplate(
+      "systems/scion-hero-foundry/templates/actors/dialogs/damage-atk.html",
+      { data }
+    );
+
+    return new Promise((resolve) => {
+      new foundry.applications.api.DialogV2({
+        classes: ["damage-dialog"],
+        window: {},
+        content,
+        buttons: [
+          {
+            action: "roll",
+            label: "Roll",
+            icon: '<i class="fas fa-dice"></i>',
+            class: "roll-damage",
+            default: true,
+            callback: async (event, button, dialog) => {
+              const extraDices = parseInt(
+                $(dialog.element).find('input[name="extra-dices"]').val() ||
+                  "0",
+                10
+              );
+
+              const { attrValue, epicAttrValue } =
+                await mountResponseAttrValues(actor, weapon.damageAttr);
+
+              await callDamageAtkRoll(actor, {
+                weapon,
+                extraDices,
+                attrValue,
+                epicAttrValue,
+              });
+
+              resolve();
+            },
+          },
+          {
+            action: "cancel",
+            icon: '<i class="fas fa-times"></i>',
+            label: "Cancel",
+            class: "roll-damage-cancel",
             callback: () => resolve(null),
           },
         ],

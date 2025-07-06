@@ -191,6 +191,37 @@ export const callRollWeaponDice = async (
   }
 };
 
+export const callDamageAtkRoll = async (
+  actor,
+  { weapon, extraDices, attrValue, epicAttrValue }
+) => {
+  try {
+    const damage = parseInt(weapon.damage) || 0;
+    let results = [];
+
+    const totalDamage = Math.max(damage + attrValue + extraDices, 0);
+
+    results = await rollDice(totalDamage);
+
+    const { totalSucess, criticalFailCount, fail, explodedDices } =
+      await calcSuccess(results);
+
+    await sendRollToChat(actor, {
+      totalSucess,
+      criticalFailCount,
+      fail,
+      criticalFail: false,
+      epicAttribute: epicAttrValue || 0,
+      explodedDices,
+      title: `Damage - ${weapon.name} <br /> Type: ${weapon.type}`,
+      epicAttributeLabel: weapon.damageAttr || "",
+    });
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error(error.message);
+  }
+};
+
 const sendRollToChat = async (
   actor,
   {
