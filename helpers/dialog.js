@@ -26,6 +26,30 @@ const mountFavoritiesSkills = async (deityPantheon, actor) => {
   return updatedAbilities;
 };
 
+const mountResponseAttrValues = async (actor, key) => {
+  const attr = foundry.utils.getProperty(actor.system, "attributes");
+  const epicAttr = foundry.utils.getProperty(actor.system, "epicAttributes");
+
+  let attrValue = 0;
+  let epicAttrValue = 0;
+
+  for (const [, group] of Object.entries(attr)) {
+    if (group[key]) {
+      attrValue = group[key].value;
+      break;
+    }
+  }
+
+  for (const [, group] of Object.entries(epicAttr)) {
+    if (group[key]) {
+      epicAttrValue = group[key].value;
+      break;
+    }
+  }
+
+  return { attrValue, epicAttrValue };
+};
+
 export const selectPantheon = async (actor) => {
   try {
     const deities = await getDeities();
@@ -272,31 +296,8 @@ export const callDialogRollSkillDice = async (actor, event) => {
                 return ui.notifications.warn("Choose an attribute first");
               }
 
-              const attr = foundry.utils.getProperty(
-                actor.system,
-                "attributes"
-              );
-              const epicAttr = foundry.utils.getProperty(
-                actor.system,
-                "epicAttributes"
-              );
-
-              let attrValue = 0;
-              let epicAttrValue = 0;
-
-              for (const [groupName, group] of Object.entries(attr)) {
-                if (group[attrSelected]) {
-                  attrValue = group[attrSelected].value;
-                  break;
-                }
-              }
-
-              for (const [groupName, group] of Object.entries(epicAttr)) {
-                if (group[attrSelected]) {
-                  epicAttrValue = group[attrSelected].value;
-                  break;
-                }
-              }
+              const { attrValue, epicAttrValue } =
+                await mountResponseAttrValues(actor, attrSelected);
 
               await callRollSkillDice(actor, {
                 skillName: key,
@@ -386,39 +387,14 @@ export const callDialogRollWeaponDice = async (actor, event) => {
 
               multipleSelected = JSON.parse(multipleSelected);
 
-              console.log("multipleSelected", multipleSelected);
-              console.log("extraDices", extraDices);
-
-              let attrValue = 0;
-              let epicAttrValue = 0;
-
-              const attr = foundry.utils.getProperty(
-                actor.system,
-                "attributes"
-              );
-              const epicAttr = foundry.utils.getProperty(
-                actor.system,
-                "epicAttributes"
-              );
               const abilities = foundry.utils.getProperty(
                 actor.system,
                 "abilities"
               );
               const skillValue = abilities[weapon.skill]?.value ?? 0;
 
-              for (const [groupName, group] of Object.entries(attr)) {
-                if (group[weapon.attr]) {
-                  attrValue = group[weapon.attr].value;
-                  break;
-                }
-              }
-
-              for (const [groupName, group] of Object.entries(epicAttr)) {
-                if (group[weapon.attr]) {
-                  epicAttrValue = group[weapon.attr].value;
-                  break;
-                }
-              }
+              const { attrValue, epicAttrValue } =
+                await mountResponseAttrValues(actor, weapon.attr);
 
               await callRollWeaponDice(actor, {
                 multipleSelected,
