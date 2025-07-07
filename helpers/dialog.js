@@ -4,6 +4,9 @@ import {
   callRollSkillDice,
   callRollWeaponDice,
   callDamageAtkRoll,
+  callRollAttrDice,
+  callRollWillpowerDice,
+  callRollLegendDice,
 } from "./rollDice.js";
 
 const mountGodsList = async (gods) =>
@@ -301,6 +304,10 @@ export const callDialogRollSkillDice = async (actor, event) => {
                 10
               );
 
+              if (isNaN(difficulty) || difficulty < 1 || difficulty > 10) {
+                return ui.notifications.error("Invalid difficulty value.");
+              }
+
               if (!attrSelected) {
                 return ui.notifications.warn("Choose an attribute first");
               }
@@ -398,6 +405,10 @@ export const callDialogRollWeaponDice = async (actor, event) => {
                 $(dialog.element).find('input[name="difficulty"]').val() || "7",
                 10
               );
+
+              if (isNaN(difficulty) || difficulty < 1 || difficulty > 10) {
+                return ui.notifications.error("Invalid difficulty value.");
+              }
 
               multipleSelected = JSON.parse(multipleSelected);
 
@@ -513,6 +524,79 @@ export const callDialogRollDamage = async (actor, event) => {
             icon: '<i class="fas fa-times"></i>',
             label: "Cancel",
             class: "roll-damage-cancel",
+            callback: () => resolve(null),
+          },
+        ],
+        render: (html) => {
+          console.log(html);
+          setTimeout(() => {
+            const contentEl = html
+              .closest(".window-app")
+              .find(".window-content")[0];
+            if (contentEl) {
+              contentEl.scrollTop = 0;
+            }
+          }, 50);
+        },
+        close: () => resolve(null),
+      }).render({ force: true });
+    });
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error(error.message);
+  }
+};
+
+export const callDifficultyDialog = async (actor, eventSup) => {
+  try {
+    const type = eventSup.currentTarget.dataset.type;
+
+    const content = await foundry.applications.handlebars.renderTemplate(
+      "systems/scion-hero-foundry/templates/actors/dialogs/difficulty.html"
+    );
+
+    return new Promise((resolve) => {
+      new foundry.applications.api.DialogV2({
+        classes: ["difficulty-dialog"],
+        window: {},
+        content,
+        buttons: [
+          {
+            action: "set",
+            label: "Set",
+            icon: '<i class="fas fa-check"></i>',
+            class: "set-difficulty",
+            default: true,
+            callback: async (event, button, dialog) => {
+              const difficulty = parseInt(
+                $(dialog.element).find('input[name="difficulty"]').val() || "7",
+                10
+              );
+
+              if (isNaN(difficulty) || difficulty < 1 || difficulty > 10) {
+                return ui.notifications.error("Invalid difficulty value.");
+              }
+
+              if (type === "attribute") {
+                await callRollAttrDice(actor, eventSup, difficulty);
+              }
+
+              if (type === "willpower") {
+                await callRollWillpowerDice(actor, eventSup, difficulty);
+              }
+
+              if (type === "legend") {
+                await callRollLegendDice(actor, eventSup, difficulty);
+              }
+
+              resolve();
+            },
+          },
+          {
+            action: "cancel",
+            icon: '<i class="fas fa-times"></i>',
+            label: "Cancel",
+            class: "set-difficulty-cancel",
             callback: () => resolve(null),
           },
         ],

@@ -38,8 +38,59 @@ const calcSuccess = async (dices, difficulty = 7) => {
   };
 };
 
-export const callRollAttrDice = async (actor, event) => {
+export const callRollLegendDice = async (actor, event, difficulty) => {
   try {
+    const legend = foundry.utils.getProperty(actor.system, `legend.value`) || 0;
+
+    const results = await rollDice(legend);
+    const { totalSucess, fail, explodedDices } = await calcSuccess(
+      results,
+      difficulty
+    );
+
+    await sendRollToChat(actor, {
+      totalSucess,
+      criticalFailCount: 0,
+      fail,
+      criticalFail: false,
+      explodedDices,
+      title: "Legend Roll",
+      epicAttributeLabel: null,
+    });
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error(error.message);
+  }
+};
+
+export const callRollWillpowerDice = async (actor, event, difficulty) => {
+  try {
+    const willpower =
+      foundry.utils.getProperty(actor.system, `willpower.value`) || 0;
+    const results = await rollDice(willpower);
+    const { totalSucess, fail, explodedDices } = await calcSuccess(
+      results,
+      difficulty
+    );
+
+    await sendRollToChat(actor, {
+      totalSucess,
+      criticalFailCount: 0,
+      fail,
+      criticalFail: false,
+      explodedDices,
+      title: "Willpower Roll",
+      epicAttributeLabel: null,
+    });
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error(error.message);
+  }
+};
+
+export const callRollAttrDice = async (actor, event, difficulty) => {
+  try {
+    console.log("Rolling attribute dice");
     const key = event.currentTarget.dataset.key;
     const attr = event.currentTarget.dataset.label;
     const attributes = foundry.utils.getProperty(actor.system, "attributes");
@@ -65,7 +116,7 @@ export const callRollAttrDice = async (actor, event) => {
       fail,
       criticalFail,
       explodedDices,
-    } = await calcSuccess(results);
+    } = await calcSuccess(results, difficulty);
 
     await sendRollToChat(actor, {
       totalSucess,

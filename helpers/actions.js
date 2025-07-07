@@ -5,13 +5,13 @@ import {
   boonSchema,
   weaponSchema,
 } from "../module/actor-base-default.js";
-import { callRollAttrDice } from "./rollDice.js";
 import {
   selectPantheon,
   selectGod,
   callDialogRollSkillDice,
   callDialogRollWeaponDice,
   callDialogRollDamage,
+  callDifficultyDialog,
 } from "./dialog.js";
 
 export async function _onAction(event, actor) {
@@ -57,7 +57,9 @@ export async function _onAction(event, actor) {
       await deleteWeapon(actor, event);
       break;
     case "roll-attribute":
-      await callRollAttrDice(actor, event);
+    case "roll-willpower":
+    case "roll-legend":
+      await callDifficultyDialog(actor, event);
       break;
     case "roll-abilitie":
       await callDialogRollSkillDice(actor, event);
