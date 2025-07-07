@@ -5,7 +5,7 @@
   <div class="weapon-wrapper">
     <ul>
       {{#each system.weapons as |weapon|}}
-      <li>
+  <li>
         <div class="weapon-name">
           <input
             type="text"
@@ -34,23 +34,23 @@
                   {{attrKey}}
                 </option>
                 {{/each}}
-            </select>
+              </select>
             </div>
             <div>
               <span>Skill:</span>
-            <select
-              name="weapon-skill"
-              data-action="select-weapon-type"
-              data-field="skill"
-              data-weapon-id="{{weapon._id}}"
-            >
-              <option value="">Skills</option>
-              {{#each ../system.skillsKeys as |skill|}}
-              <option value="{{skill}}" {{ifEquals weapon.skill skill}}>
-                {{skill}}
-              </option>
-              {{/each}}
-            </select>
+              <select
+                name="weapon-skill"
+                data-action="select-weapon-type"
+                data-field="skill"
+                data-weapon-id="{{weapon._id}}"
+              >
+                <option value="">Skills</option>
+                {{#each ../system.skillsKeys as |skill|}}
+                <option value="{{skill}}" {{ifEquals weapon.skill skill}}>
+                  {{skill}}
+                </option>
+                {{/each}}
+              </select>
             </div>
           </div>
           <div class="weapon-stats">
@@ -58,7 +58,6 @@
               <span>Speed:</span>
               <input type="text" placeholder="Speed" data-action="update-weapon-field" data-weapon-id="{{weapon._id}}" data-field="speed" value="{{weapon.speed}}" />
             </div>
-
             <div>
               <span>Accuracy:</span>
               <input type="text" placeholder="Accuracy" data-action="update-weapon-field" data-weapon-id="{{weapon._id}}" data-field="acc" value="{{weapon.acc}}" />
@@ -67,34 +66,35 @@
               <span>Defense:</span>
               <input
                 type="text"
-              placeholder="Defense"
-              data-action="update-weapon-field"
-              data-weapon-id="{{weapon._id}}"
-              data-field="defense"
-              value="{{weapon.defense}}"
-            />
-          </div>
-          <div>
-            <span>Range:</span>
-            <input
-              type="text"
-              placeholder="Range"
-              data-action="update-weapon-field"
-              data-weapon-id="{{weapon._id}}"
-              data-field="range"
-              value="{{weapon.range}}"
-            />
-          </div>
-          <div class="damage">
-            <span>Damage:</span>
-            <input
-              type="text"
-              placeholder="Damage value"
-              data-action="update-weapon-field"
-              data-weapon-id="{{weapon._id}}"
-              data-field="damage"
-              value="{{weapon.damage}}"
-            />
+                placeholder="Defense"
+                data-action="update-weapon-field"
+                data-weapon-id="{{weapon._id}}"
+                data-field="defense"
+                value="{{weapon.defense}}"
+              />
+            </div>
+            <div>
+              <span>Range:</span>
+              <input
+                type="text"
+                placeholder="Range"
+                data-action="update-weapon-field"
+                data-weapon-id="{{weapon._id}}"
+                data-field="range"
+                value="{{weapon.range}}"
+              />
+            </div>
+            <div class="damage">
+              <span>Damage:</span>
+              <input
+                type="text"
+                placeholder="Damage value"
+                data-action="update-weapon-field"
+                data-weapon-id="{{weapon._id}}"
+                data-field="damage"
+                value="{{weapon.damage}}"
+              />
+            </div>
           </div>
         </div>
         <div class="damage-info">
@@ -116,21 +116,20 @@
             </div>
             <div>
               <span>Damage Type:</span>
-            <select
-              name=""
-              id=""
-              data-action="select-weapon-type"
-              data-field="type"
-              data-weapon-id="{{weapon._id}}"
-            >
-              <option value="">Damage Type</option>
-              {{#each ../system.damageType as |type|}}
-              <option value="{{type}}" {{ifEquals weapon.type type}}>
-                {{type}}
-              </option>
-              {{/each}}
-            </select>
+              <select
+                data-action="select-weapon-type"
+                data-field="type"
+                data-weapon-id="{{weapon._id}}"
+              >
+                <option value="">Damage Type</option>
+                {{#each ../system.damageType as |type|}}
+                <option value="{{type}}" {{ifEquals weapon.type type}}>
+                  {{type}}
+                </option>
+                {{/each}}
+              </select>
             </div>
+          </div>
         </div>
         <button
           class="delete-button"
@@ -307,7 +306,7 @@
       <span class="penalty">{{#if (eq key "Incapacitated")}}I{{else}}{{condition.value}}{{/if}}</span>
       <select data-key="{{key}}" data-action="change-health-damage">
         <option {{ifEquals condition.damageType "__none__"}} value="__none__">&nbsp;</option>
-        <option {{ifEquals condition.damageType "/"}} value="/" >&#8260;</option>
+        <option {{ifEquals condition.damageType "/"}} value="/">&#8260;</option>
         <option {{ifEquals condition.damageType "X"}} value="X">✕</option>
         <option {{ifEquals condition.damageType "*"}} value="*">★</option>
       </select>
