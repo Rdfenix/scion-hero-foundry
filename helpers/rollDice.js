@@ -128,7 +128,15 @@ export const callRollSkillDice = async (
 
 export const callRollWeaponDice = async (
   actor,
-  { multipleSelected, epicAttrValue, skillValue, attrValue, weapon, extraDices }
+  {
+    multipleSelected,
+    epicAttrValue,
+    skillValue,
+    attrValue,
+    weapon,
+    extraDices,
+    difficulty,
+  }
 ) => {
   try {
     if (!weapon) {
@@ -160,7 +168,7 @@ export const callRollWeaponDice = async (
           fail,
           criticalFail,
           explodedDices,
-        } = await calcSuccess(results);
+        } = await calcSuccess(results, difficulty);
 
         await sendRollToChat(actor, {
           totalSucess,

@@ -394,6 +394,10 @@ export const callDialogRollWeaponDice = async (actor, event) => {
                   "0",
                 10
               );
+              const difficulty = parseInt(
+                $(dialog.element).find('input[name="difficulty"]').val() || "7",
+                10
+              );
 
               multipleSelected = JSON.parse(multipleSelected);
 
@@ -413,6 +417,7 @@ export const callDialogRollWeaponDice = async (actor, event) => {
                 attrValue,
                 weapon,
                 extraDices,
+                difficulty,
               });
 
               resolve();
