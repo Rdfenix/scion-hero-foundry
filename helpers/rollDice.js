@@ -11,7 +11,7 @@ export const rollDice = async (diceTotal = 0) => {
   }
 };
 
-const calcSuccess = async (dices) => {
+const calcSuccess = async (dices, difficulty = 7) => {
   let totalSucess = 0;
   let hasCriticalFail = false;
   let explodedDices = [];
@@ -21,7 +21,7 @@ const calcSuccess = async (dices) => {
     if (dice === 10) {
       explodedDices.push(dice);
       totalSucess += 2;
-    } else if (dice >= 7 && dice <= 9) {
+    } else if (dice >= difficulty && dice <= 9) {
       totalSucess += 1;
     } else if (dice === 1) {
       hasCriticalFail = true;
@@ -85,7 +85,7 @@ export const callRollAttrDice = async (actor, event) => {
 
 export const callRollSkillDice = async (
   actor,
-  { skillName, skillValue, attr, attrValue, epicAttrValue }
+  { skillName, skillValue, attr, attrValue, epicAttrValue, difficulty }
 ) => {
   try {
     if (!skillName || !skillValue || !attr || !attrValue) {
@@ -108,7 +108,7 @@ export const callRollSkillDice = async (
       fail,
       criticalFail,
       explodedDices,
-    } = await calcSuccess(results);
+    } = await calcSuccess(results, difficulty);
 
     await sendRollToChat(actor, {
       totalSucess,

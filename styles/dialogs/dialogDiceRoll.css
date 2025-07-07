@@ -1,6 +1,6 @@
 .roll-skill-dialog {
   width: 500px;
-  height: 250px;
+  height: 290px;
 }
 
 .weapon-dialog {
@@ -61,9 +61,34 @@
   font-size: 25px;
 }
 
+.attr-dialog-group {
+  height: 177px;
+}
+
 .weapon-dialog-group-header > h2 {
   font-size: 18px;
   margin-bottom: 10px !important;
+}
+
+.attr-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.difficulty {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.difficulty label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.attr-dialog-content input[type="number"] {
+  padding: 10px;
 }
 
 .attr-dialog-content select {

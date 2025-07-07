@@ -296,6 +296,11 @@ export const callDialogRollSkillDice = async (actor, event) => {
                 .find('select[name="attr-dice-roll"]')
                 .val();
 
+              const difficulty = parseInt(
+                $(dialog.element).find('input[name="difficulty"]').val() || "7",
+                10
+              );
+
               if (!attrSelected) {
                 return ui.notifications.warn("Choose an attribute first");
               }
@@ -309,6 +314,7 @@ export const callDialogRollSkillDice = async (actor, event) => {
                 attr: attrSelected,
                 attrValue,
                 epicAttrValue,
+                difficulty,
               });
 
               resolve();
