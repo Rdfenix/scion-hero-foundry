@@ -65,7 +65,7 @@
 
 .knacks-wrapper > .knack-list > ul > li > textarea,
 .boon-description > textarea {
-  height: 100px;
+  height: 145px;
   min-height: 50px;
   max-height: 200px;
   resize: none;

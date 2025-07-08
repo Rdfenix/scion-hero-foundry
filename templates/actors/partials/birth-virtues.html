@@ -55,7 +55,11 @@
                 >{{{birthright.description}}}</textarea
                 >
                 {{#if (hasOwnProperty birthright "boons")}}
-                <div class="boons-area">
+                <div
+                  class="boons-area"
+                  data-drop-target="birth-boons-list"
+                  data-index="{{index}}"
+                >
                   <span>Boons:</span>
                   <ul>
                     {{#each birthright.boons as |boon bonnIndex|}}

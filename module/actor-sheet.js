@@ -1,5 +1,6 @@
 import { _onAction } from "../helpers/actions.js";
 import { _onChange } from "../helpers/change.js";
+import { _onDrop } from "../helpers/onDrop.js";
 
 export class ScionHeroActorSheet extends foundry.appv1.sheets.ActorSheet {
   prepareData() {
@@ -63,6 +64,32 @@ export class ScionHeroActorSheet extends foundry.appv1.sheets.ActorSheet {
 
       _onChange(event, this.actor);
     });
+
+    html.find("[data-drop-target='knack-list']").on("dragover", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    });
+    html
+      .find("[data-drop-target='knack-list']")
+      .on("drop", (event) => _onDrop(event, this.actor));
+
+    html.find("[data-drop-target='boons-list']").on("dragover", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    });
+    html
+      .find("[data-drop-target='boons-list']")
+      .on("drop", (event) => _onDrop(event, this.actor));
+
+    html
+      .find("[data-drop-target='birth-boons-list']")
+      .on("dragover", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+    html
+      .find("[data-drop-target='birth-boons-list']")
+      .on("drop", (event) => _onDrop(event, this.actor));
   }
 
   async getData() {

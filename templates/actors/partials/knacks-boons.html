@@ -3,7 +3,7 @@
     <h2>Knacks</h2>
   </div>
   <div class="knacks-wrapper">
-    <div class="knack-list">
+    <div class="knack-list" data-drop-target="knack-list">
       <ul>
         {{#each system.knacks as |knack index|}}
         <li>
@@ -43,7 +43,7 @@
     <h2>Boons</h2>
   </div>
   <div class="boons-wrapper">
-    <div class="boons">
+    <div class="boons" data-drop-target="boons-list">
       <ul class="boon-list">
         {{#each system.boons as |boon index|}}
         <li>

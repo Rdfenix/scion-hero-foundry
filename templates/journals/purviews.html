@@ -12,7 +12,11 @@
         <div class="boons">
           <ul class="boon-list">
             {{#each item.boons as |boon|}}
-            <li draggable="true">
+            <li
+              draggable="true"
+              data-type="boon-power"
+              data-entry="{{boon.name}}"
+            >
               <div class="boon-header">
                 <div class="boon-title">
                   <span>{{{boon.name}}}</span>

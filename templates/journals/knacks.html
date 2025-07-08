@@ -5,7 +5,11 @@
     <div class="knack-list">
       <ul>
         {{#each knack.powers as |power|}}
-        <li draggable="true">
+        <li
+          draggable="true"
+          data-type="knack-power"
+          data-entry="{{power.name}}"
+        >
           <h3>{{power.name}}</h3>
           <span>{{{power.description}}}</span>
         </li>
