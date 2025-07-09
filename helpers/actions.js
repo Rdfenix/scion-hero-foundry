@@ -14,6 +14,8 @@ import {
   callDifficultyDialog,
 } from "./dialog.js";
 
+import { callRollJoinBattle } from "./rollDice.js";
+
 export async function _onAction(event, actor) {
   event.preventDefault();
   event.stopPropagation();
@@ -69,6 +71,9 @@ export async function _onAction(event, actor) {
       break;
     case "roll-damage":
       await callDialogRollDamage(actor, event);
+      break;
+    case "join-battle":
+      await callRollJoinBattle(actor, event);
       break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);

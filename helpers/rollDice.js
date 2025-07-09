@@ -38,6 +38,50 @@ const calcSuccess = async (dices, difficulty = 7) => {
   };
 };
 
+export const callRollJoinBattle = async (actor) => {
+  try {
+    const wits = foundry.utils.getProperty(
+      actor.system,
+      "attributes.mental.wits.value"
+    );
+
+    const epicWits = foundry.utils.getProperty(
+      actor.system,
+      "epicAttributes.mental.wits.value"
+    );
+
+    const awareness = foundry.utils.getProperty(
+      actor.system,
+      "abilities.awareness.value"
+    );
+
+    const totalDices = Math.max(0, wits + awareness) || 0;
+    const results = await rollDice(totalDices);
+
+    const {
+      totalSucess,
+      criticalFailCount,
+      fail,
+      criticalFail,
+      explodedDices,
+    } = await calcSuccess(results);
+
+    await sendRollToChat(actor, {
+      totalSucess,
+      criticalFailCount,
+      fail,
+      criticalFail,
+      epicAttribute: epicWits,
+      explodedDices,
+      title: "Join Battle",
+      epicAttributeLabel: "Wits",
+    });
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error(error.message);
+  }
+};
+
 export const callRollLegendDice = async (actor, event, difficulty) => {
   try {
     const legend = foundry.utils.getProperty(actor.system, `legend.value`) || 0;
@@ -90,7 +134,6 @@ export const callRollWillpowerDice = async (actor, event, difficulty) => {
 
 export const callRollAttrDice = async (actor, event, difficulty) => {
   try {
-    console.log("Rolling attribute dice");
     const key = event.currentTarget.dataset.key;
     const attr = event.currentTarget.dataset.label;
     const attributes = foundry.utils.getProperty(actor.system, "attributes");

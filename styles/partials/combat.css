@@ -280,3 +280,15 @@
   gap: 0.5rem;
   font-family: skranji-bold, sans-serif;
 }
+
+.join-battle {
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+}
+
+.join-battle button {
+  font-family: skranji-bold, sans-serif;
+  display: flex;
+  align-items: center;
+}
