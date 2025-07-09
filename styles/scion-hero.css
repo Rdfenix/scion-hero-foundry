@@ -237,3 +237,19 @@ select:hover {
 .dialog .window-content {
   overflow: auto;
 }
+
+.profile-image {
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  width: 135px;
+  height: 135px;
+  background: #9f9f9f;
+  top: 6px;
+}
+
+.token img {
+  border-radius: 50% !important;
+}
+
+

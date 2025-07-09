@@ -3,8 +3,19 @@
   <div class="scion-header">
     <h1>HERO</h1>
   </div>
+
   {{!-- Character Sheet Template for Foundry VTT --}}
   <form class="scion-form" autocomplete="off">
+    <div class="profile-image">
+      <img
+        class="profile"
+        src="{{actor.img}}"
+        data-edit="img"
+        title="{{actor.name}}"
+        width="135"
+        height="135"
+      />
+    </div>
     <header class="sheet-header">
       <div class="column">
         <div class="row">
@@ -99,8 +110,7 @@
         "systems/scion-hero-foundry/templates/actors/partials/knacks-boons.html"}}
       </div>
       <div class="tab" data-group="primary" data-tab="combat">
-        {{>
-        "systems/scion-hero-foundry/templates/actors/partials/combat.html"}}
+        {{> "systems/scion-hero-foundry/templates/actors/partials/combat.html"}}
       </div>
     </section>
   </form>

@@ -37,11 +37,33 @@ export async function _onChange(event, actor) {
     case "change-health-damage":
       await onChangeHealthValue(event, actor);
       break;
+    case "update-xp":
+      await updateExperiencePoints(event, actor);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
   }
 }
+
+const updateExperiencePoints = async (event, actor) => {
+  try {
+    let xp = foundry.utils.getProperty(actor.system, "experience");
+    xp = {
+      ...xp,
+      value: event.currentTarget.value || 0,
+    };
+    await actor.update(
+      {
+        "system.experience": xp,
+      },
+      { render: false }
+    );
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch xp.");
+  }
+};
 
 const onSelectFieldInWeapon = async (event, actor) => {
   try {

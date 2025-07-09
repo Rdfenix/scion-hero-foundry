@@ -104,6 +104,25 @@ Hooks.once("init", async function () {
   }
 
   registerJournalHooks();
+
+  Hooks.on("renderToken", (token, html, data) => {
+    // Aplique somente se o token tiver um sprite válido
+    if (!token.mesh) return;
+
+    const sprite = token.mesh; // ou token.icon em algumas versões
+
+    const radius = Math.min(sprite.width, sprite.height) / 2;
+
+    // Cria uma máscara circular usando PIXI
+    const mask = new PIXI.Graphics();
+    mask.beginFill(0xffffff);
+    mask.drawCircle(sprite.width / 2, sprite.height / 2, radius);
+    mask.endFill();
+
+    // Aplica a máscara ao sprite do token
+    sprite.mask = mask;
+    sprite.addChild(mask);
+  });
 });
 
 Hooks.on("preCreateActor", (document, data, options, userId) => {

@@ -109,6 +109,7 @@ export const ScionHeroActorBaseDefault = {
       Incapacitated: { value: -4, damageType: "" },
     },
   },
+  experience: { value: 0 },
 };
 
 const defaultBirthSchema = {
