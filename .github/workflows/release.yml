@@ -3,7 +3,10 @@ name: Create Release
 on:
   push:
     tags:
-      - 'v*.*.*' # Só roda quando um tag com SemVer for enviado
+      - "v*.*.*" # Só roda quando um tag com SemVer for enviado
+
+permissions:
+  contents: write # 🔥 Permissão necessária para criar releases
 
 jobs:
   build-release:
