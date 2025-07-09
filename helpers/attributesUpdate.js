@@ -1,3 +1,5 @@
+import { updateSoak } from "./updateSoak.js";
+
 const bindAttributeCheckboxes = (
   checkboxes,
   groupKey,
@@ -26,6 +28,9 @@ const bindAttributeCheckboxes = (
     );
 
     updateAttributeCheckboxes(checkboxes, valueToSet);
+    if (label === "stamina") {
+      await updateSoak(app);
+    }
   });
 };
 

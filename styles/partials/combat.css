@@ -259,6 +259,12 @@
   padding: 10px;
 }
 
+.aggraveted input[type="text"]:disabled,
+.lethal input[type="text"]:disabled,
+.bashing input[type="text"]:disabled {
+  border: 1px solid #7a7971;
+}
+
 .health-line {
   display: flex;
   width: 100%;

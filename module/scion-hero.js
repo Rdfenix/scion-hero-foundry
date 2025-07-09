@@ -8,6 +8,7 @@ import { mountingBasedata } from "../helpers/mountBasedata.js";
 import { splitInColumns } from "../helpers/splitInColumns.js";
 import { willpowerUpdate } from "../helpers/willpowerUpdate.js";
 import { legendUpdate } from "../helpers/legendUpdate.js";
+import { updateSoak } from "../helpers/updateSoak.js";
 import {
   createPuviewsJournal,
   createKnacksJournal,
@@ -136,4 +137,5 @@ Hooks.on("renderActorSheet", (app, html, data) => {
   birthrightUpdate(app, html, data);
   willpowerUpdate(app, html, data);
   legendUpdate(app, html, data);
+  updateSoak(app);
 });
