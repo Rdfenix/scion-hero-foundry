@@ -27,4 +27,4 @@ jobs:
           tag_name: ${{ github.ref_name }}
           files: scion-hero-foundry.zip
         env:
-          GITHUB_TOKEN: "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"
+          GITHUB_TOKEN: ""
