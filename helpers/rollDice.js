@@ -1,8 +1,13 @@
 import { epicAttributeSuccesses } from "../module/actor-base-default.js";
 
-export const rollDice = async (diceTotal = 0) => {
+export const rollDice = async (diceTotal, actor, flavor = "Roll") => {
   try {
     const roll = await new Roll(`${diceTotal}d10`).evaluate();
+
+    await roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor }),
+      flavor,
+    });
 
     return roll.terms[0].results.map((dice) => dice.result);
   } catch (error) {
@@ -56,7 +61,7 @@ export const callRollJoinBattle = async (actor) => {
     );
 
     const totalDices = Math.max(0, wits + awareness) || 0;
-    const results = await rollDice(totalDices);
+    const results = await rollDice(totalDices, actor);
 
     const {
       totalSucess,

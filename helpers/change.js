@@ -40,11 +40,38 @@ export async function _onChange(event, actor) {
     case "update-xp":
       await updateExperiencePoints(event, actor);
       break;
+    case "update-virtue-field":
+      await updateVirtueField(event, actor);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
   }
 }
+
+const updateVirtueField = async (event, actor) => {
+  try {
+    const field = event.currentTarget.dataset.field;
+    let virtues = foundry.utils.getProperty(actor.system, "virtues");
+
+    virtues = {
+      ...virtues,
+      [field]: { ...virtues[field], name: event.target.value },
+    };
+
+    await actor.update(
+      {
+        "system.virtues": virtues,
+      },
+      { render: false }
+    );
+
+    reopenWithActiveTab(actor);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch virtues.");
+  }
+};
 
 const updateExperiencePoints = async (event, actor) => {
   try {

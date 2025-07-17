@@ -52,7 +52,8 @@
                   data-action="update-birthright-description"
                   data-field="description"
                   data-index="{{index}}"
-                >{{{birthright.description}}}</textarea
+                >
+{{{birthright.description}}}</textarea
                 >
                 {{#if (hasOwnProperty birthright "boons")}}
                 <div
@@ -141,7 +142,13 @@
     {{#each system.virtues as |attr key|}}
     <div class="virtues-row" data-key="{{key}}">
       <div class="virtues-column">
-        <span>{{key}}</span>
+        <input
+          type="text"
+          data-action="update-virtue-field"
+          data-field="{{key}}"
+          value="{{attr.name}}"
+          placeholder="Virtue"
+        />
       </div>
       <div class="virtues-column">
         <div class="circles">

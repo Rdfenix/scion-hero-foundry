@@ -59,7 +59,12 @@ export const ScionHeroActorBaseDefault = {
     survival: { value: 0, max: 5, min: 1, favored: false },
     thrown: { value: 0, max: 5, min: 1, favored: false },
   },
-  virtues: {},
+  virtues: {
+    virtue_1: { name: "", value: 1, min: 1, max: 5 },
+    virtue_2: { name: "", value: 1, min: 1, max: 5 },
+    virtue_3: { name: "", value: 1, min: 1, max: 5 },
+    virtue_4: { name: "", value: 1, min: 1, max: 5 },
+  },
   legend: { value: 2, max: 12, min: 1 },
   legendPoints: { value: 0, max: 48, min: 0 },
   willpower: { value: 0, max: 10, min: 1 },

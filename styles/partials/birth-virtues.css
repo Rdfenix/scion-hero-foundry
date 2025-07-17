@@ -34,6 +34,11 @@
   justify-content: center;
 }
 
+.virtues-row > .virtues-column > input[type="text"] {
+  padding: 10px;
+  border: none;
+}
+
 .virtues-row > .virtues-column:nth-child(2) {
   align-items: flex-end !important;
 }

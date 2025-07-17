@@ -66,8 +66,9 @@ export const selectPantheon = async (actor) => {
         name: deity.name,
         logo: deity.img,
         description: deity.system.description,
-        virtues: deity.system.virtues.reduce((acc, virtue) => {
-          acc[virtue.name] = {
+        virtues: deity.system.virtues.reduce((acc, virtue, index) => {
+          acc[`virtue_${index + 1}`] = {
+            name: virtue.name,
             value: 1,
             min: virtue.min,
             max: virtue.max,
