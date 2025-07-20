@@ -1,0 +1,32 @@
+2025/07/20-01:25:49.368 35f4 Recovering log #75
+2025/07/20-01:25:49.368 35f4 Level-0 table #77: started
+2025/07/20-01:25:49.368 35f4 Level-0 table #77: 42987 bytes OK
+2025/07/20-01:25:49.373 35f4 Delete type=0 #75
+2025/07/20-01:25:49.373 35f4 Delete type=3 #73
+2025/07/20-01:25:49.373 37c4 Compacting 4@0 + 0@1 files
+2025/07/20-01:25:49.373 37c4 Generated table #79@0: 1 keys, 6971 bytes
+2025/07/20-01:25:49.373 37c4 Compacted 4@0 + 0@1 files => 6971 bytes
+2025/07/20-01:25:49.373 37c4 compacted to: files[ 0 1 1 0 0 0 0 ]
+2025/07/20-01:25:49.373 37c4 Delete type=2 #68
+2025/07/20-01:25:49.373 37c4 Delete type=2 #71
+2025/07/20-01:25:49.373 37c4 Delete type=2 #74
+2025/07/20-01:25:49.373 37c4 Delete type=2 #77
+2025/07/20-01:26:49.647 37c4 Level-0 table #81: started
+2025/07/20-01:26:49.649 37c4 Level-0 table #81: 42987 bytes OK
+2025/07/20-01:26:49.650 37c4 Delete type=0 #78
+2025/07/20-01:26:49.659 37c4 Manual compaction at level-0 from '!items!null' @ 72057594037927935 : 1 .. '!items!purviews_3' @ 0 : 0; will stop at '!items!null' @ 67 : 1
+2025/07/20-01:26:49.659 37c4 Compacting 1@0 + 1@1 files
+2025/07/20-01:26:49.660 37c4 Generated table #82@0: 1 keys, 6971 bytes
+2025/07/20-01:26:49.660 37c4 Compacted 1@0 + 1@1 files => 6971 bytes
+2025/07/20-01:26:49.661 37c4 compacted to: files[ 0 1 1 0 0 0 0 ]
+2025/07/20-01:26:49.661 37c4 Delete type=2 #79
+2025/07/20-01:26:49.661 37c4 Delete type=2 #81
+2025/07/20-01:26:49.672 37c4 Manual compaction at level-0 from '!items!null' @ 67 : 1 .. '!items!purviews_3' @ 0 : 0; will stop at (end)
+2025/07/20-01:26:49.684 37c4 Manual compaction at level-1 from '!items!null' @ 72057594037927935 : 1 .. '!items!purviews_3' @ 0 : 0; will stop at '!items!null' @ 69 : 1
+2025/07/20-01:26:49.684 37c4 Compacting 1@1 + 1@2 files
+2025/07/20-01:26:49.687 37c4 Generated table #83@1: 4 keys, 49177 bytes
+2025/07/20-01:26:49.687 37c4 Compacted 1@1 + 1@2 files => 49177 bytes
+2025/07/20-01:26:49.687 37c4 compacted to: files[ 0 0 1 0 0 0 0 ]
+2025/07/20-01:26:49.687 37c4 Delete type=2 #64
+2025/07/20-01:26:49.687 37c4 Delete type=2 #82
+2025/07/20-01:26:49.688 37c4 Manual compaction at level-1 from '!items!null' @ 69 : 1 .. '!items!purviews_3' @ 0 : 0; will stop at (end)
