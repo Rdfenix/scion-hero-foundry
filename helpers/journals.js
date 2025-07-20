@@ -19,6 +19,7 @@ export async function createPuviewsJournal() {
     name: folderName,
     type: "JournalEntry",
     color: "#782e22",
+    permission: { default: 2 },
   });
 
   for (const purview of purviewList) {
@@ -73,6 +74,7 @@ export async function createKnacksJournal() {
     name: folderName,
     type: "JournalEntry",
     color: "#556B2F",
+    permission: { default: 2 },
   });
 
   // Cria journals individualmente com página e flag
