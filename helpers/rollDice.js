@@ -1,15 +1,13 @@
 import { epicAttributeSuccesses } from "../module/actor-base-default.js";
 
-export const rollDice = async (diceTotal, actor, flavor = "Roll") => {
+export const rollDice = async (diceTotal) => {
   try {
     const roll = await new Roll(`${diceTotal}d10`).evaluate();
 
-    await roll.toMessage({
-      speaker: ChatMessage.getSpeaker({ actor }),
-      flavor,
-    });
-
-    return roll.terms[0].results.map((dice) => dice.result);
+    return {
+      dicesResult: roll.terms[0].results.map((dice) => dice.result),
+      roll,
+    };
   } catch (error) {
     console.error(error.message);
     ui.notifications.error(error.message);
@@ -61,7 +59,7 @@ export const callRollJoinBattle = async (actor) => {
     );
 
     const totalDices = Math.max(0, wits + awareness) || 0;
-    const results = await rollDice(totalDices, actor);
+    const { dicesResult, roll } = await rollDice(totalDices);
 
     const {
       totalSucess,
@@ -69,9 +67,9 @@ export const callRollJoinBattle = async (actor) => {
       fail,
       criticalFail,
       explodedDices,
-    } = await calcSuccess(results);
+    } = await calcSuccess(dicesResult);
 
-    await sendRollToChat(actor, {
+    await sendRollToChat(actor, roll, {
       totalSucess,
       criticalFailCount,
       fail,
@@ -91,13 +89,13 @@ export const callRollLegendDice = async (actor, event, difficulty) => {
   try {
     const legend = foundry.utils.getProperty(actor.system, `legend.value`) || 0;
 
-    const results = await rollDice(legend);
+    const { dicesResult, roll } = await rollDice(legend);
     const { totalSucess, fail, explodedDices } = await calcSuccess(
-      results,
+      dicesResult,
       difficulty
     );
 
-    await sendRollToChat(actor, {
+    await sendRollToChat(actor, roll, {
       totalSucess,
       criticalFailCount: 0,
       fail,
@@ -116,13 +114,13 @@ export const callRollWillpowerDice = async (actor, event, difficulty) => {
   try {
     const willpower =
       foundry.utils.getProperty(actor.system, `willpower.value`) || 0;
-    const results = await rollDice(willpower);
+    const { dicesResult, roll } = await rollDice(willpower);
     const { totalSucess, fail, explodedDices } = await calcSuccess(
-      results,
+      dicesResult,
       difficulty
     );
 
-    await sendRollToChat(actor, {
+    await sendRollToChat(actor, roll, {
       totalSucess,
       criticalFailCount: 0,
       fail,
@@ -153,9 +151,12 @@ export const callRollAttrDice = async (actor, event, difficulty) => {
     const totalDice = Math.max(value + penality, 0);
 
     let results = [];
+    let rollItem = null;
 
     if (totalDice > 0) {
-      results = await rollDice(totalDice);
+      const { dicesResult, roll } = await rollDice(totalDice);
+      results = dicesResult;
+      rollItem = roll;
     }
 
     const {
@@ -166,7 +167,7 @@ export const callRollAttrDice = async (actor, event, difficulty) => {
       explodedDices,
     } = await calcSuccess(results, difficulty);
 
-    await sendRollToChat(actor, {
+    await sendRollToChat(actor, rollItem, {
       totalSucess,
       criticalFailCount,
       fail,
@@ -196,9 +197,12 @@ export const callRollSkillDice = async (
     const totalDice = Math.max(attrValue + skillValue + penality, 0);
 
     let results = [];
+    let rollItem = null;
 
     if (totalDice > 0) {
-      results = await rollDice(totalDice);
+      const { dicesResult, roll } = await rollDice(totalDice);
+      results = dicesResult;
+      rollItem = roll;
     }
 
     const {
@@ -209,7 +213,7 @@ export const callRollSkillDice = async (
       explodedDices,
     } = await calcSuccess(results, difficulty);
 
-    await sendRollToChat(actor, {
+    await sendRollToChat(actor, rollItem, {
       totalSucess,
       criticalFailCount,
       fail,
@@ -259,7 +263,8 @@ export const callRollWeaponDice = async (
     if (totalDice > 0) {
       for (let i = 0; i < actions; i++) {
         let results = [];
-        results = await rollDice(totalDice);
+        const { dicesResult, roll } = await rollDice(totalDice);
+        results = dicesResult;
 
         const {
           totalSucess,
@@ -269,7 +274,7 @@ export const callRollWeaponDice = async (
           explodedDices,
         } = await calcSuccess(results, difficulty);
 
-        await sendRollToChat(actor, {
+        await sendRollToChat(actor, roll, {
           totalSucess,
           criticalFailCount,
           fail,
@@ -281,7 +286,9 @@ export const callRollWeaponDice = async (
         });
       }
     } else {
-      await sendRollToChat(actor, {
+      const { dicesResult, roll } = await rollDice(totalDice);
+
+      await sendRollToChat(actor, roll, {
         totalSucess: 0,
         criticalFailCount: 0,
         fail: true,
@@ -304,16 +311,15 @@ export const callDamageAtkRoll = async (
 ) => {
   try {
     const damage = parseInt(weapon.damage) || 0;
-    let results = [];
 
     const totalDamage = Math.max(damage + attrValue + extraDices, 0);
 
-    results = await rollDice(totalDamage);
+    const { dicesResult, roll } = await rollDice(totalDamage);
 
     const { totalSucess, criticalFailCount, fail, explodedDices } =
-      await calcSuccess(results);
+      await calcSuccess(dicesResult);
 
-    await sendRollToChat(actor, {
+    await sendRollToChat(actor, roll, {
       totalSucess,
       criticalFailCount,
       fail,
@@ -331,6 +337,7 @@ export const callDamageAtkRoll = async (
 
 const sendRollToChat = async (
   actor,
+  roll,
   {
     totalSucess,
     criticalFailCount,
@@ -362,9 +369,9 @@ const sendRollToChat = async (
       { data }
     );
 
-    await ChatMessage.create({
-      content: context,
+    await roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor }),
+      content: context,
     });
 
     foundry.audio.AudioHelper.play({ src: CONFIG.sounds.dice }, true);
