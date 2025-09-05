@@ -83,7 +83,6 @@
 
 .skills-row > .square-checkbox {
   margin: 3px 0px;
-  pointer-events: none;
   opacity: 0.8;
 }
 

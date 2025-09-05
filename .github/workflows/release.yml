@@ -1,0 +1,33 @@
+name: Create Release and Zip Asset
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Zip the project
+        run: |
+          # A variável GITHUB_REPOSITORY vem no formato "usuario/repositorio".
+          # O comando sed abaixo extrai apenas o nome do repositório.
+          REPO_NAME=$(echo "${{ github.repository }}" | sed 's/.*\///')
+          # A variável GITHUB_REF_NAME contém o nome da tag (ex: v1.0.0).
+          zip -r "${REPO_NAME}-${{ github.ref_name }}.zip" . -x ".git/*" ".github/*"
+
+      - name: Create Release and Upload Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          files: |
+            ../${REPO_NAME}-${{ github.ref_name }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
