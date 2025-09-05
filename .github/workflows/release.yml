@@ -15,6 +15,34 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Update system.json version and download URL
+        run: |
+          # Extrai o nome da tag (ex: v1.2.3)
+          TAG=${{ github.ref_name }}
+          # Remove o 'v' inicial da tag para ter apenas o número (ex: 1.2.3)
+          VERSION=${TAG#v}
+          # Constrói a URL de download para a nova release
+          DOWNLOAD_URL="https://github.com/${{ github.repository }}/releases/download/${TAG}/scion-hero-foundry.zip"
+
+          echo "Nova versão: $VERSION"
+          echo "Nova URL de Download: $DOWNLOAD_URL"
+
+          # Usa a ferramenta 'jq' para atualizar o JSON.
+          # Ele cria um arquivo temporário e depois o renomeia para segurança.
+          jq --arg version "$VERSION" --arg download "$DOWNLOAD_URL" \
+          '.version = $version | .download = $download' \
+          system.json > system.tmp.json && mv system.tmp.json system.json
+
+      # Passo 3: Fazer commit e push das alterações no system.json
+      # Essencial para que a alteração seja salva no repositório.
+      - name: Commit and Push updated system.json
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add system.json
+          git commit -m "chore: Update system.json for version ${{ github.ref_name }}"
+          git push
+
       - name: Zip the project
         run: |
           # A variável GITHUB_REPOSITORY vem no formato "usuario/repositorio".
