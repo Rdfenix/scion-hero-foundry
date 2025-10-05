@@ -2,7 +2,7 @@
   "id": "scion-hero-foundry",
   "title": "Scion - Hero",
   "description": "A system for playing Scion, a tabletop role-playing game.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "compatibility": {
     "minimum": "11",
     "verified": "13.344"
@@ -72,7 +72,7 @@
   "media": [],
   "url": "https://github.com/Rdfenix/scion-hero-foundry",
   "manifest": "https://github.com/Rdfenix/scion-hero-foundry/releases/latest/download/system.json",
-  "download": "https://github.com/Rdfenix/scion-hero-foundry/releases/download/v1.0.1/scion-hero-foundry.zip",
+  "download": "https://github.com/Rdfenix/scion-hero-foundry/releases/latest/download/scion-hero-foundry.zip",
   "license": "LICENSE.txt",
   "changelog": "https://github.com/Rdfenix/scion-hero-foundry/releases"
 }
