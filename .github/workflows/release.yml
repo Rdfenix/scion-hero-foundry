@@ -15,49 +15,47 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Update system.json version and download URL
+      - name: Update system.json version and URLs
         run: |
           # Extrai o nome da tag (ex: v1.2.3)
           TAG=${{ github.ref_name }}
           # Remove o 'v' inicial da tag para ter apenas o número (ex: 1.2.3)
           VERSION=${TAG#v}
-          # Constrói a URL de download para a nova release
-          DOWNLOAD_URL="https://github.com/${{ github.repository }}/releases/download/${TAG}/scion-hero-foundry.zip"
+
+          # Define os URLs estáticos para a 'latest' release
+          MANIFEST_URL="https://github.com/${{ github.repository }}/releases/latest/download/system.json"
+          DOWNLOAD_URL="https://github.com/${{ github.repository }}/releases/latest/download/scion-hero-foundry.zip"
 
           echo "Nova versão: $VERSION"
-          echo "Nova URL de Download: $DOWNLOAD_URL"
+          echo "URL do Manifesto: $MANIFEST_URL"
+          echo "URL de Download: $DOWNLOAD_URL"
 
           # Usa a ferramenta 'jq' para atualizar o JSON.
-          # Ele cria um arquivo temporário e depois o renomeia para segurança.
-          jq --arg version "$VERSION" --arg download "$DOWNLOAD_URL" \
-          '.version = $version | .download = $download' \
+          # Atualiza a versão, o manifesto e o URL de download.
+          jq --arg version "$VERSION" --arg manifest "$MANIFEST_URL" --arg download "$DOWNLOAD_URL" \
+          '.version = $version | .manifest = $manifest | .download = $download' \
           system.json > system.tmp.json && mv system.tmp.json system.json
 
-      # Passo 3: Fazer commit e push das alterações no system.json
-      # Essencial para que a alteração seja salva no repositório.
       - name: Commit and Push updated system.json
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add system.json
           git commit -m "chore: Update system.json for version ${{ github.ref_name }}"
-          # A linha abaixo é a que foi corrigida.
-          # Ela força o push para a branch 'main'.
           git push origin HEAD:main
 
       - name: Zip the project
         run: |
-          # A variável GITHUB_REPOSITORY vem no formato "usuario/repositorio".
-          # O comando sed abaixo extrai apenas o nome do repositório.
-          REPO_NAME=$(echo "${{ github.repository }}" | sed 's/.*\///')
-          # A variável GITHUB_REF_NAME contém o nome da tag (ex: v1.0.0).
-          zip -r "${REPO_NAME}-${{ github.ref_name }}.zip" . -x ".git/*" ".github/*"
+          # Cria o arquivo zip com o nome fixo "scion-hero-foundry.zip"
+          zip -r "scion-hero-foundry.zip" . -x ".git/*" ".github/*"
 
-      - name: Create Release and Upload Asset
+      - name: Create Release and Upload Assets
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
+          # Lista dos arquivos a serem enviados para a release.
+          # Agora inclui o system.json e o arquivo zip com o novo nome.
           files: |
-            ../${REPO_NAME}-${{ github.ref_name }}.zip
+            scion-hero-foundry.zip
+            system.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
