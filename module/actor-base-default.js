@@ -96,7 +96,7 @@ export const ScionHeroActorBaseDefault = {
       Aggravated: { value: 0 },
     },
     armor: {
-      name: "",
+      name: { value: "" },
       Bashing: { value: 0 },
       Lethal: { value: 0 },
       Aggravated: { value: 0 },

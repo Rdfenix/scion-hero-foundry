@@ -250,7 +250,9 @@
           <input
             type="text"
             placeholder="Armor name"
-            value="{{system.combat.armor.name}}"
+            data-field="name"
+            data-action="armor-update"
+            value="{{system.combat.armor.name.value}}"
           />
         </div>
         <div class="armor-stats">
@@ -258,16 +260,22 @@
             <span>A</span>
             <input
               type="text"
+              data-field="aggravated"
+              data-action="armor-update"
               value="{{system.combat.armor.Aggravated.value}}"
             />
           </div>
           <div class="lethal">
             <span>L</span>
-            <input type="text" value="{{system.combat.armor.Lethal.value}}" />
+            <input type="text"               
+              data-field="lethal"
+              data-action="armor-update" value="{{system.combat.armor.Lethal.value}}" />
           </div>
           <div class="bashing">
             <span>B</span>
-            <input type="text" value="{{system.combat.armor.Bashing.value}}" />
+            <input type="text"               
+              data-field="bashing"
+              data-action="armor-update" value="{{system.combat.armor.Bashing.value}}" />
           </div>
         </div>
       </div>

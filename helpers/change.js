@@ -43,6 +43,9 @@ export async function _onChange(event, actor) {
     case "update-virtue-field":
       await updateVirtueField(event, actor);
       break;
+    case "armor-update":
+      await updateArmorField(event, actor);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
@@ -70,6 +73,30 @@ const updateVirtueField = async (event, actor) => {
   } catch (error) {
     console.error(error.message);
     ui.notifications.error("Failed to fetch virtues.");
+  }
+};
+
+const updateArmorField = async (event, actor) => {
+  try {
+    const field = event.currentTarget.dataset.field;
+    let combat = foundry.utils.getProperty(actor.system, "combat");
+
+    combat = {
+      ...combat,
+      armor: { ...combat.armor, [field]: { value: event.currentTarget.value } },
+    };
+
+    await actor.update(
+      {
+        "system.combat": combat,
+      },
+      { render: false }
+    );
+
+    reopenWithActiveTab(actor);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to fetch combat.");
   }
 };
 
