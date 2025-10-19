@@ -1,9 +1,8 @@
 const updateBirthCheckboxes = (checkboxes, currentValue) => {
-  checkboxes.each(function () {
-    const input = this;
-    const value = parseInt(input.value);
+  checkboxes.each(function (_, input) {
+    const value = Number.parseInt(input.value);
     input.checked = !(
-      isNaN(currentValue) ||
+      Number.isNaN(currentValue) ||
       currentValue <= 0 ||
       value <= 0 ||
       value > currentValue
@@ -16,7 +15,7 @@ const bindBirthCheckboxes = (checkboxes, index, app) => {
     ev.preventDefault();
     ev.stopPropagation();
 
-    const newValue = parseInt(this.value);
+    const newValue = Number.parseInt(this.value);
     const currentValue = foundry.utils.getProperty(
       app.actor.system,
       `birthrights.${index}.level.value`

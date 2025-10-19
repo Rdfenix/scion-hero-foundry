@@ -17,7 +17,7 @@ function stripHTMLAndFormatTable(html) {
       (rowMatch) => {
         const rowHTML = rowMatch[1];
         const cols = [...rowHTML.matchAll(/<t[hd][^>]*>(.*?)<\/t[hd]>/gis)].map(
-          (colMatch) => colMatch[1].replace(/<[^>]+>/g, "").trim()
+          (colMatch) => colMatch[1].replaceAll(/<[^>]+>/g, "").trim()
         );
         return cols;
       }
@@ -42,12 +42,12 @@ function stripHTMLAndFormatTable(html) {
 
   // Remove HTML restante e insere tabela formatada no lugar
   let cleaned = html
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<\/p>/gi, "\n")
-    .replace(/<table[^>]*>.*?<\/table>/gis, tableText)
-    .replace(/<[^>]+>/g, "")
-    .replace(/\n{2,}/g, "\n")
-    .replace(/[ \t]{2,}/g, " ")
+    .replaceAll(/<br\s*\/?>/gi, "\n")
+    .replaceAll(/<\/p>/gi, "\n")
+    .replaceAll(/<table[^>]*>.*?<\/table>/gis, tableText)
+    .replaceAll(/<[^>]+>/g, "")
+    .replaceAll(/\n{2,}/g, "\n")
+    .replaceAll(/[ \t]{2,}/g, " ")
     .trim();
 
   return cleaned;

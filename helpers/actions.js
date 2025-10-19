@@ -187,7 +187,7 @@ const setBoonStructure = async (actor) => {
 };
 
 const setBoonToBirthright = async (event, actor) => {
-  const index = parseInt(event.currentTarget.dataset.index);
+  const index = Number.parseInt(event.currentTarget.dataset.index);
 
   const birthrights = foundry.utils.getProperty(actor.system, "birthrights");
 

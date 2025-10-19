@@ -276,9 +276,9 @@ const onLegendPointChange = async (event, actor) => {
 
     const min = legendPoints.min ?? 0;
     const max = legendPoints.max ?? 48;
-    let value = parseInt(event.currentTarget.value);
+    let value = Number.parseInt(event.currentTarget.value);
 
-    if (isNaN(value)) value = min;
+    if (Number.isNaN(value)) value = min;
     value = Math.max(min, Math.min(max, value));
     legendPoints.value = value;
 
@@ -299,10 +299,10 @@ const onLegendPointChange = async (event, actor) => {
 const onBirthrightBoonChange = async (event, actor) => {
   try {
     const field = event.currentTarget.dataset.field;
-    const birthIndex = parseInt(event.currentTarget.dataset.birthIndex);
-    const boonIndex = parseInt(event.currentTarget.dataset.boonIndex);
+    const birthIndex = Number.parseInt(event.currentTarget.dataset.birthIndex);
+    const boonIndex = Number.parseInt(event.currentTarget.dataset.boonIndex);
 
-    if (field === undefined || isNaN(birthIndex)) {
+    if (field === undefined || Number.isNaN(birthIndex)) {
       throw new Error("Failed to found field or index from birthrights.");
     }
 
@@ -325,9 +325,9 @@ const onBirthrightBoonChange = async (event, actor) => {
 const onBirthrightChange = async (event, actor) => {
   try {
     const field = event.currentTarget.dataset.field;
-    const index = parseInt(event.currentTarget.dataset.index);
+    const index = Number.parseInt(event.currentTarget.dataset.index);
 
-    if (field === undefined || isNaN(index)) {
+    if (field === undefined || Number.isNaN(index)) {
       throw new Error("Failed to found field or index from birthrights.");
     }
     const birthrights = foundry.utils.getProperty(actor.system, "birthrights");

@@ -300,12 +300,16 @@ export const callDialogRollSkillDice = async (actor, event) => {
                 .find('select[name="attr-dice-roll"]')
                 .val();
 
-              const difficulty = parseInt(
+              const difficulty = Number.parseInt(
                 $(dialog.element).find('input[name="difficulty"]').val() || "7",
                 10
               );
 
-              if (isNaN(difficulty) || difficulty < 1 || difficulty > 10) {
+              if (
+                Number.isNaN(difficulty) ||
+                difficulty < 1 ||
+                difficulty > 10
+              ) {
                 return ui.notifications.error("Invalid difficulty value.");
               }
 
@@ -397,17 +401,21 @@ export const callDialogRollWeaponDice = async (actor, event) => {
               let multipleSelected = $(dialog.element)
                 .find('select[name="multiple-attack"]')
                 .val();
-              const extraDices = parseInt(
+              const extraDices = Number.parseInt(
                 $(dialog.element).find('input[name="extra-dices"]').val() ||
                   "0",
                 10
               );
-              const difficulty = parseInt(
+              const difficulty = Number.parseInt(
                 $(dialog.element).find('input[name="difficulty"]').val() || "7",
                 10
               );
 
-              if (isNaN(difficulty) || difficulty < 1 || difficulty > 10) {
+              if (
+                Number.isNaN(difficulty) ||
+                difficulty < 1 ||
+                difficulty > 10
+              ) {
                 return ui.notifications.error("Invalid difficulty value.");
               }
 
@@ -501,7 +509,7 @@ export const callDialogRollDamage = async (actor, event) => {
             class: "roll-damage",
             default: true,
             callback: async (event, button, dialog) => {
-              const extraDices = parseInt(
+              const extraDices = Number.parseInt(
                 $(dialog.element).find('input[name="extra-dices"]').val() ||
                   "0",
                 10
@@ -569,12 +577,16 @@ export const callDifficultyDialog = async (actor, eventSup) => {
             class: "set-difficulty",
             default: true,
             callback: async (event, button, dialog) => {
-              const difficulty = parseInt(
+              const difficulty = Number.parseInt(
                 $(dialog.element).find('input[name="difficulty"]').val() || "7",
                 10
               );
 
-              if (isNaN(difficulty) || difficulty < 1 || difficulty > 10) {
+              if (
+                Number.isNaN(difficulty) ||
+                difficulty < 1 ||
+                difficulty > 10
+              ) {
                 return ui.notifications.error("Invalid difficulty value.");
               }
 
