@@ -3,54 +3,56 @@ import { getPurviews } from "../api/purviewsApi.js";
 import { knackSchema, boonSchema } from "../module/actor-base-default.js";
 import { reopenWithActiveTab } from "./reopenWithActiveTab.js";
 
+function processTable(tableHTML) {
+  // Extrai linhas
+  const rows = [...tableHTML.matchAll(/<tr>(.*?)<\/tr>/gis)].map((rowMatch) => {
+    const rowHTML = rowMatch[1];
+    const cols = [...rowHTML.matchAll(/<t[hd][^>]*>(.*?)<\/t[hd]>/gis)].map(
+      (colMatch) => colMatch[1].replaceAll(/<[^>]+>/g, "").trim(),
+    );
+    return cols;
+  });
+  if (!rows.length) return "";
+  // Garante que todas as linhas tenham o mesmo número de colunas
+  const maxCols = Math.max(...rows.map((r) => r.length));
+  rows.forEach((r) => {
+    while (r.length < maxCols) r.push("");
+  });
+  // Calcula largura máxima de cada coluna
+  const colWidths = Array.from({ length: maxCols }, (_, colIndex) =>
+    Math.max(...rows.map((row) => (row[colIndex] || "").length)),
+  );
+  // Monta texto formatado
+  const formatRow = (row) =>
+    row.map((cell, i) => cell.padEnd(colWidths[i])).join(" | ");
+  const separator = colWidths.map((w) => "-".repeat(w)).join("-|-");
+  const [header, ...body] = rows;
+  return [formatRow(header), separator, ...body.map(formatRow)].join("\n");
+}
+
 function stripHTMLAndFormatTable(html) {
-  // Primeiro, extrai o conteúdo da tabela
-  const tableRegex = /<table[^>]*>(.*?)<\/table>/is;
-  const tableMatch = html.match(tableRegex);
+  // Substitui todas as tabelas por texto formatado
+  let processed = html;
+  processed = processed.replaceAll(
+    /<table[^>]*>(.*?)<\/table>/gis,
+    (match, tableHTML) => {
+      return "\n" + processTable(tableHTML) + "\n";
+    },
+  );
 
-  let tableText = "";
-  if (tableMatch) {
-    const tableHTML = tableMatch[1];
+  // Remove tags de quebra de linha e parágrafo, mas preserva separação
+  processed = processed.replaceAll(/<br\s*\/?>(?!\n)/gi, "\n");
+  processed = processed.replaceAll(/<\/p>/gi, "\n");
 
-    // Extrai cabeçalhos e linhas
-    const rows = [...tableHTML.matchAll(/<tr>(.*?)<\/tr>/gis)].map(
-      (rowMatch) => {
-        const rowHTML = rowMatch[1];
-        const cols = [...rowHTML.matchAll(/<t[hd][^>]*>(.*?)<\/t[hd]>/gis)].map(
-          (colMatch) => colMatch[1].replace(/<[^>]+>/g, "").trim()
-        );
-        return cols;
-      }
-    );
+  // Remove o restante das tags HTML
+  processed = processed.replaceAll(/<[^>]+>/g, "");
 
-    // Calcula largura máxima de cada coluna
-    const colWidths = rows[0].map((_, colIndex) =>
-      Math.max(...rows.map((row) => (row[colIndex] || "").length))
-    );
+  // Normaliza múltiplas quebras de linha e espaços
+  processed = processed.replaceAll(/\n{3,}/g, "\n\n"); // Mantém parágrafos
+  processed = processed.replaceAll(/[ \t]{2,}/g, " ");
+  processed = processed.trim();
 
-    // Monta texto formatado
-    const formatRow = (row) =>
-      row.map((cell, i) => cell.padEnd(colWidths[i])).join(" | ");
-
-    const separator = colWidths.map((w) => "-".repeat(w)).join("-|-");
-
-    const [header, ...body] = rows;
-    tableText = [formatRow(header), separator, ...body.map(formatRow)].join(
-      "\n"
-    );
-  }
-
-  // Remove HTML restante e insere tabela formatada no lugar
-  let cleaned = html
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<\/p>/gi, "\n")
-    .replace(/<table[^>]*>.*?<\/table>/gis, tableText)
-    .replace(/<[^>]+>/g, "")
-    .replace(/\n{2,}/g, "\n")
-    .replace(/[ \t]{2,}/g, " ")
-    .trim();
-
-  return cleaned;
+  return processed;
 }
 
 export async function _onDrop(event, actor) {
@@ -58,7 +60,7 @@ export async function _onDrop(event, actor) {
   event.stopPropagation();
 
   const data = JSON.parse(
-    event.originalEvent.dataTransfer.getData("text/plain")
+    event.originalEvent.dataTransfer.getData("text/plain"),
   );
 
   const dropTarget = event.currentTarget.dataset.dropTarget;
@@ -107,7 +109,7 @@ const updateKnackList = async (actor, knack) => {
       {
         "system.knacks": knackList,
       },
-      { render: false }
+      { render: false },
     );
 
     await reopenWithActiveTab(actor);
@@ -148,7 +150,7 @@ const updateBoonList = async (actor, boon) => {
       {
         "system.boons": boonList,
       },
-      { render: false }
+      { render: false },
     );
 
     await reopenWithActiveTab(actor);
@@ -181,7 +183,7 @@ const updateBirthBoonList = async (actor, boon, index) => {
 
     const birthBoonsList = foundry.utils.getProperty(
       actor.system,
-      "birthrights"
+      "birthrights",
     );
 
     if (!birthBoonsList[index].boons.some((b) => b.name === foundBoon.name)) {
@@ -192,7 +194,7 @@ const updateBirthBoonList = async (actor, boon, index) => {
       {
         "system.birthrights": birthBoonsList,
       },
-      { render: false }
+      { render: false },
     );
 
     await reopenWithActiveTab(actor);

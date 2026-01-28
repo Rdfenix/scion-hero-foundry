@@ -3,10 +3,10 @@ const bindVirtuesCheckboxes = (checkboxes, label, app) => {
     ev.preventDefault();
     ev.stopPropagation();
 
-    const newValue = parseInt(this.value);
+    const newValue = Number.parseInt(this.value);
     const currentValue = foundry.utils.getProperty(
       app.actor.system,
-      `virtues.${label}.value`
+      `virtues.${label}.value`,
     );
 
     let valueToSet = newValue > currentValue ? newValue : newValue - 1;
@@ -15,7 +15,7 @@ const bindVirtuesCheckboxes = (checkboxes, label, app) => {
       {
         [`system.virtues.${label}.value`]: valueToSet,
       },
-      { render: false }
+      { render: false },
     );
 
     updateVirtuesCheckboxes(checkboxes, valueToSet);
@@ -23,11 +23,10 @@ const bindVirtuesCheckboxes = (checkboxes, label, app) => {
 };
 
 const updateVirtuesCheckboxes = (checkboxes, currentValue) => {
-  checkboxes.each(function () {
-    const input = this;
-    const value = parseInt(input.value);
+  checkboxes.each(function (_index, input) {
+    const value = Number.parseInt(input.value);
     input.checked = !(
-      isNaN(currentValue) ||
+      Number.isNaN(currentValue) ||
       currentValue <= 0 ||
       value <= 0 ||
       value > currentValue
@@ -40,7 +39,7 @@ const mountingVirtues = (row, label, app) => {
   const targetVirtues = `virtues.${label}.value`;
   const currentValue = foundry.utils.getProperty(
     app.actor.system,
-    targetVirtues
+    targetVirtues,
   );
 
   updateVirtuesCheckboxes(circleCheckboxes, currentValue);

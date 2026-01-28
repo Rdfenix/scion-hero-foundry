@@ -246,7 +246,7 @@ export const callRollWeaponDice = async (
       throw new Error("Weapon not found.");
     }
 
-    let acc = parseInt(weapon.acc) || 0;
+    let acc = Number.parseInt(weapon.acc) || 0;
     const penality = foundry.utils.getProperty(actor.system, "health.value");
     let totalDice = Math.max(
       attrValue + skillValue + acc + penality + extraDices,
@@ -310,7 +310,7 @@ export const callDamageAtkRoll = async (
   { weapon, extraDices, attrValue, epicAttrValue }
 ) => {
   try {
-    const damage = parseInt(weapon.damage) || 0;
+    const damage = Number.parseInt(weapon.damage) || 0;
 
     const totalDamage = Math.max(damage + attrValue + extraDices, 0);
 

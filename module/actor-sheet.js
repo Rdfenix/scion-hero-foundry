@@ -14,7 +14,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
       tag: "form",
       window: {
         title: "SCION.SheetTitle",
-        resizable: true,
+        resizable: false,
       },
       form: {
         handler: ScionHeroActorSheetV2.#onSubmit,
@@ -42,9 +42,35 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   /** @override */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
+    console.log("Preparando contexto do sheet do ator:", context);
     context.actor = this.document;
     context.system = this.document.system;
     context.config = CONFIG.SCION;
+    context.currentUserName = game.user.name;
+    context.isGM = game.user.isGM;
+    context.tabs = this.tabGroups;
+
+    // Inicializa o grupo 'primary' se ele não existir
+    if (!context.tabs.primary) context.tabs.primary = "stats";
+
+    const attrKeys = [];
+    const skillsKeys = [];
+    const attributes = context.system.attributes || {};
+    const skills = context.system.abilities || {};
+
+    for (const group of Object.values(attributes)) {
+      attrKeys.push(...Object.keys(group));
+    }
+
+    for (const skillKey of Object.keys(skills)) {
+      skillsKeys.push(skillKey);
+    }
+
+    const damageType = ["Bashing", "Letal", "Aggraveted"];
+
+    context.system.attrKeys = attrKeys;
+    context.system.skillsKeys = skillsKeys;
+    context.system.damageType = damageType;
 
     context.enrichedBiography =
       await foundry.applications.ux.TextEditor.enrichHTML(
