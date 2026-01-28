@@ -1,4 +1,4 @@
-import { ScionHeroActorSheet } from "./actor-sheet.js";
+import ScionHeroActorSheetV2 from "./actor-sheet.js";
 import { ScionHeroActorBaseDefault } from "./actor-base-default.js";
 import { attributesUpdate } from "../helpers/attributesUpdate.js";
 import { abilitiesUpdate } from "../helpers/abilitiesUpdate.js";
@@ -18,15 +18,16 @@ import { registerJournalHooks } from "./hooks.js";
 Hooks.once("init", async function () {
   // Remove a sheet padrão do core
   foundry.documents.collections.Actors.unregisterSheet("core", "core");
+
   // Registra a nova sheet como padrão para o tipo 'character'
   foundry.documents.collections.Actors.registerSheet(
-    "scion-hero-foundry",
-    ScionHeroActorSheet,
+    "scion",
+    ScionHeroActorSheetV2,
     {
-      types: ["character"],
+      types: ["character"], // ou o nome do type no seu template.json
       makeDefault: true,
-      label: "Scion Hero Actor Sheet",
-    }
+      label: "SCION.SheetCharacterV2",
+    },
   );
 
   Handlebars.registerHelper("json", function (context) {
@@ -51,7 +52,7 @@ Hooks.once("init", async function () {
     function (object, columns, columnClass, options) {
       const output = splitInColumns(object, columns, columnClass, options);
       return new Handlebars.SafeString(output);
-    }
+    },
   );
 
   Handlebars.registerHelper("isObject", function (value) {
@@ -87,10 +88,10 @@ Hooks.once("init", async function () {
   });
 
   const partials = [
-    "systems/scion-hero-foundry/templates/actors/partials/stats.html",
-    "systems/scion-hero-foundry/templates/actors/partials/birth-virtues.html",
-    "systems/scion-hero-foundry/templates/actors/partials/knacks-boons.html",
-    "systems/scion-hero-foundry/templates/actors/partials/combat.html",
+    "systems/scion-foundry-v2/templates/actors/partials/stats.html",
+    "systems/scion-foundry-v2/templates/actors/partials/birth-virtues.html",
+    "systems/scion-foundry-v2/templates/actors/partials/knacks-boons.html",
+    "systems/scion-foundry-v2/templates/actors/partials/combat.html",
   ];
 
   await foundry.applications.handlebars.loadTemplates(partials);
@@ -98,7 +99,7 @@ Hooks.once("init", async function () {
   // Registra o partial explicitamente para garantir que o Handlebars reconheça
   for (const partial of partials) {
     const partialContent = await fetch(partial).then((response) =>
-      response.text()
+      response.text(),
     );
     Handlebars.registerPartial(partial, partialContent);
   }
@@ -129,6 +130,8 @@ Hooks.on("preCreateActor", (document, data, options, userId) => {
   if (document.type !== "character") return;
 
   const baseData = mountingBasedata(ScionHeroActorBaseDefault, document);
+
+  console.log("Scion | Injetando dados iniciais:", baseData);
 
   // Injeta os dados diretamente no momento da criação
   document.updateSource({ system: baseData });

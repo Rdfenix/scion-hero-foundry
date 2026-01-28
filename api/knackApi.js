@@ -1,7 +1,7 @@
 /** Knacks */
 export async function getKnacks() {
   try {
-    const pack = game.packs.get("scion-hero-foundry.knacks");
+    const pack = game.packs.get("scion-foundry-v2.knacks");
 
     if (!pack) {
       throw new Error("Purviews pack not found.");
@@ -16,7 +16,7 @@ export async function getKnacks() {
       }))
       .filter(
         (knack, index, self) =>
-          index === self.findIndex((p) => p.name === knack.name)
+          index === self.findIndex((p) => p.name === knack.name),
       );
   } catch (error) {
     console.error("Error fetching knacks:", error);

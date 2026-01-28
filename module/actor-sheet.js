@@ -2,132 +2,105 @@ import { _onAction } from "../helpers/actions.js";
 import { _onChange } from "../helpers/change.js";
 import { _onDrop } from "../helpers/onDrop.js";
 
-export class ScionHeroActorSheet extends foundry.appv1.sheets.ActorSheet {
-  prepareData() {
-    super.prepareData();
-  }
-
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
+export default class ScionHeroActorSheetV2 extends foundry.applications.api.HandlebarsApplicationMixin(
+  foundry.applications.sheets.ActorSheetV2,
+) {
+  /** @override */
+  static DEFAULT_OPTIONS = foundry.utils.mergeObject(
+    super.DEFAULT_OPTIONS,
+    {
+      id: "scion-foundry-v2",
       classes: ["scion-hero", "sheet", "character"],
-      template:
-        "systems/scion-hero-foundry/templates/actors/character-sheet.html",
-      width: 890,
-      height: 800, // tabs removido para evitar conflito com inicialização manual
-    });
-  }
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    // Corrige: adiciona o parâmetro group: "primary" para bater com o data-group do HTML
-    this._customTabs = new foundry.applications.ux.Tabs({
-      navSelector: ".sheet-tabs",
-      contentSelector: ".sheet-content",
-      initial: "stats",
-      group: "primary",
-      callback: (event, tabs, tab) => {
-        // Só permite mudar a aba se o evento vier diretamente do link da aba
-        return !(event && event.target !== event.currentTarget);
+      tag: "form",
+      window: {
+        title: "SCION.SheetTitle",
+        resizable: true,
       },
-    });
+      form: {
+        handler: ScionHeroActorSheetV2.#onSubmit,
+        submitOnChange: true,
+        closeOnSubmit: false,
+      },
+      position: { width: 890, height: 800 },
+      // REGRA DE OURO: Todas as interações de clique devem ser mapeadas aqui
+      actions: {
+        rollAttribute: ScionHeroActorSheetV2.#onRollAttribute,
+        setTab: ScionHeroActorSheetV2.#onSetTab, // Handler para trocar abas
+        onCustomAction: (event, target) => _onAction(event, this.document),
+      },
+    },
+    { inplace: false },
+  );
 
-    this._customTabs.bind(html[0]);
+  static PARTS = {
+    form: {
+      template:
+        "systems/scion-foundry-v2/templates/actors/character-sheet.html",
+    },
+  };
 
-    html.find(".sheet-tabs a").on("click", (event) => {
-      if (event.target !== event.currentTarget) return;
+  /** @override */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    context.actor = this.document;
+    context.system = this.document.system;
+    context.config = CONFIG.SCION;
 
-      event.preventDefault();
-      event.stopPropagation();
+    context.enrichedBiography =
+      await foundry.applications.ux.TextEditor.enrichHTML(
+        this.document.system.biography,
+        {
+          secrets: this.document.isOwner,
+          rollData: this.document.getRollData(),
+        },
+      );
 
-      let tab = event.currentTarget.dataset.tab;
-
-      html.find(".sheet-tabs a").removeClass("active");
-      $(event.currentTarget).addClass("active");
-
-      this._customTabs.activate(tab);
-
-      html.find(".tab").removeClass("active");
-      html.find(`.tab[data-tab="${tab}"]`).addClass("active");
-    });
-
-    // Usa delegação para garantir que funcione em partials e elementos dinâmicos
-    html.on("click", "[data-action]", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-      if (event.currentTarget.tagName.toLowerCase() === "select") return;
-      _onAction(event, this.actor);
-    });
-
-    html.on("change", "[data-action]", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      _onChange(event, this.actor);
-    });
-
-    html.find("[data-drop-target='knack-list']").on("dragover", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-    });
-    html
-      .find("[data-drop-target='knack-list']")
-      .on("drop", (event) => _onDrop(event, this.actor));
-
-    html.find("[data-drop-target='boons-list']").on("dragover", (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-    });
-    html
-      .find("[data-drop-target='boons-list']")
-      .on("drop", (event) => _onDrop(event, this.actor));
-
-    html
-      .find("[data-drop-target='birth-boons-list']")
-      .on("dragover", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-      });
-    html
-      .find("[data-drop-target='birth-boons-list']")
-      .on("drop", (event) => _onDrop(event, this.actor));
+    return context;
   }
 
-  async getData() {
-    try {
-      const context = await super.getData();
-      const actorData = this.actor.toObject();
+  /* -------------------------------------------- */
+  /* Ações (Native API V2)                        */
+  /* -------------------------------------------- */
 
-      context.actor = actorData;
-      context.system = actorData.system || {};
-      context.currentUserName = game.user?.name || "";
+  // Troca de abas nativa simplificada
+  static #onSetTab(event, target) {
+    const tab = target.dataset.tab;
+    this.changeTab(tab, "primary"); // Assume que você definiu um grupo de tabs "primary"
+  }
 
-      const attrKeys = [];
-      const skillsKeys = [];
-      const attributes = context.system.attributes || {};
-      const skills = context.system.abilities || {};
-      for (const group of Object.values(attributes)) {
-        attrKeys.push(...Object.keys(group));
+  static async #onRollAttribute(event, target) {
+    const attr = target.dataset.attribute;
+    console.log(`Rolando: ${attr}`);
+  }
+
+  static async #onSubmit(event, form, formData) {
+    const updateData = foundry.utils.expandObject(formData.object);
+    await this.document.update(updateData);
+  }
+
+  /* -------------------------------------------- */
+  /* Drag & Drop e Listeners Específicos          */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _onRender(context, options) {
+    super._onRender(context, options);
+    const html = this.element;
+
+    // Em vez de listeners de clique globais, usamos apenas para o que o framework
+    // não cobre automaticamente (como inputs de mudança ou drag & drop complexo)
+
+    html.querySelectorAll("input, select").forEach((el) => {
+      if (el.dataset.action) {
+        el.addEventListener("change", (ev) => _onChange(ev, this.document));
       }
+    });
 
-      for (const skillKey of Object.keys(skills)) {
-        skillsKeys.push(skillKey);
-      }
-
-      const damageType = ["Bashing", "Letal", "Aggraveted"];
-
-      context.system.attrKeys = attrKeys;
-      context.system.skillsKeys = skillsKeys;
-      context.system.damageType = damageType;
-
-      console.log("Contexto preparado:", context);
-
-      return context;
-    } catch (e) {
-      console.error(
-        "Erro ao carregar getData ou template da ScionHeroActorSheet:",
-        e
-      );
-      return {};
-    }
+    // Delegando Drag & Drop de forma limpa
+    const dropTargets = html.querySelectorAll("[data-drop-target]");
+    dropTargets.forEach((target) => {
+      target.addEventListener("dragover", (ev) => ev.preventDefault());
+      target.addEventListener("drop", (ev) => _onDrop(ev, this.document));
+    });
   }
 }

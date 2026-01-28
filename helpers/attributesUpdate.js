@@ -6,16 +6,16 @@ const bindAttributeCheckboxes = (
   label,
   app,
   attributes,
-  type
+  type,
 ) => {
   checkboxes.off("click.scion").on("click.scion", async function (ev) {
     ev.preventDefault();
     ev.stopPropagation();
 
-    const newValue = parseInt(this.value);
+    const newValue = Number.parseInt(this.value);
     const currentValue = foundry.utils.getProperty(
       app.actor.system,
-      `${type}.${groupKey}.${label}.value`
+      `${type}.${groupKey}.${label}.value`,
     );
 
     let valueToSet = newValue > currentValue ? newValue : newValue - 1;
@@ -24,7 +24,7 @@ const bindAttributeCheckboxes = (
       {
         [attributes]: valueToSet,
       },
-      { render: false }
+      { render: false },
     );
 
     updateAttributeCheckboxes(checkboxes, valueToSet);
@@ -35,11 +35,10 @@ const bindAttributeCheckboxes = (
 };
 
 const updateAttributeCheckboxes = (checkboxes, currentValue) => {
-  checkboxes.each(function () {
-    const input = this;
-    const value = parseInt(input.value);
+  checkboxes.each(function (_index, input) {
+    const value = Number.parseInt(input.value);
     input.checked = !(
-      isNaN(currentValue) ||
+      Number.isNaN(currentValue) ||
       currentValue <= 0 ||
       value <= 0 ||
       value > currentValue
@@ -52,7 +51,7 @@ const mountingAttributes = (row, groupKey, label, app) => {
   const targetAttributes = `attributes.${groupKey}.${label}.value`;
   const currentAttrValue = foundry.utils.getProperty(
     app.actor.system,
-    targetAttributes
+    targetAttributes,
   );
   const systemAttributes = `system.attributes.${groupKey}.${label}.value`;
 
@@ -66,7 +65,7 @@ const mountingAttributes = (row, groupKey, label, app) => {
     label,
     app,
     systemAttributes,
-    "attributes"
+    "attributes",
   );
 };
 
@@ -75,7 +74,7 @@ const mountingEpicAttributes = (row, groupKey, label, app) => {
   const targetEpicAttributes = `epicAttributes.${groupKey}.${label}.value`;
   const currentAttrValue = foundry.utils.getProperty(
     app.actor.system,
-    targetEpicAttributes
+    targetEpicAttributes,
   );
   const systemEpicAttributes = `system.epicAttributes.${groupKey}.${label}.value`;
 
@@ -88,7 +87,7 @@ const mountingEpicAttributes = (row, groupKey, label, app) => {
     label,
     app,
     systemEpicAttributes,
-    "epicAttributes"
+    "epicAttributes",
   );
 };
 

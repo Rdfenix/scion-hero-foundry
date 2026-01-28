@@ -1,7 +1,7 @@
 /** Puviews */
 export async function getPurviews() {
   try {
-    const pack = game.packs.get("scion-hero-foundry.purviews");
+    const pack = game.packs.get("scion-foundry-v2.purviews");
 
     if (!pack) {
       throw new Error("Purviews pack not found.");
@@ -18,7 +18,7 @@ export async function getPurviews() {
       }))
       .filter(
         (purview, index, self) =>
-          index === self.findIndex((p) => p.name === purview.name)
+          index === self.findIndex((p) => p.name === purview.name),
       )
       .sort((a, b) => {
         const priorityA = priorities.indexOf(a.name.toUpperCase());

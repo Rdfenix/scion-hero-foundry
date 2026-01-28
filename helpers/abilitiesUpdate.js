@@ -3,10 +3,10 @@ const bindAbilitieCheckboxes = (checkboxes, label, app, abilities, type) => {
     ev.preventDefault();
     ev.stopPropagation();
 
-    const newValue = parseInt(this.value);
+    const newValue = Number.parseInt(this.value);
     const currentValue = foundry.utils.getProperty(
       app.actor.system,
-      `${type}.${label}.value`
+      `${type}.${label}.value`,
     );
 
     let valueToSet = newValue > currentValue ? newValue : newValue - 1;
@@ -15,7 +15,7 @@ const bindAbilitieCheckboxes = (checkboxes, label, app, abilities, type) => {
       {
         [abilities]: valueToSet,
       },
-      { render: false }
+      { render: false },
     );
 
     updateAbilitieCheckboxes(checkboxes, valueToSet);
@@ -23,11 +23,10 @@ const bindAbilitieCheckboxes = (checkboxes, label, app, abilities, type) => {
 };
 
 const updateAbilitieCheckboxes = (checkboxes, currentValue) => {
-  checkboxes.each(function () {
-    const input = this;
-    const value = parseInt(input.value);
+  checkboxes.each(function (_index, input) {
+    const value = Number.parseInt(input.value);
     input.checked = !(
-      isNaN(currentValue) ||
+      Number.isNaN(currentValue) ||
       currentValue <= 0 ||
       value <= 0 ||
       value > currentValue
@@ -40,7 +39,7 @@ const mountingAbilities = (row, label, app) => {
   const targetSkills = `abilities.${label}.value`;
   const currentSkillsValue = foundry.utils.getProperty(
     app.actor.system,
-    targetSkills
+    targetSkills,
   );
   const systemAbilities = `system.abilities.${label}.value`;
 
@@ -51,7 +50,7 @@ const mountingAbilities = (row, label, app) => {
     label,
     app,
     systemAbilities,
-    "abilities"
+    "abilities",
   );
 };
 
