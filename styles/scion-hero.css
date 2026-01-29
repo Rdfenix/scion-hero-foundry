@@ -54,9 +54,13 @@ input[type="radio"]::after {
   content: none;
 }
 
+.scion-wrapper.scrollable {
+  height: 100%; /* Ocupa o espaço total do formulário */
+  overflow-y: auto; /* Habilita a barra de rolagem */
+}
+
 .scion-wrapper {
   width: 100%;
-  height: auto;
   position: relative;
   display: flex;
   flex-direction: column;
