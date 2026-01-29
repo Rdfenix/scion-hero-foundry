@@ -33,6 +33,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
       window: {
         title: "SCION.SheetTitle",
         resizable: false,
+        scrollable: [".scion-wrapper"],
       },
       form: {
         handler: ScionHeroActorSheetV2.#onSubmit,
