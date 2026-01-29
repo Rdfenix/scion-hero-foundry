@@ -17,11 +17,7 @@ import {
 import { callRollJoinBattle } from "./rollDice.js";
 
 export async function _onAction(event, actor) {
-  event.preventDefault();
-  event.stopPropagation();
-  event.stopImmediatePropagation();
-
-  switch (event.currentTarget.dataset.action) {
+  switch (event) {
     case "select-pantheon":
       await selectPantheon(actor);
       break;
@@ -76,7 +72,7 @@ export async function _onAction(event, actor) {
       await callRollJoinBattle(actor, event);
       break;
     default:
-      console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
+      console.warn("Ação não reconhecida:", event);
       break;
   }
 }
@@ -95,7 +91,7 @@ const setBirthrightOptionEstructure = async (actor) => {
 
     const birthrightList = foundry.utils.getProperty(
       actor.system,
-      "birthrights"
+      "birthrights",
     );
 
     birthrightList.push(schema);
@@ -104,7 +100,7 @@ const setBirthrightOptionEstructure = async (actor) => {
       {
         "system.birthrights": birthrightList,
       },
-      { render: false }
+      { render: false },
     );
 
     await reopenWithActiveTab(actor);
@@ -128,7 +124,7 @@ const setKnackStructure = async (actor) => {
       {
         "system.knacks": knackList,
       },
-      { render: false }
+      { render: false },
     );
 
     await reopenWithActiveTab(actor);
@@ -152,7 +148,7 @@ const setWeaponStructure = async (actor) => {
       {
         "system.weapons": weapons,
       },
-      { render: false }
+      { render: false },
     );
 
     await reopenWithActiveTab(actor);
@@ -176,7 +172,7 @@ const setBoonStructure = async (actor) => {
       {
         "system.boons": boonList,
       },
-      { render: false }
+      { render: false },
     );
 
     await reopenWithActiveTab(actor);
@@ -187,7 +183,7 @@ const setBoonStructure = async (actor) => {
 };
 
 const setBoonToBirthright = async (event, actor) => {
-  const index = parseInt(event.currentTarget.dataset.index);
+  const index = Number.parseInt(event.currentTarget.dataset.index);
 
   const birthrights = foundry.utils.getProperty(actor.system, "birthrights");
 
@@ -201,7 +197,7 @@ const setBoonToBirthright = async (event, actor) => {
     {
       "system.birthrights": birthrights,
     },
-    { render: false }
+    { render: false },
   );
 
   await reopenWithActiveTab(actor);
@@ -223,7 +219,7 @@ const deleteBirthright = async (actor, event) => {
       {
         "system.birthrights": birthrights,
       },
-      { render: false }
+      { render: false },
     );
 
     await reopenWithActiveTab(actor);
@@ -249,7 +245,7 @@ const deleteWeapon = async (actor, event) => {
       {
         "system.weapons": weapons,
       },
-      { render: false }
+      { render: false },
     );
 
     await reopenWithActiveTab(actor);
@@ -284,7 +280,7 @@ const deleteBoonFromBirthright = async (actor, event) => {
       {
         "system.birthrights": birthrights,
       },
-      { render: false }
+      { render: false },
     );
 
     await reopenWithActiveTab(actor);
@@ -309,7 +305,7 @@ const deleteBoon = async (actor, event) => {
       {
         "system.boons": boons,
       },
-      { render: false }
+      { render: false },
     );
 
     await reopenWithActiveTab(actor);
@@ -334,7 +330,7 @@ const deleteKnack = async (actor, event) => {
       {
         "system.knacks": knacks,
       },
-      { render: false }
+      { render: false },
     );
 
     await reopenWithActiveTab(actor);

@@ -44,7 +44,8 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
       actions: {
         rollAttribute: ScionHeroActorSheetV2.#onRollAttribute,
         setTab: ScionHeroActorSheetV2.#onSetTab, // Handler para trocar abas
-        onCustomAction: (event, target) => _onAction(event, this.document),
+        "select-pantheon": ScionHeroActorSheetV2.#onActionTracker,
+        "select-god": ScionHeroActorSheetV2.#onActionTracker,
       },
     },
     { inplace: false },
@@ -111,6 +112,13 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   static #onSetTab(event, target) {
     const tab = target.dataset.tab;
     this.changeTab(tab, "primary"); // Assume que você definiu um grupo de tabs "primary"
+  }
+
+  static async #onActionTracker(event, target) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+    await _onAction(target.dataset.action, this.document);
   }
 
   static async #onRollAttribute(event, target) {
