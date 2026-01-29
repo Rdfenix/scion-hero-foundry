@@ -47,6 +47,13 @@ select:hover {
   outline: none;
 }
 
+input[type="checkbox"]::before,
+input[type="radio"]::before,
+input[type="checkbox"]::after,
+input[type="radio"]::after {
+  content: none;
+}
+
 .scion-wrapper {
   width: 100%;
   height: auto;
@@ -59,6 +66,15 @@ select:hover {
   border-radius: 5px;
   font-family: skranji-regular, sans-serif !important;
   font-size: medium;
+  overflow: auto;
+  scroll-behavior: smooth;
+  color: #222;
+}
+
+.scion-wrapper .sheet-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .scion-header {
@@ -75,6 +91,11 @@ select:hover {
   border-bottom: 0;
   margin: 0;
   font-family: skranji-bold, sans-serif;
+  color: #222;
+}
+
+.scion-wrapper .sheet-header .sheet-tabs .item {
+  color: #222;
 }
 
 .scion-form {
@@ -251,5 +272,3 @@ select:hover {
 .token img {
   border-radius: 50% !important;
 }
-
-

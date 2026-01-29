@@ -28,6 +28,7 @@
   justify-content: flex-start;
   gap: 0.7rem;
   width: 100%;
+  color: #222;
 }
 
 .attributes > .attributes-types-grid > .attribute-grid-item > h3,
@@ -37,6 +38,7 @@
   font-weight: 600;
   text-transform: capitalize;
   border-bottom: 0;
+  color: #222;  
 }
 
 .attributes > .attributes-types-grid > .attribute-grid-item > .attribute-row,

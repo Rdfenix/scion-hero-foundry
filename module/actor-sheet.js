@@ -9,7 +9,6 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   static DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
-      id: "scion-foundry-v2",
       classes: ["scion-hero", "sheet", "character"],
       tag: "form",
       window: {

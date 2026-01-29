@@ -1,32 +1,31 @@
 <div class="scion-wrapper"> {{!-- Actor Header --}}
-  <div class="scion-header">
-    <h1>HERO</h1>
-  </div>
-
-  {{!-- Removi a tag <form> manual. O root já é um form. --}}
-  <div class="profile-image">
-    <img class="profile" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="135" height="135" />
-  </div>
-
   <header class="sheet-header">
-     </header>
+    <div class="scion-header">
+      <h1>HERO</h1>
+    </div>
 
-  {{!-- Navegação de Abas --}}
-  <nav class="sheet-tabs tabs" data-group="primary">
-    {{!-- data-action="setTab" é o segredo aqui --}}
-    <a class="item {{#if (eq tabs.primary 'stats')}}active{{/if}}" 
-       data-action="setTab" data-group="primary" data-tab="stats">Attributes & Abilities</a>
-    
-    <a class="item {{#if (eq tabs.primary 'birth')}}active{{/if}}" 
-       data-action="setTab" data-group="primary" data-tab="birth">Birthrights & Virtues</a>
-    
-    <a class="item {{#if (eq tabs.primary 'knacks')}}active{{/if}}" 
-       data-action="setTab" data-group="primary" data-tab="knacks">Knacks & Boons</a>
-    
-    <a class="item {{#if (eq tabs.primary 'combat')}}active{{/if}}" 
-       data-action="setTab" data-group="primary" data-tab="combat">Combat</a>
-  </nav>
+    {{!-- Removi a tag <form> manual. O root já é um form. --}}
+    <div class="profile-image">
+      <img class="profile" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="135" height="135" />
+    </div>
 
+    {{!-- Navegação de Abas --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+      {{!-- data-action="setTab" é o segredo aqui --}}
+      <a class="item {{#if (eq tabs.primary 'stats')}}active{{/if}}" 
+        data-action="setTab" data-group="primary" data-tab="stats">Attributes & Abilities</a>
+      
+      <a class="item {{#if (eq tabs.primary 'birth')}}active{{/if}}" 
+        data-action="setTab" data-group="primary" data-tab="birth">Birthrights & Virtues</a>
+      
+      <a class="item {{#if (eq tabs.primary 'knacks')}}active{{/if}}" 
+        data-action="setTab" data-group="primary" data-tab="knacks">Knacks & Boons</a>
+      
+      <a class="item {{#if (eq tabs.primary 'combat')}}active{{/if}}" 
+        data-action="setTab" data-group="primary" data-tab="combat">Combat</a>
+    </nav>
+  </header>
+  
   {{!-- Conteúdo das Abas --}}
   <section class="sheet-content">
     <div class="tab {{#if (eq tabs.primary 'stats')}}active{{/if}}" data-group="primary" data-tab="stats">
