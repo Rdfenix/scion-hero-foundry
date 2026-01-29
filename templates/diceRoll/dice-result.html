@@ -15,12 +15,12 @@
     {{else if data.fail}}
     <div class="fail">
       <span>Fail:</span>
-      <span>{{data.totalSucess}}</span>
+      <span>{{data.totalSuccess}}</span>
     </div>
     {{else}}
     <div class="success">
       <span>Normal Success:</span>
-      <span>{{data.totalSucess}}</span>
+      <span>{{data.totalSuccess}}</span>
     </div>
     {{/if}} {{#if (and (higherThan data.epicAttribute 0)
     data.epicAttributeLabel)}}
@@ -32,6 +32,6 @@
   </div>
   <div class="total-result">
     <span>Total Result:</span>
-    <span>{{sum data.totalSucess data.totalEpicSuccess}}</span>
+    <span>{{sum data.totalSuccess data.totalEpicSuccess}}</span>
   </div>
 </div>
