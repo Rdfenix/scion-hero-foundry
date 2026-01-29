@@ -20,24 +20,26 @@
         <div class="attribute-column">
           <div class="circles">
             {{#each (range attribute.min attribute.max) as |i|}}
-            <input
-              type="checkbox"
-              class="circle-checkbox"
-              data-target="attributes.{{../key}}.{{label}}.value"
-              value="{{i}}"
-            />
+              <input
+                type="checkbox"
+                class="circle-checkbox"
+                data-target="attributes.{{../key}}.{{label}}.value"
+                value="{{i}}"
+                {{#if (lessThanOrEqual i ../attribute.value)}}checked{{/if}}
+              />
             {{/each}}
           </div>
           <div class="squares">
             {{#with (lookup (lookup @root.system.epicAttributes key) label) as
             |epicAttr|}} {{#if epicAttr}} {{#each (range epicAttr.min
             epicAttr.max) as |i|}}
-            <input
-              type="checkbox"
-              class="square-checkbox"
-              data-target="epicAttributes.{{../key}}.{{label}}.value"
-              value="{{i}}"
-            />
+              <input
+                type="checkbox"
+                class="square-checkbox"
+                data-target="epicAttributes.{{../key}}.{{label}}.value"
+                value="{{i}}"
+                {{#if (lessThanOrEqual i ../epicAttr.value)}}checked{{/if}}
+              />
             {{/each}} {{/if}} {{/with}}
           </div>
         </div>
@@ -71,6 +73,7 @@
             class="circle-checkbox"
             data-target="abilities.{{../key}}.value"
             value="{{i}}"
+            {{#if (lessThanOrEqual i ../data.value)}}checked{{/if}}
           />
           {{/each}}
         </div>

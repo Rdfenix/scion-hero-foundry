@@ -9,6 +9,90 @@
       <img class="profile" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="135" height="135" />
     </div>
 
+    <div class="sheet-header-character-info">
+      <div class="column">
+        <div class="row">
+          <div class="column">
+            <label for="name">Name</label>
+            <input
+            type="text"
+            id="name"
+            name="name"
+            value="{{actor.name}}"
+            placeholder=""
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <label for="player">Player</label>
+            <input
+              type="text"
+              id="player"
+              name="system.player"
+              value="{{#if system.player}}{{system.player}}{{else}}{{currentUserName}}{{/if}}"
+              placeholder=""
+            />
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="row">
+          <div class="column">
+            <label for="calling">Calling</label>
+            <input
+              type="text"
+              id="calling"
+              name="system.calling"
+              value="{{system.calling}}"
+              placeholder=""
+          />
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <label for="nature">Nature</label>
+            <input
+              type="text"
+              id="nature"
+              name="system.nature"
+              value="{{system.nature}}"
+              placeholder=""
+            />
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="row">
+          <div class="column">
+            <label for="pantheon">Pantheon</label>
+            <button
+              type="button"
+              class="scion-pantheon-button"
+              data-action="select-pantheon"
+            >
+              <span>{{system.pantheon.name}}</span>
+              {{#if system.pantheon.logo}}
+              <img src="{{system.pantheon.logo}}" alt="pantheon logo" />
+              {{/if}}
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <label for="god">God</label>
+            <button
+              type="button"
+              class="scion-pantheon-button"
+              data-action="select-god"
+            >
+              <span>{{system.pantheon.god}}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     {{!-- Navegação de Abas --}}
     <nav class="sheet-tabs tabs" data-group="primary">
       {{!-- data-action="setTab" é o segredo aqui --}}

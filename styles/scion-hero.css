@@ -87,6 +87,29 @@ input[type="radio"]::after {
   text-align: center;
 }
 
+.sheet-header .sheet-header-character-info {
+  display: inline-flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.sheet-header .sheet-header-character-info .column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.sheet-header .sheet-header-character-info .column .row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.3rem;
+  width: 100%;
+}
+
 .scion-header > h1 {
   border-bottom: 0;
   margin: 0;
@@ -238,7 +261,7 @@ input[type="radio"]::after {
 
 .circle-checkbox:checked,
 .square-checkbox:checked {
-  background: #222;
+  background: #222 !important;
 }
 
 .circles,

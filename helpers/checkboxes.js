@@ -1,11 +1,10 @@
 import { reopenWithActiveTab } from "./reopenWithActiveTab.js";
 
 export const updateCheckboxes = (checkboxes, currentValue) => {
-  checkboxes.each(function () {
-    const input = this;
-    const value = parseInt(input.value);
+  checkboxes.each(function (_index, input) {
+    const value = Number.parseInt(input.value);
     input.checked = !(
-      isNaN(currentValue) ||
+      Number.isNaN(currentValue) ||
       currentValue <= 0 ||
       value <= 0 ||
       value > currentValue
@@ -19,17 +18,17 @@ export const bindCheckboxes = (
   app,
   actor,
   system,
-  render = false
+  render = false,
 ) => {
   checkboxes.off("click.scion").on("click.scion", async function (ev) {
     ev.preventDefault();
     ev.stopPropagation();
     ev.stopImmediatePropagation();
 
-    const newValue = parseInt(this.value);
+    const newValue = Number.parseInt(this.value);
     const currentValue = foundry.utils.getProperty(
       app.actor.system,
-      targetProp
+      targetProp,
     );
 
     let valueToSet = newValue > currentValue ? newValue : newValue - 1;

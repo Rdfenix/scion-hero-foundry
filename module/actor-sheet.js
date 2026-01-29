@@ -2,6 +2,25 @@ import { _onAction } from "../helpers/actions.js";
 import { _onChange } from "../helpers/change.js";
 import { _onDrop } from "../helpers/onDrop.js";
 
+import { attributesUpdate } from "../helpers/attributesUpdate.js";
+import { abilitiesUpdate } from "../helpers/abilitiesUpdate.js";
+import { virtuesUpdate } from "../helpers/virtuesUpdate.js";
+import { birthrightUpdate } from "../helpers/birthrightsUpdate.js";
+import { willpowerUpdate } from "../helpers/willpowerUpdate.js";
+import { legendUpdate } from "../helpers/legendUpdate.js";
+import { updateSoak } from "../helpers/updateSoak.js";
+
+function renderActorSheetElements(app, html, data) {
+  // Implementar funcionalidades específicas de renderização aqui, se necessário
+  attributesUpdate(app, html, data);
+  abilitiesUpdate(app, html, data);
+  virtuesUpdate(app, html, data);
+  birthrightUpdate(app, html, data);
+  willpowerUpdate(app, html, data);
+  legendUpdate(app, html, data);
+  updateSoak(app);
+}
+
 export default class ScionHeroActorSheetV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.sheets.ActorSheetV2,
 ) {
@@ -20,7 +39,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
         submitOnChange: true,
         closeOnSubmit: false,
       },
-      position: { width: 890, height: 800 },
+      position: { width: 897, height: 800 },
       // REGRA DE OURO: Todas as interações de clique devem ser mapeadas aqui
       actions: {
         rollAttribute: ScionHeroActorSheetV2.#onRollAttribute,
@@ -42,6 +61,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     console.log("Preparando contexto do sheet do ator:", context);
+    console.log("CONFIG:", CONFIG);
     context.actor = this.document;
     context.system = this.document.system;
     context.config = CONFIG.SCION;
@@ -111,6 +131,9 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   _onRender(context, options) {
     super._onRender(context, options);
     const html = this.element;
+
+    const jHtml = $(html);
+    renderActorSheetElements(this, jHtml, context);
 
     // Em vez de listeners de clique globais, usamos apenas para o que o framework
     // não cobre automaticamente (como inputs de mudança ou drag & drop complexo)
