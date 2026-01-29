@@ -137,8 +137,8 @@ export const callRollWillpowerDice = async (actor, event, difficulty) => {
 
 export const callRollAttrDice = async (actor, event, difficulty) => {
   try {
-    const key = event.currentTarget.dataset.key;
-    const attr = event.currentTarget.dataset.label;
+    const key = event.key;
+    const attr = event.label;
     const attributes = foundry.utils.getProperty(actor.system, "attributes");
     const epicAttributes = foundry.utils.getProperty(
       actor.system,

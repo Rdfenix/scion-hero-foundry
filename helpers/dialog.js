@@ -33,6 +33,24 @@ const mountFavoritiesSkills = async (deityPantheon, actor) => {
   return updatedAbilities;
 };
 
+const parseDifficulty = (dialogEl) => {
+  const value =
+    dialogEl.querySelector('input[name="difficulty"]')?.value ?? "7";
+  const difficulty = Number.parseInt(value, 10);
+
+  if (Number.isNaN(difficulty) || difficulty < 1 || difficulty > 10) {
+    throw new Error("Invalid difficulty value.");
+  }
+
+  return difficulty;
+};
+
+const DIFFICULTY_HANDLERS = {
+  attribute: callRollAttrDice,
+  willpower: callRollWillpowerDice,
+  legend: callRollLegendDice,
+};
+
 const mountResponseAttrValues = async (actor, key) => {
   const attr = foundry.utils.getProperty(actor.system, "attributes");
   const epicAttr = foundry.utils.getProperty(actor.system, "epicAttributes");
@@ -78,7 +96,7 @@ export const selectPantheon = async (actor) => {
       }))
       .filter(
         (pantheon, index, self) =>
-          index === self.findIndex((p) => p.name === pantheon.name)
+          index === self.findIndex((p) => p.name === pantheon.name),
       );
 
     if (pantheons.length === 0) {
@@ -87,7 +105,7 @@ export const selectPantheon = async (actor) => {
 
     const content = await foundry.applications.handlebars.renderTemplate(
       "systems/scion-hero-foundry/templates/actors/dialogs/pantheon.html",
-      { pantheons }
+      { pantheons },
     );
 
     return new Promise((resolve) => {
@@ -111,7 +129,7 @@ export const selectPantheon = async (actor) => {
                 return ui.notifications.warn("Choose a pantheon first");
               }
               const selectedPantheon = pantheons.find(
-                (p) => p.name === pantheonSelected
+                (p) => p.name === pantheonSelected,
               );
 
               if (!selectedPantheon) {
@@ -126,7 +144,7 @@ export const selectPantheon = async (actor) => {
 
               const updatedAbilities = await mountFavoritiesSkills(
                 gods[0],
-                actor
+                actor,
               );
 
               await actor.update({
@@ -192,7 +210,7 @@ export const selectGod = async (actor) => {
 
     const content = await foundry.applications.handlebars.renderTemplate(
       "systems/scion-hero-foundry/templates/actors/dialogs/gods.html",
-      { gods }
+      { gods },
     );
 
     return new Promise((resolve) => {
@@ -223,7 +241,7 @@ export const selectGod = async (actor) => {
 
               const updatedAbilities = await mountFavoritiesSkills(
                 deityPantheon,
-                actor
+                actor,
               );
 
               await actor.update({
@@ -265,12 +283,12 @@ export const selectGod = async (actor) => {
   }
 };
 
-export const callDialogRollSkillDice = async (actor, event) => {
+export const callDialogRollSkillDice = async (actor, options) => {
   try {
-    const key = event.currentTarget.dataset.key;
+    const key = options.dataset.key;
     const abilities = foundry.utils.getProperty(actor.system, "abilities");
     const attrKeys = Object.values(
-      foundry.utils.getProperty(actor.system, "attributes") || {}
+      foundry.utils.getProperty(actor.system, "attributes") || {},
     ).flatMap((group) => Object.keys(group));
     const skillValue = abilities[key]?.value ?? 0;
 
@@ -280,7 +298,7 @@ export const callDialogRollSkillDice = async (actor, event) => {
 
     const content = await foundry.applications.handlebars.renderTemplate(
       "systems/scion-hero-foundry/templates/actors/dialogs/choose-attr.html",
-      { data }
+      { data },
     );
 
     return new Promise((resolve) => {
@@ -302,7 +320,7 @@ export const callDialogRollSkillDice = async (actor, event) => {
 
               const difficulty = parseInt(
                 $(dialog.element).find('input[name="difficulty"]').val() || "7",
-                10
+                10,
               );
 
               if (isNaN(difficulty) || difficulty < 1 || difficulty > 10) {
@@ -356,9 +374,9 @@ export const callDialogRollSkillDice = async (actor, event) => {
   }
 };
 
-export const callDialogRollWeaponDice = async (actor, event) => {
+export const callDialogRollWeaponDice = async (actor, options) => {
   try {
-    const weaponId = event.currentTarget.dataset.weaponId;
+    const weaponId = options.dataset.weaponId;
 
     if (!weaponId) {
       return ui.notifications.error("WeaponId not found.");
@@ -378,7 +396,7 @@ export const callDialogRollWeaponDice = async (actor, event) => {
 
     const content = await foundry.applications.handlebars.renderTemplate(
       "systems/scion-hero-foundry/templates/actors/dialogs/weapon-atk.html",
-      { data }
+      { data },
     );
 
     return new Promise((resolve) => {
@@ -397,14 +415,14 @@ export const callDialogRollWeaponDice = async (actor, event) => {
               let multipleSelected = $(dialog.element)
                 .find('select[name="multiple-attack"]')
                 .val();
-              const extraDices = parseInt(
+              const extraDices = Number.parseInt(
                 $(dialog.element).find('input[name="extra-dices"]').val() ||
                   "0",
-                10
+                10,
               );
-              const difficulty = parseInt(
+              const difficulty = Number.parseInt(
                 $(dialog.element).find('input[name="difficulty"]').val() || "7",
-                10
+                10,
               );
 
               if (isNaN(difficulty) || difficulty < 1 || difficulty > 10) {
@@ -415,7 +433,7 @@ export const callDialogRollWeaponDice = async (actor, event) => {
 
               const abilities = foundry.utils.getProperty(
                 actor.system,
-                "abilities"
+                "abilities",
               );
               const skillValue = abilities[weapon.skill]?.value ?? 0;
 
@@ -485,7 +503,7 @@ export const callDialogRollDamage = async (actor, event) => {
 
     const content = await foundry.applications.handlebars.renderTemplate(
       "systems/scion-hero-foundry/templates/actors/dialogs/damage-atk.html",
-      { data }
+      { data },
     );
 
     return new Promise((resolve) => {
@@ -504,7 +522,7 @@ export const callDialogRollDamage = async (actor, event) => {
               const extraDices = parseInt(
                 $(dialog.element).find('input[name="extra-dices"]').val() ||
                   "0",
-                10
+                10,
               );
 
               const { attrValue, epicAttrValue } =
@@ -548,75 +566,62 @@ export const callDialogRollDamage = async (actor, event) => {
   }
 };
 
-export const callDifficultyDialog = async (actor, eventSup) => {
-  try {
-    const type = eventSup.currentTarget.dataset.type;
+export const callDifficultyDialog = async (actor, options = {}) => {
+  const { type } = options;
+  console.log("callDifficultyDialog chamado com tipo:", type);
 
-    const content = await foundry.applications.handlebars.renderTemplate(
-      "systems/scion-hero-foundry/templates/actors/dialogs/difficulty.html"
-    );
-
-    return new Promise((resolve) => {
-      new foundry.applications.api.DialogV2({
-        classes: ["difficulty-dialog"],
-        window: {},
-        content,
-        buttons: [
-          {
-            action: "set",
-            label: "Set",
-            icon: '<i class="fas fa-check"></i>',
-            class: "set-difficulty",
-            default: true,
-            callback: async (event, button, dialog) => {
-              const difficulty = parseInt(
-                $(dialog.element).find('input[name="difficulty"]').val() || "7",
-                10
-              );
-
-              if (isNaN(difficulty) || difficulty < 1 || difficulty > 10) {
-                return ui.notifications.error("Invalid difficulty value.");
-              }
-
-              if (type === "attribute") {
-                await callRollAttrDice(actor, eventSup, difficulty);
-              }
-
-              if (type === "willpower") {
-                await callRollWillpowerDice(actor, eventSup, difficulty);
-              }
-
-              if (type === "legend") {
-                await callRollLegendDice(actor, eventSup, difficulty);
-              }
-
-              resolve();
-            },
-          },
-          {
-            action: "cancel",
-            icon: '<i class="fas fa-times"></i>',
-            label: "Cancel",
-            class: "set-difficulty-cancel",
-            callback: () => resolve(null),
-          },
-        ],
-        render: (html) => {
-          console.log(html);
-          setTimeout(() => {
-            const contentEl = html
-              .closest(".window-app")
-              .find(".window-content")[0];
-            if (contentEl) {
-              contentEl.scrollTop = 0;
-            }
-          }, 50);
-        },
-        close: () => resolve(null),
-      }).render({ force: true });
-    });
-  } catch (error) {
-    console.error(error.message);
-    ui.notifications.error(error.message);
+  const rollHandler = DIFFICULTY_HANDLERS[type];
+  if (!rollHandler) {
+    ui.notifications.error(`Unknown difficulty type: ${type}`);
+    return null;
   }
+
+  const content = await foundry.applications.handlebars.renderTemplate(
+    "systems/scion-hero-foundry/templates/actors/dialogs/difficulty.html",
+  );
+
+  return new Promise((resolve) => {
+    new foundry.applications.api.DialogV2({
+      classes: ["difficulty-dialog"],
+      content,
+
+      buttons: [
+        {
+          action: "set",
+          label: "Set",
+          icon: '<i class="fas fa-check"></i>',
+          class: "set-difficulty",
+          default: true,
+
+          callback: async (_event, _button, dialog) => {
+            try {
+              const difficulty = parseDifficulty(dialog.element);
+              await rollHandler(actor, options, difficulty);
+              resolve(difficulty);
+            } catch (err) {
+              ui.notifications.error(err.message);
+            }
+          },
+        },
+        {
+          action: "cancel",
+          label: "Cancel",
+          icon: '<i class="fas fa-times"></i>',
+          class: "set-difficulty-cancel",
+          callback: () => resolve(null),
+        },
+      ],
+
+      render: (html) => {
+        // garante scroll no topo sem timeout mágico
+        const contentEl = html
+          .closest(".window-app")
+          ?.querySelector(".window-content");
+
+        if (contentEl) contentEl.scrollTop = 0;
+      },
+
+      close: () => resolve(null),
+    }).render({ force: true });
+  });
 };

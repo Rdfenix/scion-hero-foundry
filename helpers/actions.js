@@ -16,7 +16,7 @@ import {
 
 import { callRollJoinBattle } from "./rollDice.js";
 
-export async function _onAction(event, actor) {
+export async function _onAction(event, actor, options) {
   switch (event) {
     case "select-pantheon":
       await selectPantheon(actor);
@@ -31,7 +31,7 @@ export async function _onAction(event, actor) {
       await setKnackStructure(actor);
       break;
     case "button-birthright-boon":
-      await setBoonToBirthright(event, actor);
+      await setBoonToBirthright(options, actor);
       break;
     case "button-boon-add":
       await setBoonStructure(actor);
@@ -40,36 +40,36 @@ export async function _onAction(event, actor) {
       await setWeaponStructure(actor);
       break;
     case "delete-birthright":
-      await deleteBirthright(actor, event);
+      await deleteBirthright(actor, options);
       break;
     case "delete-birth-boon":
-      await deleteBoonFromBirthright(actor, event);
+      await deleteBoonFromBirthright(actor, options);
       break;
     case "delete-knack":
-      await deleteKnack(actor, event);
+      await deleteKnack(actor, options);
       break;
     case "delete-boon":
-      await deleteBoon(actor, event);
+      await deleteBoon(actor, options);
       break;
     case "delete-weapon":
-      await deleteWeapon(actor, event);
+      await deleteWeapon(actor, options);
       break;
     case "roll-attribute":
     case "roll-willpower":
     case "roll-legend":
-      await callDifficultyDialog(actor, event);
+      await callDifficultyDialog(actor, options);
       break;
     case "roll-abilitie":
-      await callDialogRollSkillDice(actor, event);
+      await callDialogRollSkillDice(actor, options);
       break;
     case "roll-attack":
-      await callDialogRollWeaponDice(actor, event);
+      await callDialogRollWeaponDice(actor, options);
       break;
     case "roll-damage":
-      await callDialogRollDamage(actor, event);
+      await callDialogRollDamage(actor, event, options);
       break;
     case "join-battle":
-      await callRollJoinBattle(actor, event);
+      await callRollJoinBattle(actor, event, options);
       break;
     default:
       console.warn("Ação não reconhecida:", event);
@@ -182,8 +182,8 @@ const setBoonStructure = async (actor) => {
   }
 };
 
-const setBoonToBirthright = async (event, actor) => {
-  const index = Number.parseInt(event.currentTarget.dataset.index);
+const setBoonToBirthright = async (options, actor) => {
+  const index = Number.parseInt(options.dataset.index);
 
   const birthrights = foundry.utils.getProperty(actor.system, "birthrights");
 
@@ -203,9 +203,9 @@ const setBoonToBirthright = async (event, actor) => {
   await reopenWithActiveTab(actor);
 };
 
-const deleteBirthright = async (actor, event) => {
+const deleteBirthright = async (actor, options) => {
   try {
-    const birthId = event.currentTarget.dataset.birthId;
+    const birthId = options.dataset.birthId;
 
     if (!birthId) {
       throw new Error("Failed to found id from birthrights.");
@@ -221,17 +221,15 @@ const deleteBirthright = async (actor, event) => {
       },
       { render: false },
     );
-
-    await reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error("Failed to delete Birthrights.");
   }
 };
 
-const deleteWeapon = async (actor, event) => {
+const deleteWeapon = async (actor, options) => {
   try {
-    const weaponId = event.currentTarget.dataset.weaponId;
+    const weaponId = options.dataset.weaponId;
 
     if (!weaponId) {
       throw new Error("Failed to found id from Weapons.");
@@ -255,10 +253,10 @@ const deleteWeapon = async (actor, event) => {
   }
 };
 
-const deleteBoonFromBirthright = async (actor, event) => {
+const deleteBoonFromBirthright = async (actor, options) => {
   try {
-    const birthId = event.currentTarget.dataset.birthId;
-    const boonId = event.currentTarget.dataset.boonId;
+    const birthId = options.dataset.birthId;
+    const boonId = options.dataset.boonId;
 
     if (!boonId || !birthId) {
       throw new Error("Failed to find boon or birthright id.");
@@ -290,9 +288,9 @@ const deleteBoonFromBirthright = async (actor, event) => {
   }
 };
 
-const deleteBoon = async (actor, event) => {
+const deleteBoon = async (actor, options) => {
   try {
-    const boonId = event.currentTarget.dataset.boonId;
+    const boonId = options.dataset.boonId;
 
     if (!boonId) {
       throw new Error("Failed to found id from Boons.");
@@ -315,9 +313,9 @@ const deleteBoon = async (actor, event) => {
   }
 };
 
-const deleteKnack = async (actor, event) => {
+const deleteKnack = async (actor, options) => {
   try {
-    const knackId = event.currentTarget.dataset.knackId;
+    const knackId = options.dataset.knackId;
 
     if (!knackId) {
       throw new Error("Failed to found id from Knacks.");

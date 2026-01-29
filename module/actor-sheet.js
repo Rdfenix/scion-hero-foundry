@@ -47,6 +47,24 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
         setTab: ScionHeroActorSheetV2.#onSetTab, // Handler para trocar abas
         "select-pantheon": ScionHeroActorSheetV2.#onActionTracker,
         "select-god": ScionHeroActorSheetV2.#onActionTracker,
+        "button-birthright-type": ScionHeroActorSheetV2.#onActionTracker,
+        "button-knack-add": ScionHeroActorSheetV2.#onActionTracker,
+        "button-birthright-boon": ScionHeroActorSheetV2.#onActionTracker,
+        "button-boon-add": ScionHeroActorSheetV2.#onActionTracker,
+        "button-weapon-add": ScionHeroActorSheetV2.#onActionTracker,
+        "delete-birthright": ScionHeroActorSheetV2.#onActionTracker,
+        "delete-birth-boon": ScionHeroActorSheetV2.#onActionTracker,
+        "delete-knack": ScionHeroActorSheetV2.#onActionTracker,
+        "delete-boon": ScionHeroActorSheetV2.#onActionTracker,
+        "delete-weapon": ScionHeroActorSheetV2.#onActionTracker,
+        "roll-attribute": ScionHeroActorSheetV2.#onActionTracker,
+        "roll-willpower": ScionHeroActorSheetV2.#onActionTracker,
+        "roll-legend": ScionHeroActorSheetV2.#onActionTracker,
+        "roll-ability": ScionHeroActorSheetV2.#onActionTracker,
+        "roll-attack": ScionHeroActorSheetV2.#onActionTracker,
+        "roll-damage": ScionHeroActorSheetV2.#onActionTracker,
+        "join-battle": ScionHeroActorSheetV2.#onActionTracker,
+        editImage: ScionHeroActorSheetV2.#onEditImage,
       },
     },
     { inplace: false },
@@ -119,7 +137,39 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     event.preventDefault();
     event.stopPropagation();
     event.stopImmediatePropagation();
-    await _onAction(target.dataset.action, this.document);
+
+    const action = target.dataset.action;
+    const key = target.dataset.key;
+    const type = target.dataset.type;
+    const label = target.dataset.label;
+
+    await _onAction(action, this.document, {
+      key,
+      type,
+      label,
+      dataset: target.dataset,
+    });
+  }
+
+  static async #onEditImage(event, target) {
+    const attr = target.dataset.edit || "img";
+    const current = foundry.utils.getProperty(this.document, attr);
+
+    // Acessando o FilePicker via namespace correto da v13
+    const FilePickerImpl = foundry.applications.apps.FilePicker.implementation;
+
+    const fp = new FilePickerImpl({
+      type: "image",
+      current: current,
+      callback: (path) => {
+        this.document.update({ [attr]: path });
+      },
+      // Opcional: Garante que o seletor abra perto da ficha
+      top: this.position.top + 40,
+      left: this.position.left + 10,
+    });
+
+    return fp.browse();
   }
 
   static async #onRollAttribute(event, target) {
