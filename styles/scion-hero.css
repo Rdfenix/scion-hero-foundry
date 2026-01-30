@@ -1,42 +1,42 @@
 @font-face {
   font-family: oldenburg-regular;
-  src: url("../assets/fonts/Oldenburg-Regular.ttf") format("truetype");
+  src: url('../assets/fonts/Oldenburg-Regular.ttf') format('truetype');
   font-weight: normal;
 }
 @font-face {
   font-family: roboto-regular;
-  src: url("../assets/fonts/RobotoMono-Regular.ttf") format("truetype");
+  src: url('../assets/fonts/RobotoMono-Regular.ttf') format('truetype');
   font-weight: normal;
 }
 @font-face {
   font-family: roboto-medium;
-  src: url("../assets/fonts/RobotoMono-Medium.ttf") format("truetype");
+  src: url('../assets/fonts/RobotoMono-Medium.ttf') format('truetype');
   font-weight: normal;
 }
 @font-face {
   font-family: roboto-italic;
-  src: url("../assets/fonts/RobotoMono-Italic.ttf") format("truetype");
+  src: url('../assets/fonts/RobotoMono-Italic.ttf') format('truetype');
   font-style: italic;
 }
 @font-face {
   font-family: roboto-thin;
-  src: url("../assets/fonts/RobotoMono-Thin.ttf") format("truetype");
+  src: url('../assets/fonts/RobotoMono-Thin.ttf') format('truetype');
   font-weight: 100;
 }
 
 @font-face {
   font-family: skranji-bold;
-  src: url("../assets/fonts/Skranji-Bold.ttf") format("truetype");
+  src: url('../assets/fonts/Skranji-Bold.ttf') format('truetype');
   font-weight: bold;
 }
 @font-face {
   font-family: skranji-regular;
-  src: url("../assets/fonts/Skranji-Regular.ttf") format("truetype");
+  src: url('../assets/fonts/Skranji-Regular.ttf') format('truetype');
   font-weight: normal;
 }
 
-input[type="text"]:focus,
-input[type="text"]:hover,
+input[type='text']:focus,
+input[type='text']:hover,
 button:focus,
 button:hover,
 textarea:focus,
@@ -47,10 +47,10 @@ select:hover {
   outline: none;
 }
 
-input[type="checkbox"]::before,
-input[type="radio"]::before,
-input[type="checkbox"]::after,
-input[type="radio"]::after {
+input[type='checkbox']::before,
+input[type='radio']::before,
+input[type='checkbox']::after,
+input[type='radio']::after {
   content: none;
 }
 
@@ -82,7 +82,7 @@ input[type="radio"]::after {
 }
 
 .scion-header {
-  background-image: url("../assets/svg/scion-logo.svg");
+  background-image: url('../assets/svg/scion-logo.svg');
   background-position: center 10px;
   background-size: auto 85px;
   background-repeat: no-repeat;
@@ -102,16 +102,55 @@ input[type="radio"]::after {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  position: relative;
   gap: 0.3rem;
   width: 100%;
 }
 
 .sheet-header .sheet-header-character-info .column .row {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: center;
+  position: relative;
   gap: 0.3rem;
   width: 100%;
+}
+
+.sheet-header .sheet-header-character-info .column .row .column .pantheon-list-items {
+  width: 100%;
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  position: absolute;
+  background: #fff;
+  top: 4rem;
+  right: 0;
+  z-index: 9;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  height: auto;
+  max-height: 8rem;
+  overflow-y: auto;
+  transition:
+    max-height 0.2s ease,
+    opacity 0.15s ease;
+}
+
+.sheet-header .sheet-header-character-info .column .row .column .pantheon-list-items li {
+  cursor: pointer;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+  background-color: transparent;
+  margin: 0;
+  transition: background-color 0.3s ease;
+}
+
+.sheet-header .sheet-header-character-info .column .row .column .pantheon-list-items li:last-child {
+  border-bottom: none;
+}
+
+.sheet-header .sheet-header-character-info .column .row .column .pantheon-list-items li:hover {
+  background-color: #f2f2f2;
 }
 
 .scion-header > h1 {
@@ -125,49 +164,12 @@ input[type="radio"]::after {
   color: #222;
 }
 
-.scion-form {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  width: 100%;
-  height: 100%;
-  gap: 0.5rem;
-}
-
-.scion-form > .sheet-header {
-  gap: 0.5rem;
-  display: flex;
-}
-
-.scion-form > .sheet-header > .column {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  gap: 0.5rem;
-  align-items: stretch;
-}
-
-.scion-form > .sheet-header > .column > .row {
-  line-height: 25px;
-}
-
-.scion-form > .sheet-header > .column > .row > input[type="text"] {
-  border-top: none;
-  border-left: none;
-  border-right: none;
-  padding: 10px;
-}
-
-.scion-form > .sheet-header > .column > .row > input[type="text"]:focus {
-  box-shadow: none;
-}
-
 .scion-label-title {
   width: 100%;
   height: 85px;
   max-width: 130rem;
   margin: 0 auto;
-  background-image: url("../assets/png/band.png");
+  background-image: url('../assets/png/band.png');
   background-position: center center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -212,14 +214,14 @@ input[type="radio"]::after {
 }
 
 .scion-pantheon-button {
-  width: calc(100% - 2px);
+  width: 2rem;
   min-width: 20px;
   height: var(--form-field-height);
   border-left: none;
   border-right: none;
   border-top: none;
   border-bottom: 1px solid var(--color-border-light-tertiary);
-  background: rgba(0, 0, 0, 0.05);
+  background: #672121;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -228,13 +230,23 @@ input[type="radio"]::after {
   font-family: skranji-regular, sans-serif !important;
 }
 
-.scion-pantheon-button > img {
+.pantheon-image {
+  position: absolute;
+  top: auto;
+  left: auto;
+  right: 5px;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pantheon-image > img {
   width: 30px;
   height: 30px !important;
   flex: 0 !important;
   border: 0;
   margin-right: 0 !important;
-  margin-bottom: 5px;
 }
 
 .scion-pantheon-button:hover,
@@ -274,8 +286,8 @@ input[type="radio"]::after {
   flex-direction: row;
 }
 
-.circles > input[type="checkbox"],
-.squares > input[type="checkbox"] {
+.circles > input[type='checkbox'],
+.squares > input[type='checkbox'] {
   flex: 0 0 16px;
   width: 16px;
   height: 16px;

@@ -66,29 +66,50 @@
         <div class="row">
           <div class="column">
             <label for="pantheon">Pantheon</label>
-            <button
-              type="button"
-              class="scion-pantheon-button"
-              data-action="select-pantheon"
-            >
-              <span>{{system.pantheon.name}}</span>
-              {{#if system.pantheon.logo}}
-              <img src="{{system.pantheon.logo}}" alt="pantheon logo" />
-              {{/if}}
-            </button>
+            <input
+              type="text"
+              id="pantheon"
+              name="system.pantheon.name"
+              value="{{system.pantheon.name}}"
+              placeholder=""
+            />
+            {{#if system.pantheon.logo}}
+              <div class="pantheon-image">          
+                <img src="{{system.pantheon.logo}}" alt="pantheon logo" />
+              </div>
+            {{/if}}
+            <ul class="pantheon-list-items">
+              <li>Option 1</li>
+              <li>Option 2</li>
+              <li>Option 3</li>
+            </ul>
           </div>
+          <button
+            type="button"
+            class="scion-pantheon-button"
+            data-action="select-pantheon"
+          >
+            <i class="fa fa-book" aria-hidden="true"></i>
+          </button>
         </div>
         <div class="row">
           <div class="column">
             <label for="god">God</label>
-            <button
-              type="button"
-              class="scion-pantheon-button"
-              data-action="select-god"
-            >
-              <span>{{system.pantheon.god}}</span>
-            </button>
+            <input
+              type="text"
+              id="god"
+              name="system.pantheon.god"
+              value="{{system.pantheon.god}}"
+              placeholder=""
+            />
           </div>
+          <button
+            type="button"
+            class="scion-pantheon-button"
+            data-action="select-god"
+          >
+            <i class="fa fa-book" aria-hidden="true"></i>
+          </button>
         </div>
       </div>
     </div>
