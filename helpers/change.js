@@ -1,12 +1,6 @@
 import { reopenWithActiveTab } from './reopenWithActiveTab.js';
 import { mountDeities } from './mountDeities.js';
-
-const cleanString = str => {
-  return str
-    .normalize('NFD') // Decompõe os caracteres acentuados (ex: 'á' vira 'a' + '´')
-    .replaceAll(/[\u0300-\u036f]/g, '') // Remove apenas os acentos (os "sinais")
-    .replaceAll(/[^a-zA-Z0-9\s]/g, '');
-};
+import { cleanString, mountFavoritiesSkills, mountGodsList } from '../utils/utils.js';
 
 export async function _onChange(event, actor) {
   event.preventDefault();
@@ -420,7 +414,7 @@ const updatePantheonField = async (event, actor) => {
   try {
     const field = event.currentTarget.dataset.field;
     let pantheon = foundry.utils.getProperty(actor.system, 'pantheon');
-    const { pantheons } = await mountDeities();
+    const { pantheons, deities } = await mountDeities();
 
     const selectedPantheon =
       pantheons.find(
@@ -433,14 +427,21 @@ const updatePantheonField = async (event, actor) => {
       logo: selectedPantheon.logo || null,
     };
 
-    await actor.update(
-      {
-        'system.pantheon': pantheon,
-      },
-      { render: false }
-    );
+    let gods = deities.find(p => p.name === selectedPantheon.name)?.system.deities || [];
+    gods = await mountGodsList(gods);
+    const updatedAbilities = await mountFavoritiesSkills(gods[0], actor);
 
-    reopenWithActiveTab(actor);
+    let updatedPantheon = {
+      'system.pantheon': pantheon,
+      'system.virtues': selectedPantheon.virtues,
+    };
+
+    if (gods[0]) {
+      updatedPantheon['system.pantheon.god'] = gods[0].name;
+      updatedPantheon['system.abilities'] = updatedAbilities;
+    }
+
+    await actor.update(updatedPantheon, { render: true });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch pantheon data.');

@@ -10,30 +10,7 @@ import {
 } from './rollDice.js';
 
 import { mountDeities } from './mountDeities.js';
-
-const mountGodsList = async gods =>
-  gods.map(god => ({
-    name: god.name,
-    favoredSkills: (god.favoredSkills || []).reduce((obj, skill, idx) => {
-      obj[idx] = skill;
-      return obj;
-    }, {}),
-  }));
-
-const mountFavoritiesSkills = async (deityPantheon, actor) => {
-  const abilities = foundry.utils.getProperty(actor.system, 'abilities');
-  const favoredSkillsArr = Object.values(deityPantheon.favoredSkills);
-  const updatedAbilities = {};
-
-  for (const [key, value] of Object.entries(abilities)) {
-    updatedAbilities[key] = {
-      ...value,
-      favored: favoredSkillsArr.includes(key),
-    };
-  }
-
-  return updatedAbilities;
-};
+import { mountFavoritiesSkills, mountGodsList } from '../utils/utils.js';
 
 const parseDifficulty = dialogEl => {
   const value = dialogEl.querySelector('input[name="difficulty"]')?.value ?? '7';
