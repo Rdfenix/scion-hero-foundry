@@ -1,4 +1,12 @@
-import { reopenWithActiveTab } from "./reopenWithActiveTab.js";
+import { reopenWithActiveTab } from './reopenWithActiveTab.js';
+import { mountDeities } from './mountDeities.js';
+
+const cleanString = str => {
+  return str
+    .normalize('NFD') // Decompõe os caracteres acentuados (ex: 'á' vira 'a' + '´')
+    .replaceAll(/[\u0300-\u036f]/g, '') // Remove apenas os acentos (os "sinais")
+    .replaceAll(/[^a-zA-Z0-9\s]/g, '');
+};
 
 export async function _onChange(event, actor) {
   event.preventDefault();
@@ -6,48 +14,51 @@ export async function _onChange(event, actor) {
   event.stopImmediatePropagation();
 
   switch (event.currentTarget.dataset.action) {
-    case "select-birthright-type":
+    case 'select-birthright-type':
       event.currentTarget.dataset.selectedType = event.target.value;
       break;
-    case "update-birthright-name":
-    case "update-birthright-description":
+    case 'update-birthright-name':
+    case 'update-birthright-description':
       await onBirthrightChange(event, actor);
       break;
-    case "update-birthright-boon":
+    case 'update-birthright-boon':
       await onBirthrightBoonChange(event, actor);
       break;
-    case "knack-change":
+    case 'knack-change':
       await onKnackChange(event, actor);
       break;
-    case "boon-change":
+    case 'boon-change':
       await onBoonChange(event, actor);
       break;
-    case "legend-point-change":
+    case 'legend-point-change':
       await onLegendPointChange(event, actor);
       break;
-    case "update-weapon-field":
+    case 'update-weapon-field':
       await onChangeFieldInWeapon(event, actor);
       break;
-    case "select-weapon-type":
+    case 'select-weapon-type':
       await onSelectFieldInWeapon(event, actor);
       break;
-    case "defense-value-update":
+    case 'defense-value-update':
       await onChangeDefenseValue(event, actor);
       break;
-    case "change-health-damage":
+    case 'change-health-damage':
       await onChangeHealthValue(event, actor);
       break;
-    case "update-xp":
+    case 'update-xp':
       await updateExperiencePoints(event, actor);
       break;
-    case "update-virtue-field":
+    case 'update-virtue-field':
       await updateVirtueField(event, actor);
       break;
-    case "armor-update":
+    case 'armor-update':
       await updateArmorField(event, actor);
       break;
+    case 'update-pantheon-name':
+      await updatePantheonField(event, actor);
+      break;
     default:
-      console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
+      console.warn('Ação não reconhecida:', event.currentTarget.dataset.action);
       break;
   }
 }
@@ -55,7 +66,7 @@ export async function _onChange(event, actor) {
 const updateVirtueField = async (event, actor) => {
   try {
     const field = event.currentTarget.dataset.field;
-    let virtues = foundry.utils.getProperty(actor.system, "virtues");
+    let virtues = foundry.utils.getProperty(actor.system, 'virtues');
 
     virtues = {
       ...virtues,
@@ -64,7 +75,7 @@ const updateVirtueField = async (event, actor) => {
 
     await actor.update(
       {
-        "system.virtues": virtues,
+        'system.virtues': virtues,
       },
       { render: false }
     );
@@ -72,14 +83,14 @@ const updateVirtueField = async (event, actor) => {
     reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
-    ui.notifications.error("Failed to fetch virtues.");
+    ui.notifications.error('Failed to fetch virtues.');
   }
 };
 
 const updateArmorField = async (event, actor) => {
   try {
     const field = event.currentTarget.dataset.field;
-    let combat = foundry.utils.getProperty(actor.system, "combat");
+    let combat = foundry.utils.getProperty(actor.system, 'combat');
 
     combat = {
       ...combat,
@@ -88,7 +99,7 @@ const updateArmorField = async (event, actor) => {
 
     await actor.update(
       {
-        "system.combat": combat,
+        'system.combat': combat,
       },
       { render: false }
     );
@@ -96,26 +107,26 @@ const updateArmorField = async (event, actor) => {
     reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
-    ui.notifications.error("Failed to fetch combat.");
+    ui.notifications.error('Failed to fetch combat.');
   }
 };
 
 const updateExperiencePoints = async (event, actor) => {
   try {
-    let xp = foundry.utils.getProperty(actor.system, "experience");
+    let xp = foundry.utils.getProperty(actor.system, 'experience');
     xp = {
       ...xp,
       value: event.currentTarget.value || 0,
     };
     await actor.update(
       {
-        "system.experience": xp,
+        'system.experience': xp,
       },
       { render: false }
     );
   } catch (error) {
     console.error(error.message);
-    ui.notifications.error("Failed to fetch xp.");
+    ui.notifications.error('Failed to fetch xp.');
   }
 };
 
@@ -125,12 +136,12 @@ const onSelectFieldInWeapon = async (event, actor) => {
     const weaponId = event.currentTarget.dataset.weaponId;
 
     if (field === undefined || !weaponId) {
-      throw new Error("Failed to found field or id from weapons.");
+      throw new Error('Failed to found field or id from weapons.');
     }
 
-    let weapons = foundry.utils.getProperty(actor.system, "weapons");
+    let weapons = foundry.utils.getProperty(actor.system, 'weapons');
 
-    weapons = weapons.map((weapon) => {
+    weapons = weapons.map(weapon => {
       if (weapon._id === weaponId) {
         weapon[field] = event.target.value;
       }
@@ -139,30 +150,29 @@ const onSelectFieldInWeapon = async (event, actor) => {
 
     await actor.update(
       {
-        "system.weapons": weapons,
+        'system.weapons': weapons,
       },
       { render: false }
     );
   } catch (error) {
     console.error(error.message);
-    ui.notifications.error("Failed to fetch Weapons.");
+    ui.notifications.error('Failed to fetch Weapons.');
   }
 };
 
 const onChangeHealthValue = async (event, actor) => {
   try {
     const key = event.currentTarget.dataset.key;
-    const value =
-      event.currentTarget.value === "__none__" ? "" : event.currentTarget.value;
+    const value = event.currentTarget.value === '__none__' ? '' : event.currentTarget.value;
 
     if (key === undefined) {
-      throw new Error("Failed to found key from health values.");
+      throw new Error('Failed to found key from health values.');
     }
 
-    let health = foundry.utils.getProperty(actor.system, "health");
+    let health = foundry.utils.getProperty(actor.system, 'health');
 
     if (health === undefined) {
-      throw new Error("Failed to found health.");
+      throw new Error('Failed to found health.');
     }
 
     health = {
@@ -180,7 +190,7 @@ const onChangeHealthValue = async (event, actor) => {
     let lastKey = null;
 
     for (const key of conditionKeys) {
-      if (health.conditions[key] && health.conditions[key].damageType !== "") {
+      if (health.conditions[key] && health.conditions[key].damageType !== '') {
         lastKey = key;
       }
     }
@@ -199,7 +209,7 @@ const onChangeHealthValue = async (event, actor) => {
 
     await actor.update(
       {
-        "system.health": health,
+        'system.health': health,
       },
       { render: false }
     );
@@ -207,7 +217,7 @@ const onChangeHealthValue = async (event, actor) => {
     reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
-    ui.notifications.error("Failed to fetch health.");
+    ui.notifications.error('Failed to fetch health.');
   }
 };
 
@@ -216,16 +226,16 @@ const onChangeDefenseValue = async (event, actor) => {
     const field = event.currentTarget.dataset.field;
 
     if (field === undefined) {
-      throw new Error("Failed to found field from defense values.");
+      throw new Error('Failed to found field from defense values.');
     }
 
-    let combat = foundry.utils.getProperty(actor.system, "combat");
+    let combat = foundry.utils.getProperty(actor.system, 'combat');
 
     combat = { ...combat, [field]: { value: event.currentTarget.value } };
 
     await actor.update(
       {
-        "system.combat": combat,
+        'system.combat': combat,
       },
       { render: false }
     );
@@ -233,7 +243,7 @@ const onChangeDefenseValue = async (event, actor) => {
     reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
-    ui.notifications.error("Failed to fetch combat.");
+    ui.notifications.error('Failed to fetch combat.');
   }
 };
 
@@ -243,12 +253,12 @@ const onChangeFieldInWeapon = async (event, actor) => {
     const weaponId = event.currentTarget.dataset.weaponId;
 
     if (field === undefined || !weaponId) {
-      throw new Error("Failed to found field or id from weapons.");
+      throw new Error('Failed to found field or id from weapons.');
     }
 
-    let weapons = foundry.utils.getProperty(actor.system, "weapons");
+    let weapons = foundry.utils.getProperty(actor.system, 'weapons');
 
-    weapons = weapons.map((weapon) => {
+    weapons = weapons.map(weapon => {
       if (weapon._id === weaponId) {
         weapon[field] = event.currentTarget.value;
       }
@@ -257,22 +267,19 @@ const onChangeFieldInWeapon = async (event, actor) => {
 
     await actor.update(
       {
-        "system.weapons": weapons,
+        'system.weapons': weapons,
       },
       { render: false }
     );
   } catch (error) {
     console.error(error.message);
-    ui.notifications.error("Failed to fetch Weapons.");
+    ui.notifications.error('Failed to fetch Weapons.');
   }
 };
 
 const onLegendPointChange = async (event, actor) => {
   try {
-    const legendPoints = foundry.utils.getProperty(
-      actor.system,
-      "legendPoints"
-    );
+    const legendPoints = foundry.utils.getProperty(actor.system, 'legendPoints');
 
     const min = legendPoints.min ?? 0;
     const max = legendPoints.max ?? 48;
@@ -284,7 +291,7 @@ const onLegendPointChange = async (event, actor) => {
 
     await actor.update(
       {
-        "system.legendPoints": legendPoints,
+        'system.legendPoints': legendPoints,
       },
       { render: false }
     );
@@ -292,7 +299,7 @@ const onLegendPointChange = async (event, actor) => {
     event.currentTarget.value = value;
   } catch (error) {
     console.error(error.message);
-    ui.notifications.error("Failed to fetch legend points.");
+    ui.notifications.error('Failed to fetch legend points.');
   }
 };
 
@@ -303,22 +310,22 @@ const onBirthrightBoonChange = async (event, actor) => {
     const boonIndex = Number.parseInt(event.currentTarget.dataset.boonIndex);
 
     if (field === undefined || Number.isNaN(birthIndex)) {
-      throw new Error("Failed to found field or index from birthrights.");
+      throw new Error('Failed to found field or index from birthrights.');
     }
 
-    const birthrights = foundry.utils.getProperty(actor.system, "birthrights");
+    const birthrights = foundry.utils.getProperty(actor.system, 'birthrights');
 
     birthrights[birthIndex].boons[boonIndex][field] = event.currentTarget.value;
 
     await actor.update(
       {
-        "system.birthrights": birthrights,
+        'system.birthrights': birthrights,
       },
       { render: false }
     );
   } catch (error) {
     console.error(error.message);
-    ui.notifications.error("Failed to fetch boons on Birthrights.");
+    ui.notifications.error('Failed to fetch boons on Birthrights.');
   }
 };
 
@@ -328,9 +335,9 @@ const onBirthrightChange = async (event, actor) => {
     const index = Number.parseInt(event.currentTarget.dataset.index);
 
     if (field === undefined || Number.isNaN(index)) {
-      throw new Error("Failed to found field or index from birthrights.");
+      throw new Error('Failed to found field or index from birthrights.');
     }
-    const birthrights = foundry.utils.getProperty(actor.system, "birthrights");
+    const birthrights = foundry.utils.getProperty(actor.system, 'birthrights');
 
     // Verifica se o índice existe
     if (!birthrights[index]) {
@@ -341,13 +348,13 @@ const onBirthrightChange = async (event, actor) => {
 
     await actor.update(
       {
-        "system.birthrights": birthrights,
+        'system.birthrights': birthrights,
       },
       { render: false }
     );
   } catch (error) {
     console.error(error.message);
-    ui.notifications.error("Failed to fetch Birthrights.");
+    ui.notifications.error('Failed to fetch Birthrights.');
   }
 };
 
@@ -357,11 +364,11 @@ const onKnackChange = async (event, actor) => {
     const id = event.currentTarget.dataset.knackId; // <-- agora é string
 
     if (field === undefined || !id) {
-      throw new Error("Failed to found field or id from knacks.");
+      throw new Error('Failed to found field or id from knacks.');
     }
-    let knacks = foundry.utils.getProperty(actor.system, "knacks");
+    let knacks = foundry.utils.getProperty(actor.system, 'knacks');
 
-    knacks = knacks.map((knack) => {
+    knacks = knacks.map(knack => {
       if (knack._id === id) {
         knack[field] = event.currentTarget.value;
       }
@@ -370,13 +377,13 @@ const onKnackChange = async (event, actor) => {
 
     await actor.update(
       {
-        "system.knacks": knacks,
+        'system.knacks': knacks,
       },
       { render: false }
     );
   } catch (error) {
     console.error(error.message);
-    ui.notifications.error("Failed to fetch Knacks.");
+    ui.notifications.error('Failed to fetch Knacks.');
   }
 };
 
@@ -386,11 +393,11 @@ const onBoonChange = async (event, actor) => {
     const id = event.currentTarget.dataset.boonId; // <-- agora é string
 
     if (field === undefined || !id) {
-      throw new Error("Failed to found field or id from boons.");
+      throw new Error('Failed to found field or id from boons.');
     }
-    let boons = foundry.utils.getProperty(actor.system, "boons");
+    let boons = foundry.utils.getProperty(actor.system, 'boons');
 
-    boons = boons.map((boon) => {
+    boons = boons.map(boon => {
       if (boon._id === id) {
         boon[field] = event.currentTarget.value;
       }
@@ -399,12 +406,43 @@ const onBoonChange = async (event, actor) => {
 
     await actor.update(
       {
-        "system.boons": boons,
+        'system.boons': boons,
       },
       { render: false }
     );
   } catch (error) {
     console.error(error.message);
-    ui.notifications.error("Failed to fetch boons.");
+    ui.notifications.error('Failed to fetch boons.');
+  }
+};
+
+const updatePantheonField = async (event, actor) => {
+  try {
+    const field = event.currentTarget.dataset.field;
+    let pantheon = foundry.utils.getProperty(actor.system, 'pantheon');
+    const { pantheons } = await mountDeities();
+
+    const selectedPantheon =
+      pantheons.find(
+        p => cleanString(p.name)?.toUpperCase() === cleanString(event.target.value)?.toUpperCase()
+      ) || {};
+
+    pantheon = {
+      ...pantheon,
+      [field]: selectedPantheon[field] || event.target.value.toUpperCase(),
+      logo: selectedPantheon.logo || null,
+    };
+
+    await actor.update(
+      {
+        'system.pantheon': pantheon,
+      },
+      { render: false }
+    );
+
+    reopenWithActiveTab(actor);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error('Failed to fetch pantheon data.');
   }
 };

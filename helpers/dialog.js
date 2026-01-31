@@ -9,6 +9,8 @@ import {
   callRollLegendDice,
 } from './rollDice.js';
 
+import { mountDeities } from './mountDeities.js';
+
 const mountGodsList = async gods =>
   gods.map(god => ({
     name: god.name,
@@ -76,24 +78,7 @@ const mountResponseAttrValues = async (actor, key) => {
 
 export const selectPantheon = async actor => {
   try {
-    const deities = await getDeities();
-
-    const pantheons = deities
-      .map(deity => ({
-        name: deity.name,
-        logo: deity.img,
-        description: deity.system.description,
-        virtues: deity.system.virtues.reduce((acc, virtue, index) => {
-          acc[`virtue_${index + 1}`] = {
-            name: virtue.name,
-            value: 1,
-            min: virtue.min,
-            max: virtue.max,
-          };
-          return acc;
-        }, {}),
-      }))
-      .filter((pantheon, index, self) => index === self.findIndex(p => p.name === pantheon.name));
+    const { deities, pantheons } = await mountDeities();
 
     if (pantheons.length === 0) {
       throw new Error('Nenhuma divindade encontrada no pacote.');
