@@ -1,4 +1,3 @@
-import { reopenWithActiveTab } from './reopenWithActiveTab.js';
 import { mountDeities } from './mountDeities.js';
 import { cleanString, mountFavoritiesSkills, mountGodsList } from '../utils/utils.js';
 
@@ -73,8 +72,6 @@ const updateVirtueField = async (event, actor) => {
       },
       { render: false }
     );
-
-    reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch virtues.');
@@ -97,8 +94,6 @@ const updateArmorField = async (event, actor) => {
       },
       { render: false }
     );
-
-    reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch combat.');
@@ -207,8 +202,6 @@ const onChangeHealthValue = async (event, actor) => {
       },
       { render: false }
     );
-
-    reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch health.');
@@ -233,8 +226,6 @@ const onChangeDefenseValue = async (event, actor) => {
       },
       { render: false }
     );
-
-    reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch combat.');

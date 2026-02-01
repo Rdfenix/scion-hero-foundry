@@ -1,14 +1,14 @@
-import { _onAction } from "../helpers/actions.js";
-import { _onChange } from "../helpers/change.js";
-import { _onDrop } from "../helpers/onDrop.js";
+import { _onAction } from '../helpers/actions.js';
+import { _onChange } from '../helpers/change.js';
+import { _onDrop } from '../helpers/onDrop.js';
 
-import { attributesUpdate } from "../helpers/attributesUpdate.js";
-import { abilitiesUpdate } from "../helpers/abilitiesUpdate.js";
-import { virtuesUpdate } from "../helpers/virtuesUpdate.js";
-import { birthrightUpdate } from "../helpers/birthrightsUpdate.js";
-import { willpowerUpdate } from "../helpers/willpowerUpdate.js";
-import { legendUpdate } from "../helpers/legendUpdate.js";
-import { updateSoak } from "../helpers/updateSoak.js";
+import { attributesUpdate } from '../helpers/attributesUpdate.js';
+import { abilitiesUpdate } from '../helpers/abilitiesUpdate.js';
+import { virtuesUpdate } from '../helpers/virtuesUpdate.js';
+import { birthrightUpdate } from '../helpers/birthrightsUpdate.js';
+import { willpowerUpdate } from '../helpers/willpowerUpdate.js';
+import { legendUpdate } from '../helpers/legendUpdate.js';
+import { updateSoak } from '../helpers/updateSoak.js';
 
 function renderActorSheetElements(app, html, data) {
   // Implementar funcionalidades específicas de renderização aqui, se necessário
@@ -22,18 +22,18 @@ function renderActorSheetElements(app, html, data) {
 }
 
 export default class ScionHeroActorSheetV2 extends foundry.applications.api.HandlebarsApplicationMixin(
-  foundry.applications.sheets.ActorSheetV2,
+  foundry.applications.sheets.ActorSheetV2
 ) {
   /** @override */
   static DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
-      classes: ["scion-hero", "sheet", "character"],
-      tag: "form",
+      classes: ['scion-hero', 'sheet', 'character'],
+      tag: 'form',
       window: {
-        title: "SCION.SheetTitle",
+        title: 'SCION.SheetTitle',
         resizable: false,
-        scrollable: [".scion-wrapper"],
+        scrollable: ['.scion-wrapper'],
       },
       form: {
         handler: ScionHeroActorSheetV2.#onSubmit,
@@ -41,47 +41,47 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
         closeOnSubmit: false,
       },
       position: { width: 897, height: 800 },
+      dragDrop: [{ dragSelector: null, dropSelector: '[data-drop-target]' }],
       // REGRA DE OURO: Todas as interações de clique devem ser mapeadas aqui
       actions: {
         rollAttribute: ScionHeroActorSheetV2.#onRollAttribute,
         setTab: ScionHeroActorSheetV2.#onSetTab, // Handler para trocar abas
-        "select-pantheon": ScionHeroActorSheetV2.#onActionTracker,
-        "select-god": ScionHeroActorSheetV2.#onActionTracker,
-        "button-birthright-type": ScionHeroActorSheetV2.#onActionTracker,
-        "button-knack-add": ScionHeroActorSheetV2.#onActionTracker,
-        "button-birthright-boon": ScionHeroActorSheetV2.#onActionTracker,
-        "button-boon-add": ScionHeroActorSheetV2.#onActionTracker,
-        "button-weapon-add": ScionHeroActorSheetV2.#onActionTracker,
-        "delete-birthright": ScionHeroActorSheetV2.#onActionTracker,
-        "delete-birth-boon": ScionHeroActorSheetV2.#onActionTracker,
-        "delete-knack": ScionHeroActorSheetV2.#onActionTracker,
-        "delete-boon": ScionHeroActorSheetV2.#onActionTracker,
-        "delete-weapon": ScionHeroActorSheetV2.#onActionTracker,
-        "roll-attribute": ScionHeroActorSheetV2.#onActionTracker,
-        "roll-willpower": ScionHeroActorSheetV2.#onActionTracker,
-        "roll-legend": ScionHeroActorSheetV2.#onActionTracker,
-        "roll-ability": ScionHeroActorSheetV2.#onActionTracker,
-        "roll-attack": ScionHeroActorSheetV2.#onActionTracker,
-        "roll-damage": ScionHeroActorSheetV2.#onActionTracker,
-        "join-battle": ScionHeroActorSheetV2.#onActionTracker,
+        'select-pantheon': ScionHeroActorSheetV2.#onActionTracker,
+        'select-god': ScionHeroActorSheetV2.#onActionTracker,
+        'button-birthright-type': ScionHeroActorSheetV2.#onActionTracker,
+        'button-knack-add': ScionHeroActorSheetV2.#onActionTracker,
+        'button-birthright-boon': ScionHeroActorSheetV2.#onActionTracker,
+        'button-boon-add': ScionHeroActorSheetV2.#onActionTracker,
+        'button-weapon-add': ScionHeroActorSheetV2.#onActionTracker,
+        'delete-birthright': ScionHeroActorSheetV2.#onActionTracker,
+        'delete-birth-boon': ScionHeroActorSheetV2.#onActionTracker,
+        'delete-knack': ScionHeroActorSheetV2.#onActionTracker,
+        'delete-boon': ScionHeroActorSheetV2.#onActionTracker,
+        'delete-weapon': ScionHeroActorSheetV2.#onActionTracker,
+        'roll-attribute': ScionHeroActorSheetV2.#onActionTracker,
+        'roll-willpower': ScionHeroActorSheetV2.#onActionTracker,
+        'roll-legend': ScionHeroActorSheetV2.#onActionTracker,
+        'roll-ability': ScionHeroActorSheetV2.#onActionTracker,
+        'roll-attack': ScionHeroActorSheetV2.#onActionTracker,
+        'roll-damage': ScionHeroActorSheetV2.#onActionTracker,
+        'join-battle': ScionHeroActorSheetV2.#onActionTracker,
         editImage: ScionHeroActorSheetV2.#onEditImage,
       },
     },
-    { inplace: false },
+    { inplace: false }
   );
 
   static PARTS = {
     form: {
-      template:
-        "systems/scion-foundry-v2/templates/actors/character-sheet.html",
+      template: 'systems/scion-foundry-v2/templates/actors/character-sheet.html',
     },
   };
 
   /** @override */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    console.log("Preparando contexto do sheet do ator:", context);
-    console.log("CONFIG:", CONFIG);
+    console.log('Preparando contexto do sheet do ator:', context);
+    console.log('CONFIG:', CONFIG);
     context.actor = this.document;
     context.system = this.document.system;
     context.config = CONFIG.SCION;
@@ -90,7 +90,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     context.tabs = this.tabGroups;
 
     // Inicializa o grupo 'primary' se ele não existir
-    if (!context.tabs.primary) context.tabs.primary = "stats";
+    if (!context.tabs.primary) context.tabs.primary = 'stats';
 
     const attrKeys = [];
     const skillsKeys = [];
@@ -105,20 +105,19 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
       skillsKeys.push(skillKey);
     }
 
-    const damageType = ["Bashing", "Letal", "Aggraveted"];
+    const damageType = ['Bashing', 'Letal', 'Aggraveted'];
 
     context.system.attrKeys = attrKeys;
     context.system.skillsKeys = skillsKeys;
     context.system.damageType = damageType;
 
-    context.enrichedBiography =
-      await foundry.applications.ux.TextEditor.enrichHTML(
-        this.document.system.biography,
-        {
-          secrets: this.document.isOwner,
-          rollData: this.document.getRollData(),
-        },
-      );
+    context.enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(
+      this.document.system.biography,
+      {
+        secrets: this.document.isOwner,
+        rollData: this.document.getRollData(),
+      }
+    );
 
     return context;
   }
@@ -130,7 +129,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   // Troca de abas nativa simplificada
   static #onSetTab(event, target) {
     const tab = target.dataset.tab;
-    this.changeTab(tab, "primary"); // Assume que você definiu um grupo de tabs "primary"
+    this.changeTab(tab, 'primary'); // Assume que você definiu um grupo de tabs "primary"
   }
 
   static async #onActionTracker(event, target) {
@@ -152,16 +151,16 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   }
 
   static async #onEditImage(event, target) {
-    const attr = target.dataset.edit || "img";
+    const attr = target.dataset.edit || 'img';
     const current = foundry.utils.getProperty(this.document, attr);
 
     // Acessando o FilePicker via namespace correto da v13
     const FilePickerImpl = foundry.applications.apps.FilePicker.implementation;
 
     const fp = new FilePickerImpl({
-      type: "image",
+      type: 'image',
       current: current,
-      callback: (path) => {
+      callback: path => {
         this.document.update({ [attr]: path });
       },
       // Opcional: Garante que o seletor abra perto da ficha
@@ -182,6 +181,13 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     await this.document.update(updateData);
   }
 
+  // O framework agora chama esta função automaticamente
+  /** @override */
+  _onDrop(event) {
+    // Não precisa de preventDefault, o framework já faz
+    return _onDrop(event, this.document);
+  }
+
   /* -------------------------------------------- */
   /* Drag & Drop e Listeners Específicos          */
   /* -------------------------------------------- */
@@ -197,17 +203,17 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     // Em vez de listeners de clique globais, usamos apenas para o que o framework
     // não cobre automaticamente (como inputs de mudança ou drag & drop complexo)
 
-    html.querySelectorAll("input, select").forEach((el) => {
+    html.querySelectorAll('input, select').forEach(el => {
       if (el.dataset.action) {
-        el.addEventListener("change", (ev) => _onChange(ev, this.document));
+        el.addEventListener('change', ev => _onChange(ev, this.document));
       }
     });
 
     // Delegando Drag & Drop de forma limpa
-    const dropTargets = html.querySelectorAll("[data-drop-target]");
-    dropTargets.forEach((target) => {
-      target.addEventListener("dragover", (ev) => ev.preventDefault());
-      target.addEventListener("drop", (ev) => _onDrop(ev, this.document));
+    const dropTargets = html.querySelectorAll('[data-drop-target]');
+    dropTargets.forEach(target => {
+      target.addEventListener('dragover', ev => ev.preventDefault());
+      target.addEventListener('drop', ev => _onDrop(ev, this.document));
     });
   }
 }

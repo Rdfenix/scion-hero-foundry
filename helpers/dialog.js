@@ -1,4 +1,3 @@
-import { reopenWithActiveTab } from './reopenWithActiveTab.js';
 import { getDeities } from '../api/deitiesApi.js';
 import {
   callRollSkillDice,
@@ -113,11 +112,13 @@ export const selectPantheon = async actor => {
                 },
               });
 
-              await actor.update({
-                'system.virtues': selectedPantheon.virtues,
-              });
-
-              await reopenWithActiveTab(actor);
+              await actor.update(
+                {
+                  'system.virtues': selectedPantheon.virtues,
+                },
+                { render: true }
+              );
+              resolve();
             },
           },
           {
@@ -190,14 +191,16 @@ export const selectGod = async actor => {
 
               const updatedAbilities = await mountFavoritiesSkills(deityPantheon, actor);
 
-              await actor.update({
-                'system.abilities': updatedAbilities,
-                'system.pantheon': {
-                  god: deityPantheon.name,
+              await actor.update(
+                {
+                  'system.abilities': updatedAbilities,
+                  'system.pantheon': {
+                    god: deityPantheon.name,
+                  },
                 },
-              });
-
-              await reopenWithActiveTab(actor);
+                { render: true }
+              );
+              resolve();
             },
           },
           {

@@ -1,4 +1,3 @@
-import { reopenWithActiveTab } from './reopenWithActiveTab.js';
 import {
   birthrightSchema,
   knackSchema,
@@ -97,10 +96,8 @@ const setBirthrightOptionEstructure = async actor => {
       {
         'system.birthrights': birthrightList,
       },
-      { render: false }
+      { render: true }
     );
-
-    await reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch Birthrights.');
@@ -121,10 +118,8 @@ const setKnackStructure = async actor => {
       {
         'system.knacks': knackList,
       },
-      { render: false }
+      { render: true }
     );
-
-    await reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch knacks.');
@@ -145,10 +140,8 @@ const setWeaponStructure = async actor => {
       {
         'system.weapons': weapons,
       },
-      { render: false }
+      { render: true }
     );
-
-    await reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch weapons.');
@@ -169,10 +162,8 @@ const setBoonStructure = async actor => {
       {
         'system.boons': boonList,
       },
-      { render: false }
+      { render: true }
     );
-
-    await reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch knacks.');
@@ -194,10 +185,8 @@ const setBoonToBirthright = async (options, actor) => {
     {
       'system.birthrights': birthrights,
     },
-    { render: false }
+    { render: true }
   );
-
-  await reopenWithActiveTab(actor);
 };
 
 const deleteBirthright = async (actor, options) => {
@@ -216,7 +205,7 @@ const deleteBirthright = async (actor, options) => {
       {
         'system.birthrights': birthrights,
       },
-      { render: false }
+      { render: true }
     );
   } catch (error) {
     console.error(error.message);
@@ -240,10 +229,8 @@ const deleteWeapon = async (actor, options) => {
       {
         'system.weapons': weapons,
       },
-      { render: false }
+      { render: true }
     );
-
-    await reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to delete Weapon.');
@@ -275,10 +262,8 @@ const deleteBoonFromBirthright = async (actor, options) => {
       {
         'system.birthrights': birthrights,
       },
-      { render: false }
+      { render: true }
     );
-
-    await reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to delete boons from Birthrights.');
@@ -300,10 +285,8 @@ const deleteBoon = async (actor, options) => {
       {
         'system.boons': boons,
       },
-      { render: false }
+      { render: true }
     );
-
-    await reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to delete boons.');
@@ -325,10 +308,8 @@ const deleteKnack = async (actor, options) => {
       {
         'system.knacks': knacks,
       },
-      { render: false }
+      { render: true }
     );
-
-    await reopenWithActiveTab(actor);
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to delete Knack.');
