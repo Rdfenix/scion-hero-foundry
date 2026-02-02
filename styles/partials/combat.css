@@ -21,6 +21,7 @@
   text-transform: uppercase;
   width: 50rem;
   margin-left: 16px;
+  height: 2.5rem;
 }
 
 .weapon-wrapper ul {
@@ -45,6 +46,7 @@
   bottom: 0;
   font-size: 20px;
   height: 30px;
+  color: #222;
 }
 
 .weapon-name,
@@ -79,7 +81,7 @@
   gap: 0.5rem;
 }
 
-.weapon-stats div input[type="text"] {
+.weapon-stats div input[type='text'] {
   width: 9rem;
 }
 
@@ -96,7 +98,7 @@
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
 }
 
-.weapon-wrapper input[type="text"] {
+.weapon-wrapper input[type='text'] {
   padding: 10px;
   height: 33px;
 }
@@ -123,11 +125,11 @@
   gap: 0.4rem;
 }
 
-.weapon-stats input[type="text"] {
+.weapon-stats input[type='text'] {
   width: 6rem;
 }
 
-.damage input[type="text"] {
+.damage input[type='text'] {
   width: 10rem;
 }
 
@@ -162,7 +164,7 @@
   position: relative;
 }
 
-.point-to-spend input[type="number"] {
+.point-to-spend input[type='number'] {
   width: 9rem;
   padding: 10px;
 }
@@ -206,8 +208,8 @@
   padding: 0px 15px;
 }
 
-.defense-value-dodge input[type="text"],
-.defense-value-parry input[type="text"] {
+.defense-value-dodge input[type='text'],
+.defense-value-parry input[type='text'] {
   flex: 1;
   min-width: 0;
   padding: 10px;
@@ -251,17 +253,17 @@
   text-transform: uppercase;
 }
 
-.aggraveted input[type="text"],
-.lethal input[type="text"],
-.bashing input[type="text"] {
+.aggraveted input[type='text'],
+.lethal input[type='text'],
+.bashing input[type='text'] {
   flex: 1;
   min-width: 0;
   padding: 10px;
 }
 
-.aggraveted input[type="text"]:disabled,
-.lethal input[type="text"]:disabled,
-.bashing input[type="text"]:disabled {
+.aggraveted input[type='text']:disabled,
+.lethal input[type='text']:disabled,
+.bashing input[type='text']:disabled {
   border: 1px solid #7a7971;
 }
 
@@ -288,16 +290,20 @@
 }
 
 .join-battle button {
-  font-family: skranji-bold, sans-serif;
   display: flex;
   align-items: center;
+  font-family: skranji-regular, sans-serif !important;
+  text-transform: uppercase;
+  width: 50rem;
+  margin-left: 16px;
+  height: 2.5rem;
 }
 
 .experience {
   align-items: center;
 }
 
-.experience input[type="text"] {
+.experience input[type='text'] {
   width: 80%;
   height: 33px;
   padding: 10px;

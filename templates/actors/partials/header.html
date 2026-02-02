@@ -1,0 +1,116 @@
+<header class="sheet-header">
+    <div class="scion-header">
+        <h1>HERO</h1>
+    </div>
+
+    {{!-- Removi a tag <form> manual. O root já é um form. --}}
+    <div class="profile-image">
+        <img class="profile" src="{{actor.img}}" data-action="editImage" data-edit="img" title="{{actor.name}}" width="135" height="135" />
+    </div>
+
+    <div class="sheet-header-character-info">
+        <div class="column">
+        <div class="row">
+            <div class="column">
+            <label for="name">Name</label>
+            <input
+            type="text"
+            id="name"
+            name="name"
+            value="{{actor.name}}"
+            placeholder=""
+            />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+            <label for="player">Player</label>
+            <input
+                type="text"
+                id="player"
+                name="system.player"
+                value="{{#if system.player}}{{system.player}}{{else}}{{currentUserName}}{{/if}}"
+                placeholder=""
+            />
+            </div>
+        </div>
+        </div>
+        <div class="column">
+        <div class="row">
+            <div class="column">
+            <label for="calling">Calling</label>
+            <input
+                type="text"
+                id="calling"
+                name="system.calling"
+                value="{{system.calling}}"
+                placeholder=""
+            />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+            <label for="nature">Nature</label>
+            <input
+                type="text"
+                id="nature"
+                name="system.nature"
+                value="{{system.nature}}"
+                placeholder=""
+            />
+            </div>
+        </div>
+        </div>
+        <div class="column">
+        <div class="row">
+            <div class="column">
+            <label for="pantheon">Pantheon</label>
+            <input
+                type="text"
+                id="pantheon"
+                name="system.pantheon.name"
+                value="{{system.pantheon.name}}"
+                data-field="name"
+                data-action="update-pantheon-name"
+                placeholder=""
+            />
+            {{#if system.pantheon.logo}}
+                <div class="pantheon-image">          
+                <img src="{{system.pantheon.logo}}" alt="pantheon logo" />
+                </div>
+            {{/if}}
+            </div>
+            <button
+            type="button"
+            class="scion-pantheon-button"
+            data-action="select-pantheon"
+            >
+            <i class="fa fa-book" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="row">
+            <div class="column">
+            <label for="god">God</label>
+            <input
+                type="text"
+                id="god"
+                name="system.pantheon.god"
+                value="{{system.pantheon.god}}"
+                data-action="update-pantheon-god"
+                placeholder=""
+            />
+            </div>
+            <button
+            type="button"
+            class="scion-pantheon-button"
+            data-action="select-god"
+            >
+            <i class="fa fa-book" aria-hidden="true"></i>
+            </button>
+        </div>
+        </div>
+    </div>
+
+    <section data-application-part="tabs">{{!-- Onde ficam os links das abas --}}</section>
+
+</header>

@@ -120,6 +120,7 @@
 
 .birthright-input-area .delete-button {
   top: 0;
+  color: #222;
 }
 
 .birthright-input-area > .row {
@@ -178,6 +179,7 @@
   background: none;
   text-align: center;
   font-size: 17px;
+  color: #222;
 }
 
 .delete-button i {
@@ -242,4 +244,5 @@
   display: flex;
   align-items: center;
   height: 100%;
+  color: #222;
 }

@@ -1,117 +1,14 @@
-<div class="{{cssClass}} {{actor.type}} scion-wrapper">
-  {{!-- Actor Header --}}
-  <div class="scion-header">
-    <h1>HERO</h1>
-  </div>
+<div class="scion-wrapper scrollable"id="scion-sheet-{{actor.id}}">
+{{!-- Parte do Header --}}
+  <section data-application-part="header">
+    {{!-- O conteúdo aqui virá do template parcial do header --}}
+  </section>
 
-  {{!-- Character Sheet Template for Foundry VTT --}}
-  <form class="scion-form" autocomplete="off">
-    <div class="profile-image">
-      <img
-        class="profile"
-        src="{{actor.img}}"
-        data-edit="img"
-        title="{{actor.name}}"
-        width="135"
-        height="135"
-      />
-    </div>
-    <header class="sheet-header">
-      <div class="column">
-        <div class="row">
-          <label for="name">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value="{{actor.name}}"
-            placeholder=""
-          />
-        </div>
-        <div class="row">
-          <label for="player">Player</label>
-          <input
-            type="text"
-            id="player"
-            name="system.player"
-            value="{{#if system.player}}{{system.player}}{{else}}{{currentUserName}}{{/if}}"
-            placeholder=""
-          />
-        </div>
-      </div>
-      <div class="column">
-        <div class="row">
-          <label for="calling">Calling</label>
-          <input
-            type="text"
-            id="calling"
-            name="system.calling"
-            value="{{system.calling}}"
-            placeholder=""
-          />
-        </div>
-        <div class="row">
-          <label for="nature">Nature</label>
-          <input
-            type="text"
-            id="nature"
-            name="system.nature"
-            value="{{system.nature}}"
-            placeholder=""
-          />
-        </div>
-      </div>
-      <div class="column">
-        <div class="row">
-          <label for="pantheon">Pantheon</label>
-          <button
-            type="button"
-            class="scion-pantheon-button"
-            data-action="select-pantheon"
-          >
-            <span>{{system.pantheon.name}}</span>
-            {{#if system.pantheon.logo}}
-            <img src="{{system.pantheon.logo}}" alt="pantheon logo" />
-            {{/if}}
-          </button>
-        </div>
-        <div class="row">
-          <label for="god">God</label>
-          <button
-            type="button"
-            class="scion-pantheon-button"
-            data-action="select-god"
-          >
-            <span>{{system.pantheon.god}}</span>
-          </button>
-        </div>
-      </div>
-    </header>
-    <nav class="sheet-tabs tabs">
-      <a class="item active" data-group="primary" data-tab="stats"
-        >Attributes & Abilities</a
-      >
-      <a class="item" data-group="primary" data-tab="birth"
-        >Birthrights & Virtues</a
-      >
-      <a class="item" data-group="primary" data-tab="knacks">Knacks & Boons</a>
-      <a class="item" data-group="primary" data-tab="combat">Combat</a>
-    </nav>
-    <section class="sheet-content">
-      <div class="tab active" data-group="primary" data-tab="stats">
-        {{> "systems/scion-hero-foundry/templates/actors/partials/stats.html"}}
-      </div>
-      <div class="tab" data-group="primary" data-tab="birth">
-        {{>
-        "systems/scion-hero-foundry/templates/actors/partials/birth-virtues.html"}}
-      </div>
-      <div class="tab" data-group="primary" data-tab="knacks">
-        {{>
-        "systems/scion-hero-foundry/templates/actors/partials/knacks-boons.html"}}
-      </div>
-      <div class="tab" data-group="primary" data-tab="combat">
-        {{> "systems/scion-hero-foundry/templates/actors/partials/combat.html"}}
-      </div>
-    </section>
-  </form>
+  {{!-- Conteúdo das Abas --}}
+  <section class="sheet-content">
+    <section data-application-part="stats"></section>
+    <section data-application-part="birth"></section>
+    <section data-application-part="knacks"></section>
+    <section data-application-part="combat"></section>
+  </section>
 </div>

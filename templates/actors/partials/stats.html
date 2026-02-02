@@ -1,3 +1,4 @@
+<div class="tab {{#if (eq tabs.primary 'stats')}}active{{/if}}">
 <div class="attributes">
   <div class="scion-label-title">
     <h2>Attributes</h2>
@@ -20,24 +21,26 @@
         <div class="attribute-column">
           <div class="circles">
             {{#each (range attribute.min attribute.max) as |i|}}
-            <input
-              type="checkbox"
-              class="circle-checkbox"
-              data-target="attributes.{{../key}}.{{label}}.value"
-              value="{{i}}"
-            />
+              <input
+                type="checkbox"
+                class="circle-checkbox"
+                data-target="attributes.{{../key}}.{{label}}.value"
+                value="{{i}}"
+                {{#if (lessThanOrEqual i ../attribute.value)}}checked{{/if}}
+              />
             {{/each}}
           </div>
           <div class="squares">
             {{#with (lookup (lookup @root.system.epicAttributes key) label) as
             |epicAttr|}} {{#if epicAttr}} {{#each (range epicAttr.min
             epicAttr.max) as |i|}}
-            <input
-              type="checkbox"
-              class="square-checkbox"
-              data-target="epicAttributes.{{../key}}.{{label}}.value"
-              value="{{i}}"
-            />
+              <input
+                type="checkbox"
+                class="square-checkbox"
+                data-target="epicAttributes.{{../key}}.{{label}}.value"
+                value="{{i}}"
+                {{#if (lessThanOrEqual i ../epicAttr.value)}}checked{{/if}}
+              />
             {{/each}} {{/if}} {{/with}}
           </div>
         </div>
@@ -58,7 +61,7 @@
         <div class="skills-row">
           <input type="checkbox" class="square-checkbox" {{#if
           data.favored}}checked{{/if}} />
-          <div data-action="roll-abilitie" data-key="{{key}}">
+          <div data-action="roll-ability" data-key="{{key}}">
             <span>{{key}}</span>
           </div>
         </div>
@@ -71,6 +74,7 @@
             class="circle-checkbox"
             data-target="abilities.{{../key}}.value"
             value="{{i}}"
+            {{#if (lessThanOrEqual i ../data.value)}}checked{{/if}}
           />
           {{/each}}
         </div>
@@ -79,3 +83,5 @@
     {{/splitInColumns}}
   </div>
 </div>
+</div>
+

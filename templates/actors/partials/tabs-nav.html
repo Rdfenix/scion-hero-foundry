@@ -1,0 +1,15 @@
+{{!-- Navegação de Abas --}}
+<nav class="sheet-tabs tabs" data-group="primary">
+    {{!-- data-action="setTab" é o segredo aqui --}}
+    <a class="item {{#if (eq tabs.primary 'stats')}}active{{/if}}" 
+    data-action="setTab" data-group="primary" data-tab="stats">Attributes & Abilities</a>
+    
+    <a class="item {{#if (eq tabs.primary 'birth')}}active{{/if}}" 
+    data-action="setTab" data-group="primary" data-tab="birth">Birthrights & Virtues</a>
+    
+    <a class="item {{#if (eq tabs.primary 'knacks')}}active{{/if}}" 
+    data-action="setTab" data-group="primary" data-tab="knacks">Knacks & Boons</a>
+    
+    <a class="item {{#if (eq tabs.primary 'combat')}}active{{/if}}" 
+    data-action="setTab" data-group="primary" data-tab="combat">Combat</a>
+</nav>
