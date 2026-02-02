@@ -1,14 +1,14 @@
-import { _onAction } from '../helpers/actions.js';
-import { _onChange } from '../helpers/change.js';
-import { _onDrop } from '../helpers/onDrop.js';
+import { _onAction } from "../helpers/actions.js";
+import { _onChange } from "../helpers/change.js";
+import { _onDrop } from "../helpers/onDrop.js";
 
-import { attributesUpdate } from '../helpers/attributesUpdate.js';
-import { abilitiesUpdate } from '../helpers/abilitiesUpdate.js';
-import { virtuesUpdate } from '../helpers/virtuesUpdate.js';
-import { birthrightUpdate } from '../helpers/birthrightsUpdate.js';
-import { willpowerUpdate } from '../helpers/willpowerUpdate.js';
-import { legendUpdate } from '../helpers/legendUpdate.js';
-import { updateSoak } from '../helpers/updateSoak.js';
+import { attributesUpdate } from "../helpers/attributesUpdate.js";
+import { abilitiesUpdate } from "../helpers/abilitiesUpdate.js";
+import { virtuesUpdate } from "../helpers/virtuesUpdate.js";
+import { birthrightUpdate } from "../helpers/birthrightsUpdate.js";
+import { willpowerUpdate } from "../helpers/willpowerUpdate.js";
+import { legendUpdate } from "../helpers/legendUpdate.js";
+import { updateSoak } from "../helpers/updateSoak.js";
 
 function renderActorSheetElements(app, html, data) {
   // Implementar funcionalidades específicas de renderização aqui, se necessário
@@ -22,11 +22,11 @@ function renderActorSheetElements(app, html, data) {
 }
 
 export default class ScionHeroActorSheetV2 extends foundry.applications.api.HandlebarsApplicationMixin(
-  foundry.applications.sheets.ActorSheetV2
+  foundry.applications.sheets.ActorSheetV2,
 ) {
   constructor(options = {}) {
     super(options);
-    this.tabGroups = { primary: 'stats' };
+    this.tabGroups = { primary: "stats" };
   }
 
   /** @override */
@@ -38,13 +38,13 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   static DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
-      classes: ['scion-hero', 'sheet', 'character'],
-      tag: 'form',
+      classes: ["scion-hero", "sheet", "character"],
+      tag: "form",
       window: {
-        title: '{name}',
+        title: "{name}",
         resizable: false,
-        scrollable: ['.scion-v2-sheet'],
-        contentClasses: ['standard-form', 'scion-v2-sheet'],
+        contentClasses: ["standard-form", "scion-v2-sheet"],
+        scrollable: [".scion-v2-sheet"],
       },
       form: {
         handler: ScionHeroActorSheetV2.#onSubmit,
@@ -52,58 +52,65 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
         closeOnSubmit: false,
       },
       position: { width: 897, height: 800 },
-      dragDrop: [{ dragSelector: null, dropSelector: '[data-drop-target]' }],
+      dragDrop: [{ dragSelector: null, dropSelector: "[data-drop-target]" }],
       // REGRA DE OURO: Todas as interações de clique devem ser mapeadas aqui
       actions: {
         rollAttribute: ScionHeroActorSheetV2.#onRollAttribute,
         setTab: ScionHeroActorSheetV2.#onSetTab, // Handler para trocar abas
-        'select-pantheon': ScionHeroActorSheetV2.#onActionTracker,
-        'select-god': ScionHeroActorSheetV2.#onActionTracker,
-        'button-birthright-type': ScionHeroActorSheetV2.#onActionTracker,
-        'button-knack-add': ScionHeroActorSheetV2.#onActionTracker,
-        'button-birthright-boon': ScionHeroActorSheetV2.#onActionTracker,
-        'button-boon-add': ScionHeroActorSheetV2.#onActionTracker,
-        'button-weapon-add': ScionHeroActorSheetV2.#onActionTracker,
-        'delete-birthright': ScionHeroActorSheetV2.#onActionTracker,
-        'delete-birth-boon': ScionHeroActorSheetV2.#onActionTracker,
-        'delete-knack': ScionHeroActorSheetV2.#onActionTracker,
-        'delete-boon': ScionHeroActorSheetV2.#onActionTracker,
-        'delete-weapon': ScionHeroActorSheetV2.#onActionTracker,
-        'roll-attribute': ScionHeroActorSheetV2.#onActionTracker,
-        'roll-willpower': ScionHeroActorSheetV2.#onActionTracker,
-        'roll-legend': ScionHeroActorSheetV2.#onActionTracker,
-        'roll-ability': ScionHeroActorSheetV2.#onActionTracker,
-        'roll-attack': ScionHeroActorSheetV2.#onActionTracker,
-        'roll-damage': ScionHeroActorSheetV2.#onActionTracker,
-        'join-battle': ScionHeroActorSheetV2.#onActionTracker,
+        "select-pantheon": ScionHeroActorSheetV2.#onActionTracker,
+        "select-god": ScionHeroActorSheetV2.#onActionTracker,
+        "button-birthright-type": ScionHeroActorSheetV2.#onActionTracker,
+        "button-knack-add": ScionHeroActorSheetV2.#onActionTracker,
+        "button-birthright-boon": ScionHeroActorSheetV2.#onActionTracker,
+        "button-boon-add": ScionHeroActorSheetV2.#onActionTracker,
+        "button-weapon-add": ScionHeroActorSheetV2.#onActionTracker,
+        "delete-birthright": ScionHeroActorSheetV2.#onActionTracker,
+        "delete-birth-boon": ScionHeroActorSheetV2.#onActionTracker,
+        "delete-knack": ScionHeroActorSheetV2.#onActionTracker,
+        "delete-boon": ScionHeroActorSheetV2.#onActionTracker,
+        "delete-weapon": ScionHeroActorSheetV2.#onActionTracker,
+        "roll-attribute": ScionHeroActorSheetV2.#onActionTracker,
+        "roll-willpower": ScionHeroActorSheetV2.#onActionTracker,
+        "roll-legend": ScionHeroActorSheetV2.#onActionTracker,
+        "roll-ability": ScionHeroActorSheetV2.#onActionTracker,
+        "roll-attack": ScionHeroActorSheetV2.#onActionTracker,
+        "roll-damage": ScionHeroActorSheetV2.#onActionTracker,
+        "join-battle": ScionHeroActorSheetV2.#onActionTracker,
         editImage: ScionHeroActorSheetV2.#onEditImage,
       },
     },
-    { inplace: false }
+    { inplace: false },
   );
 
   static PARTS = {
     sheet: {
-      template: 'systems/scion-hero-foundry/templates/actors/character-sheet.html',
+      template:
+        "systems/scion-hero-foundry/templates/actors/character-sheet.html",
       root: true,
     },
     header: {
-      template: 'systems/scion-hero-foundry/templates/actors/partials/header.html',
+      template:
+        "systems/scion-hero-foundry/templates/actors/partials/header.html",
     },
     tabs: {
-      template: 'systems/scion-hero-foundry/templates/actors/partials/tabs-nav.html',
+      template:
+        "systems/scion-hero-foundry/templates/actors/partials/tabs-nav.html",
     },
     stats: {
-      template: 'systems/scion-hero-foundry/templates/actors/partials/stats.html',
+      template:
+        "systems/scion-hero-foundry/templates/actors/partials/stats.html",
     },
     birth: {
-      template: 'systems/scion-hero-foundry/templates/actors/partials/birth-virtues.html',
+      template:
+        "systems/scion-hero-foundry/templates/actors/partials/birth-virtues.html",
     },
     knacks: {
-      template: 'systems/scion-hero-foundry/templates/actors/partials/knacks-boons.html',
+      template:
+        "systems/scion-hero-foundry/templates/actors/partials/knacks-boons.html",
     },
     combat: {
-      template: 'systems/scion-hero-foundry/templates/actors/partials/combat.html',
+      template:
+        "systems/scion-hero-foundry/templates/actors/partials/combat.html",
     },
   };
 
@@ -119,9 +126,9 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
 
     // 2. Garante que sempre haja uma aba 'primary' selecionada
     if (!context.tabs.primary) {
-      context.tabs.primary = 'stats';
+      context.tabs.primary = "stats";
       // Atualiza o estado interno também para sincronizar
-      this.tabGroups.primary = 'stats';
+      this.tabGroups.primary = "stats";
     }
 
     const attrKeys = new Set();
@@ -130,33 +137,34 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     const skills = context.system.abilities || {};
 
     for (const group of Object.values(attributes)) {
-      attrKeys.add(...Object.keys(group));
+      Object.keys(group).forEach((key) => attrKeys.add(key));
     }
 
     for (const skillKey of Object.keys(skills)) {
       skillsKeys.add(skillKey);
     }
 
-    const damageType = ['Bashing', 'Letal', 'Aggraveted'];
+    const damageType = ["Bashing", "Letal", "Aggraveted"];
 
     context.system.attrKeys = Array.from(attrKeys);
     context.system.skillsKeys = Array.from(skillsKeys);
     context.system.damageType = damageType;
 
-    context.enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(
-      this.document.system.biography,
-      {
-        secrets: this.document.isOwner,
-        rollData: this.document.getRollData(),
-      }
-    );
+    context.enrichedBiography =
+      await foundry.applications.ux.TextEditor.enrichHTML(
+        this.document.system.biography,
+        {
+          secrets: this.document.isOwner,
+          rollData: this.document.getRollData(),
+        },
+      );
 
     return context;
   }
 
   static #onSetTab(event, target) {
     const tab = target.dataset.tab;
-    this.changeTab(tab, 'primary'); // Assume que você definiu um grupo de tabs "primary"
+    this.changeTab(tab, "primary"); // Assume que você definiu um grupo de tabs "primary"
   }
 
   /* -------------------------------------------- */
@@ -182,16 +190,16 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   }
 
   static async #onEditImage(event, target) {
-    const attr = target.dataset.edit || 'img';
+    const attr = target.dataset.edit || "img";
     const current = foundry.utils.getProperty(this.document, attr);
 
     // Acessando o FilePicker via namespace correto da v13
     const FilePickerImpl = foundry.applications.apps.FilePicker.implementation;
 
     const fp = new FilePickerImpl({
-      type: 'image',
+      type: "image",
       current: current,
-      callback: path => {
+      callback: (path) => {
         this.document.update({ [attr]: path });
       },
       // Opcional: Garante que o seletor abra perto da ficha
@@ -222,7 +230,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   changeTab(tab, group, options = {}) {
     // 1. Chama o original para salvar o estado (this.tabGroups)
     super.changeTab(tab, group, options);
-    this.render({ parts: ['stats', 'birth', 'knacks', 'combat'] });
+    this.render({ parts: ["stats", "birth", "knacks", "combat"] });
   }
 
   /** @override */
@@ -233,52 +241,52 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     const updates = new Set();
 
     // Atalho para verificar propriedades aninhadas com segurança
-    const has = key => foundry.utils.hasProperty(changed, key);
+    const has = (key) => foundry.utils.hasProperty(changed, key);
 
     // --- 1. HEADER ---
     // Nome, Imagem, Jogador, Calling, Natureza, Pantheon
     if (
       changed.name ||
       changed.img ||
-      has('system.player') ||
-      has('system.calling') ||
-      has('system.nature') ||
-      has('system.pantheon')
+      has("system.player") ||
+      has("system.calling") ||
+      has("system.nature") ||
+      has("system.pantheon")
     ) {
-      updates.add('header');
+      updates.add("header");
     }
 
     // --- 2. STATS TAB ---
     // Atributos, Habilidades, Lenda, Força de Vontade, XP
     if (
-      has('system.attributes') ||
-      has('system.epicAttributes') ||
-      has('system.abilities') ||
-      has('system.legend') ||
-      has('system.legendPoints') ||
-      has('system.willpower') ||
-      has('system.willpowerPoints') ||
-      has('system.experience')
+      has("system.attributes") ||
+      has("system.epicAttributes") ||
+      has("system.abilities") ||
+      has("system.legend") ||
+      has("system.legendPoints") ||
+      has("system.willpower") ||
+      has("system.willpowerPoints") ||
+      has("system.experience")
     ) {
-      updates.add('stats');
+      updates.add("stats");
     }
 
     // --- 3. BIRTHRIGHTS & VIRTUES TAB ---
     // Birthrights (array) e Virtudes
-    if (has('system.birthrights') || has('system.virtues')) {
-      updates.add('birth');
+    if (has("system.birthrights") || has("system.virtues")) {
+      updates.add("birth");
     }
 
     // --- 4. KNACKS & BOONS TAB ---
     // Knacks e Boons (arrays)
-    if (has('system.knacks') || has('system.boons')) {
-      updates.add('knacks');
+    if (has("system.knacks") || has("system.boons")) {
+      updates.add("knacks");
     }
 
     // --- 5. COMBAT TAB ---
     // Armas, Saúde, Defesas (combat object)
-    if (has('system.weapons') || has('system.health') || has('system.combat')) {
-      updates.add('combat');
+    if (has("system.weapons") || has("system.health") || has("system.combat")) {
+      updates.add("combat");
     }
 
     // Renderiza apenas as partes necessárias
@@ -302,9 +310,9 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     // Em vez de listeners de clique globais, usamos apenas para o que o framework
     // não cobre automaticamente (como inputs de mudança ou drag & drop complexo)
 
-    html.querySelectorAll('input, select, textarea').forEach(el => {
+    html.querySelectorAll("input, select, textarea").forEach((el) => {
       if (el.dataset.action) {
-        el.addEventListener('change', ev => _onChange(ev, this.document));
+        el.addEventListener("change", (ev) => _onChange(ev, this.document));
       }
     });
   }
