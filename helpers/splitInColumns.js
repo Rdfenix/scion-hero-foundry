@@ -7,9 +7,9 @@ export const splitInColumns = (object, columns, columnClass, options) => {
   for (let i = 0; i < columns; i++) {
     const slice = keys.slice(i * columnSize, (i + 1) * columnSize);
     output += `<div class='${columnClass}'>`;
-    slice.forEach((key) => {
+    for (const key of slice) {
       output += options.fn({ key, data: object[key] });
-    });
+    }
     output += "</div>";
   }
 
