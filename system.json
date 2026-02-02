@@ -25,7 +25,6 @@
     "styles/journals/knacks.css",
     "styles/diceRoll/result.css"
   ],
-  "template": "template.json",
   "scripts": [],
   "packs": [
     {
