@@ -66,12 +66,9 @@ const updateVirtueField = async (event, actor) => {
       [field]: { ...virtues[field], name: event.target.value },
     };
 
-    await actor.update(
-      {
-        'system.virtues': virtues,
-      },
-      { render: false }
-    );
+    await actor.update({
+      'system.virtues': virtues,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch virtues.');
@@ -88,12 +85,9 @@ const updateArmorField = async (event, actor) => {
       armor: { ...combat.armor, [field]: { value: event.currentTarget.value } },
     };
 
-    await actor.update(
-      {
-        'system.combat': combat,
-      },
-      { render: false }
-    );
+    await actor.update({
+      'system.combat': combat,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch combat.');
@@ -107,12 +101,9 @@ const updateExperiencePoints = async (event, actor) => {
       ...xp,
       value: event.currentTarget.value || 0,
     };
-    await actor.update(
-      {
-        'system.experience': xp,
-      },
-      { render: false }
-    );
+    await actor.update({
+      'system.experience': xp,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch xp.');
@@ -137,12 +128,9 @@ const onSelectFieldInWeapon = async (event, actor) => {
       return weapon;
     });
 
-    await actor.update(
-      {
-        'system.weapons': weapons,
-      },
-      { render: false }
-    );
+    await actor.update({
+      'system.weapons': weapons,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch Weapons.');
@@ -196,12 +184,9 @@ const onChangeHealthValue = async (event, actor) => {
       };
     }
 
-    await actor.update(
-      {
-        'system.health': health,
-      },
-      { render: false }
-    );
+    await actor.update({
+      'system.health': health,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch health.');
@@ -220,12 +205,9 @@ const onChangeDefenseValue = async (event, actor) => {
 
     combat = { ...combat, [field]: { value: event.currentTarget.value } };
 
-    await actor.update(
-      {
-        'system.combat': combat,
-      },
-      { render: false }
-    );
+    await actor.update({
+      'system.combat': combat,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch combat.');
@@ -250,12 +232,9 @@ const onChangeFieldInWeapon = async (event, actor) => {
       return weapon;
     });
 
-    await actor.update(
-      {
-        'system.weapons': weapons,
-      },
-      { render: false }
-    );
+    await actor.update({
+      'system.weapons': weapons,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch Weapons.');
@@ -274,12 +253,9 @@ const onLegendPointChange = async (event, actor) => {
     value = Math.max(min, Math.min(max, value));
     legendPoints.value = value;
 
-    await actor.update(
-      {
-        'system.legendPoints': legendPoints,
-      },
-      { render: false }
-    );
+    await actor.update({
+      'system.legendPoints': legendPoints,
+    });
 
     event.currentTarget.value = value;
   } catch (error) {
@@ -302,12 +278,9 @@ const onBirthrightBoonChange = async (event, actor) => {
 
     birthrights[birthIndex].boons[boonIndex][field] = event.currentTarget.value;
 
-    await actor.update(
-      {
-        'system.birthrights': birthrights,
-      },
-      { render: false }
-    );
+    await actor.update({
+      'system.birthrights': birthrights,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch boons on Birthrights.');
@@ -331,12 +304,9 @@ const onBirthrightChange = async (event, actor) => {
 
     birthrights[index][field] = event.currentTarget.value;
 
-    await actor.update(
-      {
-        'system.birthrights': birthrights,
-      },
-      { render: false }
-    );
+    await actor.update({
+      'system.birthrights': birthrights,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch Birthrights.');
@@ -360,12 +330,9 @@ const onKnackChange = async (event, actor) => {
       return knack;
     });
 
-    await actor.update(
-      {
-        'system.knacks': knacks,
-      },
-      { render: false }
-    );
+    await actor.update({
+      'system.knacks': knacks,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch Knacks.');
@@ -389,12 +356,9 @@ const onBoonChange = async (event, actor) => {
       return boon;
     });
 
-    await actor.update(
-      {
-        'system.boons': boons,
-      },
-      { render: false }
-    );
+    await actor.update({
+      'system.boons': boons,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch boons.');

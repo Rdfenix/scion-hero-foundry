@@ -10,7 +10,7 @@ const bindVirtuesCheckboxes = (checkboxes, label, app) => {
     let valueToSet = newValue > currentValue ? newValue : newValue - 1;
 
     if (valueToSet !== currentValue) {
-      await app.actor.update({ [`system.virtues.${label}.value`]: valueToSet }, { render: false });
+      await app.actor.update({ [`system.virtues.${label}.value`]: valueToSet });
       updateCheckboxes(checkboxes, valueToSet);
     }
   });

@@ -16,7 +16,7 @@ const bindBirthCheckboxes = (checkboxes, index, app) => {
     const birthrights = foundry.utils.deepClone(app.actor.system.birthrights);
     birthrights[index].level.value = valueToSet;
 
-    await app.actor.update({ 'system.birthrights': birthrights }, { render: false });
+    await app.actor.update({ 'system.birthrights': birthrights });
 
     updateCheckboxes(checkboxes, valueToSet);
   });

@@ -18,7 +18,6 @@ const bindAttributeCheckboxes = (checkboxes, groupKey, label, app, attributes, t
       {
         [attributes]: valueToSet,
       },
-      { render: false }
     );
 
     updateCheckboxes(checkboxes, valueToSet);
