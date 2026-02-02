@@ -30,13 +30,18 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   }
 
   /** @override */
+  get title() {
+    return this.document.name;
+  }
+
+  /** @override */
   static DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
     {
       classes: ['scion-hero', 'sheet', 'character'],
       tag: 'form',
       window: {
-        title: 'SCION.SheetTitle',
+        title: '{name}',
         resizable: false,
         scrollable: ['.scion-wrapper'],
         contentClasses: ['standard-form', 'scion-v2-sheet'],
@@ -105,15 +110,12 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   /** @override */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
-    console.log('Preparando contexto do sheet do ator:', context);
-    console.log('CONFIG:', CONFIG);
     context.actor = this.document;
     context.system = this.document.system;
     context.config = CONFIG.SCION;
     context.currentUserName = game.user.name;
     context.isGM = game.user.isGM;
     context.tabs = { ...this.tabGroups };
-    console.log('Tabs no contexto:', context.tabs);
 
     // 2. Garante que sempre haja uma aba 'primary' selecionada
     if (!context.tabs.primary) {
@@ -202,7 +204,6 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
 
   static async #onRollAttribute(event, target) {
     const attr = target.dataset.attribute;
-    console.log(`Rolando: ${attr}`);
   }
 
   static async #onSubmit(event, form, formData) {
@@ -226,7 +227,6 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
 
   /** @override */
   _onUpdate(changed, options, userId) {
-    console.log('SCION | _onUpdate chamado com mudanças:', changed);
     // Deixa o Foundry processar os dados primeiro
     super._onUpdate(changed, options, userId);
 

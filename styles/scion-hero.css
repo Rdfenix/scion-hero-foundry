@@ -45,11 +45,17 @@
 .standard-form.scion-v2-sheet {
   background: #fefefe;
   position: relative;
-  padding: 1.5rem; /* Conforme seu código original */
+  padding: 1.5rem 1.25rem;
   color: #222;
   border-radius: 8px;
   font-size: 1.05rem;
   overflow-y: auto;
+  scroll-behavior: smooth;
+  font-family: skranji-regular, sans-serif !important;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 input[type='text']:focus,
@@ -83,28 +89,7 @@ input[type='radio']::after {
   width: 100%;
 }
 
-.scion-wrapper.scrollable {
-  height: 100%; /* Ocupa o espaço total do formulário */
-  overflow-y: auto; /* Habilita a barra de rolagem */
-}
-
-.scion-wrapper {
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  background: rgba(254, 254, 254, 255);
-  padding: 15px 15px;
-  border-radius: 5px;
-  font-family: skranji-regular, sans-serif !important;
-  font-size: medium;
-  overflow: auto;
-  scroll-behavior: smooth;
-  color: #222;
-}
-
-.scion-wrapper .sheet-header {
+.standard-form.scion-v2-sheet .sheet-header {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -189,7 +174,7 @@ input[type='radio']::after {
   color: #222;
 }
 
-.scion-wrapper .sheet-header .sheet-tabs .item {
+.standard-form.scion-v2-sheet .sheet-header .sheet-tabs .item {
   color: #222;
 }
 
