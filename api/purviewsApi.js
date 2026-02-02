@@ -1,7 +1,7 @@
 /** Puviews */
 export async function getPurviews() {
   try {
-    const pack = game.packs.get("scion-foundry-v2.purviews");
+    const pack = game.packs.get("scion-hero-foundry.purviews");
     if (!pack) throw new Error("Purviews pack not found.");
 
     const documents = await pack.getDocuments();

@@ -84,26 +84,26 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
 
   static PARTS = {
     sheet: {
-      template: 'systems/scion-foundry-v2/templates/actors/character-sheet.html',
+      template: 'systems/scion-hero-foundry/templates/actors/character-sheet.html',
       root: true,
     },
     header: {
-      template: 'systems/scion-foundry-v2/templates/actors/partials/header.html',
+      template: 'systems/scion-hero-foundry/templates/actors/partials/header.html',
     },
     tabs: {
-      template: 'systems/scion-foundry-v2/templates/actors/partials/tabs-nav.html',
+      template: 'systems/scion-hero-foundry/templates/actors/partials/tabs-nav.html',
     },
     stats: {
-      template: 'systems/scion-foundry-v2/templates/actors/partials/stats.html',
+      template: 'systems/scion-hero-foundry/templates/actors/partials/stats.html',
     },
     birth: {
-      template: 'systems/scion-foundry-v2/templates/actors/partials/birth-virtues.html',
+      template: 'systems/scion-hero-foundry/templates/actors/partials/birth-virtues.html',
     },
     knacks: {
-      template: 'systems/scion-foundry-v2/templates/actors/partials/knacks-boons.html',
+      template: 'systems/scion-hero-foundry/templates/actors/partials/knacks-boons.html',
     },
     combat: {
-      template: 'systems/scion-foundry-v2/templates/actors/partials/combat.html',
+      template: 'systems/scion-hero-foundry/templates/actors/partials/combat.html',
     },
   };
 

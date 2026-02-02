@@ -1,6 +1,6 @@
 export async function getDeities() {
   try {
-    const pack = game.packs.get("scion-foundry-v2.deities");
+    const pack = game.packs.get("scion-hero-foundry.deities");
 
     if (!pack) {
       throw new Error("Pantheon pack not found.");

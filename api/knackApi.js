@@ -1,7 +1,7 @@
 /** Knacks */
 export async function getKnacks() {
   try {
-    const pack = game.packs.get("scion-foundry-v2.knacks");
+    const pack = game.packs.get("scion-hero-foundry.knacks");
     if (!pack) throw new Error("Knacks pack not found.");
 
     return Array.from(
