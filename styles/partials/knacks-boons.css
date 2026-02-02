@@ -14,25 +14,15 @@
 .knacks-wrapper > button:hover,
 .boons-wrapper > button:focus,
 .boons-wrapper > button:hover,
-.knacks-wrapper > .knack-list > ul > li > input[type="text"]:focus,
-.knacks-wrapper > .knack-list > ul > li > input[type="text"]:hover,
+.knacks-wrapper > .knack-list > ul > li > input[type='text']:focus,
+.knacks-wrapper > .knack-list > ul > li > input[type='text']:hover,
 .knacks-wrapper > .knack-list > ul > li > textarea:focus,
 .knacks-wrapper > .knack-list > ul > li > textarea:hover,
-.boom-name-level > .boon-name > input[type="text"]:focus,
-.boom-name-level > .boon-level > input[type="text"]:focus,
+.boom-name-level > .boon-name > input[type='text']:focus,
+.boom-name-level > .boon-level > input[type='text']:focus,
 .boon-description > textarea:focus,
-.boons-wrapper
-  > .boons
-  > .boon-list
-  > li
-  > .boon-cost
-  > input[type="text"]:focus,
-.boons-wrapper
-  > .boons
-  > .boon-list
-  > li
-  > .boon-dice-pool
-  > input[type="text"]:focus {
+.boons-wrapper > .boons > .boon-list > li > .boon-cost > input[type='text']:focus,
+.boons-wrapper > .boons > .boon-list > li > .boon-dice-pool > input[type='text']:focus {
   box-shadow: none;
 }
 
@@ -48,7 +38,7 @@
   padding: 0 20px;
 }
 
-.knacks-wrapper .knack-list ul li input[type="text"],
+.knacks-wrapper .knack-list ul li input[type='text'],
 .knacks-wrapper .knack-list ul li textarea {
   width: 45rem;
 }
@@ -75,16 +65,11 @@
   width: 45rem;
 }
 
-.knacks-wrapper > .knack-list > ul > li > input[type="text"],
-.boom-name-level > .boon-name > input[type="text"],
-.boom-name-level > .boon-level > input[type="text"],
-.boons-wrapper > .boons > .boon-list > li > .boon-cost > input[type="text"],
-.boons-wrapper
-  > .boons
-  > .boon-list
-  > li
-  > .boon-dice-pool
-  > input[type="text"] {
+.knacks-wrapper > .knack-list > ul > li > input[type='text'],
+.boom-name-level > .boon-name > input[type='text'],
+.boom-name-level > .boon-level > input[type='text'],
+.boons-wrapper > .boons > .boon-list > li > .boon-cost > input[type='text'],
+.boons-wrapper > .boons > .boon-list > li > .boon-dice-pool > input[type='text'] {
   padding: 10px;
   font-family: skranji-regular, sans-serif !important;
   text-transform: capitalize;
@@ -92,8 +77,13 @@
 
 .knacks-wrapper > button,
 .boons-wrapper > button {
+  display: flex;
+  align-items: center;
   font-family: skranji-regular, sans-serif !important;
   text-transform: uppercase;
+  width: 50rem;
+  margin-left: 16px;
+  height: 2.5rem;
 }
 
 .boons-wrapper > .boons > .boon-list > li {
@@ -129,19 +119,14 @@
   text-transform: capitalize;
 }
 
-.boon-level input[type="text"] {
+.boon-level input[type='text'] {
   width: 18rem;
 }
 
-.boon-cost input[type="text"] {
+.boon-cost input[type='text'] {
   width: 42.3rem;
 }
 
-.boons-wrapper
-  > .boons
-  > .boon-list
-  > li
-  > .boon-dice-pool
-  > input[type="text"] {
+.boons-wrapper > .boons > .boon-list > li > .boon-dice-pool > input[type='text'] {
   width: 39.8rem;
 }
