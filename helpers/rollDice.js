@@ -1,21 +1,25 @@
-import { epicAttributeSuccesses } from '../module/actor-base-default.js';
+import { epicAttributeSuccesses } from "../module/actor-base-default.js";
 
 /**
  * Helper para garantir que o valor seja sempre um número inteiro >= 0.
  * Converte strings para números e trata nulos/undefined.
  */
-const getSafeNumber = value => {
+const getSafeNumber = (value) => {
   if (value === null || value === undefined) return 0;
   const num = Number(value);
   return Number.isNaN(num) ? 0 : num;
 };
 
 const EPIC_MAP = new Map(
-  Object.entries(epicAttributeSuccesses || {}).map(([key, value]) => [Number(key), value])
+  Object.entries(epicAttributeSuccesses || {}).map(([key, value]) => [
+    Number(key),
+    value,
+  ]),
 );
 
-export const rollDice = async diceTotal => {
+export const rollDice = async (diceTotal) => {
   try {
+    console.log("Rolling dice with total:", diceTotal);
     const safeTotal = Math.max(0, getSafeNumber(diceTotal));
     if (safeTotal === 0) return { dicesResult: [], roll: null };
 
@@ -23,12 +27,12 @@ export const rollDice = async diceTotal => {
     let results = [];
 
     if (roll.terms?.[0]?.results) {
-      results = roll.terms[0].results.map(dice => dice.result);
+      results = roll.terms[0].results.map((dice) => dice.result);
     }
 
     return { dicesResult: results, roll };
   } catch (error) {
-    console.error('Error in rollDice:', error);
+    console.error("Error in rollDice:", error);
     ui.notifications.error(`Erro ao rolar dados: ${error.message}`);
     return { dicesResult: [], roll: null };
   }
@@ -48,7 +52,7 @@ const calcSuccess = async (dices, difficulty = 7) => {
   }
 
   const counts = new Map();
-  dices.forEach(dice => counts.set(dice, (counts.get(dice) || 0) + 1));
+  dices.forEach((dice) => counts.set(dice, (counts.get(dice) || 0) + 1));
 
   const tens = counts.get(10) || 0;
   const ones = counts.get(1) || 0;
@@ -76,16 +80,19 @@ const calcSuccess = async (dices, difficulty = 7) => {
 /**
  * Processador central para evitar repetição de código
  */
-const processAndSendRoll = async (actor, dicePool, difficulty, templateData) => {
+const processAndSendRoll = async (
+  actor,
+  dicePool,
+  difficulty,
+  templateData,
+) => {
   const { dicesResult, roll } = await rollDice(dicePool);
 
   // Cria um roll dummy (0d10) se for nulo, para não quebrar a criação da mensagem
-  const safeRoll = roll || (await new Roll('0d10').evaluate());
+  const safeRoll = roll || (await new Roll("0d10").evaluate());
 
-  const { totalSucess, criticalFailCount, fail, criticalFail, explodedDices } = await calcSuccess(
-    dicesResult,
-    difficulty
-  );
+  const { totalSucess, criticalFailCount, fail, criticalFail, explodedDices } =
+    await calcSuccess(dicesResult, difficulty);
 
   await sendRollToChat(actor, safeRoll, {
     totalSucess,
@@ -101,24 +108,27 @@ const processAndSendRoll = async (actor, dicePool, difficulty, templateData) => 
 /* Funções de Rolagem (Exportadas)             */
 /* -------------------------------------------- */
 
-export const callRollJoinBattle = async actor => {
+export const callRollJoinBattle = async (actor) => {
   try {
     const wits = getSafeNumber(
-      foundry.utils.getProperty(actor.system, 'attributes.mental.wits.value')
+      foundry.utils.getProperty(actor.system, "attributes.mental.wits.value"),
     );
     const awareness = getSafeNumber(
-      foundry.utils.getProperty(actor.system, 'abilities.awareness.value')
+      foundry.utils.getProperty(actor.system, "abilities.awareness.value"),
     );
     const epicWits = getSafeNumber(
-      foundry.utils.getProperty(actor.system, 'epicAttributes.mental.wits.value')
+      foundry.utils.getProperty(
+        actor.system,
+        "epicAttributes.mental.wits.value",
+      ),
     );
 
     const totalDices = Math.max(0, wits + awareness);
 
     await processAndSendRoll(actor, totalDices, 7, {
       epicAttribute: epicWits,
-      title: 'Join Battle',
-      epicAttributeLabel: 'Wits',
+      title: "Join Battle",
+      epicAttributeLabel: "Wits",
     });
   } catch (error) {
     console.error(error);
@@ -127,10 +137,12 @@ export const callRollJoinBattle = async actor => {
 
 export const callRollLegendDice = async (actor, event, difficulty) => {
   try {
-    const legend = getSafeNumber(foundry.utils.getProperty(actor.system, `legend.value`));
+    const legend = getSafeNumber(
+      foundry.utils.getProperty(actor.system, `legend.value`),
+    );
     await processAndSendRoll(actor, legend, difficulty, {
       epicAttribute: 0,
-      title: 'Legend Roll',
+      title: "Legend Roll",
       epicAttributeLabel: null,
     });
   } catch (error) {
@@ -140,10 +152,12 @@ export const callRollLegendDice = async (actor, event, difficulty) => {
 
 export const callRollWillpowerDice = async (actor, event, difficulty) => {
   try {
-    const willpower = getSafeNumber(foundry.utils.getProperty(actor.system, `willpower.value`));
+    const willpower = getSafeNumber(
+      foundry.utils.getProperty(actor.system, `willpower.value`),
+    );
     await processAndSendRoll(actor, willpower, difficulty, {
       epicAttribute: 0,
-      title: 'Willpower Roll',
+      title: "Willpower Roll",
       epicAttributeLabel: null,
     });
   } catch (error) {
@@ -155,12 +169,20 @@ export const callRollAttrDice = async (actor, event, difficulty) => {
   try {
     const key = event.key;
     const attr = event.label;
-    const penality = getSafeNumber(foundry.utils.getProperty(actor.system, 'health.value'));
+    const penality = getSafeNumber(
+      foundry.utils.getProperty(actor.system, "health.value"),
+    );
     const value = getSafeNumber(
-      foundry.utils.getProperty(actor.system, `attributes.${key}.${attr}.value`)
+      foundry.utils.getProperty(
+        actor.system,
+        `attributes.${key}.${attr}.value`,
+      ),
     );
     const epicValue = getSafeNumber(
-      foundry.utils.getProperty(actor.system, `epicAttributes.${key}.${attr}.value`)
+      foundry.utils.getProperty(
+        actor.system,
+        `epicAttributes.${key}.${attr}.value`,
+      ),
     );
 
     const totalDice = Math.max(value + penality, 0);
@@ -177,13 +199,15 @@ export const callRollAttrDice = async (actor, event, difficulty) => {
 
 export const callRollSkillDice = async (
   actor,
-  { skillName, skillValue, attr, attrValue, epicAttrValue, difficulty }
+  { skillName, skillValue, attr, attrValue, epicAttrValue, difficulty },
 ) => {
   try {
     const sValue = getSafeNumber(skillValue);
     const aValue = getSafeNumber(attrValue);
     const eValue = getSafeNumber(epicAttrValue);
-    const penality = getSafeNumber(foundry.utils.getProperty(actor.system, 'health.value'));
+    const penality = getSafeNumber(
+      foundry.utils.getProperty(actor.system, "health.value"),
+    );
 
     const title = `${attr} + ${skillName}`;
     const totalDice = Math.max(aValue + sValue + penality, 0);
@@ -200,7 +224,15 @@ export const callRollSkillDice = async (
 
 export const callRollWeaponDice = async (
   actor,
-  { multipleSelected, epicAttrValue, skillValue, attrValue, weapon, extraDices, difficulty }
+  {
+    multipleSelected,
+    epicAttrValue,
+    skillValue,
+    attrValue,
+    weapon,
+    extraDices,
+    difficulty,
+  },
 ) => {
   try {
     if (!weapon) return;
@@ -210,7 +242,9 @@ export const callRollWeaponDice = async (
     const aValue = getSafeNumber(attrValue);
     const eValue = getSafeNumber(epicAttrValue);
     const extra = getSafeNumber(extraDices);
-    const penality = getSafeNumber(foundry.utils.getProperty(actor.system, 'health.value'));
+    const penality = getSafeNumber(
+      foundry.utils.getProperty(actor.system, "health.value"),
+    );
 
     let totalDice = aValue + sValue + acc + penality + extra;
     let actions = 1;
@@ -223,11 +257,12 @@ export const callRollWeaponDice = async (
     totalDice = Math.max(totalDice, 0);
 
     for (let i = 0; i < actions; i++) {
-      const title = actions > 1 ? `#${i + 1} - ${weapon.name}` : `#1 - ${weapon.name}`;
+      const title =
+        actions > 1 ? `#${i + 1} - ${weapon.name}` : `#1 - ${weapon.name}`;
       await processAndSendRoll(actor, totalDice, difficulty, {
         epicAttribute: eValue,
         title: title,
-        epicAttributeLabel: weapon.attr || '',
+        epicAttributeLabel: weapon.attr || "",
       });
     }
   } catch (error) {
@@ -237,7 +272,7 @@ export const callRollWeaponDice = async (
 
 export const callDamageAtkRoll = async (
   actor,
-  { weapon, extraDices, attrValue, epicAttrValue }
+  { weapon, extraDices, attrValue, epicAttrValue },
 ) => {
   try {
     const damage = getSafeNumber(weapon.damage);
@@ -250,7 +285,7 @@ export const callDamageAtkRoll = async (
     await processAndSendRoll(actor, totalDamage, 7, {
       epicAttribute: eValue,
       title: `Damage - ${weapon.name} <br /> Type: ${weapon.type}`,
-      epicAttributeLabel: weapon.damageAttr || '',
+      epicAttributeLabel: weapon.damageAttr || "",
     });
   } catch (error) {
     console.error(error);
@@ -271,9 +306,9 @@ const sendRollToChat = async (
     criticalFail,
     epicAttribute,
     explodedDices = [],
-    title = '',
-    epicAttributeLabel = '',
-  }
+    title = "",
+    epicAttributeLabel = "",
+  },
 ) => {
   try {
     const safeTotalSucess = getSafeNumber(totalSucess);
@@ -281,7 +316,7 @@ const sendRollToChat = async (
     const totalEpicSuccess = EPIC_MAP.get(safeEpicAttribute) || 0;
 
     const data = {
-      totalSucess: safeTotalSucess,
+      totalSuccess: safeTotalSucess,
       criticalFailCount,
       fail,
       criticalFail,
@@ -293,8 +328,8 @@ const sendRollToChat = async (
     };
 
     const context = await foundry.applications.handlebars.renderTemplate(
-      'systems/scion-hero-foundry/templates/diceRoll/dice-result.html',
-      { data }
+      "systems/scion-hero-foundry/templates/diceRoll/dice-result.html",
+      { data },
     );
 
     const chatData = {
@@ -312,7 +347,7 @@ const sendRollToChat = async (
     // Toca o som (Mova para cá se o toMessage não estiver tocando automaticamente na sua config)
     foundry.audio.AudioHelper.play({ src: CONFIG.sounds.dice }, true);
   } catch (error) {
-    console.error('Error sending roll to chat:', error);
-    ui.notifications.error('Erro ao enviar resultado para o chat.');
+    console.error("Error sending roll to chat:", error);
+    ui.notifications.error("Erro ao enviar resultado para o chat.");
   }
 };
