@@ -24,6 +24,11 @@ function renderActorSheetElements(app, html, data) {
 export default class ScionHeroActorSheetV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   foundry.applications.sheets.ActorSheetV2
 ) {
+  constructor(options = {}) {
+    super(options);
+    this.tabGroups = { primary: 'stats' };
+  }
+
   /** @override */
   static DEFAULT_OPTIONS = foundry.utils.mergeObject(
     super.DEFAULT_OPTIONS,
@@ -34,6 +39,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
         title: 'SCION.SheetTitle',
         resizable: false,
         scrollable: ['.scion-wrapper'],
+        contentClasses: ['standard-form', 'scion-v2-sheet'],
       },
       form: {
         handler: ScionHeroActorSheetV2.#onSubmit,
@@ -72,8 +78,27 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   );
 
   static PARTS = {
-    form: {
+    sheet: {
       template: 'systems/scion-foundry-v2/templates/actors/character-sheet.html',
+      root: true,
+    },
+    header: {
+      template: 'systems/scion-foundry-v2/templates/actors/partials/header.html',
+    },
+    tabs: {
+      template: 'systems/scion-foundry-v2/templates/actors/partials/tabs-nav.html',
+    },
+    stats: {
+      template: 'systems/scion-foundry-v2/templates/actors/partials/stats.html',
+    },
+    birth: {
+      template: 'systems/scion-foundry-v2/templates/actors/partials/birth-virtues.html',
+    },
+    knacks: {
+      template: 'systems/scion-foundry-v2/templates/actors/partials/knacks-boons.html',
+    },
+    combat: {
+      template: 'systems/scion-foundry-v2/templates/actors/partials/combat.html',
     },
   };
 
@@ -87,10 +112,15 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     context.config = CONFIG.SCION;
     context.currentUserName = game.user.name;
     context.isGM = game.user.isGM;
-    context.tabs = this.tabGroups;
+    context.tabs = { ...this.tabGroups };
+    console.log('Tabs no contexto:', context.tabs);
 
-    // Inicializa o grupo 'primary' se ele não existir
-    if (!context.tabs.primary) context.tabs.primary = 'stats';
+    // 2. Garante que sempre haja uma aba 'primary' selecionada
+    if (!context.tabs.primary) {
+      context.tabs.primary = 'stats';
+      // Atualiza o estado interno também para sincronizar
+      this.tabGroups.primary = 'stats';
+    }
 
     const attrKeys = [];
     const skillsKeys = [];
@@ -122,15 +152,14 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     return context;
   }
 
-  /* -------------------------------------------- */
-  /* Ações (Native API V2)                        */
-  /* -------------------------------------------- */
-
-  // Troca de abas nativa simplificada
   static #onSetTab(event, target) {
     const tab = target.dataset.tab;
     this.changeTab(tab, 'primary'); // Assume que você definiu um grupo de tabs "primary"
   }
+
+  /* -------------------------------------------- */
+  /* Ações (Native API V2)                        */
+  /* -------------------------------------------- */
 
   static async #onActionTracker(event, target) {
     event.preventDefault();
@@ -188,6 +217,76 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     return _onDrop(event, this.document);
   }
 
+  /** @override */
+  changeTab(tab, group, options = {}) {
+    // 1. Chama o original para salvar o estado (this.tabGroups)
+    super.changeTab(tab, group, options);
+    this.render({ parts: ['stats', 'birth', 'knacks', 'combat'] });
+  }
+
+  /** @override */
+  _onUpdate(changed, options, userId) {
+    console.log('SCION | _onUpdate chamado com mudanças:', changed);
+    // Deixa o Foundry processar os dados primeiro
+    super._onUpdate(changed, options, userId);
+
+    const updates = new Set();
+
+    // Atalho para verificar propriedades aninhadas com segurança
+    const has = key => foundry.utils.hasProperty(changed, key);
+
+    // --- 1. HEADER ---
+    // Nome, Imagem, Jogador, Calling, Natureza, Pantheon
+    if (
+      changed.name ||
+      changed.img ||
+      has('system.player') ||
+      has('system.calling') ||
+      has('system.nature') ||
+      has('system.pantheon')
+    ) {
+      updates.add('header');
+    }
+
+    // --- 2. STATS TAB ---
+    // Atributos, Habilidades, Lenda, Força de Vontade, XP
+    if (
+      has('system.attributes') ||
+      has('system.epicAttributes') ||
+      has('system.abilities') ||
+      has('system.legend') ||
+      has('system.legendPoints') ||
+      has('system.willpower') ||
+      has('system.willpowerPoints') ||
+      has('system.experience')
+    ) {
+      updates.add('stats');
+    }
+
+    // --- 3. BIRTHRIGHTS & VIRTUES TAB ---
+    // Birthrights (array) e Virtudes
+    if (has('system.birthrights') || has('system.virtues')) {
+      updates.add('birth');
+    }
+
+    // --- 4. KNACKS & BOONS TAB ---
+    // Knacks e Boons (arrays)
+    if (has('system.knacks') || has('system.boons')) {
+      updates.add('knacks');
+    }
+
+    // --- 5. COMBAT TAB ---
+    // Armas, Saúde, Defesas (combat object)
+    if (has('system.weapons') || has('system.health') || has('system.combat')) {
+      updates.add('combat');
+    }
+
+    // Renderiza apenas as partes necessárias
+    if (updates.size > 0) {
+      this.render({ parts: Array.from(updates) });
+    }
+  }
+
   /* -------------------------------------------- */
   /* Drag & Drop e Listeners Específicos          */
   /* -------------------------------------------- */
@@ -203,17 +302,10 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     // Em vez de listeners de clique globais, usamos apenas para o que o framework
     // não cobre automaticamente (como inputs de mudança ou drag & drop complexo)
 
-    html.querySelectorAll('input, select').forEach(el => {
+    html.querySelectorAll('input, select, textarea').forEach(el => {
       if (el.dataset.action) {
         el.addEventListener('change', ev => _onChange(ev, this.document));
       }
-    });
-
-    // Delegando Drag & Drop de forma limpa
-    const dropTargets = html.querySelectorAll('[data-drop-target]');
-    dropTargets.forEach(target => {
-      target.addEventListener('dragover', ev => ev.preventDefault());
-      target.addEventListener('drop', ev => _onDrop(ev, this.document));
     });
   }
 }

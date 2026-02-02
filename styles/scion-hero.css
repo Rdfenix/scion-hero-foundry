@@ -35,6 +35,23 @@
   font-weight: normal;
 }
 
+.sheet-content {
+  position: relative;
+  display: block;
+  min-height: 400px; /* Ajuste conforme necessário */
+}
+
+/* Garante que o form da aplicação ocupe a altura total */
+.standard-form.scion-v2-sheet {
+  background: #fefefe;
+  position: relative;
+  padding: 1.5rem; /* Conforme seu código original */
+  color: #222;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  overflow-y: auto;
+}
+
 input[type='text']:focus,
 input[type='text']:hover,
 button:focus,
@@ -52,6 +69,18 @@ input[type='radio']::before,
 input[type='checkbox']::after,
 input[type='radio']::after {
   content: none;
+}
+
+/* Esconde todas as abas por padrão */
+.scion-v2-sheet .tab {
+  display: none;
+}
+
+/* Mostra apenas a aba que tiver a classe .active */
+.scion-v2-sheet .tab.active {
+  display: inline-flex;
+  padding: 1.5rem 0;
+  width: 100%;
 }
 
 .scion-wrapper.scrollable {
