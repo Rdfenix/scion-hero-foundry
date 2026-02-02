@@ -92,12 +92,9 @@ const setBirthrightOptionEstructure = async actor => {
 
     birthrightList.push(schema);
 
-    await actor.update(
-      {
-        'system.birthrights': birthrightList,
-      },
-      { render: true }
-    );
+    await actor.update({
+      'system.birthrights': birthrightList,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch Birthrights.');
@@ -114,12 +111,9 @@ const setKnackStructure = async actor => {
 
     knackList.push(schema);
 
-    await actor.update(
-      {
-        'system.knacks': knackList,
-      },
-      { render: true }
-    );
+    await actor.update({
+      'system.knacks': knackList,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch knacks.');
@@ -136,12 +130,9 @@ const setWeaponStructure = async actor => {
 
     weapons.push(schema);
 
-    await actor.update(
-      {
-        'system.weapons': weapons,
-      },
-      { render: true }
-    );
+    await actor.update({
+      'system.weapons': weapons,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to fetch weapons.');
@@ -158,15 +149,12 @@ const setBoonStructure = async actor => {
 
     boonList.push(schema);
 
-    await actor.update(
-      {
-        'system.boons': boonList,
-      },
-      { render: true }
-    );
+    await actor.update({
+      'system.boons': boonList,
+    });
   } catch (error) {
     console.error(error.message);
-    ui.notifications.error('Failed to fetch knacks.');
+    ui.notifications.error('Failed to fetch boons.');
   }
 };
 
@@ -181,12 +169,9 @@ const setBoonToBirthright = async (options, actor) => {
 
   birthrights[index]?.boons.push(schema);
 
-  await actor.update(
-    {
-      'system.birthrights': birthrights,
-    },
-    { render: true }
-  );
+  await actor.update({
+    'system.birthrights': birthrights,
+  });
 };
 
 const deleteBirthright = async (actor, options) => {
@@ -201,12 +186,9 @@ const deleteBirthright = async (actor, options) => {
 
     birthrights = birthrights.filter(birth => birth._id !== birthId);
 
-    await actor.update(
-      {
-        'system.birthrights': birthrights,
-      },
-      { render: true }
-    );
+    await actor.update({
+      'system.birthrights': birthrights,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to delete Birthrights.');
@@ -225,12 +207,9 @@ const deleteWeapon = async (actor, options) => {
 
     weapons = weapons.filter(weapon => weapon._id !== weaponId);
 
-    await actor.update(
-      {
-        'system.weapons': weapons,
-      },
-      { render: true }
-    );
+    await actor.update({
+      'system.weapons': weapons,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to delete Weapon.');
@@ -258,12 +237,9 @@ const deleteBoonFromBirthright = async (actor, options) => {
       return birth;
     });
 
-    await actor.update(
-      {
-        'system.birthrights': birthrights,
-      },
-      { render: true }
-    );
+    await actor.update({
+      'system.birthrights': birthrights,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to delete boons from Birthrights.');
@@ -281,12 +257,9 @@ const deleteBoon = async (actor, options) => {
 
     boons = boons.filter(boon => boon._id !== boonId);
 
-    await actor.update(
-      {
-        'system.boons': boons,
-      },
-      { render: true }
-    );
+    await actor.update({
+      'system.boons': boons,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to delete boons.');
@@ -304,12 +277,9 @@ const deleteKnack = async (actor, options) => {
 
     knacks = knacks.filter(knack => knack._id !== knackId);
 
-    await actor.update(
-      {
-        'system.knacks': knacks,
-      },
-      { render: true }
-    );
+    await actor.update({
+      'system.knacks': knacks,
+    });
   } catch (error) {
     console.error(error.message);
     ui.notifications.error('Failed to delete Knack.');

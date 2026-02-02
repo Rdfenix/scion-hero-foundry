@@ -10,29 +10,23 @@ const getSafeNumber = value => {
   return Number.isNaN(num) ? 0 : num;
 };
 
+const EPIC_MAP = new Map(
+  Object.entries(epicAttributeSuccesses || {}).map(([key, value]) => [Number(key), value])
+);
+
 export const rollDice = async diceTotal => {
   try {
     const safeTotal = Math.max(0, getSafeNumber(diceTotal));
-
-    // Se for 0 dados, retorna vazio seguro imediatamente
-    if (safeTotal === 0) {
-      return { dicesResult: [], roll: null };
-    }
+    if (safeTotal === 0) return { dicesResult: [], roll: null };
 
     const roll = await new Roll(`${safeTotal}d10`).evaluate();
-
     let results = [];
-    if (roll.terms && roll.terms.length > 0) {
-      const term = roll.terms[0];
-      if (term.results) {
-        results = term.results.map(dice => dice.result);
-      }
+
+    if (roll.terms?.[0]?.results) {
+      results = roll.terms[0].results.map(dice => dice.result);
     }
 
-    return {
-      dicesResult: results,
-      roll,
-    };
+    return { dicesResult: results, roll };
   } catch (error) {
     console.error('Error in rollDice:', error);
     ui.notifications.error(`Erro ao rolar dados: ${error.message}`);
@@ -42,37 +36,39 @@ export const rollDice = async diceTotal => {
 
 const calcSuccess = async (dices, difficulty = 7) => {
   let totalSucess = 0;
-  let hasCriticalFail = false;
-  let explodedDices = [];
-  let criticalFailCount = [];
 
   if (!dices || dices.length === 0) {
     return {
       totalSucess: 0,
-      criticalFailCount: [],
+      criticalFailCount: 0,
       fail: true,
       criticalFail: false,
       explodedDices: [],
     };
   }
 
-  for (const dice of dices) {
-    if (dice === 10) {
-      explodedDices.push(dice);
-      totalSucess += 2;
-    } else if (dice >= difficulty && dice <= 9) {
-      totalSucess += 1;
-    } else if (dice === 1) {
-      hasCriticalFail = true;
-      criticalFailCount.push(dice);
-    }
+  const counts = new Map();
+  dices.forEach(dice => counts.set(dice, (counts.get(dice) || 0) + 1));
+
+  const tens = counts.get(10) || 0;
+  const ones = counts.get(1) || 0;
+
+  totalSucess += tens * 2;
+  const explodedDices = Array.from({ length: tens }, () => 10);
+
+  // Sucessos normais (7, 8, 9)
+  for (let i = difficulty; i <= 9; i++) {
+    totalSucess += counts.get(i) || 0;
   }
+
+  const hasCriticalFail = ones > 0;
+  const isFail = totalSucess === 0;
 
   return {
     totalSucess,
-    criticalFailCount,
-    fail: totalSucess === 0 && !hasCriticalFail,
-    criticalFail: totalSucess === 0 && hasCriticalFail,
+    criticalFailCount: ones,
+    fail: isFail && !hasCriticalFail,
+    criticalFail: isFail && hasCriticalFail,
     explodedDices,
   };
 };
@@ -282,11 +278,7 @@ const sendRollToChat = async (
   try {
     const safeTotalSucess = getSafeNumber(totalSucess);
     const safeEpicAttribute = getSafeNumber(epicAttribute);
-
-    let totalEpicSuccess = 0;
-    if (epicAttributeSuccesses && safeEpicAttribute in epicAttributeSuccesses) {
-      totalEpicSuccess = getSafeNumber(epicAttributeSuccesses[safeEpicAttribute]);
-    }
+    const totalEpicSuccess = EPIC_MAP.get(safeEpicAttribute) || 0;
 
     const data = {
       totalSucess: safeTotalSucess,
@@ -310,7 +302,6 @@ const sendRollToChat = async (
       content: context,
       roll: roll,
     };
-
 
     if (roll instanceof Roll) {
       await roll.toMessage(chatData);

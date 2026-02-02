@@ -43,7 +43,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
       window: {
         title: '{name}',
         resizable: false,
-        scrollable: ['.scion-wrapper'],
+        scrollable: ['.scion-v2-sheet'],
         contentClasses: ['standard-form', 'scion-v2-sheet'],
       },
       form: {
@@ -124,23 +124,23 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
       this.tabGroups.primary = 'stats';
     }
 
-    const attrKeys = [];
-    const skillsKeys = [];
+    const attrKeys = new Set();
+    const skillsKeys = new Set();
     const attributes = context.system.attributes || {};
     const skills = context.system.abilities || {};
 
     for (const group of Object.values(attributes)) {
-      attrKeys.push(...Object.keys(group));
+      attrKeys.add(...Object.keys(group));
     }
 
     for (const skillKey of Object.keys(skills)) {
-      skillsKeys.push(skillKey);
+      skillsKeys.add(skillKey);
     }
 
     const damageType = ['Bashing', 'Letal', 'Aggraveted'];
 
-    context.system.attrKeys = attrKeys;
-    context.system.skillsKeys = skillsKeys;
+    context.system.attrKeys = Array.from(attrKeys);
+    context.system.skillsKeys = Array.from(skillsKeys);
     context.system.damageType = damageType;
 
     context.enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(
