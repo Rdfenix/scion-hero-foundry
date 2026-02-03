@@ -1,4 +1,5 @@
 import ScionHeroActorSheetV2 from './actor-sheet.js';
+import { ScionCombatWheel } from './combat-wheel.js';
 import { ScionHeroActorBaseDefault } from './actor-base-default.js';
 import { mountingBasedata } from '../helpers/mountBasedata.js';
 import { splitInColumns } from '../helpers/splitInColumns.js';
@@ -75,6 +76,61 @@ Hooks.once('init', async function () {
   registerJournalHooks();
 });
 
+// HOOK NOVO: Adiciona botão na barra lateral (Layer de Tokens ou Tiles)
+Hooks.on('getSceneControlButtons', controls => {
+  // 1. Remova a verificação de Array, ou ajuste-a
+  if (!game.user.isGM) return;
+
+  console.log("CHEGUEI AQUI NO WHEEL BUTTON", controls);
+
+  // 2. Localize o controle de 'tiles' de forma segura
+  // No v13 'controls' é um objeto. No v12- é um array.
+  const tileControls = Array.isArray(controls)
+    ? controls.find(c => c.name === 'tiles')
+    : controls.tiles;
+
+  if (tileControls) {
+    const myTool = {
+      name: 'scion-wheel',
+      title: 'Battle Wheel Scion',
+      icon: 'fas fa-sync-alt',
+      button: true,
+      visible: true,
+      onClick: () => {
+        new Dialog({
+          title: 'Controlar Roda de Batalha',
+          content: `<p style="text-align:center">Gerencie a roda de iniciativa.</p>`,
+          buttons: {
+            create: {
+              label: 'Criar Roda (Spawn)',
+              icon: '<i class="fas fa-plus"></i>',
+              callback: () => ScionCombatWheel.createWheel(),
+            },
+            prev: {
+              label: 'Voltar (-1)',
+              icon: '<i class="fas fa-arrow-left"></i>',
+              callback: () => ScionCombatWheel.advance(-1),
+            },
+            next: {
+              label: 'Avançar (+1)',
+              icon: '<i class="fas fa-arrow-right"></i>',
+              callback: () => ScionCombatWheel.advance(1),
+            },
+          },
+          default: 'next',
+        }).render(true);
+      },
+    };
+
+    // 3. Adiciona a ferramenta à lista
+    // No v13 tileControls.tools também pode ser um objeto ou array dependendo da implementação
+    if (Array.isArray(tileControls.tools)) {
+      tileControls.tools.push(myTool);
+    } else {
+      tileControls.tools['scion-wheel'] = myTool;
+    }
+  }
+});
 Hooks.on('preCreateActor', (document, data, options, userId) => {
   if (document.type !== 'character') return;
 
