@@ -1,4 +1,5 @@
 import ScionHeroActorSheetV2 from './actor-sheet.js';
+import { ScionCombatWheel } from './combat-wheel.js';
 import { ScionHeroActorBaseDefault } from './actor-base-default.js';
 import { mountingBasedata } from '../helpers/mountBasedata.js';
 import { splitInColumns } from '../helpers/splitInColumns.js';
@@ -152,6 +153,8 @@ Hooks.once('init', async function () {
     return a === b ? 'selected' : '';
   });
 
+  globalThis.ScionCombatWheel = ScionCombatWheel;
+
   registerJournalHooks();
 });
 
@@ -159,8 +162,6 @@ Hooks.on('preCreateActor', (document, data, options, userId) => {
   if (document.type !== 'character') return;
 
   const baseData = mountingBasedata(ScionHeroActorBaseDefault, document);
-
-  console.log('Scion | Injetando dados iniciais:', baseData);
 
   // Injeta os dados diretamente no momento da criação
   document.updateSource({ system: baseData });

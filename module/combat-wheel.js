@@ -83,6 +83,8 @@ export class ScionCombatWheel {
     const tickFloor = Math.floor(((tick % 8) + 8) % 8);
     const tickAdjustments = new Map([
       [1, { angleOffset: -6, xOffset: 52 }],
+      [2, { angleOffset: 2, xOffset: 52 }],
+      [4, { angleOffset: -1, xOffset: -36 }],
       [5, { angleOffset: 0, xOffset: -52 }],
       [6, { angleOffset: 5.3, xOffset: -52 }],
       [7, { angleOffset: -3, xOffset: 2 }],
@@ -142,5 +144,3 @@ export class ScionCombatWheel {
     await canvas.scene.createEmbeddedDocuments('Tile', [wheelData, tokenData]);
   }
 }
-
-globalThis.ScionCombatWheel = ScionCombatWheel;
