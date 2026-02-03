@@ -6,6 +6,40 @@ import { splitInColumns } from '../helpers/splitInColumns.js';
 
 import { createPuviewsJournal, createKnacksJournal } from '../helpers/journals.js';
 import { registerJournalHooks } from './hooks.js';
+import { getRoot } from '../utils/utils.js';
+
+async function createOrUpdateWheelMacro() {
+  const macroName = 'Scion | Advance tick Wheel';
+  const root = getRoot();
+  let macro = game.macros.find(m => m.name === macroName);
+
+  const command = `
+    if (typeof ScionCombatWheel === "undefined") {
+      ui.notifications.error("ScionCombatWheel não está disponível.");
+    } else {
+      ScionCombatWheel.advance(1);
+    }
+  `;
+
+  if (macro) {
+    await macro.update({ command });
+  } else {
+    macro = await Macro.create({
+      name: macroName,
+      type: 'script',
+      scope: 'global',
+      img: `${root}/assets/svg/angles-right-solid-full.svg`,
+      command,
+    });
+  }
+
+  return macro;
+}
+
+async function assignMacroToHotbar(slot = 1) {
+  const macro = await createOrUpdateWheelMacro();
+  await game.user.assignHotbarMacro(macro, slot);
+}
 
 Hooks.once('init', async function () {
   // Registra a nova sheet como padrão para o tipo 'character'
@@ -81,8 +115,6 @@ Hooks.on('getSceneControlButtons', controls => {
   // 1. Remova a verificação de Array, ou ajuste-a
   if (!game.user.isGM) return;
 
-  console.log("CHEGUEI AQUI NO WHEEL BUTTON", controls);
-
   // 2. Localize o controle de 'tiles' de forma segura
   // No v13 'controls' é um objeto. No v12- é um array.
   const tileControls = Array.isArray(controls)
@@ -93,7 +125,7 @@ Hooks.on('getSceneControlButtons', controls => {
     const myTool = {
       name: 'scion-wheel',
       title: 'Battle Wheel Scion',
-      icon: 'fas fa-sync-alt',
+      icon: 'fa-solid fa-sun',
       button: true,
       visible: true,
       onClick: () => {
@@ -131,6 +163,7 @@ Hooks.on('getSceneControlButtons', controls => {
     }
   }
 });
+
 Hooks.on('preCreateActor', (document, data, options, userId) => {
   if (document.type !== 'character') return;
 
@@ -155,4 +188,8 @@ Hooks.on('ready', async () => {
 
   await createPuviewsJournal();
   await createKnacksJournal();
+
+  if (!game.user.isGM) return;
+
+  await assignMacroToHotbar(1);
 });

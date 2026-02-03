@@ -76,3 +76,7 @@ export function stripHTMLAndFormatTable(html) {
 
   return processed;
 }
+
+export function getRoot() {
+  return `systems/${game?.system?.id}`;
+}
