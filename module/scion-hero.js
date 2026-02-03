@@ -9,36 +9,82 @@ import { registerJournalHooks } from './hooks.js';
 import { getRoot } from '../utils/utils.js';
 
 async function createOrUpdateWheelMacro() {
-  const macroName = 'Scion | Advance tick Wheel';
   const root = getRoot();
-  let macro = game.macros.find(m => m.name === macroName);
 
-  const command = `
-    if (typeof ScionCombatWheel === "undefined") {
-      ui.notifications.error("ScionCombatWheel não está disponível.");
-    } else {
-      ScionCombatWheel.advance(1);
-    }
-  `;
+  // IMPORTANTE: Para que as macros funcionem, a classe precisa estar no escopo global
+  // Adicione isso no seu arquivo combat-wheel.js ou no init:
+  // window.ScionCombatWheel = ScionCombatWheel;
 
-  if (macro) {
-    await macro.update({ command });
-  } else {
-    macro = await Macro.create({
-      name: macroName,
+  const macroActions = [
+    {
+      name: 'Scion: Create Combat Wheel',
       type: 'script',
-      scope: 'global',
+      command: `if (typeof ScionCombatWheel !== "undefined") {
+        ScionCombatWheel.createWheel();
+      } else {
+        ui.notifications.error("A classe ScionCombatWheel não foi encontrada no escopo global.");
+      }`,
+      img: `${root}/assets/svg/square-plus-solid-full.svg`,
+    },
+    {
+      name: 'Scion: Advance Tick Wheel',
+      type: 'script',
+      command: `if (typeof ScionCombatWheel !== "undefined") {
+        ScionCombatWheel.advance(1);
+      } else {
+        ui.notifications.error("A classe ScionCombatWheel não foi encontrada.");
+      }`,
       img: `${root}/assets/svg/angles-right-solid-full.svg`,
-      command,
-    });
+    },
+    {
+      name: 'Scion: Rewind Tick Wheel',
+      type: 'script',
+      command: `if (typeof ScionCombatWheel !== "undefined") {
+        ScionCombatWheel.advance(-1);
+      } else {
+        ui.notifications.error("A classe ScionCombatWheel não foi encontrada.");
+      }`,
+      img: `${root}/assets/svg/angles-left-solid-full.svg`,
+    },
+    {
+      name: 'Scion: Remove Combat Wheel',
+      type: 'script',
+      command: `if (typeof ScionCombatWheel !== "undefined") {
+        ScionCombatWheel.clearWheel();
+      } else {
+        ui.notifications.error("A classe ScionCombatWheel não foi encontrada.");
+      }`,
+      img: `${root}/assets/svg/eraser-solid-full.svg`,
+    },
+  ];
+
+  const results = [];
+
+  for (const data of macroActions) {
+    let macro = game.macros.find(m => m.name === data.name);
+
+    if (macro) {
+      await macro.update(data);
+    } else {
+      macro = await Macro.create(data);
+    }
+    results.push(macro);
   }
 
-  return macro;
+  return results;
 }
 
 async function assignMacroToHotbar(slot = 1) {
-  const macro = await createOrUpdateWheelMacro();
-  await game.user.assignHotbarMacro(macro, slot);
+  const macros = (await createOrUpdateWheelMacro()).filter(m => !!m);
+
+  for (let i = 0; i < macros.length; i++) {
+    if (macros[i] && macros[i] instanceof Macro) {
+      await game.user.assignHotbarMacro(macros[i], slot + i);
+      console.log(`Scion | Macro atribuída ao hotbar: ${macros[i].name} no slot ${slot + i}`);
+    } else {
+      console.warn(`Scion | Macro inválida não atribuída ao hotbar:`, macros[i]);
+    }
+  }
 }
 
 Hooks.once('init', async function () {
