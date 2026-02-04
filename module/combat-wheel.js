@@ -12,25 +12,31 @@ export class ScionCombatWheel {
   }
 
   static CONFIG = {
-    wheelSize: 1910,
-    tokenSize: 320,
-    radius: 822,
-    startAngle: -67.5,
+    wheelSize: 1100,
+    tokenSize: 184, // Redimensionado proporcionalmente (320 * 0.576)
+    radius: 473, // Redimensionado proporcionalmente (822 * 0.576)
+    startAngle: -67.5, // O ângulo permanece o mesmo
     totalTicks: 8,
   };
 
   static async moveToken(tickIndex) {
-    const tokenTile = canvas.scene.tiles.find(t => t.getFlag(this.ID, 'type') === 'token');
-    const bgTile = canvas.scene.tiles.find(t => t.getFlag(this.ID, 'type') === 'bg');
+    const tokenTile = canvas.scene.tiles.find(
+      (t) => t.getFlag(this.ID, "type") === "token",
+    );
+    const bgTile = canvas.scene.tiles.find(
+      (t) => t.getFlag(this.ID, "type") === "bg",
+    );
 
-    if (!tokenTile || !bgTile) return ui.notifications.warn('Roda não encontrada.');
+    if (!tokenTile || !bgTile)
+      return ui.notifications.warn("Roda não encontrada.");
 
     // 1. Calcular Ticks (Origem e Destino)
-    const oldTick = tokenTile.getFlag(this.ID, 'currentTick') || 0;
+    const oldTick = tokenTile.getFlag(this.ID, "currentTick") || 0;
     const newTick = tickIndex; // Mantemos o valor real para o cálculo de distância
 
     const normalizedNewTick =
-      ((newTick % this.CONFIG.totalTicks) + this.CONFIG.totalTicks) % this.CONFIG.totalTicks;
+      ((newTick % this.CONFIG.totalTicks) + this.CONFIG.totalTicks) %
+      this.CONFIG.totalTicks;
 
     // 2. Definir a animação orbital
     const duration = 600;
@@ -42,7 +48,11 @@ export class ScionCombatWheel {
       const currentInterpolatedTick = oldTick + (newTick - oldTick) * progress;
 
       // Pega as coordenadas X e Y para esse micro-momento do ângulo
-      const pos = this.getPositionForTick(currentInterpolatedTick, bgTile.x, bgTile.y);
+      const pos = this.getPositionForTick(
+        currentInterpolatedTick,
+        bgTile.x,
+        bgTile.y,
+      );
 
       // Move o visual (mesh)
       if (tokenTile.mesh) {
@@ -56,18 +66,22 @@ export class ScionCombatWheel {
       name,
       duration,
       ontick,
-      easing: 'easeInOutSine',
+      easing: "easeInOutSine",
     });
 
     // 4. Salvar posição final no banco de dados
-    const finalPos = this.getPositionForTick(normalizedNewTick, bgTile.x, bgTile.y);
+    const finalPos = this.getPositionForTick(
+      normalizedNewTick,
+      bgTile.x,
+      bgTile.y,
+    );
     return tokenTile.update(
       {
         x: finalPos.x,
         y: finalPos.y,
         [`flags.${this.ID}.currentTick`]: normalizedNewTick,
       },
-      { animate: false }
+      { animate: false },
     );
   }
 
@@ -82,12 +96,12 @@ export class ScionCombatWheel {
     // Para animação suave, o ajuste ideal seria interpolado, mas manteremos o seu Map:
     const tickFloor = Math.floor(((tick % 8) + 8) % 8);
     const tickAdjustments = new Map([
-      [1, { angleOffset: -4, xOffset: 52 }],
-      [2, { angleOffset: 2, xOffset: 52 }],
-      [4, { angleOffset: -1, xOffset: -36 }],
-      [5, { angleOffset: 0, xOffset: -52 }],
-      [6, { angleOffset: 5.3, xOffset: -52 }],
-      [7, { angleOffset: -3, xOffset: 2 }],
+      [1, { angleOffset: -4, xOffset: 30 }], // 52 -> 30
+      [2, { angleOffset: 2, xOffset: 30 }], // 52 -> 30
+      [4, { angleOffset: -1, xOffset: -21 }], // -36 -> -21
+      [5, { angleOffset: 0, xOffset: -30 }], // -52 -> -30
+      [6, { angleOffset: 5.3, xOffset: -30 }], // -52 -> -30
+      [7, { angleOffset: -3, xOffset: 1 }], // 2 -> 1
     ]);
 
     const adjustment = tickAdjustments.get(tickFloor);
@@ -109,15 +123,15 @@ export class ScionCombatWheel {
   // --- Métodos de utilidade mantidos ---
 
   static async rewind() {
-    this.openDialog('previous');
+    this.openDialog("previous");
   }
 
   static async advance() {
-    this.openDialog('next');
+    this.openDialog("next");
   }
 
   static async openDialog(stepDirection) {
-    console.log('Scion | Abrindo diálogo da Roda de Combate:', stepDirection);
+    console.log("Scion | Abrindo diálogo da Roda de Combate:", stepDirection);
     const options = {
       ticks: [1, 2, 3, 4, 5, 6],
       action: stepDirection,
@@ -125,29 +139,33 @@ export class ScionCombatWheel {
 
     const content = await foundry.applications.handlebars.renderTemplate(
       `systems/${this.ID}/templates/combat-wheel/dialog/combat-wheel-dialog.hbs`,
-      { options }
+      { options },
     );
 
     new foundry.applications.api.DialogV2({
-      classes: ['combat-wheel-dialog'],
-      title: 'Roda de Combate',
+      classes: ["combat-wheel-dialog"],
+      title: "Roda de Combate",
       content,
       buttons: [
         {
-          action: 'select',
-          label: 'Select',
+          action: "select",
+          label: "Select",
           icon: '<i class="fa-regular fa-circle-check"></i>',
-          class: 'roll-weapon',
+          class: "roll-weapon",
           default: true,
           callback: async (event, button, dialog) => {
-            const stepSelected = $(dialog.element).find('select[name="tick-value"]').val();
-            const tokenTile = canvas.scene.tiles.find(t => t.getFlag(this.ID, 'type') === 'token');
+            const stepSelected = $(dialog.element)
+              .find('select[name="tick-value"]')
+              .val();
+            const tokenTile = canvas.scene.tiles.find(
+              (t) => t.getFlag(this.ID, "type") === "token",
+            );
 
             if (!tokenTile) return;
 
-            const current = tokenTile.getFlag(this.ID, 'currentTick') || 0;
+            const current = tokenTile.getFlag(this.ID, "currentTick") || 0;
 
-            if (stepDirection === 'next') {
+            if (stepDirection === "next") {
               await this.moveToken(current + Number.parseInt(stepSelected));
             } else {
               await this.moveToken(current - Number.parseInt(stepSelected));
@@ -159,8 +177,10 @@ export class ScionCombatWheel {
   }
 
   static async clearWheel() {
-    const ids = canvas.scene.tiles.filter(t => t.getFlag(this.ID, 'type')).map(t => t.id);
-    if (ids.length) await canvas.scene.deleteEmbeddedDocuments('Tile', ids);
+    const ids = canvas.scene.tiles
+      .filter((t) => t.getFlag(this.ID, "type"))
+      .map((t) => t.id);
+    if (ids.length) await canvas.scene.deleteEmbeddedDocuments("Tile", ids);
   }
 
   static async createWheel() {
@@ -173,7 +193,7 @@ export class ScionCombatWheel {
       x: (canvas.dimensions.width - this.CONFIG.wheelSize) / 2,
       y: (canvas.dimensions.height - this.CONFIG.wheelSize) / 2,
       z: 100,
-      flags: { [this.ID]: { type: 'bg' } },
+      flags: { [this.ID]: { type: "bg" } },
     };
     const startPos = this.getPositionForTick(0, wheelData.x, wheelData.y);
     const tokenData = {
@@ -183,8 +203,8 @@ export class ScionCombatWheel {
       x: startPos.x,
       y: startPos.y,
       z: 110,
-      flags: { [this.ID]: { type: 'token', currentTick: 0 } },
+      flags: { [this.ID]: { type: "token", currentTick: 0 } },
     };
-    await canvas.scene.createEmbeddedDocuments('Tile', [wheelData, tokenData]);
+    await canvas.scene.createEmbeddedDocuments("Tile", [wheelData, tokenData]);
   }
 }
