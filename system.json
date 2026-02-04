@@ -2,7 +2,7 @@
   "id": "scion-hero-foundry",
   "title": "Scion - Hero V2",
   "description": "A system for playing Scion, a tabletop role-playing game.",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "compatibility": {
     "minimum": "11",
     "verified": "13.344"
