@@ -9,7 +9,7 @@ import {
 } from './rollDice.js';
 
 import { mountDeities } from './mountDeities.js';
-import { mountFavoritiesSkills, mountGodsList } from '../utils/utils.js';
+import { mountFavoritiesSkills, mountGodsList, getRoot } from '../utils/utils.js';
 
 const parseDifficulty = dialogEl => {
   const value = dialogEl.querySelector('input[name="difficulty"]')?.value ?? '7';
@@ -61,7 +61,7 @@ export const selectPantheon = async actor => {
     }
 
     const content = await foundry.applications.handlebars.renderTemplate(
-      'systems/scion-hero-foundry/templates/actors/dialogs/pantheon.html',
+      `${getRoot()}/templates/actors/dialogs/pantheon.html`,
       { pantheons }
     );
 
@@ -159,7 +159,7 @@ export const selectGod = async actor => {
     gods = await mountGodsList(gods);
 
     const content = await foundry.applications.handlebars.renderTemplate(
-      'systems/scion-hero-foundry/templates/actors/dialogs/gods.html',
+      `${getRoot()}/templates/actors/dialogs/gods.html`,
       { gods }
     );
 
@@ -244,7 +244,7 @@ export const callDialogRollSkillDice = async (actor, options) => {
     };
 
     const content = await foundry.applications.handlebars.renderTemplate(
-      'systems/scion-hero-foundry/templates/actors/dialogs/choose-attr.html',
+      `${getRoot()}/templates/actors/dialogs/choose-attr.html`,
       { data }
     );
 
@@ -340,7 +340,7 @@ export const callDialogRollWeaponDice = async (actor, options) => {
     };
 
     const content = await foundry.applications.handlebars.renderTemplate(
-      'systems/scion-hero-foundry/templates/actors/dialogs/weapon-atk.html',
+      `${getRoot()}/templates/actors/dialogs/weapon-atk.html`,
       { data }
     );
 
@@ -441,7 +441,7 @@ export const callDialogRollDamage = async (actor, options) => {
     };
 
     const content = await foundry.applications.handlebars.renderTemplate(
-      'systems/scion-hero-foundry/templates/actors/dialogs/damage-atk.html',
+      `${getRoot()}/templates/actors/dialogs/damage-atk.html`,
       { data }
     );
 
@@ -515,14 +515,13 @@ export const callDifficultyDialog = async (actor, options = {}) => {
   }
 
   const content = await foundry.applications.handlebars.renderTemplate(
-    'systems/scion-hero-foundry/templates/actors/dialogs/difficulty.html'
+    `${getRoot()}/templates/actors/dialogs/difficulty.html`
   );
 
   return new Promise(resolve => {
     new foundry.applications.api.DialogV2({
       classes: ['difficulty-dialog'],
       content,
-
       buttons: [
         {
           action: 'set',

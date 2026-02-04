@@ -1,10 +1,91 @@
 import ScionHeroActorSheetV2 from './actor-sheet.js';
+import { ScionCombatWheel } from './combat-wheel.js';
 import { ScionHeroActorBaseDefault } from './actor-base-default.js';
 import { mountingBasedata } from '../helpers/mountBasedata.js';
 import { splitInColumns } from '../helpers/splitInColumns.js';
 
 import { createPuviewsJournal, createKnacksJournal } from '../helpers/journals.js';
 import { registerJournalHooks } from './hooks.js';
+import { getRoot } from '../utils/utils.js';
+
+async function createOrUpdateWheelMacro() {
+  const root = getRoot();
+
+  // IMPORTANTE: Para que as macros funcionem, a classe precisa estar no escopo global
+  // Adicione isso no seu arquivo combat-wheel.js ou no init:
+  // window.ScionCombatWheel = ScionCombatWheel;
+
+  const macroActions = [
+    {
+      name: 'Scion: Create Combat Wheel',
+      type: 'script',
+      command: `if (typeof ScionCombatWheel !== "undefined") {
+        ScionCombatWheel.createWheel();
+      } else {
+        ui.notifications.error("A classe ScionCombatWheel não foi encontrada no escopo global.");
+      }`,
+      img: `${root}/assets/svg/square-plus-solid-full.svg`,
+    },
+    {
+      name: 'Scion: Advance Tick Wheel',
+      type: 'script',
+      command: `if (typeof ScionCombatWheel !== "undefined") {
+        ScionCombatWheel.advance();
+      } else {
+        ui.notifications.error("A classe ScionCombatWheel não foi encontrada.");
+      }`,
+      img: `${root}/assets/svg/angles-right-solid-full.svg`,
+    },
+    {
+      name: 'Scion: Rewind Tick Wheel',
+      type: 'script',
+      command: `if (typeof ScionCombatWheel !== "undefined") {
+        ScionCombatWheel.rewind();
+      } else {
+        ui.notifications.error("A classe ScionCombatWheel não foi encontrada.");
+      }`,
+      img: `${root}/assets/svg/angles-left-solid-full.svg`,
+    },
+    {
+      name: 'Scion: Remove Combat Wheel',
+      type: 'script',
+      command: `if (typeof ScionCombatWheel !== "undefined") {
+        ScionCombatWheel.clearWheel();
+      } else {
+        ui.notifications.error("A classe ScionCombatWheel não foi encontrada.");
+      }`,
+      img: `${root}/assets/svg/eraser-solid-full.svg`,
+    },
+  ];
+
+  const results = [];
+
+  for (const data of macroActions) {
+    let macro = game.macros.find(m => m.name === data.name);
+
+    if (macro) {
+      await macro.update(data);
+    } else {
+      macro = await Macro.create(data);
+    }
+    results.push(macro);
+  }
+
+  return results;
+}
+
+async function assignMacroToHotbar(slot = 1) {
+  const macros = (await createOrUpdateWheelMacro()).filter(m => !!m);
+
+  for (let i = 0; i < macros.length; i++) {
+    if (macros[i] && macros[i] instanceof Macro) {
+      await game.user.assignHotbarMacro(macros[i], slot + i);
+      console.log(`Scion | Macro atribuída ao hotbar: ${macros[i].name} no slot ${slot + i}`);
+    } else {
+      console.warn(`Scion | Macro inválida não atribuída ao hotbar:`, macros[i]);
+    }
+  }
+}
 
 Hooks.once('init', async function () {
   // Registra a nova sheet como padrão para o tipo 'character'
@@ -72,6 +153,8 @@ Hooks.once('init', async function () {
     return a === b ? 'selected' : '';
   });
 
+  globalThis.ScionCombatWheel = ScionCombatWheel;
+
   registerJournalHooks();
 });
 
@@ -79,8 +162,6 @@ Hooks.on('preCreateActor', (document, data, options, userId) => {
   if (document.type !== 'character') return;
 
   const baseData = mountingBasedata(ScionHeroActorBaseDefault, document);
-
-  console.log('Scion | Injetando dados iniciais:', baseData);
 
   // Injeta os dados diretamente no momento da criação
   document.updateSource({ system: baseData });
@@ -99,4 +180,8 @@ Hooks.on('ready', async () => {
 
   await createPuviewsJournal();
   await createKnacksJournal();
+
+  if (!game.user.isGM) return;
+
+  await assignMacroToHotbar(1);
 });

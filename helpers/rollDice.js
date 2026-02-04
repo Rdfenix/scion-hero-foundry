@@ -1,5 +1,5 @@
 import { epicAttributeSuccesses } from "../module/actor-base-default.js";
-
+import { getRoot } from "../utils/utils.js";
 /**
  * Helper para garantir que o valor seja sempre um número inteiro >= 0.
  * Converte strings para números e trata nulos/undefined.
@@ -328,7 +328,7 @@ const sendRollToChat = async (
     };
 
     const context = await foundry.applications.handlebars.renderTemplate(
-      "systems/scion-hero-foundry/templates/diceRoll/dice-result.html",
+      `${getRoot()}/templates/diceRoll/dice-result.html`,
       { data },
     );
 

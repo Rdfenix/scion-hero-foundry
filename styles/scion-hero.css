@@ -325,3 +325,24 @@ input[type='radio']::after {
 .token img {
   border-radius: 50% !important;
 }
+
+.combat-wheel-dialog .window-content {
+  background: #fefefe !important;
+  padding: 1rem !important;
+  font-family: skranji-regular, sans-serif !important;
+  color: #222;
+  width: 19rem;
+}
+
+.combat-wheel-dialog .window-content .dialog-form .dialog-content .combat-wheel-dialog-header h2 {
+  color: #222;
+  font-family: skranji-regular, sans-serif !important;
+  margin-bottom: 0 !important;
+}
+
+.combat-wheel-dialog .window-content .dialog-form .dialog-content .combat-wheel-dialog-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 1rem;
+}

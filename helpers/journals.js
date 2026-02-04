@@ -1,10 +1,11 @@
 import { getKnacks } from "../api/knackApi.js";
 import { getPurviews } from "../api/purviewsApi.js";
+import { getRoot } from "../utils/utils.js";
 
 export async function createPuviewsJournal() {
   const purviewList = await getPurviews();
   const templatePath =
-    "systems/scion-hero-foundry/templates/journals/purviews.html";
+    `${getRoot()}/templates/journals/purviews.html`;
   const folderName = "Purviews";
 
   let folder = game.folders.find(
@@ -61,7 +62,7 @@ export async function createKnacksJournal() {
   const knackList = await getKnacks();
   const folderName = "Knacks";
   const templatePath =
-    "systems/scion-hero-foundry/templates/journals/knacks.html";
+    `${getRoot()}/templates/journals/knacks.html`;
 
   // Deleta pasta antiga se já existir
   let folder = game.folders.find(
