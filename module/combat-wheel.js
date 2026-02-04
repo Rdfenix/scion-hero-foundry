@@ -82,7 +82,7 @@ export class ScionCombatWheel {
     // Para animação suave, o ajuste ideal seria interpolado, mas manteremos o seu Map:
     const tickFloor = Math.floor(((tick % 8) + 8) % 8);
     const tickAdjustments = new Map([
-      [1, { angleOffset: -6, xOffset: 52 }],
+      [1, { angleOffset: -4, xOffset: 52 }],
       [2, { angleOffset: 2, xOffset: 52 }],
       [4, { angleOffset: -1, xOffset: -36 }],
       [5, { angleOffset: 0, xOffset: -52 }],
@@ -107,11 +107,55 @@ export class ScionCombatWheel {
   }
 
   // --- Métodos de utilidade mantidos ---
-  static async advance(steps = 1) {
-    const tokenTile = canvas.scene.tiles.find(t => t.getFlag(this.ID, 'type') === 'token');
-    if (!tokenTile) return;
-    const current = tokenTile.getFlag(this.ID, 'currentTick') || 0;
-    await this.moveToken(current + steps);
+
+  static async rewind() {
+    this.openDialog('previous');
+  }
+
+  static async advance() {
+    this.openDialog('next');
+  }
+
+  static async openDialog(stepDirection) {
+    console.log('Scion | Abrindo diálogo da Roda de Combate:', stepDirection);
+    const options = {
+      ticks: [1, 2, 3, 4, 5, 6],
+      action: stepDirection,
+    };
+
+    const content = await foundry.applications.handlebars.renderTemplate(
+      `systems/${this.ID}/templates/combat-wheel/dialog/combat-wheel-dialog.hbs`,
+      { options }
+    );
+
+    new foundry.applications.api.DialogV2({
+      classes: ['combat-wheel-dialog'],
+      title: 'Roda de Combate',
+      content,
+      buttons: [
+        {
+          action: 'select',
+          label: 'Select',
+          icon: '<i class="fa-regular fa-circle-check"></i>',
+          class: 'roll-weapon',
+          default: true,
+          callback: async (event, button, dialog) => {
+            const stepSelected = $(dialog.element).find('select[name="tick-value"]').val();
+            const tokenTile = canvas.scene.tiles.find(t => t.getFlag(this.ID, 'type') === 'token');
+
+            if (!tokenTile) return;
+
+            const current = tokenTile.getFlag(this.ID, 'currentTick') || 0;
+
+            if (stepDirection === 'next') {
+              await this.moveToken(current + Number.parseInt(stepSelected));
+            } else {
+              await this.moveToken(current - Number.parseInt(stepSelected));
+            }
+          },
+        },
+      ],
+    }).render(true);
   }
 
   static async clearWheel() {

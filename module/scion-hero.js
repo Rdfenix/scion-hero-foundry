@@ -30,7 +30,7 @@ async function createOrUpdateWheelMacro() {
       name: 'Scion: Advance Tick Wheel',
       type: 'script',
       command: `if (typeof ScionCombatWheel !== "undefined") {
-        ScionCombatWheel.advance(1);
+        ScionCombatWheel.advance();
       } else {
         ui.notifications.error("A classe ScionCombatWheel não foi encontrada.");
       }`,
@@ -40,7 +40,7 @@ async function createOrUpdateWheelMacro() {
       name: 'Scion: Rewind Tick Wheel',
       type: 'script',
       command: `if (typeof ScionCombatWheel !== "undefined") {
-        ScionCombatWheel.advance(-1);
+        ScionCombatWheel.rewind();
       } else {
         ui.notifications.error("A classe ScionCombatWheel não foi encontrada.");
       }`,

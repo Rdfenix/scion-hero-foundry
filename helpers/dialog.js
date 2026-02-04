@@ -522,7 +522,6 @@ export const callDifficultyDialog = async (actor, options = {}) => {
     new foundry.applications.api.DialogV2({
       classes: ['difficulty-dialog'],
       content,
-
       buttons: [
         {
           action: 'set',
