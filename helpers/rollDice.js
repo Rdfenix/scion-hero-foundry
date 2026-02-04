@@ -102,6 +102,10 @@ const processAndSendRoll = async (
     explodedDices,
     ...templateData,
   });
+
+  return {
+    totalSucess: Math.max(0, totalSucess + (templateData.epicAttribute || 0)),
+  };
 };
 
 /* -------------------------------------------- */
@@ -125,11 +129,44 @@ export const callRollJoinBattle = async (actor) => {
 
     const totalDices = Math.max(0, wits + awareness);
 
-    await processAndSendRoll(actor, totalDices, 7, {
+    const initiativeValue = await processAndSendRoll(actor, totalDices, 7, {
       epicAttribute: epicWits,
       title: "Join Battle",
       epicAttributeLabel: "Wits",
     });
+
+    //Verifica se existe um combate ativo. Se não, cria um.
+    let combat = game.combat;
+    if (!combat) {
+      if (!game.user.isGM)
+        return ui.notifications.warn(
+          "Não há combate ativo e apenas o Mestre pode iniciar um.",
+        );
+      combat = await Combat.create({ scene: canvas.scene.id, active: true });
+    }
+
+    let combatant = combat.combatants.find((c) => c.actorId === actor.id);
+
+    if (!combatant) {
+      console.log(`Scion | Adicionando ${actor.name} ao combate...`);
+      // Cria o combatente a partir do token ativo do ator na cena
+      const token = actor.getActiveTokens()[0];
+      if (!token)
+        return ui.notifications.error(
+          "O personagem precisa de um token na cena para entrar em combate.",
+        );
+
+      const created = await combat.createEmbeddedDocuments("Combatant", [
+        {
+          tokenId: token.id,
+          actorId: actor.id,
+          hidden: token.document.hidden,
+        },
+      ]);
+      combatant = created[0];
+    }
+
+    await combatant.update({ initiative: initiativeValue.totalSucess });
   } catch (error) {
     console.error(error);
   }
