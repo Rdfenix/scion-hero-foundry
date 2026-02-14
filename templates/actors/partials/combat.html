@@ -2,7 +2,7 @@
 <div class="tab {{#if (eq tabs.primary 'combat')}}active{{/if}}">
 <div class="weapons">
   <div class="scion-label-title">
-    <h2>Weapons</h2>
+    <h2>{{localize "STATS.WEAPONS"}}</h2>
   </div>
   <div class="weapon-wrapper">
     <ul>
@@ -17,20 +17,20 @@
             data-field="name"
             value="{{weapon.name}}"
           />
-          <button data-action="roll-attack" data-weapon-id="{{weapon._id}}">Attack</button>
-          <button data-action="roll-damage" data-weapon-id="{{weapon._id}}">Damage</button>
+          <button data-action="roll-attack" data-weapon-id="{{weapon._id}}">{{localize "LABELS.ATTACK"}}</button>
+          <button data-action="roll-damage" data-weapon-id="{{weapon._id}}">{{localize "LABELS.DAMAGE"}}</button>
         </div>
         <div class="weapon-specs">
           <div class="attr-skill">
             <div>
-              <span>Attr:</span>
+              <span>{{localize "LABELS.ATTRIBUTE"}}:</span>
               <select
                 name="weapon-attr"
                 data-action="select-weapon-type"
                 data-field="attr"
                 data-weapon-id="{{weapon._id}}"
               >
-                <option value="">Attr</option>
+                <option value="">{{localize "LABELS.ATTRIBUTE"}}</option>
                 {{#each ../system.attrKeys as |attrKey|}}
                 <option value="{{attrKey}}" {{ifEquals weapon.attr attrKey}}>
                   {{attrKey}}
@@ -39,14 +39,14 @@
               </select>
             </div>
             <div>
-              <span>Skill:</span>
+              <span>{{localize "LABELS.SKILL"}}:</span>
               <select
                 name="weapon-skill"
                 data-action="select-weapon-type"
                 data-field="skill"
                 data-weapon-id="{{weapon._id}}"
               >
-                <option value="">Skills</option>
+                <option value="">{{localize "LABELS.SKILLS"}}</option>
                 {{#each ../system.skillsKeys as |skill|}}
                 <option value="{{skill}}" {{ifEquals weapon.skill skill}}>
                   {{skill}}
@@ -57,15 +57,15 @@
           </div>
           <div class="weapon-stats">
             <div>
-              <span>Speed:</span>
+              <span>{{localize "LABELS.SPEED"}}:</span>
               <input type="text" placeholder="Speed" data-action="update-weapon-field" data-weapon-id="{{weapon._id}}" data-field="speed" value="{{weapon.speed}}" />
             </div>
             <div>
-              <span>Accuracy:</span>
+              <span>{{localize "LABELS.ACCURACY"}}:</span>
               <input type="text" placeholder="Accuracy" data-action="update-weapon-field" data-weapon-id="{{weapon._id}}" data-field="acc" value="{{weapon.acc}}" />
             </div>
             <div>
-              <span>Defense:</span>
+              <span>{{localize "LABELS.DEFENSE"}}:</span>
               <input
                 type="text"
                 placeholder="Defense"
@@ -76,7 +76,7 @@
               />
             </div>
             <div>
-              <span>Range:</span>
+              <span>{{localize "LABELS.RANGE"}}:</span>
               <input
                 type="text"
                 placeholder="Range"
@@ -87,7 +87,7 @@
               />
             </div>
             <div class="damage">
-              <span>Damage:</span>
+              <span>{{localize "LABELS.DAMAGE_VALUE"}}:</span>
               <input
                 type="text"
                 placeholder="Damage value"
@@ -102,13 +102,13 @@
         <div class="damage-info">
           <div class="damage-attr">
             <div>
-              <span>Damage Attribute:</span>
+              <span>{{localize "LABELS.DAMAGE_ATTRIBUTE"}}:</span>
               <select
                 data-action="select-weapon-type"
                 data-field="damageAttr"
                 data-weapon-id="{{weapon._id}}"
               >
-                <option value="">Damage Attr</option>
+                <option value="">{{localize "LABELS.DAMAGE_ATTRIBUTE"}}</option>
                 {{#each ../system.attrKeys as |attr|}}
                 <option value="{{attr}}" {{ifEquals weapon.damageAttr attr}}>
                   {{attr}}
@@ -117,13 +117,13 @@
               </select>
             </div>
             <div>
-              <span>Damage Type:</span>
+              <span>{{localize "LABELS.DAMAGE_TYPE"}}:</span>
               <select
                 data-action="select-weapon-type"
                 data-field="type"
                 data-weapon-id="{{weapon._id}}"
               >
-                <option value="">Damage Type</option>
+                <option value="">{{localize "LABELS.DAMAGE_TYPE"}}</option>
                 {{#each ../system.damageType as |type|}}
                 <option value="{{type}}" {{ifEquals weapon.type type}}>
                   {{type}}
@@ -144,18 +144,18 @@
       {{/each}}
     </ul>
     <button class="add-weapon" data-action="button-weapon-add">
-      Add weapon
+      {{localize "LABELS.ADD_WEAPON"}}
     </button>
   </div>
 </div>
 <div class="willpower-legend">
   <div class="scion-label-title">
-    <h2>Willpower & Legend</h2>
+    <h2>{{localize "STATS.WILLPOWER_LEGEND"}}</h2>
   </div>
   <div class="willpower-legend-wrapper">
     <div class="willpower">
       <div class="scion-label-subtitle" data-type="willpower" data-action="roll-willpower">
-        <h2>Willpower</h2>
+        <h2>{{localize "STATS.WILLPOWER"}}</h2>
       </div>
       <div class="points">
         <div class="circles">
@@ -183,7 +183,7 @@
     </div>
     <div class="legend">
       <div class="scion-label-subtitle" data-type="legend" data-action="roll-legend">
-        <h2>Legend</h2>
+        <h2>{{localize "STATS.LEGEND"}}</h2>
       </div>
       <div class="points">
         <div class="circles">
@@ -197,7 +197,7 @@
           {{/each}}
         </div>
         <div class="point-to-spend">
-          <span>Points:</span><span>{{multiply system.legend.value 4}}</span>
+          <span>{{localize "LABELS.POINTS"}}:</span><span>{{multiply system.legend.value 4}}</span>
           <input
             type="number"
             data-action="legend-point-change"
@@ -212,18 +212,18 @@
 </div>
 <div class="combat-armor">
   <div class="scion-label-title">
-    <h2>Combat, Soak & Armor</h2>
+    <h2>{{localize "STATS.COMBAT_SOAK_ARMOR"}}</h2>
   </div>
   <div class="join-battle">
-    <button data-action="join-battle">Join Battle</button>
+    <button data-action="join-battle">{{localize "LABELS.JOIN_BATTLE"}}</button>
   </div>
   <div class="combat-armor-grid">
     <div class="combat-armor-grid-item">
       <div class="scion-label-small-subtitle">
-        <h2>Defense Values</h2>
+        <h2>{{localize "STATS.DEFENSE_VALUES"}}</h2>
       </div>
       <div class="defense-value-dodge">
-        <span>Dodge:</span>
+        <span>{{localize "STATS.DODGE"}}:</span>
         <input
           type="text"
           data-field="dodgeDV"
@@ -233,7 +233,7 @@
         />
       </div>
       <div class="defense-value-parry">
-        <span>Parry:</span>
+        <span>{{localize "STATS.PARRY"}}:</span>
         <input
           type="text"
           data-field="parryDV"
@@ -245,7 +245,7 @@
     </div>
     <div class="combat-armor-grid-item">
       <div class="scion-label-small-subtitle">
-        <h2>Armor</h2>
+        <h2>{{localize "STATS.ARMOR"}}</h2>
       </div>
       <div class="armor-wrapper">
         <div class="armor-name">
@@ -284,7 +284,7 @@
     </div>
     <div class="combat-armor-grid-item">
       <div class="scion-label-small-subtitle">
-        <h2>Soak</h2>
+        <h2>{{localize "STATS.SOAK"}}</h2>
       </div>
       <div class="soak-wrapper">
         <div class="armor-stats">
@@ -311,7 +311,7 @@
 </div>
 <div class="health">
   <div class="scion-label-title">
-    <h2>Health</h2>
+    <h2>{{localize "LABELS.HEALTH"}}</h2>
   </div>
 
   <div class="health-line">
@@ -330,7 +330,7 @@
 </div>
 <div class="experience">
   <div class="scion-label-title">
-    <h2>Experience</h2>
+    <h2>{{localize "STATS.EXPERIENCE"}}</h2>
   </div>
   <input type="text" data-action="update-xp" value="{{system.experience.value}}">
 </div>
