@@ -1,124 +1,125 @@
-
 <div class="tab {{#if (eq tabs.primary 'knacks')}}active{{/if}}">
-<div class="knacks">
-  <div class="scion-label-title">
-    <h2>Knacks</h2>
-  </div>
-  <div class="knacks-wrapper">
-    <div class="knack-list" data-drop-target="knack-list">
-      <ul>
-        {{#each system.knacks as |knack index|}}
-        <li>
-          <input
-            type="text"
-            value="{{{knack.name}}}"
-            data-index="{{index}}"
-            data-knack-id="{{knack._id}}"
-            data-action="knack-change"
-            placeholder="Knack"
-            data-field="name"
-          />
-          <textarea
-            data-index="{{index}}"
-            data-knack-id="{{knack._id}}"
-            data-field="description"
-            placeholder="Description"
-            data-action="knack-change"
-          >{{{knack.description}}}</textarea
-          >
-          <button
-            class="delete-button"
-            data-action="delete-knack"
-            data-knack-id="{{knack._id}}"
-          >
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </li>
-        {{/each}}
-      </ul>
+  <div class="knacks">
+    <div class="scion-label-title">
+      <h2>{{localize "STATS.KNACKS"}}</h2>
     </div>
-    <button data-action="button-knack-add">Add Knack</button>
-  </div>
-</div>
-<div class="boons">
-  <div class="scion-label-title">
-    <h2>Boons</h2>
-  </div>
-  <div class="boons-wrapper">
-    <div class="boons" data-drop-target="boons-list">
-      <ul class="boon-list">
-        {{#each system.boons as |boon index|}}
-        <li>
-          <div class="boom-name-level">
-            <div class="boon-name">
-              <input
-                type="text"
-                value="{{{boon.name}}}"
-                data-index="{{index}}"
-                placeholder="Boon name"
-                data-boon-id="{{boon._id}}"
-                data-field="name"
-                data-action="boon-change"
-              />
-            </div>
-            <div class="boon-level">
-              <span>level:</span
-              ><input
-                type="text"
-                value="{{{boon.level}}}"
-                data-index="{{index}}"
-                placeholder="Boon level"
-                data-boon-id="{{boon._id}}"
-                data-field="level"
-                data-action="boon-change"
-              />
-            </div>
-          </div>
-          <div class="boon-dice-pool">
-            <span>Dice pool:</span>
+    <div class="knacks-wrapper">
+      <div class="knack-list" data-drop-target="knack-list">
+        <ul>
+          {{#each system.knacks as |knack index|}}
+          <li>
             <input
               type="text"
-              value="{{{boon.dice_pool}}}"
+              value="{{{knack.name}}}"
               data-index="{{index}}"
-              placeholder="Dice pool"
-              data-boon-id="{{boon._id}}"
-              data-field="dice_pool"
-              data-action="boon-change"
+              data-knack-id="{{knack._id}}"
+              data-action="knack-change"
+              placeholder="{{localize "LABELS.KNACK"}}"
+              data-field="name"
             />
-          </div>
-          <div class="boon-cost">
-            <span>cost:</span>
-            <input
-              type="text"
-              value="{{{boon.cost}}}"
-              placeholder="Boon cost"
-              data-boon-id="{{boon._id}}"
-              data-field="cost"
-              data-action="boon-change"
-            />
-          </div>
-          <div class="boon-description">
             <textarea
               data-index="{{index}}"
-              placeholder="Description"
-              data-boon-id="{{boon._id}}"
+              data-knack-id="{{knack._id}}"
               data-field="description"
-              data-action="boon-change"
-            >{{{boon.description}}}</textarea
+              placeholder="{{localize "LABELS.DESCRIPTION"}}"
+              data-action="knack-change"
+            >{{{knack.description}}}</textarea>
+            <button
+              class="delete-button"
+              data-action="delete-knack"
+              data-knack-id="{{knack._id}}"
             >
-          </div>
-          <button
-            class="delete-button"
-            data-action="delete-boon"
-            data-boon-id="{{boon._id}}"
-          >
-            <i class="fa-solid fa-trash"></i>
-          </button>
-        </li>
-        {{/each}}
-      </ul>
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      <button data-action="button-knack-add">
+        {{localize "LABELS.ADD_KNACK"}}
+      </button>
     </div>
-    <button data-action="button-boon-add">Add Boon</button>
   </div>
-</div>
+  <div class="boons">
+    <div class="scion-label-title">
+      <h2>{{localize "STATS.BOONS"}}</h2>
+    </div>
+    <div class="boons-wrapper">
+      <div class="boons" data-drop-target="boons-list">
+        <ul class="boon-list">
+          {{#each system.boons as |boon index|}}
+          <li>
+            <div class="boom-name-level">
+              <div class="boon-name">
+                <input
+                  type="text"
+                  value="{{{boon.name}}}"
+                  data-index="{{index}}"
+                  placeholder="{{{localize "LABELS.BOON_NAME"}}}"
+                  data-boon-id="{{boon._id}}"
+                  data-field="name"
+                  data-action="boon-change"
+                />
+              </div>
+              <div class="boon-level">
+                <span>{{localize "LABELS.LEVEL"}}:</span>
+                <input
+                  type="text"
+                  value="{{{boon.level}}}"
+                  data-index="{{index}}"
+                  placeholder="{{localize "LABELS.BOON_LEVEL"}}"
+                  data-boon-id="{{boon._id}}"
+                  data-field="level"
+                  data-action="boon-change"
+                />
+              </div>
+            </div>
+            <div class="boon-dice-pool">
+              <span>{{localize "LABELS.DICE_POOL"}}:</span>
+              <input
+                type="text"
+                value="{{{boon.dice_pool}}}"
+                data-index="{{index}}"
+                placeholder="{{localize "LABELS.DICE_POOL"}}"
+                data-boon-id="{{boon._id}}"
+                data-field="dice_pool"
+                data-action="boon-change"
+              />
+            </div>
+            <div class="boon-cost">
+              <span>{{localize "LABELS.COST"}}:</span>
+              <input
+                type="text"
+                value="{{{boon.cost}}}"
+                placeholder="{{localize "LABELS.BOON_COST"}}"
+                data-boon-id="{{boon._id}}"
+                data-field="cost"
+                data-action="boon-change"
+              />
+            </div>
+            <div class="boon-description">
+              <textarea
+                data-index="{{index}}"
+                placeholder="{{localize "LABELS.DESCRIPTION"}}"
+                data-boon-id="{{boon._id}}"
+                data-field="description"
+                data-action="boon-change"
+              >{{{boon.description}}}</textarea>
+            </div>
+            <button
+              class="delete-button"
+              data-action="delete-boon"
+              data-boon-id="{{boon._id}}"
+            >
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      <button data-action="button-boon-add">
+        {{localize "LABELS.ADD_BOON"}}
+      </button>
+    </div>
+  </div>
 </div>

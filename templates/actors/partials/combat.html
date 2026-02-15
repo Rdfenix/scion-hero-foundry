@@ -68,7 +68,7 @@
               <span>{{localize "LABELS.DEFENSE"}}:</span>
               <input
                 type="text"
-                placeholder="Defense"
+                placeholder="{{localize "LABELS.DEFENSE"}}"
                 data-action="update-weapon-field"
                 data-weapon-id="{{weapon._id}}"
                 data-field="defense"
@@ -79,7 +79,7 @@
               <span>{{localize "LABELS.RANGE"}}:</span>
               <input
                 type="text"
-                placeholder="Range"
+                placeholder="{{localize "LABELS.RANGE"}}"
                 data-action="update-weapon-field"
                 data-weapon-id="{{weapon._id}}"
                 data-field="range"
@@ -90,7 +90,7 @@
               <span>{{localize "LABELS.DAMAGE_VALUE"}}:</span>
               <input
                 type="text"
-                placeholder="Damage value"
+                placeholder="{{localize "LABELS.DAMAGE_VALUE"}}"
                 data-action="update-weapon-field"
                 data-weapon-id="{{weapon._id}}"
                 data-field="damage"
@@ -228,7 +228,7 @@
           type="text"
           data-field="dodgeDV"
           data-action="defense-value-update"
-          placeholder="Value"
+          placeholder="{{localize "LABELS.VALUE"}}"
           value="{{system.combat.dodgeDV.value}}"
         />
       </div>
@@ -238,7 +238,7 @@
           type="text"
           data-field="parryDV"
           data-action="defense-value-update"
-          placeholder="value"
+          placeholder="{{localize "LABELS.VALUE"}}"
           value="{{system.combat.parryDV.value}}"
         />
       </div>
@@ -251,7 +251,7 @@
         <div class="armor-name">
           <input
             type="text"
-            placeholder="Armor name"
+            placeholder="{{localize "LABELS.ARMOR_NAME"}}"
             data-field="name"
             data-action="armor-update"
             value="{{system.combat.armor.name.value}}"

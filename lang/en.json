@@ -10,6 +10,7 @@
   },
   "LABELS": {
     "CHOOSE_THE_TYPE": "Choose type",
+    "BIRTHRIGHT": "Birthright",
     "ADD_BIRTHRIGHT": "Add Birthright",
     "VIRTUE": "Virtue",
     "ADD_KNACK": "Add Knack",
@@ -27,6 +28,7 @@
     "LEVEL": "Level",
     "TYPE": "Type",
     "SKILL": "Skill",
+    "COST": "Cost",
     "WEAPON_NAME": "Weapon Name",
     "WEAPON_ATACK": "Weapon Attack",
     "DAMAGE_VALUE": "Weapon Damage",
@@ -65,7 +67,10 @@
     "TOTAL_RESULT": "Total Result",
     "ATTRIBUTE": "Attribute",
     "SKILLS": "Skills",
-    "HEALTH": "Health"
+    "HEALTH": "Health",
+    "SELECT_TYPE_OF_BIRTHRIGHT": "Select Type of Birthright",
+    "KNACK": "Knack",
+    "ARMOR_NAME": "Armor Name"
   },
   "STATS": {
     "ATTRIBUTES": "Attributes",

@@ -1,7 +1,7 @@
 <div class="tab {{#if (eq tabs.primary 'stats')}}active{{/if}}">
 <div class="attributes">
   <div class="scion-label-title">
-    <h2>Attributes</h2>
+    <h2>{{localize "STATS.ATTRIBUTES"}}</h2>
   </div>
   <div class="attributes-types-grid">
     {{#each system.attributes as |attr key|}}
@@ -52,7 +52,7 @@
 </div>
 <div class="skills">
   <div class="scion-label-title">
-    <h2>Abilities</h2>
+    <h2>{{localize "STATS.ABILITIES"}}</h2>
   </div>
   <div class="skills-types-grid">
     {{#splitInColumns system.abilities 3 'skills-grid-item'}}

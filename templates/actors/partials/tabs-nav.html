@@ -2,14 +2,14 @@
 <nav class="sheet-tabs tabs" data-group="primary">
     {{!-- data-action="setTab" é o segredo aqui --}}
     <a class="item {{#if (eq tabs.primary 'stats')}}active{{/if}}" 
-    data-action="setTab" data-group="primary" data-tab="stats">Attributes & Abilities</a>
+    data-action="setTab" data-group="primary" data-tab="stats">{{localize "LABELS.ATTRIBUTES_ABILITIES"}}</a>
     
     <a class="item {{#if (eq tabs.primary 'birth')}}active{{/if}}" 
-    data-action="setTab" data-group="primary" data-tab="birth">Birthrights & Virtues</a>
+    data-action="setTab" data-group="primary" data-tab="birth">{{localize "LABELS.BIRTHRIGHTS_VIRTUES"}}</a>
     
     <a class="item {{#if (eq tabs.primary 'knacks')}}active{{/if}}" 
-    data-action="setTab" data-group="primary" data-tab="knacks">Knacks & Boons</a>
+    data-action="setTab" data-group="primary" data-tab="knacks">{{localize "LABELS.KNACKS_BOONS"}}</a>
     
     <a class="item {{#if (eq tabs.primary 'combat')}}active{{/if}}" 
-    data-action="setTab" data-group="primary" data-tab="combat">Combat</a>
+    data-action="setTab" data-group="primary" data-tab="combat">{{localize "LABELS.COMBAT"}}</a>
 </nav>

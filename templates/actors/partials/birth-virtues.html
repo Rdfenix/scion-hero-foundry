@@ -1,170 +1,175 @@
-
 <div class="tab {{#if (eq tabs.primary 'birth')}}active{{/if}}">
-<div class="birth">
-  <div class="scion-label-title">
-    <h2>Birthrights</h2>
-  </div>
-  <section class="birth-wrapper">
-    <div class="births">
-      <ul>
-        {{#each system.birthrights as |birthright index|}}
-        <li>
-          <div class="birthright-input-area" data-index="{{index}}">
-            <button
-              class="delete-button"
-              data-action="delete-birthright"
-              data-birth-id="{{birthright._id}}"
-            >
-              <i class="fa-solid fa-trash"></i>
-            </button>
-            <div class="row">
-              <div class="birthright-name">
-                <input
-                  type="text"
-                  placeholder="Birthright Name"
-                  value="{{birthright.name}}"
-                  data-action="update-birthright-name"
-                  data-field="name"
-                  data-index="{{index}}"
-                />
-              </div>
-              <div class="types">
-                <span>Type:</span>
-                <span class="birth-type">{{birthright.type}}</span>
-              </div>
-              <div class="birthright-level">
-                <span>Level:</span>
-                <div class="circles">
-                  {{#each (range birthright.level.min birthright.level.max) as
-                  |i|}}
+  <div class="birth">
+    <div class="scion-label-title">
+      <h2>{{localize "STATS.BIRTHRIGHTS"}}</h2>
+    </div>
+    <section class="birth-wrapper">
+      <div class="births">
+        <ul>
+          {{#each system.birthrights as |birthright index|}}
+          <li>
+            <div class="birthright-input-area" data-index="{{index}}">
+              <button
+                class="delete-button"
+                data-action="delete-birthright"
+                data-birth-id="{{birthright._id}}"
+              >
+                <i class="fa-solid fa-trash"></i>
+              </button>
+              <div class="row">
+                <div class="birthright-name">
                   <input
-                    type="checkbox"
-                    class="circle-checkbox"
-                    data-target="birthrights.{{index}}.level.value"
-                    value="{{i}}"
+                    type="text"
+                    placeholder="{{localize "LABELS.BIRTHRIGHT"}}"
+                    value="{{birthright.name}}"
+                    data-action="update-birthright-name"
+                    data-field="name"
+                    data-index="{{index}}"
                   />
-                  {{/each}}
+                </div>
+                <div class="types">
+                  <span>{{localize "LABELS.TYPE"}}</span>
+                  <span class="birth-type">{{birthright.type}}</span>
+                </div>
+                <div class="birthright-level">
+                  <span>{{localize "LABELS.LEVEL"}}</span>
+                  <div class="circles">
+                    {{#each (range birthright.level.min birthright.level.max) as
+                    |i|}}
+                    <input
+                      type="checkbox"
+                      class="circle-checkbox"
+                      data-target="birthrights.{{index}}.level.value"
+                      value="{{i}}"
+                    />
+                    {{/each}}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="birthright-description">
-                <span>Description:</span>
-                <textarea
-                  data-action="update-birthright-description"
-                  data-field="description"
-                  data-index="{{index}}"
-                >{{{birthright.description}}}</textarea
-                >
-                {{#if (hasOwnProperty birthright "boons")}}
-                <div
-                  class="boons-area"
-                  data-drop-target="birth-boons-list"
-                  data-index="{{index}}"
-                >
-                  <span>Boons:</span>
-                  <ul>
-                    {{#each birthright.boons as |boon bonnIndex|}}
-                    <li>
-                      <input
-                        type="text"
-                        value="{{boon.name}}"
-                        data-field="name"
-                        data-birth-index="{{index}}"
-                        data-boon-index="{{bonnIndex}}"
-                        data-action="update-birthright-boon"
-                        placeholder="Boon name"
-                      />
-                      <span>Level:</span>
-                      <input
-                        type="text"
-                        value="{{boon.level}}"
-                        data-field="level"
-                        data-birth-index="{{index}}"
-                        data-boon-index="{{bonnIndex}}"
-                        data-action="update-birthright-boon"
-                        placeholder="Level"
-                      />
-                      <button
-                        class="delete-button"
-                        data-action="delete-birth-boon"
-                        data-birth-id="{{birthright._id}}"
-                        data-boon-id="{{boon._id}}"
-                      >
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
-                    </li>
-                    {{/each}}
-                  </ul>
-                  <button
-                    data-action="button-birthright-boon"
+              <div class="row">
+                <div class="birthright-description">
+                  <span>{{localize "LABELS.DESCRIPTION"}}:</span>
+                  <textarea
+                    data-action="update-birthright-description"
+                    data-field="description"
+                    data-index="{{index}}"
+                  >{{{birthright.description}}}</textarea>
+                  {{#if (hasOwnProperty birthright "boons")}}
+                  <div
+                    class="boons-area"
+                    data-drop-target="birth-boons-list"
                     data-index="{{index}}"
                   >
-                    Add Boon
-                  </button>
+                    <span>{{localize "STATS.BOONS"}}:</span>
+                    <ul>
+                      {{#each birthright.boons as |boon bonnIndex|}}
+                      <li>
+                        <input
+                          type="text"
+                          value="{{boon.name}}"
+                          data-field="name"
+                          data-birth-index="{{index}}"
+                          data-boon-index="{{bonnIndex}}"
+                          data-action="update-birthright-boon"
+                          placeholder="{{localize "LABELS.BOON_NAME"}}"
+                        />
+                        <span>{{localize "LABELS.LEVEL"}}:</span>
+                        <input
+                          type="text"
+                          value="{{boon.level}}"
+                          data-field="level"
+                          data-birth-index="{{index}}"
+                          data-boon-index="{{bonnIndex}}"
+                          data-action="update-birthright-boon"
+                          placeholder="{{localize "LABELS.LEVEL"}}"
+                        />
+                        <button
+                          class="delete-button"
+                          data-action="delete-birth-boon"
+                          data-birth-id="{{birthright._id}}"
+                          data-boon-id="{{boon._id}}"
+                        >
+                          <i class="fa-solid fa-trash"></i>
+                        </button>
+                      </li>
+                      {{/each}}
+                    </ul>
+                    <button
+                      data-action="button-birthright-boon"
+                      data-index="{{index}}"
+                    >
+                      {{localize "LABELS.ADD_BOON"}}
+                    </button>
+                  </div>
+                  {{/if}}
                 </div>
-                {{/if}}
               </div>
             </div>
-          </div>
-        </li>
-        {{/each}}
-      </ul>
-    </div>
-    <div class="button">
-      <div class="birthright-types">
-        <label for="birthright-type">Choose the type</label>
-        <select
-          name=""
-          id="birthright-type"
-          data-action="select-birthright-type"
-          onmousedown="event.stopPropagation();"
-          onclick="event.stopPropagation();"
-          onchange="event.stopPropagation(); event.stopImmediatePropagation();"
-          onkeydown="event.stopPropagation();"
-        >
-          <option value="" disabled selected>Select Type of Birthright</option>
-          {{#each system.birthrightTypes as |birthrightType|}}
-          <option value="{{birthrightType.type}}">
-            {{birthrightType.type}}
-          </option>
+          </li>
           {{/each}}
-        </select>
+        </ul>
       </div>
-      <button data-action="button-birthright-type">Add Birthright</button>
-    </div>
-  </section>
-</div>
-<div class="virtues">
-  <div class="scion-label-title">
-    <h2>Virtues</h2>
+      <div class="button">
+        <div class="birthright-types">
+          <label for="birthright-type"
+            >{{localize "LABELS.CHOOSE_THE_TYPE"}}</label
+          >
+          <select
+            name=""
+            id="birthright-type"
+            data-action="select-birthright-type"
+            onmousedown="event.stopPropagation()"
+            onclick="event.stopPropagation()"
+            onchange="
+              event.stopPropagation();
+              event.stopImmediatePropagation();
+            "
+            onkeydown="event.stopPropagation()"
+          >
+            <option value="" disabled selected>
+              {{localize "LABELS.SELECT_TYPE_OF_BIRTHRIGHT"}}
+            </option>
+            {{#each system.birthrightTypes as |birthrightType|}}
+            <option value="{{birthrightType.type}}">
+              {{birthrightType.type}}
+            </option>
+            {{/each}}
+          </select>
+        </div>
+        <button data-action="button-birthright-type">{{localize "LABELS.ADD_BIRTHRIGHT"}}</button>
+      </div>
+    </section>
   </div>
-  <section class="virtues-wrapper">
-    {{#each system.virtues as |attr key|}}
-    <div class="virtues-row" data-key="{{key}}">
-      <div class="virtues-column">
-        <input
-          type="text"
-          data-action="update-virtue-field"
-          data-field="{{key}}"
-          value="{{attr.name}}"
-          placeholder="Virtue"
-        />
-      </div>
-      <div class="virtues-column">
-        <div class="circles">
-          {{#each (range attr.min attr.max) as |i|}}
+  <div class="virtues">
+    <div class="scion-label-title">
+      <h2>{{localize "STATS.VIRTUES"}}</h2>
+    </div>
+    <section class="virtues-wrapper">
+      {{#each system.virtues as |attr key|}}
+      <div class="virtues-row" data-key="{{key}}">
+        <div class="virtues-column">
           <input
-            type="checkbox"
-            class="circle-checkbox"
-            data-target="virtues.{{key}}.value"
-            value="{{i}}"
+            type="text"
+            data-action="update-virtue-field"
+            data-field="{{key}}"
+            value="{{attr.name}}"
+            placeholder="{{localize "LABELS.VIRTUE"}}"
           />
-          {{/each}}
+        </div>
+        <div class="virtues-column">
+          <div class="circles">
+            {{#each (range attr.min attr.max) as |i|}}
+            <input
+              type="checkbox"
+              class="circle-checkbox"
+              data-target="virtues.{{key}}.value"
+              value="{{i}}"
+            />
+            {{/each}}
+          </div>
         </div>
       </div>
-    </div>
-    {{/each}}
-  </section>
-</div>
+      {{/each}}
+    </section>
+  </div>
 </div>
