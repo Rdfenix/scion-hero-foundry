@@ -1,15 +1,15 @@
 <form autocomplete="off" class="combat-wheel-dialog-form">
-    <div class="combat-wheel-dialog-header">
-        <h2>Tick direction: {{options.action}}</h2>
+  <div class="combat-wheel-dialog-header">
+    <h2>{{localize "LABELS.TICK_DIRECTION"}}: {{options.action}}</h2>
+  </div>
+  <section class="combat-wheel-dialog-section">
+    <div class="combat-wheel-dialog-column">
+      <label for="action-select">{{localize "LABELS.STEP"}}:</label>
+      <select id="action-select" name="tick-value">
+        {{#each options.ticks as |tick|}}
+          <option value="{{tick}}">{{tick}}</option>
+        {{/each}}
+      </select>
     </div>
-    <section class="combat-wheel-dialog-section">
-        <div class="combat-wheel-dialog-column">
-            <label for="action-select">Step:</label>
-            <select id="action-select" name="tick-value">
-                {{#each options.ticks as |tick|}}
-                    <option value="{{tick}}">{{tick}}</option>
-                {{/each}}
-            </select>
-        </div>
-    </section>
+  </section>
 </form>
