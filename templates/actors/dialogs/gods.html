@@ -1,7 +1,7 @@
 <form autocomplete="off" class="pantheon-form">
   <div class="pantheon-group form-group">
     <header class="pantheon-group-header">
-      <h1>Choose the Gods</h1>
+      <h1>{{localize "LABELS.CHOOSE_GODS"}}</h1>
     </header>
     <section class="pantheon-group-content">
       <ul class="pantheon-list">
@@ -18,7 +18,7 @@
           <label for="{{god.name}}">
             <div class="pantheon-name">{{god.name}}</div>
             <div class="skills-label">
-              <span>Favored Skills</span>
+              <span>{{localize "LABELS.FAVORED_SKILLS"}}</span>
             </div>
             <div class="god-skills">
               {{#splitInColumns god.favoredSkills 3 'god-skill-item'}}

@@ -1,25 +1,27 @@
 <form autocomplete="off" class="weapon-dialog-form">
   <div class="weapon-dialog-group">
     <header class="weapon-dialog-group-header">
-      <h1>Weapon Attack</h1>
+      <h1>{{localize "LABELS.WEAPON_ATACK"}}</h1>
       <h2>{{data.weapon.name}}</h2>
     </header>
     <section class="weapon-dialog-content">
       <div class="actions">
         <div class="multiple-atk">
           <select name="multiple-attack">
-            <option value="" disabled selected>Select Multiple Attack</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
+            <option value="" disabled selected>
+              {{localize "LABELS.SELECT_MULTIPLE_ATTACK"}}
+            </option>
+            <option value="true">{{localize "LABELS.YES"}}</option>
+            <option value="false">{{localize "LABELS.NO"}}</option>
           </select>
         </div>
       </div>
       <div class="extra-info">
-        <label for="extra-dices">Extra Dices:</label>
+        <label for="extra-dices">{{localize "LABELS.EXTRA_DICES"}}:</label>
         <input type="text" name="extra-dices" value="0" />
       </div>
       <div class="difficulty">
-        <label for="difficulty">Difficulty</label>
+        <label for="difficulty">{{localize "LABELS.DIFFICULTY"}}</label>
         <input type="number" name="difficulty" value="7" />
       </div>
     </section>

@@ -1,7 +1,7 @@
 <form autocomplete="off" class="pantheon-form">
   <div class="pantheon-group form-group">
     <header class="pantheon-group-header">
-      <h1>Choose the Pantheon</h1>
+      <h1>{{localize "LABELS.CHOOSE_PANTHEON"}}</h1>
     </header>
     <section class="pantheon-group-content">
       <ul class="pantheon-list">
@@ -25,7 +25,7 @@
               />
             </div>
             <div class="virtues-label">
-              <span>Virtues</span>
+              <span>{{localize "LABELS.VIRTUES"}}</span>
             </div>
             <div class="pantheon-virtues">
               {{#splitInColumns pantheon.virtues 2 'pantheon-virtue-item'}}
@@ -33,7 +33,7 @@
               {{/splitInColumns}}
             </div>
             <div class="description-label">
-              <span>Description</span>
+              <span>{{localize "LABELS.DESCRIPTION"}}</span>
             </div>
             <div class="pantheon-description">
               {{#if pantheon.description}}

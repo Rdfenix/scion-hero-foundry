@@ -70,7 +70,8 @@
     "HEALTH": "Health",
     "SELECT_TYPE_OF_BIRTHRIGHT": "Select Type of Birthright",
     "KNACK": "Knack",
-    "ARMOR_NAME": "Armor Name"
+    "ARMOR_NAME": "Armor Name",
+    "SELECT_MULTIPLE_ATTACK": "Select Multiple Attack"
   },
   "STATS": {
     "ATTRIBUTES": "Attributes",
