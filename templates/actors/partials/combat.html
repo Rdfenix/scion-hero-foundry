@@ -33,7 +33,7 @@
                 <option value="">{{localize "LABELS.ATTRIBUTE"}}</option>
                 {{#each ../system.attrKeys as |attrKey|}}
                 <option value="{{attrKey}}" {{ifEquals weapon.attr attrKey}}>
-                  {{attrKey}}
+                  {{customLocalize attrKey 'ATTRIBUTES'}}
                 </option>
                 {{/each}}
               </select>
@@ -49,7 +49,7 @@
                 <option value="">{{localize "LABELS.SKILLS"}}</option>
                 {{#each ../system.skillsKeys as |skill|}}
                 <option value="{{skill}}" {{ifEquals weapon.skill skill}}>
-                  {{skill}}
+                  {{customLocalize skill 'ABILITIES'}}
                 </option>
                 {{/each}}
               </select>
@@ -111,7 +111,7 @@
                 <option value="">{{localize "LABELS.DAMAGE_ATTRIBUTE"}}</option>
                 {{#each ../system.attrKeys as |attr|}}
                 <option value="{{attr}}" {{ifEquals weapon.damageAttr attr}}>
-                  {{attr}}
+                  {{customLocalize attr 'ATTRIBUTES'}}
                 </option>
                 {{/each}}
               </select>
@@ -126,7 +126,7 @@
                 <option value="">{{localize "LABELS.DAMAGE_TYPE"}}</option>
                 {{#each ../system.damageType as |type|}}
                 <option value="{{type}}" {{ifEquals weapon.type type}}>
-                  {{type}}
+                  {{ customLocalize type 'DAMAGE_TYPES'}}
                 </option>
                 {{/each}}
               </select>

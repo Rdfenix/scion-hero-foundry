@@ -1,37 +1,40 @@
 <div class="dice-result">
-  <h3>Dice Roll Result</h3>
+  <h3>{{localize "LABELS.DICE_ROLL_RESULT"}}</h3>
   <span>{{{data.title}}}</span>
   <div class="dice-result-wrapper">
     {{#if data.explodedDices.length}}
     <div class="exploded-dices">
-      <span>Exploded Dices:</span>
+      <span>{{localize "LABELS.EXPLODED_DICE"}}:</span>
       <span>{{data.explodedDices}}</span>
     </div>
     {{/if}} {{#if (and (eq data.epicAttribute 0) data.criticalFail)}}
     <div class="critical-fail">
-      <span>Critical Fail:</span>
+      <span>{{localize "LABELS.CRITICAL_FAIL"}}:</span>
       <span>{{data.criticalFailCount}}</span>
     </div>
     {{else if data.fail}}
     <div class="fail">
-      <span>Fail:</span>
+      <span>{{localize "LABELS.FAIL"}}:</span>
       <span>{{data.totalSuccess}}</span>
     </div>
     {{else}}
     <div class="success">
-      <span>Normal Success:</span>
+      <span>{{localize "LABELS.NORMAL_SUCCESSES"}}:</span>
       <span>{{data.totalSuccess}}</span>
     </div>
     {{/if}} {{#if (and (higherThan data.epicAttribute 0)
     data.epicAttributeLabel)}}
     <div class="epic-attribute">
-      <span>Epic Attribute - {{data.epicAttributeLabel}}:</span>
+      <span
+        >{{localize "LABELS.EPIC_ATTRIBUTE"}} -
+        {{customLocalize data.epicAttributeLabel 'ATTRIBUTES'}}:</span
+      >
       <span>{{data.epicAttribute}}</span>
     </div>
     {{/if}}
   </div>
   <div class="total-result">
-    <span>Total Result:</span>
+    <span>{{localize "LABELS.TOTAL_RESULT"}}:</span>
     <span>{{sum data.totalSuccess data.totalEpicSuccess}}</span>
   </div>
 </div>

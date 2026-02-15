@@ -38,7 +38,7 @@ export const rollDice = async (diceTotal) => {
   }
 };
 
-const calcSuccess = async (dices, difficulty = 7) => {
+const calcSuccess = async (dices, difficulty = 7, isDamage = false) => {
   let totalSucess = 0;
 
   if (!dices || dices.length === 0) {
@@ -57,8 +57,9 @@ const calcSuccess = async (dices, difficulty = 7) => {
   const tens = counts.get(10) || 0;
   const ones = counts.get(1) || 0;
 
-  totalSucess += tens * 2;
-  const explodedDices = Array.from({ length: tens }, () => 10);
+  totalSucess += isDamage ? tens : tens * 2;
+
+  const explodedDices = isDamage ? [] : Array.from({ length: tens }, () => 10);
 
   // Sucessos normais (7, 8, 9)
   for (let i = difficulty; i <= 9; i++) {
@@ -85,6 +86,7 @@ const processAndSendRoll = async (
   dicePool,
   difficulty,
   templateData,
+  isDamage = false,
 ) => {
   const { dicesResult, roll } = await rollDice(dicePool);
 
@@ -92,10 +94,16 @@ const processAndSendRoll = async (
   const safeRoll = roll || (await new Roll("0d10").evaluate());
 
   const { totalSucess, criticalFailCount, fail, criticalFail, explodedDices } =
-    await calcSuccess(dicesResult, difficulty);
+    await calcSuccess(dicesResult, difficulty, isDamage);
+
+  const epicDots = getSafeNumber(templateData.epicAttribute);
+  const epicAutoSuccesses = EPIC_MAP.get(epicDots) || 0;
+
+  // Total final = Sucessos dos dados + Sucessos Automáticos do Épico
+  const finalTotal = Math.max(0, totalSucess + epicAutoSuccesses);
 
   await sendRollToChat(actor, safeRoll, {
-    totalSucess,
+    totalSucess: finalTotal,
     criticalFailCount,
     fail,
     criticalFail,
@@ -104,7 +112,7 @@ const processAndSendRoll = async (
   });
 
   return {
-    totalSucess: Math.max(0, totalSucess + (templateData.epicAttribute || 0)),
+    totalSucess: finalTotal,
   };
 };
 
@@ -128,11 +136,12 @@ export const callRollJoinBattle = async (actor) => {
     );
 
     const totalDices = Math.max(0, wits + awareness);
+    const witsLocalized = game.i18n.localize("ATTRIBUTES.WITS");
 
     const initiativeValue = await processAndSendRoll(actor, totalDices, 7, {
       epicAttribute: epicWits,
-      title: "Join Battle",
-      epicAttributeLabel: "Wits",
+      title: game.i18n.localize("LABELS.JOIN_BATTLE"),
+      epicAttributeLabel: witsLocalized,
     });
 
     //Verifica se existe um combate ativo. Se não, cria um.
@@ -179,7 +188,7 @@ export const callRollLegendDice = async (actor, event, difficulty) => {
     );
     await processAndSendRoll(actor, legend, difficulty, {
       epicAttribute: 0,
-      title: "Legend Roll",
+      title: game.i18n.localize("LABELS.LEGEND_ROLL"),
       epicAttributeLabel: null,
     });
   } catch (error) {
@@ -194,7 +203,7 @@ export const callRollWillpowerDice = async (actor, event, difficulty) => {
     );
     await processAndSendRoll(actor, willpower, difficulty, {
       epicAttribute: 0,
-      title: "Willpower Roll",
+      title: game.i18n.localize("LABELS.WILLPOWER_ROLL"),
       epicAttributeLabel: null,
     });
   } catch (error) {
@@ -246,7 +255,13 @@ export const callRollSkillDice = async (
       foundry.utils.getProperty(actor.system, "health.value"),
     );
 
-    const title = `${attr} + ${skillName}`;
+    const localizedAttr = game.i18n.localize(
+      `ATTRIBUTES.${attr.replaceAll(/([a-z])([A-Z])/g, "$1_$2").toUpperCase()}`,
+    );
+    const localizedSkill = game.i18n.localize(
+      `ABILITIES.${skillName.replaceAll(/([a-z])([A-Z])/g, "$1_$2").toUpperCase()}`,
+    );
+    const title = `${localizedAttr} + ${localizedSkill}`;
     const totalDice = Math.max(aValue + sValue + penality, 0);
 
     await processAndSendRoll(actor, totalDice, difficulty, {
@@ -317,13 +332,19 @@ export const callDamageAtkRoll = async (
     const extra = getSafeNumber(extraDices);
     const eValue = getSafeNumber(epicAttrValue);
 
-    const totalDamage = Math.max(damage + aValue + extra, 0);
+    const totalDamageDice = Math.max(damage + aValue + extra, 0);
 
-    await processAndSendRoll(actor, totalDamage, 7, {
-      epicAttribute: eValue,
-      title: `Damage - ${weapon.name} <br /> Type: ${weapon.type}`,
-      epicAttributeLabel: weapon.damageAttr || "",
-    });
+    await processAndSendRoll(
+      actor,
+      totalDamageDice,
+      7,
+      {
+        epicAttribute: eValue,
+        title: `${game.i18n.localize("LABELS.DAMAGE")} - ${weapon.name} <br /> ${game.i18n.localize("LABELS.TYPE")}: ${weapon.type}`,
+        epicAttributeLabel: weapon.damageAttr || "",
+      },
+      true,
+    );
   } catch (error) {
     console.error(error);
   }

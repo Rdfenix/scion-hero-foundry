@@ -71,7 +71,9 @@
     "SELECT_TYPE_OF_BIRTHRIGHT": "Select Type of Birthright",
     "KNACK": "Knack",
     "ARMOR_NAME": "Armor Name",
-    "SELECT_MULTIPLE_ATTACK": "Select Multiple Attack"
+    "SELECT_MULTIPLE_ATTACK": "Select Multiple Attack",
+    "WILLPOWER_ROLL": "Willpower Roll",
+    "LEGEND_ROLL": "Legend Roll"
   },
   "STATS": {
     "ATTRIBUTES": "Attributes",
@@ -96,6 +98,11 @@
     "PHYSICAL": "Physical",
     "SOCIAL": "Social",
     "MENTAL": "Mental"
+  },
+  "DAMAGE_TYPES": {
+    "BASHING": "Bashing",
+    "LETHAL": "Lethal",
+    "AGGRAVATED": "Aggravated"
   },
   "ATTRIBUTES": {
     "STRENGTH": "Strength",

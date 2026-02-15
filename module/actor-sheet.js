@@ -144,7 +144,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
       skillsKeys.add(skillKey);
     }
 
-    const damageType = ["Bashing", "Letal", "Aggraveted"];
+    const damageType = ["Bashing", "Lethal", "Aggravated"];
 
     context.system.attrKeys = Array.from(attrKeys);
     context.system.skillsKeys = Array.from(skillsKeys);

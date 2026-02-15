@@ -6,7 +6,7 @@
   <div class="attributes-types-grid">
     {{#each system.attributes as |attr key|}}
     <div class="attribute-grid-item" data-key="{{key}}">
-      <h3>{{key}}</h3>
+      <h3>{{customLocalize key 'ATTRIBUTE_TYPES'}}</h3>
       {{#each attr as |attribute label|}}
       <div class="attribute-row" data-label="{{label}}">
         <div
@@ -16,7 +16,7 @@
           data-key="{{key}}"
           data-label="{{label}}"
         >
-          <span>{{label}}</span>
+          <span>{{customLocalize label 'ATTRIBUTES'}}</span>
         </div>
         <div class="attribute-column">
           <div class="circles">
@@ -62,7 +62,7 @@
           <input type="checkbox" class="square-checkbox" {{#if
           data.favored}}checked{{/if}} />
           <div data-action="roll-ability" data-key="{{key}}">
-            <span>{{key}}</span>
+            <span>{{customLocalize key 'ABILITIES'}}</span>
           </div>
         </div>
       </div>

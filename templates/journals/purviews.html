@@ -1,5 +1,5 @@
 <section class="purviews-section purview-journal-entry-content">
-  <h2>Description</h2>
+  <h2>{{localize "LABELS.DESCRIPTION"}}</h2>
   <div class="purviews-wrapper">
     <div class="purviews-description">
       <span>{{{purview.description}}}</span>
@@ -21,19 +21,23 @@
                 <div class="boon-title">
                   <span>{{{boon.name}}}</span>
                   <div class="level">
-                    <span>Level:</span>
+                    <span>{{localize "LABELS.LEVEL"}}:</span>
                     <span>{{boon.level}}</span>
                   </div>
                 </div>
                 <div class="boon-header-column">
                   <div class="boon-header-row">
-                    <span class="boon-header-label">Dice Pool:</span>
+                    <span class="boon-header-label"
+                      >{{localize "LABELS.DICE_POOL"}}:</span
+                    >
                     <span class="boon-header-value">{{{boon.dice_pool}}}</span>
                   </div>
                 </div>
                 <div class="boon-header-column">
                   <div class="boon-header-row">
-                    <span class="boon-header-label">Cost:</span>
+                    <span class="boon-header-label"
+                      >{{localize "LABELS.COST"}}:</span
+                    >
                     <span class="boon-header-value">{{{boon.cost}}}</span>
                   </div>
                 </div>
