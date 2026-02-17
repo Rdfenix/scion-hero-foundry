@@ -10,6 +10,13 @@ export async function _onChange(event, actor) {
   event.stopPropagation();
   event.stopImmediatePropagation();
 
+  if (!actor?.isOwner) {
+    ui.notifications.warn(
+      "Você não tem permissão para alterar este personagem.",
+    );
+    return;
+  }
+
   switch (event.currentTarget.dataset.action) {
     case "select-birthright-type":
       event.currentTarget.dataset.selectedType = event.target.value;
