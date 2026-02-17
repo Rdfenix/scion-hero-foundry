@@ -4,15 +4,14 @@ export const updateSoak = async (app) => {
       ui.notifications.warn("You do not have permission to update this actor.");
       return;
     }
-    
-    const statmina = foundry.utils.getProperty(
-      app.actor.system,
-      "attributes.physical.stamina.value"
+
+    const statmina = foundry.utils.deepClone(
+      app.actor.system.attributes.physical.stamina.value,
     );
-    const epicStamina = foundry.utils.getProperty(
-      app.actor.system,
-      "epicAttributes.physical.stamina.value"
+    const epicStamina = foundry.utils.deepClone(
+      app.actor.system.epicAttributes.physical.stamina.value,
     );
+
     const Bashing = Math.max(0, statmina + epicStamina) || 0;
     const Lethal = Math.max(0, Math.ceil(statmina / 2) + epicStamina) || 0;
     const Aggravated = epicStamina || 0;
@@ -27,7 +26,7 @@ export const updateSoak = async (app) => {
       {
         "system.combat.soak": soak,
       },
-      { render: true }
+      { render: true },
     );
   } catch (error) {
     console.error("Error updating Soak:", error);

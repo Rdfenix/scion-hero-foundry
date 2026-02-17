@@ -103,7 +103,7 @@ const processAndSendRoll = async (
   const finalTotal = Math.max(0, totalSucess + epicAutoSuccesses);
 
   await sendRollToChat(actor, safeRoll, {
-    totalSucess: finalTotal,
+    totalSucess,
     criticalFailCount,
     fail,
     criticalFail,
@@ -123,16 +123,13 @@ const processAndSendRoll = async (
 export const callRollJoinBattle = async (actor) => {
   try {
     const wits = getSafeNumber(
-      foundry.utils.getProperty(actor.system, "attributes.mental.wits.value"),
+      foundry.utils.deepClone(actor.system.attributes.mental.wits.value),
     );
     const awareness = getSafeNumber(
-      foundry.utils.getProperty(actor.system, "abilities.awareness.value"),
+      foundry.utils.deepClone(actor.system.abilities.awareness.value),
     );
     const epicWits = getSafeNumber(
-      foundry.utils.getProperty(
-        actor.system,
-        "epicAttributes.mental.wits.value",
-      ),
+      foundry.utils.deepClone(actor.system.epicAttributes.mental.wits.value),
     );
 
     const totalDices = Math.max(0, wits + awareness);
@@ -184,7 +181,7 @@ export const callRollJoinBattle = async (actor) => {
 export const callRollLegendDice = async (actor, event, difficulty) => {
   try {
     const legend = getSafeNumber(
-      foundry.utils.getProperty(actor.system, `legend.value`),
+      foundry.utils.deepClone(actor.system.legend.value),
     );
     await processAndSendRoll(actor, legend, difficulty, {
       epicAttribute: 0,
@@ -199,7 +196,7 @@ export const callRollLegendDice = async (actor, event, difficulty) => {
 export const callRollWillpowerDice = async (actor, event, difficulty) => {
   try {
     const willpower = getSafeNumber(
-      foundry.utils.getProperty(actor.system, `willpower.value`),
+      foundry.utils.deepClone(actor.system.willpower.value),
     );
     await processAndSendRoll(actor, willpower, difficulty, {
       epicAttribute: 0,
@@ -216,19 +213,13 @@ export const callRollAttrDice = async (actor, event, difficulty) => {
     const key = event.key;
     const attr = event.label;
     const penality = getSafeNumber(
-      foundry.utils.getProperty(actor.system, "health.value"),
+      foundry.utils.deepClone(actor.system.health.value),
     );
     const value = getSafeNumber(
-      foundry.utils.getProperty(
-        actor.system,
-        `attributes.${key}.${attr}.value`,
-      ),
+      foundry.utils.deepClone(actor.system.attributes[key][attr].value),
     );
     const epicValue = getSafeNumber(
-      foundry.utils.getProperty(
-        actor.system,
-        `epicAttributes.${key}.${attr}.value`,
-      ),
+      foundry.utils.deepClone(actor.system.epicAttributes[key][attr].value),
     );
 
     const totalDice = Math.max(value + penality, 0);
@@ -252,7 +243,7 @@ export const callRollSkillDice = async (
     const aValue = getSafeNumber(attrValue);
     const eValue = getSafeNumber(epicAttrValue);
     const penality = getSafeNumber(
-      foundry.utils.getProperty(actor.system, "health.value"),
+      foundry.utils.deepClone(actor.system.health.value),
     );
 
     const localizedAttr = game.i18n.localize(
@@ -295,7 +286,7 @@ export const callRollWeaponDice = async (
     const eValue = getSafeNumber(epicAttrValue);
     const extra = getSafeNumber(extraDices);
     const penality = getSafeNumber(
-      foundry.utils.getProperty(actor.system, "health.value"),
+      foundry.utils.deepClone(actor.system.health.value),
     );
 
     let totalDice = aValue + sValue + acc + penality + extra;

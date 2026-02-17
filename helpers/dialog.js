@@ -1,4 +1,4 @@
-import { getDeities } from '../api/deitiesApi.js';
+import { getDeities } from "../api/deitiesApi.js";
 import {
   callRollSkillDice,
   callRollWeaponDice,
@@ -6,17 +6,22 @@ import {
   callRollAttrDice,
   callRollWillpowerDice,
   callRollLegendDice,
-} from './rollDice.js';
+} from "./rollDice.js";
 
-import { mountDeities } from './mountDeities.js';
-import { mountFavoritiesSkills, mountGodsList, getRoot } from '../utils/utils.js';
+import { mountDeities } from "./mountDeities.js";
+import {
+  mountFavoritiesSkills,
+  mountGodsList,
+  getRoot,
+} from "../utils/utils.js";
 
-const parseDifficulty = dialogEl => {
-  const value = dialogEl.querySelector('input[name="difficulty"]')?.value ?? '7';
+const parseDifficulty = (dialogEl) => {
+  const value =
+    dialogEl.querySelector('input[name="difficulty"]')?.value ?? "7";
   const difficulty = Number.parseInt(value, 10);
 
   if (Number.isNaN(difficulty) || difficulty < 1 || difficulty > 10) {
-    throw new Error('Invalid difficulty value.');
+    throw new Error("Invalid difficulty value.");
   }
 
   return difficulty;
@@ -29,8 +34,8 @@ const DIFFICULTY_HANDLERS = {
 };
 
 const mountResponseAttrValues = async (actor, key) => {
-  const attr = foundry.utils.getProperty(actor.system, 'attributes');
-  const epicAttr = foundry.utils.getProperty(actor.system, 'epicAttributes');
+  const attr = foundry.utils.deepClone(actor.system.attributes);
+  const epicAttr = foundry.utils.deepClone(actor.system.epicAttributes);
 
   let attrValue = 0;
   let epicAttrValue = 0;
@@ -52,30 +57,30 @@ const mountResponseAttrValues = async (actor, key) => {
   return { attrValue, epicAttrValue };
 };
 
-export const selectPantheon = async actor => {
+export const selectPantheon = async (actor) => {
   try {
     const { deities, pantheons } = await mountDeities();
 
     if (pantheons.length === 0) {
-      throw new Error('Nenhuma divindade encontrada no pacote.');
+      throw new Error("Nenhuma divindade encontrada no pacote.");
     }
 
     const content = await foundry.applications.handlebars.renderTemplate(
       `${getRoot()}/templates/actors/dialogs/pantheon.html`,
-      { pantheons }
+      { pantheons },
     );
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       new foundry.applications.api.DialogV2({
-        classes: ['pantheon-dialog'],
+        classes: ["pantheon-dialog"],
         window: {},
         content,
         buttons: [
           {
-            action: 'select',
-            label: 'Select',
+            action: "select",
+            label: "Select",
             icon: '<i class="fas fa-check"></i>',
-            class: 'pantheon-select',
+            class: "pantheon-select",
             default: true,
             callback: async (event, button, dialog) => {
               const pantheonSelected = $(dialog.element)
@@ -83,56 +88,65 @@ export const selectPantheon = async actor => {
                 .val();
 
               if (!pantheonSelected) {
-                return ui.notifications.warn('Choose a pantheon first');
+                return ui.notifications.warn("Choose a pantheon first");
               }
-              const selectedPantheon = pantheons.find(p => p.name === pantheonSelected);
+              const selectedPantheon = pantheons.find(
+                (p) => p.name === pantheonSelected,
+              );
 
               if (!selectedPantheon) {
-                return ui.notifications.warn('Pantheon not found');
+                return ui.notifications.warn("Pantheon not found");
               }
 
-              let gods = deities.find(p => p.name === selectedPantheon.name)?.system.deities || [];
+              let gods =
+                deities.find((p) => p.name === selectedPantheon.name)?.system
+                  .deities || [];
 
               gods = await mountGodsList(gods);
 
-              const updatedAbilities = await mountFavoritiesSkills(gods[0], actor);
+              const updatedAbilities = await mountFavoritiesSkills(
+                gods[0],
+                actor,
+              );
 
               await actor.update({
-                'system.pantheon': {
+                "system.pantheon": {
                   name: selectedPantheon.name,
                   logo: selectedPantheon.logo,
                 },
-                'system.virtues': null,
+                "system.virtues": null,
               });
 
               await actor.update({
-                'system.abilities': updatedAbilities,
-                'system.pantheon': {
+                "system.abilities": updatedAbilities,
+                "system.pantheon": {
                   god: gods[0].name,
                 },
               });
 
               await actor.update(
                 {
-                  'system.virtues': selectedPantheon.virtues,
+                  "system.virtues": selectedPantheon.virtues,
                 },
-                { render: true }
+                { render: true },
               );
               resolve();
             },
           },
           {
-            action: 'cancel',
+            action: "cancel",
             icon: '<i class="fas fa-times"></i>',
-            label: 'Cancel',
-            class: 'pantheon-cancel',
+            label: "Cancel",
+            class: "pantheon-cancel",
             callback: () => resolve(null),
           },
         ],
-        render: html => {
+        render: (html) => {
           console.log(html);
           setTimeout(() => {
-            const contentEl = html.closest('.window-app').find('.window-content')[0];
+            const contentEl = html
+              .closest(".window-app")
+              .find(".window-content")[0];
             if (contentEl) {
               contentEl.scrollTop = 0;
             }
@@ -148,32 +162,32 @@ export const selectPantheon = async actor => {
   }
 };
 
-export const selectGod = async actor => {
+export const selectGod = async (actor) => {
   try {
     const pantheon = actor.system.pantheon?.name;
 
     const deities = await getDeities();
 
-    let gods = deities.find(p => p.name === pantheon)?.system.deities || [];
+    let gods = deities.find((p) => p.name === pantheon)?.system.deities || [];
 
     gods = await mountGodsList(gods);
 
     const content = await foundry.applications.handlebars.renderTemplate(
       `${getRoot()}/templates/actors/dialogs/gods.html`,
-      { gods }
+      { gods },
     );
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       new foundry.applications.api.DialogV2({
-        classes: ['pantheon-dialog'],
+        classes: ["pantheon-dialog"],
         window: {},
         content,
         buttons: [
           {
-            action: 'select',
-            label: 'Select',
+            action: "select",
+            label: "Select",
             icon: '<i class="fas fa-check"></i>',
-            class: 'pantheon-select',
+            class: "pantheon-select",
             default: true,
             callback: async (event, button, dialog) => {
               const godSelected = $(dialog.element)
@@ -181,40 +195,45 @@ export const selectGod = async actor => {
                 .val();
 
               if (!godSelected) {
-                return ui.notifications.warn('Choose a god first');
+                return ui.notifications.warn("Choose a god first");
               }
-              const deityPantheon = gods.find(p => p.name === godSelected);
+              const deityPantheon = gods.find((p) => p.name === godSelected);
 
               if (!deityPantheon) {
-                return ui.notifications.warn('God not found');
+                return ui.notifications.warn("God not found");
               }
 
-              const updatedAbilities = await mountFavoritiesSkills(deityPantheon, actor);
+              const updatedAbilities = await mountFavoritiesSkills(
+                deityPantheon,
+                actor,
+              );
 
               await actor.update(
                 {
-                  'system.abilities': updatedAbilities,
-                  'system.pantheon': {
+                  "system.abilities": updatedAbilities,
+                  "system.pantheon": {
                     god: deityPantheon.name,
                   },
                 },
-                { render: true }
+                { render: true },
               );
               resolve();
             },
           },
           {
-            action: 'cancel',
+            action: "cancel",
             icon: '<i class="fas fa-times"></i>',
-            label: 'Cancel',
-            class: 'pantheon-cancel',
+            label: "Cancel",
+            class: "pantheon-cancel",
             callback: () => resolve(null),
           },
         ],
-        render: html => {
+        render: (html) => {
           console.log(html);
           setTimeout(() => {
-            const contentEl = html.closest('.window-app').find('.window-content')[0];
+            const contentEl = html
+              .closest(".window-app")
+              .find(".window-content")[0];
             if (contentEl) {
               contentEl.scrollTop = 0;
             }
@@ -233,10 +252,10 @@ export const selectGod = async actor => {
 export const callDialogRollSkillDice = async (actor, options) => {
   try {
     const key = options.dataset.key;
-    const abilities = foundry.utils.getProperty(actor.system, 'abilities');
+    const abilities = foundry.utils.deepClone(actor.system.abilities);
     const attrKeys = Object.values(
-      foundry.utils.getProperty(actor.system, 'attributes') || {}
-    ).flatMap(group => Object.keys(group));
+      foundry.utils.deepClone(actor.system.attributes) || {},
+    ).flatMap((group) => Object.keys(group));
     const skillValue = abilities[key]?.value ?? 0;
 
     const data = {
@@ -245,41 +264,45 @@ export const callDialogRollSkillDice = async (actor, options) => {
 
     const content = await foundry.applications.handlebars.renderTemplate(
       `${getRoot()}/templates/actors/dialogs/choose-attr.html`,
-      { data }
+      { data },
     );
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       new foundry.applications.api.DialogV2({
-        classes: ['roll-skill-dialog'],
+        classes: ["roll-skill-dialog"],
         window: {},
         content,
         buttons: [
           {
-            action: 'roll',
-            label: 'Roll',
+            action: "roll",
+            label: "Roll",
             icon: '<i class="fas fa-dice"></i>',
-            class: 'roll-skill',
+            class: "roll-skill",
             default: true,
             callback: async (event, button, dialog) => {
-              const attrSelected = $(dialog.element).find('select[name="attr-dice-roll"]').val();
+              const attrSelected = $(dialog.element)
+                .find('select[name="attr-dice-roll"]')
+                .val();
 
               const difficulty = Number.parseInt(
-                $(dialog.element).find('input[name="difficulty"]').val() || '7',
-                10
+                $(dialog.element).find('input[name="difficulty"]').val() || "7",
+                10,
               );
 
-              if (Number.isNaN(difficulty) || difficulty < 1 || difficulty > 10) {
-                return ui.notifications.error('Invalid difficulty value.');
+              if (
+                Number.isNaN(difficulty) ||
+                difficulty < 1 ||
+                difficulty > 10
+              ) {
+                return ui.notifications.error("Invalid difficulty value.");
               }
 
               if (!attrSelected) {
-                return ui.notifications.warn('Choose an attribute first');
+                return ui.notifications.warn("Choose an attribute first");
               }
 
-              const { attrValue, epicAttrValue } = await mountResponseAttrValues(
-                actor,
-                attrSelected
-              );
+              const { attrValue, epicAttrValue } =
+                await mountResponseAttrValues(actor, attrSelected);
 
               await callRollSkillDice(actor, {
                 skillName: key,
@@ -294,17 +317,19 @@ export const callDialogRollSkillDice = async (actor, options) => {
             },
           },
           {
-            action: 'cancel',
+            action: "cancel",
             icon: '<i class="fas fa-times"></i>',
-            label: 'Cancel',
-            class: 'roll-skill-cancel',
+            label: "Cancel",
+            class: "roll-skill-cancel",
             callback: () => resolve(null),
           },
         ],
-        render: html => {
+        render: (html) => {
           console.log(html);
           setTimeout(() => {
-            const contentEl = html.closest('.window-app').find('.window-content')[0];
+            const contentEl = html
+              .closest(".window-app")
+              .find(".window-content")[0];
             if (contentEl) {
               contentEl.scrollTop = 0;
             }
@@ -324,15 +349,15 @@ export const callDialogRollWeaponDice = async (actor, options) => {
     const weaponId = options.dataset.weaponId;
 
     if (!weaponId) {
-      return ui.notifications.error('WeaponId not found.');
+      return ui.notifications.error("WeaponId not found.");
     }
 
-    const weapons = foundry.utils.getProperty(actor.system, 'weapons');
+    const weapons = foundry.utils.deepClone(actor.system.weapons);
 
-    const weapon = weapons.find(w => w._id === weaponId);
+    const weapon = weapons.find((w) => w._id === weaponId);
 
     if (!weapon) {
-      return ui.notifications.error('Weapon not found.');
+      return ui.notifications.error("Weapon not found.");
     }
 
     const data = {
@@ -341,45 +366,50 @@ export const callDialogRollWeaponDice = async (actor, options) => {
 
     const content = await foundry.applications.handlebars.renderTemplate(
       `${getRoot()}/templates/actors/dialogs/weapon-atk.html`,
-      { data }
+      { data },
     );
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       new foundry.applications.api.DialogV2({
-        classes: ['weapon-dialog'],
+        classes: ["weapon-dialog"],
         window: {},
         content,
         buttons: [
           {
-            action: 'roll',
-            label: 'Roll',
+            action: "roll",
+            label: "Roll",
             icon: '<i class="fas fa-dice"></i>',
-            class: 'roll-weapon',
+            class: "roll-weapon",
             default: true,
             callback: async (event, button, dialog) => {
-              let multipleSelected = $(dialog.element).find('select[name="multiple-attack"]').val();
+              let multipleSelected = $(dialog.element)
+                .find('select[name="multiple-attack"]')
+                .val();
               const extraDices = Number.parseInt(
-                $(dialog.element).find('input[name="extra-dices"]').val() || '0',
-                10
+                $(dialog.element).find('input[name="extra-dices"]').val() ||
+                  "0",
+                10,
               );
               const difficulty = Number.parseInt(
-                $(dialog.element).find('input[name="difficulty"]').val() || '7',
-                10
+                $(dialog.element).find('input[name="difficulty"]').val() || "7",
+                10,
               );
 
-              if (Number.isNaN(difficulty) || difficulty < 1 || difficulty > 10) {
-                return ui.notifications.error('Invalid difficulty value.');
+              if (
+                Number.isNaN(difficulty) ||
+                difficulty < 1 ||
+                difficulty > 10
+              ) {
+                return ui.notifications.error("Invalid difficulty value.");
               }
 
               multipleSelected = JSON.parse(multipleSelected);
 
-              const abilities = foundry.utils.getProperty(actor.system, 'abilities');
+              const abilities = foundry.utils.deepClone(actor.system.abilities);
               const skillValue = abilities[weapon.skill]?.value ?? 0;
 
-              const { attrValue, epicAttrValue } = await mountResponseAttrValues(
-                actor,
-                weapon.attr
-              );
+              const { attrValue, epicAttrValue } =
+                await mountResponseAttrValues(actor, weapon.attr);
 
               await callRollWeaponDice(actor, {
                 multipleSelected,
@@ -395,17 +425,19 @@ export const callDialogRollWeaponDice = async (actor, options) => {
             },
           },
           {
-            action: 'cancel',
+            action: "cancel",
             icon: '<i class="fas fa-times"></i>',
-            label: 'Cancel',
-            class: 'roll-weapon-cancel',
+            label: "Cancel",
+            class: "roll-weapon-cancel",
             callback: () => resolve(null),
           },
         ],
-        render: html => {
+        render: (html) => {
           console.log(html);
           setTimeout(() => {
-            const contentEl = html.closest('.window-app').find('.window-content')[0];
+            const contentEl = html
+              .closest(".window-app")
+              .find(".window-content")[0];
             if (contentEl) {
               contentEl.scrollTop = 0;
             }
@@ -425,15 +457,15 @@ export const callDialogRollDamage = async (actor, options) => {
     const weaponId = options.dataset.weaponId;
 
     if (!weaponId) {
-      return ui.notifications.error('WeaponId not found.');
+      return ui.notifications.error("WeaponId not found.");
     }
 
-    const weapons = foundry.utils.getProperty(actor.system, 'weapons');
+    const weapons = foundry.utils.deepClone(actor.system.weapons);
 
-    const weapon = weapons.find(w => w._id === weaponId);
+    const weapon = weapons.find((w) => w._id === weaponId);
 
     if (!weapon) {
-      return ui.notifications.error('Weapon not found.');
+      return ui.notifications.error("Weapon not found.");
     }
 
     const data = {
@@ -442,31 +474,30 @@ export const callDialogRollDamage = async (actor, options) => {
 
     const content = await foundry.applications.handlebars.renderTemplate(
       `${getRoot()}/templates/actors/dialogs/damage-atk.html`,
-      { data }
+      { data },
     );
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       new foundry.applications.api.DialogV2({
-        classes: ['damage-dialog'],
+        classes: ["damage-dialog"],
         window: {},
         content,
         buttons: [
           {
-            action: 'roll',
-            label: 'Roll',
+            action: "roll",
+            label: "Roll",
             icon: '<i class="fas fa-dice"></i>',
-            class: 'roll-damage',
+            class: "roll-damage",
             default: true,
             callback: async (event, button, dialog) => {
               const extraDices = Number.parseInt(
-                $(dialog.element).find('input[name="extra-dices"]').val() || '0',
-                10
+                $(dialog.element).find('input[name="extra-dices"]').val() ||
+                  "0",
+                10,
               );
 
-              const { attrValue, epicAttrValue } = await mountResponseAttrValues(
-                actor,
-                weapon.damageAttr
-              );
+              const { attrValue, epicAttrValue } =
+                await mountResponseAttrValues(actor, weapon.damageAttr);
 
               await callDamageAtkRoll(actor, {
                 weapon,
@@ -479,17 +510,19 @@ export const callDialogRollDamage = async (actor, options) => {
             },
           },
           {
-            action: 'cancel',
+            action: "cancel",
             icon: '<i class="fas fa-times"></i>',
-            label: 'Cancel',
-            class: 'roll-damage-cancel',
+            label: "Cancel",
+            class: "roll-damage-cancel",
             callback: () => resolve(null),
           },
         ],
-        render: html => {
+        render: (html) => {
           console.log(html);
           setTimeout(() => {
-            const contentEl = html.closest('.window-app').find('.window-content')[0];
+            const contentEl = html
+              .closest(".window-app")
+              .find(".window-content")[0];
             if (contentEl) {
               contentEl.scrollTop = 0;
             }
@@ -506,7 +539,7 @@ export const callDialogRollDamage = async (actor, options) => {
 
 export const callDifficultyDialog = async (actor, options = {}) => {
   const { type } = options;
-  console.log('callDifficultyDialog chamado com tipo:', type);
+  console.log("callDifficultyDialog chamado com tipo:", type);
 
   const rollHandler = DIFFICULTY_HANDLERS[type];
   if (!rollHandler) {
@@ -515,19 +548,19 @@ export const callDifficultyDialog = async (actor, options = {}) => {
   }
 
   const content = await foundry.applications.handlebars.renderTemplate(
-    `${getRoot()}/templates/actors/dialogs/difficulty.html`
+    `${getRoot()}/templates/actors/dialogs/difficulty.html`,
   );
 
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     new foundry.applications.api.DialogV2({
-      classes: ['difficulty-dialog'],
+      classes: ["difficulty-dialog"],
       content,
       buttons: [
         {
-          action: 'set',
-          label: 'Set',
+          action: "set",
+          label: "Set",
           icon: '<i class="fas fa-check"></i>',
-          class: 'set-difficulty',
+          class: "set-difficulty",
           default: true,
 
           callback: async (_event, _button, dialog) => {
@@ -541,17 +574,19 @@ export const callDifficultyDialog = async (actor, options = {}) => {
           },
         },
         {
-          action: 'cancel',
-          label: 'Cancel',
+          action: "cancel",
+          label: "Cancel",
           icon: '<i class="fas fa-times"></i>',
-          class: 'set-difficulty-cancel',
+          class: "set-difficulty-cancel",
           callback: () => resolve(null),
         },
       ],
 
-      render: html => {
+      render: (html) => {
         // garante scroll no topo sem timeout mágico
-        const contentEl = html.closest('.window-app')?.querySelector('.window-content');
+        const contentEl = html
+          .closest(".window-app")
+          ?.querySelector(".window-content");
 
         if (contentEl) contentEl.scrollTop = 0;
       },

@@ -17,7 +17,7 @@ export const bindCheckboxes = (checkboxes, targetProp, app, actor, system, rende
     ev.stopImmediatePropagation();
 
     const newValue = Number.parseInt(this.value);
-    const currentValue = foundry.utils.getProperty(app.actor.system, targetProp);
+    const currentValue =  foundry.utils.getProperty(app.actor.system, targetProp);
 
     let valueToSet = newValue > currentValue ? newValue : newValue - 1;
 
