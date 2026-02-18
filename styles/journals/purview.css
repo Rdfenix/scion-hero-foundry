@@ -14,22 +14,6 @@
   display: none;
 }
 
-.purview-journal-entry-content
-  > .journal-entry-pages
-  > .journal-entry-page:has(header.journal-page-header)
-  header.journal-page-header {
-  margin: 0 0 23px 0;
-  background-image: url(../../assets/png/band-small.png);
-  background-position: center center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  min-height: 60px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .purview-journal-entry-content > h2 {
   margin: 0 0 23px 0;
   text-align: center;
