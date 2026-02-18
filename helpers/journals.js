@@ -114,18 +114,28 @@ export async function createKnacksJournal() {
   }
 }
 
-export const checkPurviewFlag = (doc) => {
+export const checkPurviewFlag = (doc, html) => {
   if (doc.flags["scion-hero-foundry"]?.customPurviewCss) {
-    const element = document.getElementsByClassName("journal-entry-content")[0];
-
-    element.classList.add("purview-journal-entry-content");
+    // Procura pelo elemento section no contexto HTML renderizado
+    const contentElement = html instanceof HTMLElement 
+      ? html.querySelector(".purviews-section") 
+      : html[0]?.querySelector(".purviews-section");
+    
+    if (contentElement && !contentElement.classList.contains("purview-journal-entry-content")) {
+      contentElement.classList.add("purview-journal-entry-content");
+    }
   }
 };
 
-export const checkKnacksFlag = (doc) => {
+export const checkKnacksFlag = (doc, html) => {
   if (doc.flags["scion-hero-foundry"]?.customKnackCss) {
-    const element = document.getElementsByClassName("journal-entry-content")[0];
-
-    element.classList.add("knack-journal-entry-content");
+    // Procura pelo elemento section no contexto HTML renderizado
+    const contentElement = html instanceof HTMLElement 
+      ? html.querySelector(".knacks-section") 
+      : html[0]?.querySelector(".knacks-section");
+    
+    if (contentElement && !contentElement.classList.contains("knack-journal-entry-content")) {
+      contentElement.classList.add("knack-journal-entry-content");
+    }
   }
 };

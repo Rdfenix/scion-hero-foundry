@@ -16,17 +16,12 @@ import {
 import { callRollJoinBattle } from "./rollDice.js";
 
 export async function _onAction(event, actor, options) {
-  event.preventDefault();
-  event.stopPropagation();
-  event.stopImmediatePropagation();
-
   if (!actor?.isOwner) {
     ui.notifications.warn(
       "Você não tem permissão para alterar este personagem.",
     );
     return;
   }
-
   switch (event) {
     case "select-pantheon":
       await selectPantheon(actor);

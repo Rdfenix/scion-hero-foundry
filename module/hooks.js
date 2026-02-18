@@ -5,8 +5,8 @@ export function registerJournalHooks() {
 
   Hooks.on('renderJournalEntryPageSheet', (sheet, html, data) => {
     const doc = sheet.document;
-    checkKnacksFlag(doc);
-    checkPurviewFlag(doc);
+    checkKnacksFlag(doc, html);
+    checkPurviewFlag(doc, html);
 
     html.querySelectorAll('li[draggable=true]').forEach(el => {
       el.addEventListener('dragstart', event => {

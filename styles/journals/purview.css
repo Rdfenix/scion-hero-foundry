@@ -1,12 +1,17 @@
-.purview-journal-entry-content > .journal-header {
-  display: none;
-}
-
-.purview-journal-entry-content > .journal-entry-pages > .journal-entry-page {
-  margin-top: 20px;
+.purview-journal-entry-content {
   background: rgba(254, 254, 254, 255);
   border-radius: 5px;
   padding: 15px 15px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.purview-journal-entry-content > .journal-header {
+  display: none;
 }
 
 .purview-journal-entry-content
@@ -25,18 +30,18 @@
   align-items: center;
 }
 
-.purview-journal-entry-content
-  > .journal-entry-pages
-  > .journal-entry-page:has(header.journal-page-header)
-  header.journal-page-header
-  h1 {
+.purview-journal-entry-content > h2 {
+  margin: 0 0 23px 0;
+  text-align: center;
   font-family: skranji-bold, sans-serif;
   font-size: 1.5rem;
-  margin: 0;
-  padding: 0;
+  background-image: url(../../assets/png/band-small.png);
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding: 1rem 0;
   border-bottom: none;
-  color: rgba(254, 254, 254, 255);
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  color: #fff;
 }
 
 .purviews-description,
@@ -59,9 +64,7 @@
 }
 
 .purviews-section > h2 {
-  font-family: skranji-bold, sans-serif;
   font-size: 1.75em;
-  color: #222;
 }
 
 .purviews-wrapper,
@@ -147,12 +150,6 @@
 
 .boon-list > li:last-child {
   border-bottom: none;
-}
-
-.boon-header-column {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .boon-header-row > span:first-child {
