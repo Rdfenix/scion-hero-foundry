@@ -61,7 +61,7 @@ async function createOrUpdateWheelMacro() {
     },
   ];
 
-  const results = [];
+  const results = new Set();
 
   for (const data of macroActions) {
     let macro = game.macros.find((m) => m.name === data.name);
@@ -71,10 +71,10 @@ async function createOrUpdateWheelMacro() {
     } else {
       macro = await Macro.create(data);
     }
-    results.push(macro);
+    results.add(macro);
   }
 
-  return results;
+  return Array.from(results);
 }
 
 async function assignMacroToHotbar(slot = 1) {
@@ -113,11 +113,11 @@ Hooks.once("init", async function () {
 
   // Helper para gerar um array de números de start até end (inclusive)
   Handlebars.registerHelper("range", function (start, end, options) {
-    let result = [];
+    let result = new Set();
     for (let i = start; i <= end; i++) {
-      result.push(i);
+      result.add(i);
     }
-    return result;
+    return Array.from(result);
   });
 
   Handlebars.registerHelper("sub", function (a, b) {
@@ -170,7 +170,8 @@ Hooks.once("init", async function () {
 
   Handlebars.registerHelper("customLocalize", function (word, key) {
     const formatedWord = word
-      .replaceAll(/([a-z])([A-Z])/g, "$1_$2").toUpperCase();
+      .replaceAll(/([a-z])([A-Z])/g, "$1_$2")
+      .toUpperCase();
     return game.i18n.localize(`${key}.${formatedWord}`);
   });
 

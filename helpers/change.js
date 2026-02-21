@@ -72,6 +72,9 @@ const updateVirtueField = async (event, actor) => {
     const field = event.currentTarget.dataset.field;
     let virtues = foundry.utils.deepClone(actor.system.virtues);
 
+    // Inicializar com objeto vazio se virtues for null
+    if (!virtues) virtues = {};
+
     virtues = {
       ...virtues,
       [field]: { ...virtues[field], name: event.target.value },
@@ -91,6 +94,14 @@ const updateArmorField = async (event, actor) => {
     const field = event.currentTarget.dataset.field;
     let combat = foundry.utils.deepClone(actor.system.combat);
 
+    // Inicializar com objeto padrão se combat for null
+    if (!combat) {
+      combat = { armor: {} };
+    }
+    if (!combat.armor) {
+      combat.armor = {};
+    }
+
     combat = {
       ...combat,
       armor: { ...combat.armor, [field]: { value: event.currentTarget.value } },
@@ -108,6 +119,12 @@ const updateArmorField = async (event, actor) => {
 const updateExperiencePoints = async (event, actor) => {
   try {
     let xp = foundry.utils.deepClone(actor.system.experience);
+
+    // Inicializar com valores padrão se xp for null
+    if (!xp) {
+      xp = { value: 0 };
+    }
+
     xp = {
       ...xp,
       value: event.currentTarget.value || 0,
@@ -255,24 +272,33 @@ const onChangeFieldInWeapon = async (event, actor) => {
 
 const onLegendPointChange = async (event, actor) => {
   try {
-    const legendPoints = foundry.utils.deepClone(actor.system.legendPoints);
+    const inputElement = event.currentTarget;
+    const inputValue = Number.parseInt(inputElement.value);
+
+    let legendPoints = foundry.utils.deepClone(actor.system.legendPoints) || {
+      value: 0,
+      min: 0,
+      max: 48,
+    };
 
     const min = legendPoints.min ?? 0;
     const max = legendPoints.max ?? 48;
-    let value = Number.parseInt(event.currentTarget.value);
 
-    if (Number.isNaN(value)) value = min;
-    value = Math.max(min, Math.min(max, value));
-    legendPoints.value = value;
+    let newValue = Number.isNaN(inputValue) ? min : inputValue;
+    newValue = Math.max(min, Math.min(max, newValue));
+
+    legendPoints.value = newValue;
 
     await actor.update({
       "system.legendPoints": legendPoints,
     });
 
-    event.currentTarget.value = value;
+    if (inputElement) {
+      inputElement.value = newValue;
+    }
   } catch (error) {
-    console.error(error.message);
-    ui.notifications.error("Failed to fetch legend points.");
+    console.error("Erro ao atualizar Legend Points:", error);
+    ui.notifications.error("Não foi possível atualizar os Pontos de Lenda.");
   }
 };
 
@@ -286,7 +312,15 @@ const onBirthrightBoonChange = async (event, actor) => {
       throw new Error("Failed to found field or index from birthrights.");
     }
 
-    const birthrights = foundry.utils.deepClone(actor.system.birthrights);
+    let birthrights = foundry.utils.deepClone(actor.system.birthrights);
+
+    // Verificar se birthrights e os índices existem
+    if (!birthrights?.[birthIndex]) {
+      throw new Error("Birthright not found.");
+    }
+    if (!birthrights[birthIndex].boons?.[boonIndex]) {
+      throw new Error("Boon not found.");
+    }
 
     birthrights[birthIndex].boons[boonIndex][field] = event.currentTarget.value;
 
@@ -333,7 +367,13 @@ const onKnackChange = async (event, actor) => {
     if (field === undefined || !id) {
       throw new Error("Failed to found field or id from knacks.");
     }
+
     let knacks = foundry.utils.deepClone(actor.system.knacks);
+
+    // Inicializar com array vazio se knacks for null
+    if (!knacks || !Array.isArray(knacks)) {
+      knacks = [];
+    }
 
     knacks = knacks.map((knack) => {
       if (knack._id === id) {
@@ -360,6 +400,11 @@ const onBoonChange = async (event, actor) => {
       throw new Error("Failed to found field or id from boons.");
     }
     let boons = foundry.utils.deepClone(actor.system.boons);
+
+    // Inicializar com array vazio se boons for null
+    if (!boons || !Array.isArray(boons)) {
+      boons = [];
+    }
 
     boons = boons.map((boon) => {
       if (boon._id === id) {
