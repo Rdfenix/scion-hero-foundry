@@ -11,6 +11,62 @@ import {
 import { registerJournalHooks } from "./hooks.js";
 import { getRoot } from "../utils/utils.js";
 
+function getTranslationMap() {
+  const root = getRoot();
+  return {
+    "pt-BR": {
+      deities: `${root}/lang/deities-pt-BR.json`,
+      knacksPuviews: `${root}/lang/knack-puerviews-pt-BR.json`,
+    },
+    en: {
+      deities: `${root}/lang/deities-en.json`,
+      knacksPuviews: `${root}/lang/knack-puerviews-en.json`,
+    },
+  };
+}
+
+function gameSettingsRegister() {
+  const id = game?.system?.id || "scion-hero-foundry";
+  game.settings.register(id, "contentLanguage", {
+    name: game.i18n.localize("LABELS.SPECIFIC_CONTENT_LANGUAGE"),
+    hint: game.i18n.localize("LABELS.CHOOSE_CONTENT_LANGUAGE"),
+    scope: "client",
+    config: true,
+    type: String,
+    choices: {
+      "pt-BR": "Português (Brasil)",
+      en: "English",
+    },
+    default: "en",
+    onChange: () => globalThis.location.reload(),
+  });
+}
+
+async function loadTranslations() {
+  const id = game?.system?.id || "scion-hero-foundry";
+  const selectedLang = game.settings.get(id, "contentLanguage");
+  const translationMap = getTranslationMap();
+  const filesToLoad = translationMap[selectedLang];
+
+  for (const [key, path] of Object.entries(filesToLoad)) {
+    try {
+      const response = await fetch(path);
+      if (!response.ok) throw new Error(`Erro ao carregar ${path}`);
+
+      const content = await response.json();
+
+      // Mescla no objeto global de traduções
+      foundry.utils.mergeObject(game.i18n.translations, content, {
+        inplace: true,
+      });
+
+      console.log(`Scion Hero | Carregado: ${key} (${selectedLang})`);
+    } catch (err) {
+      console.error(`Scion Hero | Falha ao carregar tradução [${key}]:`, err);
+    }
+  }
+}
+
 async function createOrUpdateWheelMacro() {
   const root = getRoot();
 
@@ -96,9 +152,10 @@ async function assignMacroToHotbar(slot = 1) {
 }
 
 Hooks.once("init", async function () {
+  const id = game?.system?.id || "scion-hero-foundry";
   // Registra a nova sheet como padrão para o tipo 'character'
   foundry.documents.collections.Actors.registerSheet(
-    "scion",
+    id,
     ScionHeroActorSheetV2,
     {
       types: ["character"], // ou o nome do type no seu template.json
@@ -175,9 +232,15 @@ Hooks.once("init", async function () {
     return game.i18n.localize(`${key}.${formatedWord}`);
   });
 
+  gameSettingsRegister();
+
   globalThis.ScionCombatWheel = ScionCombatWheel;
 
   registerJournalHooks();
+});
+
+Hooks.on("setup", async () => {
+  loadTranslations();
 });
 
 Hooks.on("preCreateActor", (document, data, options, userId) => {
