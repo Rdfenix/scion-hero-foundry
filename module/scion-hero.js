@@ -9,7 +9,7 @@ import {
   createKnacksJournal,
 } from "../helpers/journals.js";
 import { registerJournalHooks } from "./hooks.js";
-import { getRoot } from "../utils/utils.js";
+import { getRoot, customLocalizeWord } from "../utils/utils.js";
 
 function getTranslationMap() {
   const root = getRoot();
@@ -226,10 +226,7 @@ Hooks.once("init", async function () {
   });
 
   Handlebars.registerHelper("customLocalize", function (word, key) {
-    const formatedWord = word
-      .replaceAll(/([a-z])([A-Z])/g, "$1_$2")
-      .toUpperCase();
-    return game.i18n.localize(`${key}.${formatedWord}`);
+    return customLocalizeWord(word, key);
   });
 
   gameSettingsRegister();

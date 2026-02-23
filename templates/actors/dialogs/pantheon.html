@@ -25,11 +25,11 @@
               />
             </div>
             <div class="virtues-label">
-              <span>{{localize "LABELS.VIRTUES"}}</span>
+              <span>{{localize "STATS.VIRTUES"}}</span>
             </div>
             <div class="pantheon-virtues">
               {{#splitInColumns pantheon.virtues 2 'pantheon-virtue-item'}}
-              <div class="pantheon-virtue-item-row">{{data.name}}</div>
+              <div class="pantheon-virtue-item-row">{{customLocalize data.name 'VIRTUES'}}</div>
               {{/splitInColumns}}
             </div>
             <div class="description-label">
@@ -37,7 +37,7 @@
             </div>
             <div class="pantheon-description">
               {{#if pantheon.description}}
-              <p>{{{pantheon.description}}}</p>
+              <p>{{{localize pantheon.description}}}</p>
               {{else}}
               <p>No description available.</p>
               {{/if}}

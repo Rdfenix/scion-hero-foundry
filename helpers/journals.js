@@ -4,12 +4,11 @@ import { getRoot } from "../utils/utils.js";
 
 export async function createPuviewsJournal() {
   const purviewList = await getPurviews();
-  const templatePath =
-    `${getRoot()}/templates/journals/purviews.html`;
+  const templatePath = `${getRoot()}/templates/journals/purviews.html`;
   const folderName = "Purviews";
 
   let folder = game.folders.find(
-    (f) => f.name === folderName && f.type === "JournalEntry"
+    (f) => f.name === folderName && f.type === "JournalEntry",
   );
 
   if (folder) {
@@ -20,7 +19,7 @@ export async function createPuviewsJournal() {
     name: folderName,
     type: "JournalEntry",
     color: "#782e22",
-    permission: { default: 2 },
+    ownership: { default: 2 },
   });
 
   for (const purview of purviewList) {
@@ -31,13 +30,13 @@ export async function createPuviewsJournal() {
       templatePath,
       {
         purview,
-      }
+      },
     );
 
     const entry = await JournalEntry.create({
       name: purview.name,
       folder: folder.id,
-      permission: { default: 2 },
+      ownership: { default: 2 },
     });
 
     await entry.createEmbeddedDocuments("JournalEntryPage", [
@@ -61,12 +60,11 @@ export async function createPuviewsJournal() {
 export async function createKnacksJournal() {
   const knackList = await getKnacks();
   const folderName = "Knacks";
-  const templatePath =
-    `${getRoot()}/templates/journals/knacks.html`;
+  const templatePath = `${getRoot()}/templates/journals/knacks.html`;
 
   // Deleta pasta antiga se já existir
   let folder = game.folders.find(
-    (f) => f.name === folderName && f.type === "JournalEntry"
+    (f) => f.name === folderName && f.type === "JournalEntry",
   );
   if (folder) await folder.delete();
 
@@ -75,7 +73,7 @@ export async function createKnacksJournal() {
     name: folderName,
     type: "JournalEntry",
     color: "#556B2F",
-    permission: { default: 2 },
+    ownership: { default: 2 },
   });
 
   // Cria journals individualmente com página e flag
@@ -87,13 +85,13 @@ export async function createKnacksJournal() {
       templatePath,
       {
         knackItem,
-      }
+      },
     );
 
     const entry = await JournalEntry.create({
       name: knackItem.name,
       folder: folder.id,
-      permission: { default: 2 },
+      ownership: { default: 2 },
     });
 
     await entry.createEmbeddedDocuments("JournalEntryPage", [
@@ -117,11 +115,15 @@ export async function createKnacksJournal() {
 export const checkPurviewFlag = (doc, html) => {
   if (doc.flags["scion-hero-foundry"]?.customPurviewCss) {
     // Procura pelo elemento section no contexto HTML renderizado
-    const contentElement = html instanceof HTMLElement 
-      ? html.querySelector(".purviews-section") 
-      : html[0]?.querySelector(".purviews-section");
-    
-    if (contentElement && !contentElement.classList.contains("purview-journal-entry-content")) {
+    const contentElement =
+      html instanceof HTMLElement
+        ? html.querySelector(".purviews-section")
+        : html[0]?.querySelector(".purviews-section");
+
+    if (
+      contentElement &&
+      !contentElement.classList.contains("purview-journal-entry-content")
+    ) {
       contentElement.classList.add("purview-journal-entry-content");
     }
   }
@@ -130,11 +132,15 @@ export const checkPurviewFlag = (doc, html) => {
 export const checkKnacksFlag = (doc, html) => {
   if (doc.flags["scion-hero-foundry"]?.customKnackCss) {
     // Procura pelo elemento section no contexto HTML renderizado
-    const contentElement = html instanceof HTMLElement 
-      ? html.querySelector(".knacks-section") 
-      : html[0]?.querySelector(".knacks-section");
-    
-    if (contentElement && !contentElement.classList.contains("knack-journal-entry-content")) {
+    const contentElement =
+      html instanceof HTMLElement
+        ? html.querySelector(".knacks-section")
+        : html[0]?.querySelector(".knacks-section");
+
+    if (
+      contentElement &&
+      !contentElement.classList.contains("knack-journal-entry-content")
+    ) {
       contentElement.classList.add("knack-journal-entry-content");
     }
   }

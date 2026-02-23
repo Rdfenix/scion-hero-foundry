@@ -78,6 +78,7 @@ const prepareBirthrightList = async (actor, boonName, index) => {
           ...boonSchema,
           _id: foundry.utils.randomID(),
           name: foundBoon.name,
+          level: foundBoon.level,
           description: stripHTMLAndFormatTable(foundBoon.description),
         });
       }

@@ -13,6 +13,7 @@ import {
   mountFavoritiesSkills,
   mountGodsList,
   getRoot,
+  customLocalizeWord,
 } from "../utils/utils.js";
 
 const parseDifficulty = (dialogEl) => {
@@ -124,12 +125,20 @@ export const selectPantheon = async (actor) => {
                 },
               });
 
-              await actor.update(
-                {
-                  "system.virtues": selectedPantheon.virtues,
+              const virtues = Object.entries(selectedPantheon.virtues).reduce(
+                (acc, [key, virtue]) => {
+                  acc[key] = {
+                    ...virtue,
+                    name: customLocalizeWord(virtue.name, "VIRTUES"),
+                  };
+                  return acc;
                 },
-                { render: true },
+                {},
               );
+
+              await actor.update({
+                "system.virtues": virtues,
+              });
               resolve();
             },
           },

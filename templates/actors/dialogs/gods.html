@@ -22,7 +22,9 @@
             </div>
             <div class="god-skills">
               {{#splitInColumns god.favoredSkills 3 'god-skill-item'}}
-              <div class="god-skill-item-row">{{data}}</div>
+              <div class="god-skill-item-row">
+                {{customLocalize data 'ABILITIES'}}
+              </div>
               {{/splitInColumns}}
             </div>
           </label>

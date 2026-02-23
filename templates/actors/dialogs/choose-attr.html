@@ -7,7 +7,7 @@
       <select name="attr-dice-roll">
         <option value="">{{localize "LABELS.CHOOSE_ATTRIBUTE"}}</option>
         {{#each data.attrKeys as |attr|}}
-        <option value="{{attr}}">{{attr}}</option>
+        <option value="{{attr}}">{{customLocalize attr 'ATTRIBUTES'}}</option>
         {{/each}}
       </select>
       <div class="difficulty">
