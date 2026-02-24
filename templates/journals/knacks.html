@@ -1,7 +1,7 @@
 <section class="knacks-section knack-journal-entry-content">
   <div class="knack-wrapper-list">
     {{#each knackItem.knacks as |knack|}}
-    <h2>{{knack.name}}</h2>
+    <h2>{{localize knack.name}}</h2>
     <div class="knack-list">
       <ul>
         {{#each knack.powers as |power|}}
@@ -10,8 +10,8 @@
           data-type="knack-power"
           data-entry="{{power.name}}"
         >
-          <h3>{{power.name}}</h3>
-          <span>{{{power.description}}}</span>
+          <h3>{{localize power.name}}</h3>
+          <span>{{{localize power.description}}}</span>
         </li>
         {{/each}}
       </ul>

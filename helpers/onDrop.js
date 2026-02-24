@@ -17,12 +17,12 @@ const prepareKnackList = async (actor, knackName) => {
     if (!foundPower) return null;
 
     const newList = foundry.utils.deepClone(actor.system.knacks || []);
-    if (!newList.some((k) => k.name === foundPower.name)) {
+    if (!newList.some((k) => k.name === game.i18n.localize(foundPower.name))) {
       newList.push({
         ...knackSchema,
         _id: foundry.utils.randomID(),
-        name: foundPower.name,
-        description: foundPower.description,
+        name: game.i18n.localize(foundPower.name),
+        description: game.i18n.localize(foundPower.description),
       });
     }
     return newList;
