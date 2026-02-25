@@ -6,7 +6,7 @@ export async function getPurviews() {
 
     const documents = await pack.getDocuments();
 
-    const priorityList = ["PURVIEWS", "PANTHEON–SPECIFIC PURVIEWS"];
+    const priorityList = ["PURVIEWS", "PANTHEON–SPECIFIC PURVIEWS", "SPECIAL PURVIEWS"];
 
     const priorityMap = new Map(
       priorityList.map((name, index) => [name, index]),

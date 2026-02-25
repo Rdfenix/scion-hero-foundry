@@ -43,15 +43,15 @@ const prepareBoonList = async (actor, boonName) => {
     if (!foundBoon) return null;
 
     const newList = foundry.utils.deepClone(actor.system.boons || []);
-    if (!newList.some((b) => b.name === foundBoon.name)) {
+    if (!newList.some((b) => b.name === game.i18n.localize(foundBoon.name))) {
       newList.push({
         ...boonSchema,
         _id: foundry.utils.randomID(),
-        name: foundBoon.name,
-        description: stripHTMLAndFormatTable(foundBoon.description),
+        name: game.i18n.localize(foundBoon.name),
+        description: stripHTMLAndFormatTable(game.i18n.localize(foundBoon.description)),
         level: foundBoon.level,
-        dice_pool: foundBoon.dice_pool,
-        cost: foundBoon.cost,
+        dice_pool: game.i18n.localize(foundBoon.dice_pool),
+        cost: game.i18n.localize(foundBoon.cost),
       });
     }
     return newList;
@@ -73,13 +73,13 @@ const prepareBirthrightList = async (actor, boonName, index) => {
 
     const birthrights = foundry.utils.deepClone(actor.system.birthrights || []);
     if (birthrights[index]) {
-      if (!birthrights[index].boons.some((b) => b.name === foundBoon.name)) {
+      if (!birthrights[index].boons.some((b) => b.name === game.i18n.localize(foundBoon.name))) {
         birthrights[index].boons.push({
           ...boonSchema,
           _id: foundry.utils.randomID(),
-          name: foundBoon.name,
+          name: game.i18n.localize(foundBoon.name),
           level: foundBoon.level,
-          description: stripHTMLAndFormatTable(foundBoon.description),
+          description: stripHTMLAndFormatTable(game.i18n.localize(foundBoon.description)),
         });
       }
     }
