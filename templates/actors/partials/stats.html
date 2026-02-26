@@ -60,7 +60,7 @@
       <div class="skills-column">
         <div class="skills-row">
           <input type="checkbox" class="square-checkbox" {{#if
-          data.favored}}checked{{/if}} />
+          data.favored}}checked{{/if}} data-key="{{key}}" data-action="update-favorite-skill"/>
           <div data-action="roll-ability" data-key="{{key}}">
             <span>{{customLocalize key 'ABILITIES'}}</span>
           </div>

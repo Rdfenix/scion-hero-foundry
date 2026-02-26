@@ -80,6 +80,9 @@ export async function _onChange(event, actor) {
     case "update-pantheon-god":
       await updatePantheonGodField(event, actor);
       break;
+    case "update-favorite-skill":
+      await updateFavoriteSkill(event, actor);
+      break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
       break;
@@ -528,11 +531,38 @@ const updatePantheonGodField = async (event, actor) => {
     if (foundGod) {
       const updatedAbilities = await mountFavoritiesSkills(foundGod, actor);
       updateData["system.abilities"] = updatedAbilities;
+    } else {
+      updateData["system.abilities"] = resetFavAbilities(actor);
     }
 
     await actor.update(updateData, { render: true });
   } catch (error) {
     console.error("Erro ao atualizar deus:", error);
     ui.notifications.error("Não foi possível carregar os dados sobre o deus.");
+  }
+};
+
+const updateFavoriteSkill = async (event, actor) => {
+  try {
+    const key = event.currentTarget.dataset.key;
+    const abilities = foundry.utils.deepClone(actor.system.abilities);
+    let updatedAbilities = {};
+
+    updatedAbilities = {
+      ...abilities,
+      [key]: {
+        ...abilities[key],
+        favored: !abilities[key].favored,
+      },
+    };
+
+    const updateData = {
+      "system.abilities": updatedAbilities,
+    };
+
+    await actor.update(updateData);
+  } catch (error) {
+    console.error(error.message);
+    ui.notifications.error("Failed to update skill.");
   }
 };
