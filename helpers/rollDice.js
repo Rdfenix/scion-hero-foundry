@@ -133,12 +133,11 @@ export const callRollJoinBattle = async (actor) => {
     );
 
     const totalDices = Math.max(0, wits + awareness);
-    const witsLocalized = game.i18n.localize("ATTRIBUTES.WITS");
 
     const initiativeValue = await processAndSendRoll(actor, totalDices, 7, {
       epicAttribute: epicWits,
       title: game.i18n.localize("LABELS.JOIN_BATTLE"),
-      epicAttributeLabel: witsLocalized,
+      epicAttributeLabel: 'WITS',
     });
 
     //Verifica se existe um combate ativo. Se não, cria um.
