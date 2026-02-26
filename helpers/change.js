@@ -5,6 +5,22 @@ import {
   mountGodsList,
 } from "../utils/utils.js";
 
+const resetFavAbilities = (actor) => {
+  const abilities = foundry.utils.deepClone(actor.system.abilities || {});
+  const resetedAbilities = {};
+
+  for (const key in abilities) {
+    if (!Object.hasOwn(abilities, key)) continue;
+
+    resetedAbilities[key] = {
+      ...abilities[key],
+      favored: false,
+    };
+  }
+
+  return resetedAbilities;
+};
+
 export async function _onChange(event, actor) {
   event.preventDefault();
   event.stopPropagation();
@@ -60,6 +76,9 @@ export async function _onChange(event, actor) {
       break;
     case "update-pantheon-name":
       await updatePantheonField(event, actor);
+      break;
+    case "update-pantheon-god":
+      await updatePantheonGodField(event, actor);
       break;
     default:
       console.warn("Ação não reconhecida:", event.currentTarget.dataset.action);
@@ -431,7 +450,7 @@ const updatePantheonField = async (event, actor) => {
     const selectedPantheon =
       pantheons.find(
         (p) =>
-          cleanString(p.name)?.toUpperCase() ===
+          cleanString(game.i18n.localize(p.name))?.toUpperCase() ===
           cleanString(event.target.value)?.toUpperCase(),
       ) || {};
 
@@ -441,25 +460,79 @@ const updatePantheonField = async (event, actor) => {
       logo: selectedPantheon.logo || null,
     };
 
-    let gods =
-      deities.find((p) => p.name === selectedPantheon.name)?.system.deities ||
-      [];
-    gods = await mountGodsList(gods);
-    const updatedAbilities = await mountFavoritiesSkills(gods[0], actor);
+    // 3. Buscar os deuses associados
+    const pantheonData = deities.find(
+      (p) => game.i18n.localize(p.name) === selectedPantheon.name,
+    );
+    const godsData = pantheonData?.system.deities || [];
+    const gods = await mountGodsList(godsData);
 
-    let updatedPantheon = {
+    const updateData = {
       "system.pantheon": pantheon,
-      "system.virtues": selectedPantheon.virtues,
+      "system.virtues": selectedPantheon.virtues || {
+        virtue_1: { name: "", value: 1, min: 1, max: 5 },
+        virtue_2: { name: "", value: 1, min: 1, max: 5 },
+        virtue_3: { name: "", value: 1, min: 1, max: 5 },
+        virtue_4: { name: "", value: 1, min: 1, max: 5 },
+      },
     };
 
-    if (gods[0]) {
-      updatedPantheon["system.pantheon.god"] = gods[0].name;
-      updatedPantheon["system.abilities"] = updatedAbilities;
+    // 5. Adicionar dados do deus e habilidades se existirem
+    if (gods && gods.length > 0 && gods[0]) {
+      const updatedAbilities = await mountFavoritiesSkills(gods[0], actor);
+
+      updateData["system.pantheon.god"] = gods[0].name;
+      updateData["system.abilities"] = updatedAbilities;
+    } else {
+      updateData["system.pantheon.god"] = "";
+      updateData["system.abilities"] = resetFavAbilities(actor);
     }
 
-    await actor.update(updatedPantheon, { render: true });
+    await actor.update(updateData, { render: true });
   } catch (error) {
-    console.error(error.message);
-    ui.notifications.error("Failed to fetch pantheon data.");
+    console.error("Erro ao atualizar panteão:", error);
+    ui.notifications.error("Não foi possível carregar os dados do panteão.");
+  }
+};
+
+const updatePantheonGodField = async (event, actor) => {
+  try {
+    const field = event.currentTarget.dataset.field;
+    const selectedGodName = event.target.value;
+
+    let pantheon = foundry.utils.deepClone(actor.system.pantheon);
+    const { deities } = await mountDeities();
+
+    let foundGod = null;
+    for (const p of deities) {
+      const god = p.system.deities.find(
+        (g) =>
+          cleanString(game.i18n.localize(g.name))?.toUpperCase() ===
+          cleanString(selectedGodName)?.toUpperCase(),
+      );
+      if (god) {
+        foundGod = god;
+        break;
+      }
+    }
+
+    pantheon = {
+      ...pantheon,
+      [field]: foundGod ? foundGod.name : selectedGodName.toUpperCase(),
+    };
+
+    const updateData = {
+      "system.pantheon": pantheon,
+    };
+
+    if (foundGod) {
+      const updatedAbilities = await mountFavoritiesSkills(foundGod, actor);
+      updateData["system.abilities"] = updatedAbilities;
+    }
+
+    await actor.update(updateData, { render: true });
+  } catch (error) {
+    console.error("Erro ao atualizar deus:", error);
+    ui.notifications.error("Não foi possível carregar os dados sobre o deus.");
   }
 };
