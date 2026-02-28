@@ -35,6 +35,9 @@
   </div>
   <div class="total-result">
     <span>{{localize "LABELS.TOTAL_RESULT"}}:</span>
-    <span>{{sum data.totalSuccess data.totalEpicSuccess}}</span>
+    <div class="total-result-dice">
+      <img src="/systems/scion-hero-foundry/assets/svg/d10.svg" alt="" srcset="">
+      <span>{{sum data.totalSuccess data.totalEpicSuccess}}</span>
+    </div>
   </div>
 </div>
