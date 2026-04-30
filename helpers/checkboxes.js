@@ -1,3 +1,5 @@
+import { _debounce } from "./debounce.js";
+
 export const updateCheckboxes = (checkboxes, currentValue) => {
   checkboxes.each(function (_index, input) {
     const value = Number.parseInt(input.value);
