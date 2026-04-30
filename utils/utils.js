@@ -1,3 +1,10 @@
+const DOCUMENT_PERMISSION_LEVELS = {
+  NONE: 0,
+  LIMITED: 1,
+  OBSERVER: 2,
+  OWNER: 3,
+};
+
 export const cleanString = (str) => {
   return str
     .normalize("NFD") // Decompõe os caracteres acentuados (ex: 'á' vira 'a' + '´')
@@ -94,4 +101,38 @@ export function customLocalizeWord(word, key) {
     .replaceAll(/([a-z])([A-Z])/g, "$1_$2")
     .toUpperCase();
   return game.i18n.localize(`${key}.${formatedWord}`);
+}
+
+export function validateActorPermission(actor, requiredPermission = "OWNER") {
+  if (!actor) {
+    ui.notifications.error("Ator não encontrado.");
+    return false;
+  }
+
+  // Obtém as permissões do usuário atual para este ator
+  const userPermission = actor.getUserLevel(game.user);
+
+  console.log(`Permissão do usuário ${game.user.name}:`, userPermission);
+  console.log(
+    `Nível requerido (OWNER=3):`,
+    DOCUMENT_PERMISSION_LEVELS[requiredPermission],
+  );
+
+  // CONST.DOCUMENT_PERMISSION_LEVELS:
+  // NONE = 0, LIMITED = 1, OBSERVER = 2, OWNER = 3
+
+  const requiredLevel = DOCUMENT_PERMISSION_LEVELS[requiredPermission] ?? 3;
+
+  if (userPermission < requiredLevel) {
+    const permName = Object.keys(DOCUMENT_PERMISSION_LEVELS).find(
+      (k) => DOCUMENT_PERMISSION_LEVELS[k] === userPermission,
+    );
+
+    ui.notifications.warn(
+      `Permissão insuficiente. Você tem: ${permName}, Necessário: ${requiredPermission}`,
+    );
+    return false;
+  }
+
+  return true;
 }

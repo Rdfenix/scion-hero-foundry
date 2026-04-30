@@ -13,15 +13,15 @@ import {
   callDifficultyDialog,
 } from "./dialog.js";
 
+import { validateActorPermission } from "../utils/utils.js";
+
 import { callRollJoinBattle } from "./rollDice.js";
 
 export async function _onAction(event, actor, options) {
-  if (!actor?.isOwner) {
-    ui.notifications.warn(
-      "Você não tem permissão para alterar este personagem.",
-    );
+  if (!validateActorPermission(actor, "OWNER")) {
     return;
   }
+
   switch (event) {
     case "select-pantheon":
       await selectPantheon(actor);

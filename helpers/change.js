@@ -3,6 +3,7 @@ import {
   cleanString,
   mountFavoritiesSkills,
   mountGodsList,
+  validateActorPermission,
 } from "../utils/utils.js";
 
 const resetFavAbilities = (actor) => {
@@ -26,10 +27,7 @@ export async function _onChange(event, actor) {
   event.stopPropagation();
   event.stopImmediatePropagation();
 
-  if (!actor?.isOwner) {
-    ui.notifications.warn(
-      "Você não tem permissão para alterar este personagem.",
-    );
+  if (!validateActorPermission(actor, "OWNER")) {
     return;
   }
 
