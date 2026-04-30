@@ -26,7 +26,7 @@ export const updateSoak = async (app) => {
       {
         "system.combat.soak": soak,
       },
-      { render: true },
+      { render: false },
     );
   } catch (error) {
     console.error("Error updating Soak:", error);
