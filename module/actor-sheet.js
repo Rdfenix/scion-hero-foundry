@@ -9,6 +9,7 @@ import { birthrightUpdate } from "../helpers/birthrightsUpdate.js";
 import { willpowerUpdate } from "../helpers/willpowerUpdate.js";
 import { legendUpdate } from "../helpers/legendUpdate.js";
 import { updateSoak } from "../helpers/updateSoak.js";
+import { createDebouncedRender } from "../helpers/debounce.js";
 
 function renderActorSheetElements(app, html, data) {
   // Implementar funcionalidades específicas de renderização aqui, se necessário
@@ -27,6 +28,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   constructor(options = {}) {
     super(options);
     this.tabGroups = { primary: "stats" };
+    this.debouncedRender = createDebouncedRender(this, 150);
   }
 
   /** @override */
@@ -292,7 +294,8 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
 
     // Renderiza apenas as partes necessárias
     if (!isLocalUpdate && updates.size > 0) {
-      this.render({ parts: Array.from(updates) });
+      this.debouncedRender(Array.from(updates));
+      // this.render({ parts: Array.from(updates) });
     }
   }
 
