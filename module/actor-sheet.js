@@ -29,6 +29,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     super(options);
     this.tabGroups = { primary: "stats" };
     this.debouncedRender = createDebouncedRender(this, 150);
+    this._debouncedTabRender = createDebouncedRender(this, 150);
   }
 
   /** @override */
@@ -232,7 +233,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
   changeTab(tab, group, options = {}) {
     // 1. Chama o original para salvar o estado (this.tabGroups)
     super.changeTab(tab, group, options);
-    this.render({ parts: ["stats", "birth", "knacks", "combat"] });
+    this._debouncedTabRender(["stats", "birth", "knacks", "combat"]);
   }
 
   /** @override */
@@ -316,7 +317,13 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
 
     html.querySelectorAll("input, select, textarea").forEach((el) => {
       if (el.dataset.action) {
-        el.addEventListener("change", (ev) => _onChange(ev, this.document));
+        // Remove listener anterior se existir
+        if (el._scionChangeListener) {
+          el.removeEventListener("change", el._scionChangeListener);
+        }
+
+        el._scionChangeListener = (ev) => _onChange(ev, this.document);
+        el.addEventListener("change", el._scionChangeListener);
       }
     });
   }
