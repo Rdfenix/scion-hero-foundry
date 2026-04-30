@@ -238,6 +238,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     // Deixa o Foundry processar os dados primeiro
     super._onUpdate(changed, options, userId);
 
+    const isLocalUpdate = userId === game.user.id;
     const updates = new Set();
 
     // Atalho para verificar propriedades aninhadas com segurança
@@ -290,7 +291,7 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     }
 
     // Renderiza apenas as partes necessárias
-    if (updates.size > 0) {
+    if (!isLocalUpdate && updates.size > 0) {
       this.render({ parts: Array.from(updates) });
     }
   }
