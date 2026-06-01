@@ -1,0 +1,41 @@
+<form autocomplete="off" class="default-dialog-form">
+  <div class="default-dialog-form-group">
+    <div class="default-dialog-header">
+      <h2>{{localize data.title}}</h2>
+    </div>
+    <section class="default-dialog-section">
+      {{#if data.showAttribute}}
+        <select name="attr-dice-roll">
+          <option value="">{{localize "LABELS.CHOOSE_ATTRIBUTE"}}</option>
+          {{#each data.attrKeys as |attr|}}
+            <option value="{{attr}}">{{customLocalize
+                attr
+                "ATTRIBUTES"
+              }}</option>
+          {{/each}}
+        </select>
+      {{/if}}
+      {{#if data.showMultipleAttack}}
+        <div class="actions">
+          <div class="multiple-atk">
+            <select name="multiple-attack">
+              <option value="" disabled selected>
+                {{localize "LABELS.SELECT_MULTIPLE_ATTACK"}}
+              </option>
+              <option value="true">{{localize "LABELS.YES"}}</option>
+              <option value="false">{{localize "LABELS.NO"}}</option>
+            </select>
+          </div>
+        </div>
+      {{/if}}
+      <div class="extra-info">
+        <label for="extra-dices">{{localize "LABELS.EXTRA_DICES"}}:</label>
+        <input type="text" name="extra-dices" value="0" />
+      </div>
+      <div class="difficulty">
+        <label for="difficulty">{{localize "LABELS.DIFFICULTY"}}</label>
+        <input type="number" name="difficulty" value="7" />
+      </div>
+    </section>
+  </div>
+</form>

@@ -1,11 +1,11 @@
 .roll-skill-dialog {
   width: 500px;
-  height: 290px;
+  height: 368px;
 }
 
 .difficulty-dialog {
   width: 500px;
-  height: 220px;
+  height: 315px;
 }
 
 .weapon-dialog {
@@ -20,7 +20,8 @@
 
 .weapon-dialog-form,
 .weapon-dialog-group,
-.damage-atk-group {
+.damage-atk-group,
+.default-dialog-form-group {
   width: 100%;
   min-height: 100px;
   position: relative;
@@ -51,7 +52,8 @@
 
 .attr-dialog-form,
 .attr-dialog-group,
-.damage-atk-form {
+.damage-atk-form,
+.default-dialog-form {
   width: 100%;
   height: 140px;
   min-height: 100px;
@@ -71,7 +73,8 @@
 .weapon-dialog-group-header > h1,
 .weapon-dialog-group-header > h2,
 .damage-atk-group-header > h1,
-.damage-atk-group-header > h2 {
+.damage-atk-group-header > h2,
+.default-dialog-header > h2 {
   margin: 0 0 1.5rem !important;
   padding: 0 !important;
   border: none !important;
@@ -89,7 +92,8 @@
   margin-bottom: 10px !important;
 }
 
-.attr-dialog-content {
+.attr-dialog-content,
+.default-dialog-section {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -107,11 +111,13 @@
   font-size: 16px;
 }
 
-.attr-dialog-content input[type="number"] {
+.attr-dialog-content input[type="number"],
+.default-dialog-section input[type="number"] {
   padding: 10px;
 }
 
-.attr-dialog-content select {
+.attr-dialog-content select,
+.default-dialog-section select {
   text-transform: capitalize;
 }
 

@@ -269,10 +269,12 @@ export const callDialogRollSkillDice = async (actor, options) => {
 
     const data = {
       attrKeys,
+      title: "LABELS.CHOOSE_ATTRIBUTE",
+      showAttribute: true,
     };
 
     const content = await foundry.applications.handlebars.renderTemplate(
-      `${getRoot()}/templates/actors/dialogs/choose-attr.html`,
+      `${getRoot()}/templates/actors/dialogs/default-dialog.hbs`,
       { data },
     );
 
@@ -298,6 +300,12 @@ export const callDialogRollSkillDice = async (actor, options) => {
                 10,
               );
 
+              const extraDices = Number.parseInt(
+                $(dialog.element).find('input[name="extra-dices"]').val() ||
+                  "0",
+                10,
+              );
+
               if (
                 Number.isNaN(difficulty) ||
                 difficulty < 1 ||
@@ -320,6 +328,7 @@ export const callDialogRollSkillDice = async (actor, options) => {
                 attrValue,
                 epicAttrValue,
                 difficulty,
+                extraDices,
               });
 
               resolve();
@@ -557,7 +566,7 @@ export const callDifficultyDialog = async (actor, options = {}) => {
   }
 
   const content = await foundry.applications.handlebars.renderTemplate(
-    `${getRoot()}/templates/actors/dialogs/difficulty.html`,
+    `${getRoot()}/templates/actors/dialogs/default-dialog.hbs`,
   );
 
   return new Promise((resolve) => {
@@ -575,7 +584,14 @@ export const callDifficultyDialog = async (actor, options = {}) => {
           callback: async (_event, _button, dialog) => {
             try {
               const difficulty = parseDifficulty(dialog.element);
-              await rollHandler(actor, options, difficulty);
+
+              const extraDices = Number.parseInt(
+                $(dialog.element).find('input[name="extra-dices"]').val() ||
+                  "0",
+                10,
+              );
+
+              await rollHandler(actor, options, difficulty, extraDices);
               resolve(difficulty);
             } catch (err) {
               ui.notifications.error(err.message);

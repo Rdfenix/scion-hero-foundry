@@ -58,7 +58,6 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
       dragDrop: [{ dragSelector: null, dropSelector: "[data-drop-target]" }],
       // REGRA DE OURO: Todas as interações de clique devem ser mapeadas aqui
       actions: {
-        rollAttribute: ScionHeroActorSheetV2.#onRollAttribute,
         setTab: ScionHeroActorSheetV2.#onSetTab, // Handler para trocar abas
         "select-pantheon": ScionHeroActorSheetV2.#onActionTracker,
         "select-god": ScionHeroActorSheetV2.#onActionTracker,
@@ -213,10 +212,6 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     return fp.browse();
   }
 
-  static async #onRollAttribute(event, target) {
-    const attr = target.dataset.attribute;
-  }
-
   static async #onSubmit(event, form, formData) {
     const updateData = foundry.utils.expandObject(formData.object);
     await this.document.update(updateData);
@@ -296,7 +291,6 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     // Renderiza apenas as partes necessárias
     if (!isLocalUpdate && updates.size > 0) {
       this.debouncedRender(Array.from(updates));
-      // this.render({ parts: Array.from(updates) });
     }
   }
 

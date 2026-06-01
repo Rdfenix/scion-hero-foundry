@@ -137,7 +137,7 @@ export const callRollJoinBattle = async (actor) => {
     const initiativeValue = await processAndSendRoll(actor, totalDices, 7, {
       epicAttribute: epicWits,
       title: game.i18n.localize("LABELS.JOIN_BATTLE"),
-      epicAttributeLabel: 'WITS',
+      epicAttributeLabel: "WITS",
     });
 
     //Verifica se existe um combate ativo. Se não, cria um.
@@ -207,7 +207,12 @@ export const callRollWillpowerDice = async (actor, event, difficulty) => {
   }
 };
 
-export const callRollAttrDice = async (actor, event, difficulty) => {
+export const callRollAttrDice = async (
+  actor,
+  event,
+  difficulty,
+  extraDices,
+) => {
   try {
     const key = event.key;
     const attr = event.label;
@@ -221,7 +226,8 @@ export const callRollAttrDice = async (actor, event, difficulty) => {
       foundry.utils.deepClone(actor.system.epicAttributes[key][attr].value),
     );
 
-    const totalDice = Math.max(value + penality, 0);
+    const extra = getSafeNumber(extraDices);
+    const totalDice = Math.max(value + penality + extra, 0);
 
     await processAndSendRoll(actor, totalDice, difficulty, {
       epicAttribute: epicValue,
@@ -235,10 +241,19 @@ export const callRollAttrDice = async (actor, event, difficulty) => {
 
 export const callRollSkillDice = async (
   actor,
-  { skillName, skillValue, attr, attrValue, epicAttrValue, difficulty },
+  {
+    skillName,
+    skillValue,
+    attr,
+    attrValue,
+    epicAttrValue,
+    difficulty,
+    extraDices,
+  },
 ) => {
   try {
     const sValue = getSafeNumber(skillValue);
+    const extra = getSafeNumber(extraDices);
     const aValue = getSafeNumber(attrValue);
     const eValue = getSafeNumber(epicAttrValue);
     const penality = getSafeNumber(
@@ -252,7 +267,7 @@ export const callRollSkillDice = async (
       `ABILITIES.${skillName.replaceAll(/([a-z])([A-Z])/g, "$1_$2").toUpperCase()}`,
     );
     const title = `${localizedAttr} + ${localizedSkill}`;
-    const totalDice = Math.max(aValue + sValue + penality, 0);
+    const totalDice = Math.max(aValue + sValue + penality + extra, 0);
 
     await processAndSendRoll(actor, totalDice, difficulty, {
       epicAttribute: eValue,
