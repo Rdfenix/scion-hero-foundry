@@ -19,7 +19,7 @@ const mountingWillpowerPointsCheckboxes = (row, app) => {
   const actor = app.actor.system.willpowerPoints;
 
   updateCheckboxes(squareCheckboxes, currentValue);
-  bindCheckboxes(squareCheckboxes, targetProp, app, actor, system);
+  bindCheckboxes(squareCheckboxes, targetProp, app, actor, system, true);
 };
 
 export const willpowerUpdate = (app, html, data) => {
