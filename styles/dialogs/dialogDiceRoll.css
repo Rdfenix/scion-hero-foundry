@@ -1,21 +1,17 @@
-.roll-skill-dialog {
-  width: 500px;
-  height: 368px;
-}
-
+.roll-skill-dialog,
 .difficulty-dialog {
   width: 500px;
-  height: 315px;
+  height: auto;
 }
 
 .weapon-dialog {
   width: 550px;
-  height: 405px;
+  height: auto;
 }
 
 .damage-dialog {
   width: 490px;
-  height: 320px;
+  height: auto;
 }
 
 .weapon-dialog-form,
