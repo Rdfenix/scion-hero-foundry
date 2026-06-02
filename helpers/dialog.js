@@ -271,6 +271,7 @@ export const callDialogRollSkillDice = async (actor, options) => {
       attrKeys,
       title: "LABELS.CHOOSE_ATTRIBUTE",
       showAttribute: true,
+      showExtraInfo: true,
     };
 
     const content = await foundry.applications.handlebars.renderTemplate(
@@ -565,8 +566,13 @@ export const callDifficultyDialog = async (actor, options = {}) => {
     return null;
   }
 
+  const data = {
+    showExtraInfo: type === "attribute",
+  };
+
   const content = await foundry.applications.handlebars.renderTemplate(
     `${getRoot()}/templates/actors/dialogs/default-dialog.hbs`,
+    { data },
   );
 
   return new Promise((resolve) => {
