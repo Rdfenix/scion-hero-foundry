@@ -70,6 +70,7 @@
 .weapon-dialog-group-header > h2,
 .damage-atk-group-header > h1,
 .damage-atk-group-header > h2,
+.default-dialog-header > h1,
 .default-dialog-header > h2 {
   margin: 0 0 1.5rem !important;
   padding: 0 !important;
@@ -77,6 +78,7 @@
   font-family: skranji-regular, sans-serif !important;
   color: #222;
   font-size: 25px;
+  transform: uppercase;
 }
 
 .attr-dialog-group {
