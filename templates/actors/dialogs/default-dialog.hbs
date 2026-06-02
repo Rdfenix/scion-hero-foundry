@@ -1,7 +1,12 @@
 <form autocomplete="off" class="default-dialog-form">
   <div class="default-dialog-form-group">
     <div class="default-dialog-header">
-      <h2>{{localize data.title}}</h2>
+      {{#if data.title}}
+        <h1>{{localize data.title}}</h1>
+      {{/if}}
+      {{#if data.subtitle}}
+        <h2>{{localize data.subtitle}}</h2>
+      {{/if}}
     </div>
     <section class="default-dialog-section">
       {{#if data.showAttribute}}

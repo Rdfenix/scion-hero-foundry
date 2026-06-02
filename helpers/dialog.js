@@ -269,7 +269,7 @@ export const callDialogRollSkillDice = async (actor, options) => {
 
     const data = {
       attrKeys,
-      title: "LABELS.CHOOSE_ATTRIBUTE",
+      subtitle: "LABELS.CHOOSE_ATTRIBUTE",
       showAttribute: true,
       showExtraInfo: true,
     };
@@ -381,10 +381,14 @@ export const callDialogRollWeaponDice = async (actor, options) => {
 
     const data = {
       weapon,
+      title: "LABELS.WEAPON_ATACK",
+      subtitle: weapon.name,
+      showMultipleAttack: true,
+      showExtraInfo: true,
     };
 
     const content = await foundry.applications.handlebars.renderTemplate(
-      `${getRoot()}/templates/actors/dialogs/weapon-atk.html`,
+      `${getRoot()}/templates/actors/dialogs/default-dialog.hbs`,
       { data },
     );
 
@@ -489,10 +493,13 @@ export const callDialogRollDamage = async (actor, options) => {
 
     const data = {
       weapon,
+      title: "LABELS.DAMAGE_ATACK",
+      subtitle: weapon.name,
+      showExtraInfo: true,
     };
 
     const content = await foundry.applications.handlebars.renderTemplate(
-      `${getRoot()}/templates/actors/dialogs/damage-atk.html`,
+      `${getRoot()}/templates/actors/dialogs/default-dialog.hbs`,
       { data },
     );
 
