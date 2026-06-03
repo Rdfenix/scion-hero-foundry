@@ -271,6 +271,7 @@ export const callDialogRollSkillDice = async (actor, options) => {
       attrKeys,
       subtitle: "LABELS.CHOOSE_ATTRIBUTE",
       showAttribute: true,
+      showExtraDices: true,
     };
 
     const content = await foundry.applications.handlebars.renderTemplate(
@@ -384,6 +385,7 @@ export const callDialogRollWeaponDice = async (actor, options) => {
       subtitle: weapon.name,
       showMultipleAttack: true,
       showExtraInfo: true,
+      showExtraDices: true,
     };
 
     const content = await foundry.applications.handlebars.renderTemplate(
@@ -495,6 +497,7 @@ export const callDialogRollDamage = async (actor, options) => {
       title: "LABELS.DAMAGE_ATACK",
       subtitle: weapon.name,
       showExtraInfo: true,
+      showExtraDices: true,
     };
 
     const content = await foundry.applications.handlebars.renderTemplate(
@@ -572,8 +575,13 @@ export const callDifficultyDialog = async (actor, options = {}) => {
     return null;
   }
 
+  const data = {
+    showExtraDices: type === "attribute"
+  };
+
   const content = await foundry.applications.handlebars.renderTemplate(
     `${getRoot()}/templates/actors/dialogs/default-dialog.hbs`,
+    { data }
   );
 
   return new Promise((resolve) => {
