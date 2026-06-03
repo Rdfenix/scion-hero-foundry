@@ -165,24 +165,19 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
 
   /** @override */
   async render(force = false, options = {}) {
-    // Preserve scroll position of the main sheet container across renders
-    try {
-      const prevEl = this.element?.querySelector?.('.scion-wrapper') || this.element?.querySelector?.('.scion-v2-sheet') || this.element;
-      const prevScroll = prevEl ? prevEl.scrollTop : 0;
-      const result = await super.render(force, options);
-      // Restore scroll on next tick to ensure DOM is updated
-      setTimeout(() => {
-        try {
-          if (prevEl) prevEl.scrollTop = prevScroll;
-        } catch (e) {
-          console.warn('Failed to restore scroll position', e);
-        }
-      }, 0);
-      return result;
-    } catch (err) {
-      console.error('Error preserving scroll on render:', err);
-      return await super.render(force, options);
-    }
+    const scrollContainer = this.element?.querySelector(".scion-v2-sheet");
+    const prevScroll = scrollContainer?.scrollTop ?? 0;
+
+    const result = await super.render(force, options);
+
+    // Usar requestAnimationFrame em vez de setTimeout
+    return new Promise((resolve) => {
+      requestAnimationFrame(() => {
+        const newContainer = this.element?.querySelector(".scion-v2-sheet");
+        if (newContainer) newContainer.scrollTop = prevScroll;
+        resolve(result);
+      });
+    });
   }
 
   static #onSetTab(event, target) {
@@ -258,6 +253,9 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     super._onUpdate(changed, options, userId);
 
     const isLocalUpdate = userId === game.user.id;
+
+    if (isLocalUpdate) return;
+    
     const updates = new Set();
 
     // Atalho para verificar propriedades aninhadas com segurança
