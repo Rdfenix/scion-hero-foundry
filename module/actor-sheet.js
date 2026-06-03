@@ -151,19 +151,6 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     context.system.attrKeys = Array.from(attrKeys);
     context.system.skillsKeys = Array.from(skillsKeys);
     context.system.damageType = damageType;
-
-    // Build ordered versions of attributes/abilities to ensure deterministic
-    // iteration order in templates and avoid DOM reordering causing scroll jumps.
-    context.system.attributesOrdered = {};
-    for (const k of context.system.attrKeys) {
-      context.system.attributesOrdered[k] = context.system.attributes[k];
-    }
-
-    context.system.abilitiesOrdered = {};
-    for (const k of context.system.skillsKeys) {
-      context.system.abilitiesOrdered[k] = context.system.abilities[k];
-    }
-
     context.enrichedBiography =
       await foundry.applications.ux.TextEditor.enrichHTML(
         this.document.system.biography,
