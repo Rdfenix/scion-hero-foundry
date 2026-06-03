@@ -33,12 +33,10 @@
           </div>
         </div>
       {{/if}}
-      {{#if data.showExtraInfo}}
-        <div class="extra-info">
-          <label for="extra-dices">{{localize "LABELS.EXTRA_DICES"}}:</label>
-          <input type="text" name="extra-dices" value="0" />
-        </div>
-      {{/if}}
+      <div class="extra-info">
+        <label for="extra-dices">{{localize "LABELS.EXTRA_DICES"}}:</label>
+        <input type="text" name="extra-dices" value="0" />
+      </div>
       <div class="difficulty">
         <label for="difficulty">{{localize "LABELS.DIFFICULTY"}}</label>
         <input type="number" name="difficulty" value="7" />
