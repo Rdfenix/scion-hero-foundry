@@ -4,7 +4,7 @@
     <h2>{{localize "STATS.ATTRIBUTES"}}</h2>
   </div>
   <div class="attributes-types-grid">
-    {{#each system.attributes as |attr key|}}
+    {{#each system.attributesOrdered as |attr key|}}
     <div class="attribute-grid-item" data-key="{{key}}">
       <h3>{{customLocalize key 'ATTRIBUTE_TYPES'}}</h3>
       {{#each attr as |attribute label|}}
@@ -55,7 +55,7 @@
     <h2>{{localize "STATS.ABILITIES"}}</h2>
   </div>
   <div class="skills-types-grid">
-    {{#splitInColumns system.abilities 3 'skills-grid-item'}}
+    {{#splitInColumns system.abilitiesOrdered 3 'skills-grid-item'}}
     <div class="skills-row" data-key="{{key}}">
       <div class="skills-column">
         <div class="skills-row">

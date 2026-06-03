@@ -51,7 +51,7 @@
   font-size: 1.05rem;
   overflow-y: auto;
   scroll-behavior: smooth;
-  overflow-anchor: none;
+  overflow-anchor: auto;
   scrollbar-gutter: stable both-edges;
   font-family: skranji-regular, sans-serif !important;
   width: 100%;

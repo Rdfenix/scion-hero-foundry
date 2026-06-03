@@ -152,6 +152,18 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
     context.system.skillsKeys = Array.from(skillsKeys);
     context.system.damageType = damageType;
 
+    // Build ordered versions of attributes/abilities to ensure deterministic
+    // iteration order in templates and avoid DOM reordering causing scroll jumps.
+    context.system.attributesOrdered = {};
+    for (const k of context.system.attrKeys) {
+      context.system.attributesOrdered[k] = context.system.attributes[k];
+    }
+
+    context.system.abilitiesOrdered = {};
+    for (const k of context.system.skillsKeys) {
+      context.system.abilitiesOrdered[k] = context.system.abilities[k];
+    }
+
     context.enrichedBiography =
       await foundry.applications.ux.TextEditor.enrichHTML(
         this.document.system.biography,
@@ -162,6 +174,28 @@ export default class ScionHeroActorSheetV2 extends foundry.applications.api.Hand
       );
 
     return context;
+  }
+
+  /** @override */
+  async render(force = false, options = {}) {
+    // Preserve scroll position of the main sheet container across renders
+    try {
+      const prevEl = this.element?.querySelector?.('.scion-wrapper') || this.element?.querySelector?.('.scion-v2-sheet') || this.element;
+      const prevScroll = prevEl ? prevEl.scrollTop : 0;
+      const result = await super.render(force, options);
+      // Restore scroll on next tick to ensure DOM is updated
+      setTimeout(() => {
+        try {
+          if (prevEl) prevEl.scrollTop = prevScroll;
+        } catch (e) {
+          console.warn('Failed to restore scroll position', e);
+        }
+      }, 0);
+      return result;
+    } catch (err) {
+      console.error('Error preserving scroll on render:', err);
+      return await super.render(force, options);
+    }
   }
 
   static #onSetTab(event, target) {
