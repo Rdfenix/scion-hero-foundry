@@ -1,0 +1,143 @@
+.pantheon-dialog {
+    width: 700px;
+    height: 500px;
+    & > .window-content {
+        & > .dialog-form {
+            & > .form-footer {
+                position: sticky;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: rgb(255 255 255);
+                z-index: 10;
+                padding: 10px;
+                box-shadow: 0 -2px 8px -6px #0002;
+                border-radius: 4px;
+                button {
+                    color: #222;
+                    font-size: 19px;
+                    font-weight: bold;
+                    font-family: skranji-regular, sans-serif !important;
+                }
+            }
+        }
+    }
+}
+.pantheon-form,
+.pantheon-group {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column !important;
+    gap: 0.5rem;
+    margin: 0 !important;
+    font-family: skranji-regular, sans-serif !important;
+    background: rgba(254, 254, 254, 255);
+    padding: 15px 15px;
+    border-radius: 5px;
+    min-height: 25.875rem;
+    color: #222;
+}
+.pantheon-form {
+    background: rgba(254, 254, 254, 255);
+    padding: 15px 15px;
+    border-radius: 5px;
+    min-height: 25.875rem;
+}
+.pantheon-group-header,
+.pantheon-group-content {
+    display: flex;
+    width: 100%;
+}
+.pantheon-group-header {
+    flex: none !important;
+    display: flex;
+    justify-content: center;
+    & > h1 {
+        margin: 0 0 0.1rem !important;
+        padding: 0 !important;
+        border: none !important;
+        color: #222;
+    }
+}
+.pantheon-group-content {
+    width: 100% !important;
+    display: flex !important;
+    flex-flow: column;
+    height: 100% !important;
+}
+.pantheon-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    padding: 0;
+}
+.pantheon-logo {
+    width: 100px;
+    height: 100px;
+    border: none;
+}
+.pantheon-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.45rem;
+}
+.pantheon-virtues,
+.god-skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-auto-rows: minmax(60px, auto);
+    gap: 0.9rem;
+    text-align: center;
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 0.95rem;
+    justify-items: center;
+    align-items: center;
+}
+.god-skills {
+    & > *:last-child {
+        &:nth-child(odd) {
+            grid-column: 1 / -1;
+            justify-self: center;
+        }
+    }
+}
+.pantheon-item {
+    padding: 1rem;
+    border-bottom: 1px solid #222;
+    transition: background-color 0.3s ease;
+    text-transform: capitalize;
+    &:last-child {
+        border-bottom: none;
+    }
+    & > label {
+        cursor: pointer;
+    }
+}
+.pantheon-item:hover,
+.pantheon-item:has(input[type="radio"]:checked) {
+    background-color: rgba(211, 211, 211, 0.5) !important;
+}
+.pantheon-description {
+    padding: 0 0.5rem;
+    font-size: 0.9rem;
+    text-align: justify;
+}
+.virtues-label,
+.skills-label,
+.description-label {
+    width: 100%;
+    text-align: center;
+    font-size: 1.45rem;
+}
+.dialog {
+    .window-content {
+        scroll-behavior: smooth;
+        padding-bottom: 5px;
+    }
+}

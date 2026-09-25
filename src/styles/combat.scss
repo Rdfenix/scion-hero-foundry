@@ -1,0 +1,293 @@
+@use "./mixins/column";
+@use "./mixins/grid";
+
+.weapons,
+.health,
+.experience,
+.willpower-legend,
+.combat-armor,
+.weapon-wrapper {
+    @include column.column;
+    position: relative;
+}
+
+.weapon-wrapper {
+    ul {
+        list-style: none;
+        padding: 0 30px;
+        gap: 1.62rem;
+        display: flex;
+        flex-direction: column;
+
+        li {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 0.6rem;
+            padding: 10px;
+            box-shadow: 4px 1px 13px rgba(0, 0, 0, 0.3);
+            position: relative;
+            width: 48rem;
+
+            .delete-button--absolute {
+                top: 230px;
+                bottom: 0;
+            }
+        }
+    }
+
+    .add-weapon {
+        font-family: skranji-regular, sans-serif !important;
+        text-transform: uppercase;
+        width: 50rem;
+        margin-left: 16px;
+        height: 2.5rem;
+    }
+
+    input[type="text"] {
+        padding: 10px;
+        height: 33px;
+    }
+}
+
+.weapon-name,
+.weapon-specs,
+.attr-skill,
+.damage-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.weapon-specs,
+.damage-info {
+    flex-wrap: wrap;
+}
+
+.weapon-name {
+    button {
+        width: 23rem;
+        font-family: skranji-regular, sans-serif !important;
+        text-transform: capitalize;
+
+        &:nth-of-type(2) {
+            background-color: #ff5b5b;
+            border: 1px solid #ff5b5b;
+            color: #222;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+        }
+    }
+}
+
+.damage-attr,
+.attr-skill {
+    div {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        gap: 0.5rem;
+    }
+
+    select {
+        padding: 0 10px;
+        height: 33px;
+        text-transform: capitalize;
+    }
+}
+
+.damage-attr {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+
+    select {
+        width: 21rem;
+    }
+}
+
+.attr-skill {
+    select {
+        width: 23rem;
+    }
+}
+
+.weapon-stats {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    div,
+    .damage {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        gap: 0.5rem;
+    }
+
+    input[type="text"] {
+        width: 6rem;
+    }
+
+    .damage input[type="text"] {
+        width: 10rem;
+    }
+}
+
+.willpower-legend-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    gap: 0.6rem;
+    padding: 0 10px;
+}
+
+.willpower,
+.legend {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .points {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.5rem;
+        position: relative;
+        align-items: center;
+    }
+
+    .scion-label-subtitle {
+        margin: 0 0 5px 0;
+    }
+}
+
+.point-to-spend {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+
+    input[type="number"] {
+        width: 9rem;
+        padding: 10px;
+    }
+}
+
+.combat-armor-grid {
+    @include grid.grid;
+}
+
+.combat-armor-grid-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.defense-value-dodge,
+.defense-value-parry {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 15px;
+
+    input[type="text"] {
+        flex: 1;
+        min-width: 0;
+        padding: 10px;
+    }
+
+    span {
+        min-width: 60px;
+    }
+}
+
+.armor-wrapper,
+.soak-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+    gap: 0.5rem;
+    flex: 1;
+    justify-content: center;
+}
+
+.armor-stats {
+    display: flex;
+    flex: 1 auto;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.aggraveted,
+.lethal,
+.bashing {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 0.5rem;
+
+    span {
+        min-width: 20px;
+        text-transform: uppercase;
+    }
+
+    input[type="text"] {
+        flex: 1;
+        min-width: 0;
+        padding: 10px;
+
+        &:disabled {
+            border: 1px solid #7a7971;
+        }
+    }
+}
+
+.health-line {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+}
+
+.health-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: skranji-bold, sans-serif;
+}
+
+.join-battle {
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+
+    button {
+        display: flex;
+        align-items: center;
+        font-family: skranji-regular, sans-serif !important;
+        text-transform: uppercase;
+        width: 50rem;
+        margin-left: 16px;
+        height: 2.5rem;
+    }
+}
+
+.experience {
+    align-items: center;
+    padding-bottom: 1rem;
+
+    input[type="text"] {
+        width: 80%;
+        height: 33px;
+        padding: 10px;
+    }
+}

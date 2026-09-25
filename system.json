@@ -1,6 +1,6 @@
 {
   "id": "scion-hero-foundry",
-  "title": "Scion - Hero V2",
+  "title": "Scion - Hero V2 Vite",
   "description": "A system for playing Scion, a tabletop role-playing game.",
   "version": "2.2.22",
   "compatibility": {
@@ -12,48 +12,35 @@
       "name": "Rudnei Oliviera"
     }
   ],
-  "esmodules": [
-    "module/scion-hero.js"
-  ],
-  "styles": [
-    "styles/scion-hero.css",
-    "styles/partials/stats.css",
-    "styles/partials/birth-virtues.css",
-    "styles/partials/knacks-boons.css",
-    "styles/partials/combat.css",
-    "styles/dialogs/pantheon.css",
-    "styles/dialogs/dialogDiceRoll.css",
-    "styles/journals/purview.css",
-    "styles/journals/knacks.css",
-    "styles/diceRoll/result.css"
-  ],
+  "esmodules": ["dist/main.js"],
+  "styles": ["dist/main.css"],
   "scripts": [],
   "packs": [
     {
       "name": "deities",
       "label": "Deities List",
-      "path": "packs/deities.db",
+      "path": "src/packs/deities.db",
       "type": "Item",
       "system": "scion-hero-foundry"
     },
     {
       "name": "boons",
       "label": "Boon List",
-      "path": "packs/boons.db",
+      "path": "src/packs/boons.db",
       "type": "Item",
       "system": "scion-hero-foundry"
     },
     {
       "name": "knacks",
       "label": "Knack List",
-      "path": "packs/knacks.db",
+      "path": "src/packs/knacks.db",
       "type": "Item",
       "system": "scion-hero-foundry"
     },
     {
       "name": "purviews",
       "label": "Purviews List",
-      "path": "packs/purviews.db",
+      "path": "src/packs/purviews.db",
       "type": "Item",
       "system": "scion-hero-foundry"
     }
@@ -62,12 +49,12 @@
     {
       "lang": "en",
       "name": "English",
-      "path": "lang/en.json"
+      "path": "./src/lang/en.json"
     },
     {
       "lang": "pt-BR",
       "name": "Português (Brasil)",
-      "path": "lang/pt-BR.json"
+      "path": "./src/lang/pt-BR.json"
     }
   ],
   "grid": {

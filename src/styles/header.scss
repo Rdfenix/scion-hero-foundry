@@ -1,0 +1,114 @@
+.sheet-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    color: #222;
+
+    .scion-header {
+        background-image: url("../assets/svg/scion-logo.svg");
+        background-position: center 10px;
+        background-size: auto 85px;
+        background-repeat: no-repeat;
+        height: 120px;
+        padding: 90px 0 0px 0;
+        text-align: center;
+
+        h1 {
+            border-bottom: 0;
+            margin: 0;
+            font-family: skranji-bold, sans-serif;
+            color: #222;
+        }
+    }
+
+    .profile-image {
+        display: flex;
+        position: absolute;
+        z-index: 1;
+        width: 135px;
+        height: 135px;
+        background: #9f9f9f;
+        top: 15px;
+    }
+
+    .sheet-header-character-info {
+        display: inline-flex;
+        gap: 1rem;
+        width: 100%;
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            position: relative;
+            gap: 0.3rem;
+            width: 100%;
+
+            .row {
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                position: relative;
+                gap: 0.3rem;
+                width: 100%;
+            }
+        }
+
+        .pantheon-list-items {
+            width: 100%;
+            margin: 0;
+            list-style: none;
+            padding: 0;
+            position: absolute;
+            background: #fff;
+            top: 4rem;
+            right: 0;
+            z-index: 9;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            height: auto;
+            max-height: 8rem;
+            overflow-y: auto;
+            transition:
+                max-height 0.2s ease,
+                opacity 0.15s ease;
+
+            li {
+                cursor: pointer;
+                padding: 1rem;
+                border-bottom: 1px solid #ccc;
+                background-color: transparent;
+                margin: 0;
+                transition: background-color 0.3s ease;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                &:hover {
+                    background-color: #f2f2f2;
+                }
+            }
+        }
+    }
+}
+
+.pantheon-image {
+    position: absolute;
+    top: auto;
+    left: auto;
+    right: 5px;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pantheon-image > img {
+    width: 35px;
+    height: 35px !important;
+    flex: 0 !important;
+    border: 0;
+    margin-right: 0 !important;
+}

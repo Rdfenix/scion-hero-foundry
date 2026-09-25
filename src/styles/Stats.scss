@@ -1,0 +1,83 @@
+@use "../styles/mixins/grid";
+@use "../styles/mixins/label";
+
+.attributes-types-grid {
+    @include grid.grid;
+
+    .attribute-grid-item {
+        @include grid.grid-item;
+
+        .attribute-row {
+            @include grid.grid-item-row;
+
+            button.attribute-column {
+                @include grid.grid-item-column;
+                background: transparent;
+                border: none;
+                color: #222;
+                padding: 0;
+                font-size: 0.97rem;
+                align-items: flex-start !important;
+                font-weight: bold;
+            }
+
+            .attribute-column {
+                @include grid.grid-item-column;
+
+                span {
+                    font-size: 0.97rem;
+                    text-transform: capitalize;
+                }
+
+                &:nth-child(1) {
+                    cursor: pointer;
+                }
+
+                &:last-of-type {
+                    align-items: flex-end;
+                }
+            }
+        }
+    }
+}
+
+.skills-types-grid {
+    @include grid.grid;
+
+    .skills-grid-item {
+        @include grid.grid-item;
+
+        .skills-row {
+            @include grid.grid-item-row;
+            gap: 0.2rem;
+
+            .skills-column {
+                @include grid.grid-item-column;
+                align-items: flex-start;
+
+                span {
+                    font-size: 0.97rem;
+                    text-transform: capitalize;
+                }
+
+                &:first-of-type {
+                    cursor: pointer;
+                    white-space: nowrap;
+                }
+
+                &:last-of-type {
+                    align-items: flex-end;
+                }
+
+                &:nth-child(1) {
+                    flex: 2 !important;
+                }
+
+            }
+
+            .square-checkbox {
+                opacity: 0.6;
+            }
+        }
+    }
+}

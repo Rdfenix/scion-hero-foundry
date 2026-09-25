@@ -121,17 +121,5 @@
         "experience": { "value": 0 }
       }
     }
-  },
-  "Item": {
-    "types": [
-      "boon",
-      "knack",
-      "purview",
-      "birthright",
-      "deity",
-      "consumibles",
-      "other"
-    ],
-    "templates": {}
   }
 }

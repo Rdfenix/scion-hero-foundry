@@ -1,0 +1,13 @@
+@mixin label-title-h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    border-bottom: 0;
+    margin: 0;
+    font-family: skranji-bold, sans-serif;
+}
+
+@mixin label-subtitle-h2 {
+    font-size: 1.2rem;
+}

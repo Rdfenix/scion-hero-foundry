@@ -1,0 +1,119 @@
+@use "./mixins/column";
+
+.knacks,
+.boons {
+    @include column.column;
+}
+
+.boons {
+    padding-bottom: 1rem;
+}
+
+.knacks-wrapper,
+.boons-wrapper {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0 20px;
+    font-family: skranji-regular, sans-serif !important;
+    text-transform: capitalize;
+}
+
+.knacks-wrapper > .knack-list > ul,
+.boons-wrapper > .boons > .boon-list {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.knacks-wrapper > .knack-list > ul > li,
+.boons-wrapper > .boons > .boon-list > li {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.boons-wrapper > .boons > .boon-list > li > .delete-button {
+    top: 0px;
+    right: -6px;
+}
+
+.knacks-wrapper > button,
+.boons-wrapper > button {
+    display: flex;
+    align-items: center;
+    width: 50rem;
+    height: 2.5rem;
+    font-family: skranji-regular, sans-serif !important;
+    text-transform: uppercase;
+
+    &:hover,
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.boom-name-level {
+    display: flex;
+    width: 100%;
+    gap: 0.65rem;
+}
+
+.boom-name-level > .boon-name,
+.boom-name-level > .boon-level {
+    width: 24rem;
+}
+
+.boon-level,
+.boon-cost,
+.boon-dice-pool {
+    width: 48.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: capitalize;
+}
+
+.boon-level {
+    .rich-text-editor--name {
+        width: 19rem;
+    }
+}
+
+.boon-dice-pool {
+    .rich-text-editor--name {
+        width: 38rem;
+    }
+}
+
+.boon-level > span,
+.boon-cost > span,
+.boon-dice-pool > span {
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.boon-cost > input[type="text"] {
+    width: 43.5rem;
+    padding: 10px;
+    font-family: skranji-regular, sans-serif !important;
+    text-transform: capitalize;
+
+    &:hover,
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.boon-description > .rich-text-editor {
+    width: 48.5rem;
+}

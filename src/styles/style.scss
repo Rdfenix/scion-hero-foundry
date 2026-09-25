@@ -1,0 +1,336 @@
+@use "./mixins/column";
+@use "./mixins/label";
+
+@font-face {
+  font-family: oldenburg-regular;
+  src: url("../assets/fonts/Oldenburg-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: roboto-regular;
+  src: url("../assets/fonts/RobotoMono-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: roboto-medium;
+  src: url("../assets/fonts/RobotoMono-Medium.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: roboto-italic;
+  src: url("../assets/fonts/RobotoMono-Italic.ttf") format("truetype");
+  font-style: italic;
+}
+@font-face {
+  font-family: roboto-thin;
+  src: url("../assets/fonts/RobotoMono-Thin.ttf") format("truetype");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: skranji-bold;
+  src: url("../assets/fonts/Skranji-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: skranji-regular;
+  src: url("../assets/fonts/Skranji-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+input[type="checkbox"]::before,
+input[type="radio"]::before,
+input[type="checkbox"]::after,
+input[type="radio"]::after {
+  content: none;
+}
+
+input[type="text"]:focus,
+input[type="text"]:hover,
+button:focus,
+button:hover,
+textarea:focus,
+textarea:hover,
+select:focus,
+select:hover,
+button.active {
+  box-shadow: none;
+  outline: none;
+}
+
+.sheet-content {
+  position: relative;
+  display: block;
+  min-height: 400px; /* Ajuste conforme necessário */
+}
+
+.standard-form.scion-v2-sheet {
+  background: #fefefe;
+  position: relative;
+  padding: 1.5rem 1.25rem;
+  color: #222;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  overflow-anchor: auto;
+  scrollbar-gutter: stable both-edges;
+  font-family: skranji-regular, sans-serif !important;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  min-height: 0;
+}
+
+.attributes {
+  @include column.column;
+}
+
+.skills {
+  @include column.column;
+  padding-bottom: 1rem;
+}
+
+.scion-label-title,
+.scion-label-subtitle,
+.scion-label-small-subtitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > h2 {
+    @include label.label-title-h2;
+  }
+}
+
+.scion-label-title {
+  width: 100%;
+  height: 85px;
+  max-width: 130rem;
+  margin: 0 auto;
+  background-image: url("../assets/png/band.png");
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.scion-label-subtitle,
+.scion-label-small-subtitle {
+  margin: 0 0 15px 0;
+  min-height: 60px;
+  background-image: url("../assets/png/band-small.png");
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  text-align: center;
+
+  > h2 {
+    font-size: 1.2rem;
+  }
+}
+
+.scion-label-small-subtitle {
+  background-image: url("../assets/png/band-very-small.png");
+}
+
+.circle-checkbox,
+.square-checkbox {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #222;
+  margin: 0 2px;
+  background: #fff;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.square-checkbox {
+  border-radius: 4px;
+}
+
+.circle-checkbox {
+  border-radius: 50%;
+}
+
+.circle-checkbox:checked,
+.square-checkbox:checked {
+  background: #222 !important;
+}
+
+.circles,
+.squares {
+  display: flex;
+  flex-direction: row;
+}
+
+.circles > input[type="checkbox"],
+.squares > input[type="checkbox"] {
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  margin: 1px;
+}
+
+.dialog .window-content {
+  overflow: auto;
+}
+
+.profile-image {
+  display: flex;
+  position: absolute;
+  z-index: 1;
+  width: 135px;
+  height: 135px;
+  background: #9f9f9f;
+  top: 6px;
+}
+
+.delete-button {
+  border: none;
+  background: none;
+  text-align: center;
+  color: #222;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+
+  i {
+    margin-right: 0;
+  }
+}
+
+.delete-button--absolute {
+  position: absolute;
+  width: 36px;
+  height: auto;
+  right: 5px;
+  top: 5px;
+  font-size: 17px;
+}
+
+.delete-button--inline {
+  position: static;
+  margin-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.delete-button--combat {
+  top: 230px;
+  bottom: 0;
+  font-size: 20px;
+  height: 30px;
+}
+
+.rich-text-editor {
+  position: relative;
+  width: 100%;
+}
+
+.rich-text-editor__content {
+  width: 100%;
+  height: 2rem;
+  line-height: 2rem;
+  background: #302831;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: var(--input-box-shadow);
+  outline: 1px solid transparent;
+  font-size: inherit;
+  color: #e7d1b1;
+  user-select: text;
+  transition: outline-color 0.5s;
+  cursor: text;
+  overflow: hidden;
+  font-family: skranji-regular, sans-serif !important;
+  text-transform: capitalize;
+  box-sizing: border-box;
+  min-height: 2rem;
+  padding: 0 0.5rem;
+
+  p {
+    margin: 0;
+    line-height: 2rem;
+  }
+}
+
+.rich-text-editor__content:focus {
+  outline-color: none;
+}
+
+.rich-text-editor__placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  line-height: 2rem;
+  padding: 0 0.5rem;
+  opacity: 0.6;
+  pointer-events: none;
+  color: #e7d1b1;
+}
+
+.rich-text-editor--name {
+  width: 45rem;
+  max-width: 100%;
+}
+
+.rich-text-editor--description {
+  width: 45rem;
+  max-width: 100%;
+}
+
+.rich-text-editor--description .rich-text-editor__content {
+  height: 145px;
+  min-height: 50px;
+  max-height: 200px;
+  line-height: 1.4;
+  padding: 0.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  white-space: normal;
+  overflow-wrap: anywhere;
+
+  p {
+    margin: 0;
+    line-height: 1.4;
+  }
+}
+
+.rich-text-editor--description .rich-text-editor__placeholder {
+  height: auto;
+  line-height: 1.4;
+  padding: 0.5rem;
+}
+
+.journal-entry-content > .journal-header,
+.journal-page-header,
+.journal-entry-pages > .journal-entry-page > .edit-container {
+  display: none;
+}
+
+.combat-wheel-dialog .window-content {
+  background: #fefefe !important;
+  padding: 1rem !important;
+  font-family: skranji-regular, sans-serif !important;
+  color: #222;
+  width: 19rem;
+}
+
+.combat-wheel-dialog .window-content .dialog-form .dialog-content .combat-wheel-dialog-header h2 {
+  color: #222;
+  font-family: skranji-regular, sans-serif !important;
+  margin-bottom: 0 !important;
+}
+
+.combat-wheel-dialog .window-content .dialog-form .dialog-content .combat-wheel-dialog-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 1rem;
+}
