@@ -2,7 +2,7 @@
   "id": "scion-hero-foundry",
   "title": "Scion - Hero V2 Vite",
   "description": "A system for playing Scion, a tabletop role-playing game.",
-  "version": "2.2.22",
+  "version": "2.3.0",
   "compatibility": {
     "minimum": "11",
     "verified": "14.360"
@@ -12,8 +12,12 @@
       "name": "Rudnei Oliviera"
     }
   ],
-  "esmodules": ["dist/main.js"],
-  "styles": ["dist/main.css"],
+  "esmodules": [
+    "dist/main.js"
+  ],
+  "styles": [
+    "dist/main.css"
+  ],
   "scripts": [],
   "packs": [
     {
