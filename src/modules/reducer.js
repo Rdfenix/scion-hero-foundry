@@ -265,12 +265,13 @@ const updatePantheonField = async (value, actor) => {
 
   const pantheon = {
     ...currentPantheon,
-    name: selectedPantheon?.name ?? value,
+    name: selectedPantheon?.name ?? value.toUpperCase(),
     logo: selectedPantheon?.logo ?? null,
   };
 
   const pantheonData = deities.find(
-    (p) => game.i18n.localize(p.name) === selectedPantheon.name,
+    (p) =>
+      selectedPantheon && game.i18n.localize(p.name) === selectedPantheon.name,
   );
 
   const gods = await mountGodsList(pantheonData?.system?.deities ?? []);
@@ -314,7 +315,7 @@ const updatePantheonGodField = async (value, actor) => {
     return {
       "system.pantheon": {
         ...currentPantheon,
-        god: value,
+        god: value.toUpperCase(),
       },
       "system.virtues": currentPantheon?.virtues ?? EMPTY_VIRTUES,
       "system.abilities": resetFavoredAbilities(actor),
