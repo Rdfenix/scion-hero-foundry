@@ -16598,9 +16598,7 @@ var P = "data:image/svg+xml,%3c?xml%20version='1.0'%20standalone='no'?%3e%3c!DOC
 }, _e = async (e, t) => {
 	let { weapon: n, extraDices: r = 0, difficulty: i, isMultiple: a } = t;
 	if (!n) return null;
-	let o = he(e?.system?.attributes, n.attr), s = he(e?.system?.epicAttributes, n.attr);
-	console.log(s);
-	let c = e?.system?.abilities?.[n.skill], l = I(o?.value), u = I(s?.value), d = I(c?.value), f = I(e?.system?.health?.value), p = Math.max(l + d + I(n.acc) + f + I(r), 0), m = a ? 2 : 1;
+	let o = he(e?.system?.attributes, n.attr), s = he(e?.system?.epicAttributes, n.attr), c = e?.system?.abilities?.[n.skill], l = I(o?.value), u = I(s?.value), d = I(c?.value), f = I(e?.system?.health?.value), p = Math.max(l + d + I(n.acc) + f + I(r), 0), m = a ? 2 : 1;
 	a && (p -= 2), p = Math.max(p, 0);
 	for (let t = 0; t < m; t += 1) await pe(e, p, i, {
 		epicAttribute: u,
@@ -16609,11 +16607,10 @@ var P = "data:image/svg+xml,%3c?xml%20version='1.0'%20standalone='no'?%3e%3c!DOC
 	});
 	return !0;
 }, B = async (e, t) => {
-	console.log("DATA DAMAGE ROLL ", t);
 	let { weapon: n, extraDices: r = 0, difficulty: i } = t;
 	if (!n) return null;
-	let a = he(e?.system?.epicAttributes, n.damageAttr), o = he(e?.system?.attributes, n.damageAttr), s = Math.max(I(n.damage) + I(o?.value) + I(r), 0);
-	return console.log("TOTAL DAMAGE DICE ", s), pe(e, s, i, {
+	let a = he(e?.system?.epicAttributes, n.damageAttr), o = he(e?.system?.attributes, n.damageAttr);
+	return pe(e, Math.max(I(n.damage) + I(o?.value) + I(r), 0), i, {
 		epicAttribute: I(a?.value),
 		title: `${game.i18n.localize("LABELS.DAMAGE")} - ${n.name} <br /> ${game.i18n.localize("LABELS.TYPE")}: ${n.type}`,
 		epicAttributeLabel: n.damageAttr || ""
@@ -16902,9 +16899,7 @@ var xe = ({ pantheons: e, ref: t }) => {
 	willpower: {},
 	battle: {}
 }, Te = async (e, t = {}) => {
-	let { type: n, data: r = {} } = t;
-	console.log("DATA ", r), console.log("TYPE ", n);
-	let i = null;
+	let { type: n, data: r = {} } = t, i = null;
 	if (Object.hasOwn(Ce, n) && (i = Ce[n]), !i) return ui.notifications.error(`Unknown difficulty type: ${n}`), null;
 	let a = e?.system?.attrKeys || [], o = {
 		...we[n],
@@ -16926,13 +16921,11 @@ var xe = ({ pantheons: e, ref: t }) => {
 				callback: async () => {
 					try {
 						let t = c.current?.getValues();
-						if (console.log("VALUES ", t), !t) throw Error("Não foi possível obter os valores do diálogo.");
+						if (!t) throw Error("Não foi possível obter os valores do diálogo.");
 						let n = {
 							...r,
 							...t
-						};
-						console.log("ROLLDATA ", n);
-						let a = await i(e, n);
+						}, a = await i(e, n);
 						s(a ?? null);
 					} catch (e) {
 						ui.notifications.error(e.message);
