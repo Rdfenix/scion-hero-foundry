@@ -16609,12 +16609,15 @@ var P = "data:image/svg+xml,%3c?xml%20version='1.0'%20standalone='no'?%3e%3c!DOC
 	});
 	return !0;
 }, B = async (e, t) => {
-	let { weapon: n, extraDices: r = 0, attrValue: i, epicAttrValue: a, difficulty: o } = t;
-	return n ? pe(e, Math.max(I(n.damage) + I(i) + I(r), 0), o, {
-		epicAttribute: I(a),
+	console.log("DATA DAMAGE ROLL ", t);
+	let { weapon: n, extraDices: r = 0, difficulty: i } = t;
+	if (!n) return null;
+	let a = he(e?.system?.epicAttributes, n.damageAttr), o = he(e?.system?.attributes, n.damageAttr), s = Math.max(I(n.damage) + I(o?.value) + I(r), 0);
+	return console.log("TOTAL DAMAGE DICE ", s), pe(e, s, i, {
+		epicAttribute: I(a?.value),
 		title: `${game.i18n.localize("LABELS.DAMAGE")} - ${n.name} <br /> ${game.i18n.localize("LABELS.TYPE")}: ${n.type}`,
 		epicAttributeLabel: n.damageAttr || ""
-	}, !0) : null;
+	}, !0);
 }, ve = async (e, t = {}) => {
 	try {
 		let n = I(e?.system?.attributes?.mental?.wits?.value), r = I(e?.system?.abilities?.awareness?.value), i = I(e?.system?.epicAttributes?.mental?.wits?.value), a = I(t.difficulty || 7), o = await pe(e, Math.max(0, n + r), a, {
@@ -16899,7 +16902,9 @@ var xe = ({ pantheons: e, ref: t }) => {
 	willpower: {},
 	battle: {}
 }, Te = async (e, t = {}) => {
-	let { type: n, data: r = {} } = t, i = null;
+	let { type: n, data: r = {} } = t;
+	console.log("DATA ", r), console.log("TYPE ", n);
+	let i = null;
 	if (Object.hasOwn(Ce, n) && (i = Ce[n]), !i) return ui.notifications.error(`Unknown difficulty type: ${n}`), null;
 	let a = e?.system?.attrKeys || [], o = {
 		...we[n],
@@ -16921,11 +16926,13 @@ var xe = ({ pantheons: e, ref: t }) => {
 				callback: async () => {
 					try {
 						let t = c.current?.getValues();
-						if (!t) throw Error("Não foi possível obter os valores do diálogo.");
+						if (console.log("VALUES ", t), !t) throw Error("Não foi possível obter os valores do diálogo.");
 						let n = {
 							...r,
 							...t
-						}, a = await i(e, n);
+						};
+						console.log("ROLLDATA ", n);
+						let a = await i(e, n);
 						s(a ?? null);
 					} catch (e) {
 						ui.notifications.error(e.message);

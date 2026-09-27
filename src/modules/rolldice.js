@@ -281,8 +281,6 @@ export const callRollWeaponDice = async (actor, data) => {
     weapon.attr,
   );
 
-  console.log(epicAttribute);
-
   const skill = actor?.system?.abilities?.[weapon.skill];
 
   const attrValue = getSafeNumber(attribute?.value);
@@ -319,13 +317,20 @@ export const callRollWeaponDice = async (actor, data) => {
 };
 
 export const callDamageAtkRoll = async (actor, data) => {
-  const { weapon, extraDices = 0, attrValue, epicAttrValue, difficulty } = data;
+  const { weapon, extraDices = 0, difficulty } = data;
 
   if (!weapon) return null;
 
+  const epicAttributeDamage = findAttribute(
+    actor?.system?.epicAttributes,
+    weapon.damageAttr,
+  );
+
+  const attribute = findAttribute(actor?.system?.attributes, weapon.damageAttr);
+
   const totalDamageDice = Math.max(
     getSafeNumber(weapon.damage) +
-      getSafeNumber(attrValue) +
+      getSafeNumber(attribute?.value) +
       getSafeNumber(extraDices),
     0,
   );
@@ -335,7 +340,7 @@ export const callDamageAtkRoll = async (actor, data) => {
     totalDamageDice,
     difficulty,
     {
-      epicAttribute: getSafeNumber(epicAttrValue),
+      epicAttribute: getSafeNumber(epicAttributeDamage?.value),
       title: `${game.i18n.localize("LABELS.DAMAGE")} - ${weapon.name} <br /> ${game.i18n.localize(
         "LABELS.TYPE",
       )}: ${weapon.type}`,
