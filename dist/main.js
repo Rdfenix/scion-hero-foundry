@@ -27354,13 +27354,7 @@ var oh = ({ placeholder: e, onBlurCallback: t }) => {
 		editorState: (e) => {
 			a.current && e.update(() => {
 				let t = Np(e, new DOMParser().parseFromString(a.current, "text/html")), n = Lc();
-				n.clear();
-				let r = t.filter(K), i = t.filter((e) => !K(e));
-				if (r.length > 0) {
-					let e = Zs();
-					e.append(...r), n.append(e);
-				}
-				n.append(...i);
+				n.clear(), n.select(), Do(t), zc(null);
 			});
 		}
 	}), [o]);

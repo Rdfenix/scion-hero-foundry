@@ -6,7 +6,7 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { $generateHtmlFromNodes, $generateNodesFromDOM } from "@lexical/html";
-import { $getRoot, $isTextNode, $createParagraphNode } from "lexical";
+import { $getRoot, $insertNodes, $setSelection } from "lexical";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 
 const CustomContentEditable = ({ placeholder, onBlurCallback }) => {
@@ -58,16 +58,9 @@ const RichTextEditor = ({
 
           root.clear();
 
-          const textNodes = nodes.filter($isTextNode);
-          const otherNodes = nodes.filter((node) => !$isTextNode(node));
-
-          if (textNodes.length > 0) {
-            const paragraph = $createParagraphNode();
-            paragraph.append(...textNodes);
-            root.append(paragraph);
-          }
-
-          root.append(...otherNodes);
+          root.select();
+          $insertNodes(nodes);
+          $setSelection(null);
         });
       },
     }),
