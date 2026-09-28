@@ -26,11 +26,13 @@ const CombatWheel = ({ options, ref }) => {
       </div>
       <section className="combat-wheel-dialog-section">
         <div className="combat-wheel-dialog-column">
-          <label for="action-select">{localize("LABELS.STEP")}:</label>
+          <label htmlFor="action-select">{localize("LABELS.STEP")}:</label>
         </div>
         <select id="action-select" name="tick-value" onChange={handleTicker}>
           {options.ticks.map((tick) => (
-            <option value={tick}>{tick}</option>
+            <option key={tick} value={tick}>
+              {tick}
+            </option>
           ))}
         </select>
       </section>
