@@ -28680,7 +28680,7 @@ var Dh = class e extends foundry.applications.sheets.ActorSheetV2 {
 			children: [/* @__PURE__ */ (0, F.jsx)("div", {
 				className: "combat-wheel-dialog-column",
 				children: /* @__PURE__ */ (0, F.jsxs)("label", {
-					for: "action-select",
+					htmlFor: "action-select",
 					children: [M("LABELS.STEP"), ":"]
 				})
 			}), /* @__PURE__ */ (0, F.jsx)("select", {
@@ -28693,7 +28693,7 @@ var Dh = class e extends foundry.applications.sheets.ActorSheetV2 {
 				children: e.ticks.map((e) => /* @__PURE__ */ (0, F.jsx)("option", {
 					value: e,
 					children: e
-				}))
+				}, e))
 			})]
 		})]
 	});
