@@ -57,6 +57,14 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
       });
 
     return {
+      player: new StringField({ initial: "" }),
+      calling: new StringField({ initial: "" }),
+      nature: new StringField({ initial: "" }),
+      pantheon: new SchemaField({
+        name: new StringField({ initial: "" }),
+        god: new StringField({ initial: "" }),
+        logo: new StringField({ initial: "", nullable: true }),
+      }),
       attributes: new SchemaField({
         physical: new SchemaField({
           strength: createStat(1, 10, 1),

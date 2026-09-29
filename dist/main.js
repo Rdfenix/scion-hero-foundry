@@ -28906,6 +28906,17 @@ var Dh = class e extends foundry.applications.sheets.ActorSheetV2 {
 			favored: new zh({ initial: !1 })
 		});
 		return {
+			player: new Rh({ initial: "" }),
+			calling: new Rh({ initial: "" }),
+			nature: new Rh({ initial: "" }),
+			pantheon: new Ih({
+				name: new Rh({ initial: "" }),
+				god: new Rh({ initial: "" }),
+				logo: new Rh({
+					initial: "",
+					nullable: !0
+				})
+			}),
 			attributes: new Ih({
 				physical: new Ih({
 					strength: e(1, 10, 1),
