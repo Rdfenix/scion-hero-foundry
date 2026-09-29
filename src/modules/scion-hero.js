@@ -4,6 +4,7 @@ import { ScionHeroActorBaseDefault } from "./actor-base-default.js";
 import { createKnacksJournal, createPuviewsJournal } from "./journals.js";
 import { ScionCombatWheel } from "./ScionCombatWheel.js";
 import { getRoot } from "../utils/utils";
+import { CharacterDataModel } from "./CharacterDataModel.js"
 
 import deitiesEn from "../lang/deities-en.json";
 import deitiesBr from "../lang/deities-pt-BR.json";
@@ -150,6 +151,8 @@ Hooks.once("init", async function () {
       label: "SCION.SheetCharacterV2",
     },
   );
+
+  CONFIG.Actor.dataModels.character = CharacterDataModel;
 
   globalThis.ScionCombatWheel = ScionCombatWheel;
 

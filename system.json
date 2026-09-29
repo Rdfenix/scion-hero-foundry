@@ -7,17 +7,18 @@
     "minimum": "11",
     "verified": "14.368"
   },
+  "documentTypes": {
+    "Actor": {
+      "character": {}
+    }
+  },
   "authors": [
     {
       "name": "Rudnei Oliviera"
     }
   ],
-  "esmodules": [
-    "dist/main.js"
-  ],
-  "styles": [
-    "dist/main.css"
-  ],
+  "esmodules": ["dist/main.js"],
+  "styles": ["dist/main.css"],
   "scripts": [],
   "packs": [
     {
