@@ -18,9 +18,9 @@ export class ScionCombatWheel {
 
   static CONFIG = {
     wheelSize: 1100,
-    tokenSize: 184, // Redimensionado proporcionalmente (320 * 0.576)
-    radius: 473, // Redimensionado proporcionalmente (822 * 0.576)
-    startAngle: -67.5, // O ângulo permanece o mesmo
+    tokenSize: 184,
+    radius: 507, // Ajustado para o meio-termo (nem tão fora, nem tão dentro)
+    startAngle: -67.4, // Revertido para o valor original para melhor alinhamento
     totalTicks: 8,
   };
 
@@ -49,30 +49,25 @@ export class ScionCombatWheel {
 
     // Função que roda a cada frame do navegador
     const ontick = (dt, { progress }) => {
-      // Interpola o "tick" atual (ex: de 0 para 1, passa por 0.1, 0.2...)
-      const currentInterpolatedTick = oldTick + (newTick - oldTick) * progress;
+      const current = oldTick + (newTick - oldTick) * progress;
+      const pos = this.getPositionForTick(current, bgTile.x, bgTile.y);
 
-      // Pega as coordenadas X e Y para esse micro-momento do ângulo
-      const pos = this.getPositionForTick(
-        currentInterpolatedTick,
-        bgTile.x,
-        bgTile.y,
-      );
-
-      // Move o visual (mesh)
-      if (tokenTile.mesh) {
-        tokenTile.mesh.x = pos.x;
-        tokenTile.mesh.y = pos.y;
+      const mesh = tokenTile.mesh;
+      if (mesh) {
+        const ax = mesh.anchor?.x ?? 0;
+        const ay = mesh.anchor?.y ?? 0;
+        mesh.position.set(
+          pos.x + this.CONFIG.tokenSize * ax,
+          pos.y + this.CONFIG.tokenSize * ay,
+        );
       }
     };
 
     // 3. Executar a animação de arco
-    await foundry.canvas.animation.CanvasAnimation.animate([], {
-      name,
-      duration,
-      ontick,
-      easing: "easeInOutSine",
-    });
+    await foundry.canvas.animation.CanvasAnimation.animate(
+      [{ parent: { t: 0 }, attribute: "t", to: 1 }],
+      { name, duration, ontick, easing: "easeInOutSine" },
+    );
 
     // 4. Salvar posição final no banco de dados
     const finalPos = this.getPositionForTick(
@@ -214,25 +209,33 @@ export class ScionCombatWheel {
   static async createWheel() {
     if (!canvas.scene) return;
     await this.clearWheel();
+
+    const { x: viewX, y: viewY } = canvas.stage.pivot; // ou o centro da cena, como preferir
+
     const wheelData = {
-      texture: { src: this.imagePaths.wheel },
+      texture: { src: this.imagePaths.wheel, anchorX: 0, anchorY: 0 },
       width: this.CONFIG.wheelSize,
       height: this.CONFIG.wheelSize,
-      x: (canvas.dimensions.width - this.CONFIG.wheelSize) / 2,
-      y: (canvas.dimensions.height - this.CONFIG.wheelSize) / 2,
-      z: 100,
+      x: Math.round(viewX - this.CONFIG.wheelSize / 2),
+      y: Math.round(viewY - this.CONFIG.wheelSize / 2),
+      elevation: 0,
+      sort: 100,
       flags: { [this.ID]: { type: "bg" } },
     };
+
     const startPos = this.getPositionForTick(0, wheelData.x, wheelData.y);
+
     const tokenData = {
-      texture: { src: this.imagePaths.token },
+      texture: { src: this.imagePaths.token, anchorX: 0, anchorY: 0 },
       width: this.CONFIG.tokenSize,
       height: this.CONFIG.tokenSize,
       x: startPos.x,
       y: startPos.y,
-      z: 110,
+      elevation: 1,
+      sort: 200,
       flags: { [this.ID]: { type: "token", currentTick: 0 } },
     };
+
     await canvas.scene.createEmbeddedDocuments("Tile", [wheelData, tokenData]);
   }
 }
