@@ -304,14 +304,16 @@ export const callRollWeaponDice = async (actor, data) => {
 
   totalDice = Math.max(totalDice, 0);
 
-  for (let index = 0; index < actions; index += 1) {
-    await processAndSendRoll(actor, totalDice, difficulty, {
-      epicAttribute: epicAttrValue,
-      title:
-        actions > 1 ? `#${index + 1} - ${weapon.name}` : `#1 - ${weapon.name}`,
-      epicAttributeLabel: weapon.attr || "",
-    });
-  }
+  await Promise.all(
+    Array.from({ length: actions }, (_, index) =>
+      processAndSendRoll(actor, totalDice, difficulty, {
+        epicAttribute: epicAttrValue,
+        title:
+          actions > 1 ? `#${index + 1} - ${weapon.name}` : `#1 - ${weapon.name}`,
+        epicAttributeLabel: weapon.attr || "",
+      }),
+    ),
+  );
 
   return true;
 };

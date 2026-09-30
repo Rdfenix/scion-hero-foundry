@@ -16599,13 +16599,11 @@ var N = "data:image/svg+xml,%3c?xml%20version='1.0'%20standalone='no'?%3e%3c!DOC
 	let { weapon: n, extraDices: r = 0, difficulty: i, isMultiple: a } = t;
 	if (!n) return null;
 	let o = ge(e?.system?.attributes, n.attr), s = ge(e?.system?.epicAttributes, n.attr), c = e?.system?.abilities?.[n.skill], l = F(o?.value), u = F(s?.value), d = F(c?.value), f = F(e?.system?.health?.value), p = Math.max(l + d + F(n.acc) + f + F(r), 0), m = a ? 2 : 1;
-	a && (p -= 2), p = Math.max(p, 0);
-	for (let t = 0; t < m; t += 1) await me(e, p, i, {
+	return a && (p -= 2), p = Math.max(p, 0), await Promise.all(Array.from({ length: m }, (t, r) => me(e, p, i, {
 		epicAttribute: u,
-		title: m > 1 ? `#${t + 1} - ${n.name}` : `#1 - ${n.name}`,
+		title: m > 1 ? `#${r + 1} - ${n.name}` : `#1 - ${n.name}`,
 		epicAttributeLabel: n.attr || ""
-	});
-	return !0;
+	}))), !0;
 }, z = async (e, t) => {
 	let { weapon: n, extraDices: r = 0, difficulty: i } = t;
 	if (!n) return null;
