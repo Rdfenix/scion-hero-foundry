@@ -107,16 +107,16 @@ async function createOrUpdateWheelMacro() {
 
   const results = new Set();
 
-  for (const data of macroActions) {
-    let macro = game.macros.find((m) => m.name === data.name);
+  const macros = await Promise.all(
+    macroActions.map(async (data) => {
+      const existingMacro = game.macros.find((m) => m.name === data.name);
+      return existingMacro
+        ? existingMacro.update(data)
+        : Macro.create(data);
+    }),
+  );
 
-    if (macro) {
-      await macro.update(data);
-    } else {
-      macro = await Macro.create(data);
-    }
-    results.add(macro);
-  }
+  for (const macro of macros) results.add(macro);
 
   return Array.from(results);
 }
@@ -124,19 +124,21 @@ async function createOrUpdateWheelMacro() {
 async function assignMacroToHotbar(slot = 1) {
   const macros = (await createOrUpdateWheelMacro()).filter((m) => !!m);
 
-  for (let i = 0; i < macros.length; i++) {
-    if (macros[i] && macros[i] instanceof Macro) {
-      await game.user.assignHotbarMacro(macros[i], slot + i);
-      console.log(
-        `Scion | Macro atribuída ao hotbar: ${macros[i].name} no slot ${slot + i}`,
-      );
-    } else {
-      console.warn(
-        `Scion | Macro inválida não atribuída ao hotbar:`,
-        macros[i],
-      );
-    }
-  }
+  await Promise.all(
+    macros.map(async (macro, i) => {
+      if (macro && macro instanceof Macro) {
+        await game.user.assignHotbarMacro(macro, slot + i);
+        console.log(
+          `Scion | Macro atribuída ao hotbar: ${macro.name} no slot ${slot + i}`,
+        );
+      } else {
+        console.warn(
+          `Scion | Macro inválida não atribuída ao hotbar:`,
+          macro,
+        );
+      }
+    }),
+  );
 }
 
 Hooks.once("init", async function () {

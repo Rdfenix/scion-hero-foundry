@@ -123,11 +123,11 @@ export class ScionCombatWheel {
   // --- Métodos de utilidade mantidos ---
 
   static async rewind() {
-    this.openDialog("previous");
+    void this.openDialog("previous");
   }
 
   static async advance() {
-    this.openDialog("next");
+    void this.openDialog("next");
   }
 
   static async openDialog(stepDirection) {

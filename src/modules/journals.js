@@ -42,7 +42,7 @@ export const createPuviewsJournal = async () => {
     ownership: { default: 2 },
   });
 
-  for (const purview of purviewList) {
+  await Promise.all(purviewList.map(async (purview) => {
     const content = renderToStaticMarkup(
       createElement(Purview, {
         purview,
@@ -75,7 +75,7 @@ export const createPuviewsJournal = async () => {
         },
       },
     ]);
-  }
+  }));
 };
 
 export const createKnacksJournal = async () => {
@@ -115,7 +115,7 @@ export const createKnacksJournal = async () => {
     ownership: { default: 2 },
   });
 
-  for (const knackItem of knackList) {
+  await Promise.all(knackList.map(async (knackItem) => {
     const content = renderToStaticMarkup(
       createElement(Knack, {
         knacks: knackItem.knacks ?? [],
@@ -148,5 +148,5 @@ export const createKnacksJournal = async () => {
         },
       },
     ]);
-  }
+  }));
 };

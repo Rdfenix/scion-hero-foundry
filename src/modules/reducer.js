@@ -224,7 +224,7 @@ export async function reducer(action, actor) {
     case "OPEN_DIFICULTY_DIALOG": {
       const { field, value } = action.payload;
 
-      callDifficultyDialog(actor, { type: field, data: value });
+      void callDifficultyDialog(actor, { type: field, data: value });
 
       break;
     }
