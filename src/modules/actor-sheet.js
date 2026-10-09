@@ -27,7 +27,7 @@ export default class ScionHeroActorSheetV2
       tag: "form",
       window: {
         title: "{name}",
-        resizable: false,
+        resizable: true,
         contentClasses: ["standard-form", "scion-v2-sheet"],
         scrollable: [".scion-v2-sheet"],
       },

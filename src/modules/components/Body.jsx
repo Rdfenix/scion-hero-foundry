@@ -5,15 +5,20 @@ import Birth from "./partials/Birth";
 import KnacksBoons from "./partials/KnacksBoons";
 import Combat from "./partials/Combat";
 
+const Tabs = {
+  stats: Stats,
+  birth: Birth,
+  knacks: KnacksBoons,
+  combat: Combat,
+};
+
 const Body = () => {
   const { activeTab } = useTabs();
+  const ActiveTab = Tabs[activeTab];
 
   return (
     <div className="sheet-content">
-      {activeTab === "stats" && <Stats />}
-      {activeTab === "birth" && <Birth />}
-      {activeTab === "knacks" && <KnacksBoons />}
-      {activeTab === "combat" && <Combat />}
+      {ActiveTab && <ActiveTab />}
     </div>
   );
 };

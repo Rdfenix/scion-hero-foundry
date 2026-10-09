@@ -28291,25 +28291,25 @@ var fh = ({ data: e }) => {
 			}
 		})]
 	});
-}, _h = () => {
-	let { system: e } = Fe();
-	return /* @__PURE__ */ (0, P.jsxs)(P.Fragment, { children: [
-		/* @__PURE__ */ (0, P.jsx)(fh, { data: e }),
-		/* @__PURE__ */ (0, P.jsx)(ph, { data: e }),
-		/* @__PURE__ */ (0, P.jsx)(mh, { data: e }),
-		/* @__PURE__ */ (0, P.jsx)(hh, { data: e }),
-		/* @__PURE__ */ (0, P.jsx)(gh, { data: e })
-	] });
+}, _h = {
+	stats: Ge,
+	birth: Je,
+	knacks: uh,
+	combat: () => {
+		let { system: e } = Fe();
+		return /* @__PURE__ */ (0, P.jsxs)(P.Fragment, { children: [
+			/* @__PURE__ */ (0, P.jsx)(fh, { data: e }),
+			/* @__PURE__ */ (0, P.jsx)(ph, { data: e }),
+			/* @__PURE__ */ (0, P.jsx)(mh, { data: e }),
+			/* @__PURE__ */ (0, P.jsx)(hh, { data: e }),
+			/* @__PURE__ */ (0, P.jsx)(gh, { data: e })
+		] });
+	}
 }, vh = () => {
-	let { activeTab: e } = Le();
-	return /* @__PURE__ */ (0, P.jsxs)("div", {
+	let { activeTab: e } = Le(), t = _h[e];
+	return /* @__PURE__ */ (0, P.jsx)("div", {
 		className: "sheet-content",
-		children: [
-			e === "stats" && /* @__PURE__ */ (0, P.jsx)(Ge, {}),
-			e === "birth" && /* @__PURE__ */ (0, P.jsx)(Je, {}),
-			e === "knacks" && /* @__PURE__ */ (0, P.jsx)(uh, {}),
-			e === "combat" && /* @__PURE__ */ (0, P.jsx)(_h, {})
-		]
+		children: t && /* @__PURE__ */ (0, P.jsx)(t, {})
 	});
 }, yh = () => {
 	let e = Fe();
@@ -28456,7 +28456,7 @@ var Dh = class e extends foundry.applications.sheets.ActorSheetV2 {
 		tag: "form",
 		window: {
 			title: "{name}",
-			resizable: !1,
+			resizable: !0,
 			contentClasses: ["standard-form", "scion-v2-sheet"],
 			scrollable: [".scion-v2-sheet"]
 		},
