@@ -7,25 +7,62 @@ import D10Icon from "../../assets/svg/d10.svg";
 const DiceResult = ({ data }) => {
   let resultTemplate;
 
+  const getDiceValueClass = (value) => {
+    if (value === 1) return "dice-value dice-value--one";
+    if (value === 10) return "dice-value dice-value--ten";
+    if (value < 7) return "dice-value dice-value--low";
+    return "dice-value";
+  };
+
+  const renderDicesResults = () => (
+    <div className="dice-values">
+      {(data.dicesResults ?? []).map((dice) => {
+        const value = Number(dice);
+        const valueClass = getDiceValueClass(value);
+
+        return (
+          <span className={valueClass} key={index}>
+            {dice}
+          </span>
+        );
+      })}
+    </div>
+  );
+
   if (data.epicAttribute === 0 && data.criticalFail) {
     resultTemplate = (
       <div className="critical-fail">
-        <span>{localize("LABELS.CRITICAL_FAIL")}:</span>
-        <span>{data.criticalFailCount}</span>
+        <details className="roll-breakdown">
+          <summary className="critical-fail">
+            <span>{localize("LABELS.CRITICAL_FAIL")}:</span>
+            <span>{data.totalSuccess}</span>
+          </summary>
+          {renderDicesResults()}
+        </details>
       </div>
     );
   } else if (data.fail) {
     resultTemplate = (
       <div className="fail">
-        <span>{localize("LABELS.FAIL")}:</span>
-        <span>{data.totalSuccess}</span>
+        <details className="roll-breakdown">
+          <summary className="fail">
+            <span>{localize("LABELS.FAIL")}:</span>
+            <span>{data.totalSuccess}</span>
+          </summary>
+          {renderDicesResults()}
+        </details>
       </div>
     );
   } else {
     resultTemplate = (
       <div className="success">
-        <span>{localize("LABELS.NORMAL_SUCCESSES")}:</span>
-        <span>{data.totalSuccess}</span>
+        <details className="roll-breakdown">
+          <summary className="success">
+            <span>{localize("LABELS.NORMAL_SUCCESSES")}:</span>
+            <span>{data.totalSuccess}</span>
+          </summary>
+          {renderDicesResults()}
+        </details>
       </div>
     );
   }
@@ -41,9 +78,7 @@ const DiceResult = ({ data }) => {
         {data.explodedDices.length > 0 && (
           <div className="exploded-dices">
             <span>{localize("LABELS.EXPLODED_DICE")}:</span>
-            <span>
-              {data.explodedDices}
-            </span>
+            <span>{data.explodedDices}</span>
           </div>
         )}
         {resultTemplate}

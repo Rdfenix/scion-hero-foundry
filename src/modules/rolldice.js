@@ -102,6 +102,7 @@ const processAndSendRoll = async (
 
   const epicDots = getSafeNumber(templateData.epicAttribute);
   const epicAutoSuccesses = EPIC_MAP.get(epicDots) || 0;
+  const dicesResults = dicesResult || [];
 
   // Total final = Sucessos dos dados + Sucessos Automáticos do Épico
   const finalTotal = Math.max(0, totalSucess + epicAutoSuccesses);
@@ -112,6 +113,7 @@ const processAndSendRoll = async (
     fail,
     criticalFail,
     explodedDices,
+    dicesResults,
     ...templateData,
   });
 
@@ -130,6 +132,7 @@ const sendRollToChat = async (
     criticalFail,
     epicAttribute,
     explodedDices = [],
+    dicesResults = [],
     title = "",
     epicAttributeLabel = "",
   },
@@ -146,6 +149,7 @@ const sendRollToChat = async (
       criticalFail,
       epicAttribute: safeEpicAttribute,
       explodedDices,
+      dicesResults,
       title,
       epicAttributeLabel,
       totalEpicSuccess,
@@ -309,7 +313,9 @@ export const callRollWeaponDice = async (actor, data) => {
       processAndSendRoll(actor, totalDice, difficulty, {
         epicAttribute: epicAttrValue,
         title:
-          actions > 1 ? `#${index + 1} - ${weapon.name}` : `#1 - ${weapon.name}`,
+          actions > 1
+            ? `#${index + 1} - ${weapon.name}`
+            : `#1 - ${weapon.name}`,
         epicAttributeLabel: weapon.attr || "",
       }),
     ),
