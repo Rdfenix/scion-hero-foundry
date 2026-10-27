@@ -94,8 +94,11 @@ $shadow: rgba(0, 0, 0, 0.9);
 .roll-breakdown {
     width: 100%;
 
-    summary {
+    > summary {
+        display: list-item;
+        width: 100%;
         cursor: pointer;
+        pointer-events: auto;
     }
 }
 
