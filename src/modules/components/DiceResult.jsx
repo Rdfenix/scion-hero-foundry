@@ -21,7 +21,7 @@ const DiceResult = ({ data }) => {
         const valueClass = getDiceValueClass(value);
 
         return (
-          <span className={valueClass} key={index}>
+          <span className={valueClass} key={dice}>
             {dice}
           </span>
         );

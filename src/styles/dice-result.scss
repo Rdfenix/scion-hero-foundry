@@ -18,7 +18,7 @@ $shadow: rgba(0, 0, 0, 0.9);
     @include flex-center;
     flex-direction: column;
     padding: 10px;
-    font-family: $font-main;
+    font-family: $font-main !important;
     color: $color-text;
     flex-wrap: nowrap;
     @include text-capitalized;
@@ -26,7 +26,7 @@ $shadow: rgba(0, 0, 0, 0.9);
 
     h3 {
         font-size: 20px;
-        font-family: $font-main;
+        font-family: $font-main !important;
         margin-bottom: 5px;
     }
 
