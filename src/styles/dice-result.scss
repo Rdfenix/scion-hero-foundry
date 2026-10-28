@@ -57,6 +57,10 @@ $shadow: rgba(0, 0, 0, 0.9);
     font-size: 16px;
     @include text-capitalized;
     gap: 5px;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .total-result {
@@ -93,9 +97,16 @@ $shadow: rgba(0, 0, 0, 0.9);
 
 .roll-breakdown {
     width: 100%;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     > summary {
-        display: list-item;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         cursor: pointer;
         pointer-events: auto;
