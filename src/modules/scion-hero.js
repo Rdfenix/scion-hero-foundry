@@ -161,7 +161,7 @@ Hooks.on("setup", async () => {
 });
 
 // registrar uma vez, ex: no hooks.js do módulo
-Hooks.on("renderChatMessageHTML", (message, html) => {
+/*Hooks.on("renderChatMessageHTML", (message, html) => {
   html.querySelectorAll(".roll-breakdown").forEach((details) => {
     const summary = details.querySelector(":scope > summary");
     if (!summary || summary.dataset.bound) return;
@@ -172,7 +172,7 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
       details.classList.toggle("is-open");
     });
   });
-});
+});*/
 
 Hooks.on("preCreateActor", (actor, data, options, userId) => {
   // Roda apenas se quem está criando for o usuário atual e se for character

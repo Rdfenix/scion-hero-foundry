@@ -16442,16 +16442,43 @@ var N = "data:image/svg+xml,%3c?xml%20version='1.0'%20standalone='no'?%3e%3c!DOC
 })), P = (/* @__PURE__ */ o(((e, t) => {
 	t.exports = le();
 })))(), ue = ({ data: e }) => {
-	let t;
-	return t = e.epicAttribute === 0 && e.criticalFail ? /* @__PURE__ */ (0, P.jsxs)("div", {
+	let t, n = (e) => e === 1 ? "dice-value dice-value--one" : e === 10 ? "dice-value dice-value--ten" : e < 7 ? "dice-value dice-value--low" : "dice-value", r = () => /* @__PURE__ */ (0, P.jsx)("div", {
+		className: "dice-values",
+		children: (e.dicesResults ?? []).map((e) => {
+			let t = Number(e), r = n(t);
+			return /* @__PURE__ */ (0, P.jsx)("span", {
+				className: r,
+				children: e
+			}, e);
+		})
+	});
+	return t = e.epicAttribute === 0 && e.criticalFail ? /* @__PURE__ */ (0, P.jsx)("div", {
 		className: "critical-fail",
-		children: [/* @__PURE__ */ (0, P.jsxs)("span", { children: [j("LABELS.CRITICAL_FAIL"), ":"] }), /* @__PURE__ */ (0, P.jsx)("span", { children: e.criticalFailCount })]
-	}) : e.fail ? /* @__PURE__ */ (0, P.jsxs)("div", {
+		children: /* @__PURE__ */ (0, P.jsxs)("details", {
+			className: "roll-breakdown",
+			children: [/* @__PURE__ */ (0, P.jsxs)("summary", {
+				className: "critical-fail",
+				children: [/* @__PURE__ */ (0, P.jsxs)("span", { children: [j("LABELS.CRITICAL_FAIL"), ":"] }), /* @__PURE__ */ (0, P.jsx)("span", { children: e.totalSuccess })]
+			}), r()]
+		})
+	}) : e.fail ? /* @__PURE__ */ (0, P.jsx)("div", {
 		className: "fail",
-		children: [/* @__PURE__ */ (0, P.jsxs)("span", { children: [j("LABELS.FAIL"), ":"] }), /* @__PURE__ */ (0, P.jsx)("span", { children: e.totalSuccess })]
-	}) : /* @__PURE__ */ (0, P.jsxs)("div", {
+		children: /* @__PURE__ */ (0, P.jsxs)("details", {
+			className: "roll-breakdown",
+			children: [/* @__PURE__ */ (0, P.jsxs)("summary", {
+				className: "fail",
+				children: [/* @__PURE__ */ (0, P.jsxs)("span", { children: [j("LABELS.FAIL"), ":"] }), /* @__PURE__ */ (0, P.jsx)("span", { children: e.totalSuccess })]
+			}), r()]
+		})
+	}) : /* @__PURE__ */ (0, P.jsx)("div", {
 		className: "success",
-		children: [/* @__PURE__ */ (0, P.jsxs)("span", { children: [j("LABELS.NORMAL_SUCCESSES"), ":"] }), /* @__PURE__ */ (0, P.jsx)("span", { children: e.totalSuccess })]
+		children: /* @__PURE__ */ (0, P.jsxs)("details", {
+			className: "roll-breakdown",
+			children: [/* @__PURE__ */ (0, P.jsxs)("summary", {
+				className: "success",
+				children: [/* @__PURE__ */ (0, P.jsxs)("span", { children: [j("LABELS.NORMAL_SUCCESSES"), ":"] }), /* @__PURE__ */ (0, P.jsx)("span", { children: e.totalSuccess })]
+			}), r()]
+		})
 	}), /* @__PURE__ */ (0, P.jsxs)("div", {
 		className: "dice-result",
 		children: [
@@ -16535,33 +16562,35 @@ var N = "data:image/svg+xml,%3c?xml%20version='1.0'%20standalone='no'?%3e%3c!DOC
 		explodedDices: s
 	};
 }, me = async (e, t, n, r, i = !1) => {
-	let { dicesResult: a, roll: o } = await fe(t), s = o || await new Roll("0d10").evaluate(), { totalSucess: c, criticalFailCount: l, fail: u, criticalFail: d, explodedDices: f } = await pe(a, n, i), p = F(r.epicAttribute), m = de.get(p) || 0, h = Math.max(0, c + m);
+	let { dicesResult: a, roll: o } = await fe(t), s = o || await new Roll("0d10").evaluate(), { totalSucess: c, criticalFailCount: l, fail: u, criticalFail: d, explodedDices: f } = await pe(a, n, i), p = F(r.epicAttribute), m = de.get(p) || 0, h = a || [], g = Math.max(0, c + m);
 	return await I(e, s, {
 		totalSucess: c,
 		criticalFailCount: l,
 		fail: u,
 		criticalFail: d,
 		explodedDices: f,
+		dicesResults: h,
 		...r
-	}), { totalSucess: h };
-}, I = async (e, t, { totalSucess: n, criticalFailCount: r, fail: i, criticalFail: a, epicAttribute: o, explodedDices: s = [], title: c = "", epicAttributeLabel: l = "" }) => {
+	}), { totalSucess: g };
+}, I = async (e, t, { totalSucess: n, criticalFailCount: r, fail: i, criticalFail: a, epicAttribute: o, explodedDices: s = [], dicesResults: c = [], title: l = "", epicAttributeLabel: u = "" }) => {
 	try {
-		let u = F(n), d = F(o), f = {
-			totalSuccess: u,
+		let d = F(n), f = F(o), p = {
+			totalSuccess: d,
 			criticalFailCount: r,
 			fail: i,
 			criticalFail: a,
-			epicAttribute: d,
+			epicAttribute: f,
 			explodedDices: s,
-			title: c,
-			epicAttributeLabel: l,
-			totalEpicSuccess: de.get(d) || 0
-		}, p = (0, ce.renderToStaticMarkup)((0, _.createElement)(ue, { data: f })), m = {
+			dicesResults: c,
+			title: l,
+			epicAttributeLabel: u,
+			totalEpicSuccess: de.get(f) || 0
+		}, m = (0, ce.renderToStaticMarkup)((0, _.createElement)(ue, { data: p })), h = {
 			speaker: window.ChatMessage.getSpeaker({ actor: e }),
-			content: p,
+			content: m,
 			roll: t
 		};
-		t instanceof Roll ? await t.toMessage(m) : await window.ChatMessage.create(m), game.audio?.context?.state === "suspended" && await game.audio.context.resume(), await window.foundry.audio.AudioHelper.play({
+		t instanceof Roll ? await t.toMessage(h) : await window.ChatMessage.create(h), game.audio?.context?.state === "suspended" && await game.audio.context.resume(), await window.foundry.audio.AudioHelper.play({
 			src: window.CONFIG.sounds.dice,
 			volume: 1,
 			loop: !1,

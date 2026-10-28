@@ -100,14 +100,6 @@ $shadow: rgba(0, 0, 0, 0.9);
         cursor: pointer;
         pointer-events: auto;
     }
-
-    .dice-values {
-        display: none;
-    }
-
-    &.is-open .dice-values {
-        display: flex;
-    }
 }
 
 .dice-values {
