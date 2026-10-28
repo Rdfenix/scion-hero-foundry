@@ -16,12 +16,12 @@ const DiceResult = ({ data }) => {
 
   const renderDicesResults = () => (
     <div className="dice-values">
-      {(data.dicesResults ?? []).map((dice, index) => {
+      {(data.dicesResults ?? []).map((dice) => {
         const value = Number(dice);
         const valueClass = getDiceValueClass(value);
 
         return (
-          <span className={valueClass} key={index}>
+          <span className={valueClass} key={dice}>
             {dice}
           </span>
         );

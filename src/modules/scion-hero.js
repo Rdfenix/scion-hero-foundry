@@ -4,7 +4,7 @@ import { ScionHeroActorBaseDefault } from "./actor-base-default.js";
 import { createKnacksJournal, createPuviewsJournal } from "./journals.js";
 import { ScionCombatWheel } from "./ScionCombatWheel.js";
 import { getRoot } from "../utils/utils";
-import { CharacterDataModel } from "./CharacterDataModel.js"
+import { CharacterDataModel } from "./CharacterDataModel.js";
 
 import deitiesEn from "../lang/deities-en.json";
 import deitiesBr from "../lang/deities-pt-BR.json";
@@ -110,9 +110,7 @@ async function createOrUpdateWheelMacro() {
   const macros = await Promise.all(
     macroActions.map(async (data) => {
       const existingMacro = game.macros.find((m) => m.name === data.name);
-      return existingMacro
-        ? existingMacro.update(data)
-        : Macro.create(data);
+      return existingMacro ? existingMacro.update(data) : Macro.create(data);
     }),
   );
 
@@ -132,10 +130,7 @@ async function assignMacroToHotbar(slot = 1) {
           `Scion | Macro atribuída ao hotbar: ${macro.name} no slot ${slot + i}`,
         );
       } else {
-        console.warn(
-          `Scion | Macro inválida não atribuída ao hotbar:`,
-          macro,
-        );
+        console.warn(`Scion | Macro inválida não atribuída ao hotbar:`, macro);
       }
     }),
   );
@@ -163,6 +158,20 @@ Hooks.once("init", async function () {
 
 Hooks.on("setup", async () => {
   await loadTranslations();
+});
+
+// registrar uma vez, ex: no hooks.js do módulo
+Hooks.on("renderChatMessageHTML", (message, html) => {
+  html.querySelectorAll(".roll-breakdown").forEach((details) => {
+    const summary = details.querySelector(":scope > summary");
+    if (!summary || summary.dataset.bound) return;
+
+    summary.dataset.bound = "true";
+    summary.addEventListener("click", (event) => {
+      event.preventDefault(); // não depende mais do comportamento nativo
+      details.classList.toggle("is-open");
+    });
+  });
 });
 
 Hooks.on("preCreateActor", (actor, data, options, userId) => {

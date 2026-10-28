@@ -18,7 +18,7 @@ $shadow: rgba(0, 0, 0, 0.9);
     @include flex-center;
     flex-direction: column;
     padding: 10px;
-    font-family: $font-main !important;
+    font-family: $font-main;
     color: $color-text;
     flex-wrap: nowrap;
     @include text-capitalized;
@@ -26,7 +26,7 @@ $shadow: rgba(0, 0, 0, 0.9);
 
     h3 {
         font-size: 20px;
-        font-family: $font-main !important;
+        font-family: $font-main;
         margin-bottom: 5px;
     }
 
@@ -99,6 +99,14 @@ $shadow: rgba(0, 0, 0, 0.9);
         width: 100%;
         cursor: pointer;
         pointer-events: auto;
+    }
+
+    .dice-values {
+        display: none;
+    }
+
+    &.is-open .dice-values {
+        display: flex;
     }
 }
 
